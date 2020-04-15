@@ -1,0 +1,256 @@
+<!DOCTYPE html>
+<html lang="zh-cmn-Hans">
+
+<head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width,initial-scale=1.0">
+  <title>Teaching</title>
+  <link rel="icon" href="<%= BASE_URL %>logo.png">
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/babel-polyfill/7.2.5/polyfill.js"></script>
+  <style>
+    html,
+    body,
+    #app {
+      height: 100%;
+      margin: 0px;
+      padding: 0px;
+    }
+
+    .chromeframe {
+      margin: 0.2em 0;
+      background: #ccc;
+      color: #000;
+      padding: 0.2em 0;
+    }
+
+    #loader-wrapper {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      z-index: 999999;
+    }
+
+    /* 滚动条优化 start */
+    ::-webkit-scrollbar {
+      width: 8px;
+      height: 8px;
+    }
+
+    ::-webkit-scrollbar-track {
+      background: #f6f6f6;
+      border-radius: 2px;
+    }
+
+    ::-webkit-scrollbar-thumb {
+      background: #cdcdcd;
+      border-radius: 2px;
+    }
+
+    ::-webkit-scrollbar-thumb:hover {
+      background: #747474;
+    }
+
+    ::-webkit-scrollbar-corner {
+      background: #f6f6f6;
+    }
+
+    /* 滚动条优化 end */
+    .load_title {
+      font-family: 'Open Sans';
+      font-size: 14px;
+      width: 100%;
+      text-align: center;
+      z-index: 9999999999999;
+      position: absolute;
+      top: 60%;
+      opacity: 1;
+      line-height: 30px;
+    }
+
+    .loader {
+      --size: 32px;
+      --duration: 800ms;
+      width: 96px;
+      height: 64px;
+      top: 40%;
+      margin: auto;
+      transform-style: preserve-3d;
+      transform-origin: 50% 50%;
+      transform: rotateX(60deg) rotateZ(45deg) rotateY(0deg) translateZ(0px);
+      position: relative;
+    }
+
+    .loader .box {
+      width: 32px;
+      height: 32px;
+      transform-style: preserve-3d;
+      position: absolute;
+      top: 0;
+      left: 0;
+    }
+
+    .loader .box:nth-child(1) {
+      transform: translate(100%, 0);
+      animation: box1 800ms linear infinite;
+    }
+
+    .loader .box:nth-child(2) {
+      transform: translate(0, 100%);
+      animation: box2 800ms linear infinite;
+    }
+
+    .loader .box:nth-child(3) {
+      transform: translate(100%, 100%);
+      animation: box3 800ms linear infinite;
+    }
+
+    .loader .box:nth-child(4) {
+      transform: translate(200%, 0);
+      animation: box4 800ms linear infinite;
+    }
+
+    .loader .box>div {
+      --translateZ: calc(var(--size) / 2);
+      --rotateY: 0deg;
+      --rotateX: 0deg;
+      background: #5c8df6;
+      width: 100%;
+      height: 100%;
+      transform: rotateY(var(--rotateY)) rotateX(var(--rotateX)) translateZ(var(--translateZ));
+      position: absolute;
+      top: auto;
+      right: auto;
+      bottom: auto;
+      left: auto;
+    }
+
+    .loader .box>div:nth-child(1) {
+      top: 0;
+      left: 0;
+    }
+
+    .loader .box>div:nth-child(2) {
+      background: #145af2;
+      right: 0;
+      --rotateY: 90deg;
+    }
+
+    .loader .box>div:nth-child(3) {
+      background: #447cf5;
+      --rotateX: -90deg;
+    }
+
+    .loader .box>div:nth-child(4) {
+      background: #dbe3f4;
+      top: 0;
+      left: 0;
+      --translateZ: calc(var(--size) * 3 * -1);
+    }
+
+    @keyframes box1 {
+
+      0%,
+      50% {
+        transform: translate(100%, 0);
+      }
+
+      100% {
+        transform: translate(200%, 0);
+      }
+    }
+
+    @keyframes box2 {
+      0% {
+        transform: translate(0, 100%);
+      }
+
+      50% {
+        transform: translate(0, 0);
+      }
+
+      100% {
+        transform: translate(100%, 0);
+      }
+    }
+
+    @keyframes box3 {
+
+      0%,
+      50% {
+        transform: translate(100%, 100%);
+      }
+
+      100% {
+        transform: translate(0, 100%);
+      }
+    }
+
+    @keyframes box4 {
+      0% {
+        transform: translate(200%, 0);
+      }
+
+      50% {
+        transform: translate(200%, 100%);
+      }
+
+      100% {
+        transform: translate(100%, 100%);
+      }
+    }
+  </style>
+  <!-- 全局配置 -->
+  <script>
+    window._CONFIG = {};
+    window._CONFIG['domianURL'] = 'http://127.0.0.1:8080/api';
+    window._CONFIG['webURL'] = window.location.protocol + '//' + window.location.hostname + (window.location.port ? ':' + window.location.port : '')
+    window._CONFIG['casPrefixUrl'] = 'http://cas.example.org:8443/cas';
+    window._CONFIG['onlinePreviewDomainURL'] = 'http://fileview.jeecg.com/onlinePreview'
+    window._CONFIG['staticDomainURL'] = window._CONFIG['domianURL'] + '/sys/common/static';
+    window._CONFIG['pdfDomainURL'] = window._CONFIG['domianURL'] + '/sys/common/pdf/pdfPreviewIframe';
+    window._CONFIG['qn_base'] = "//q8nlj54u7.bkt.clouddn.com/"
+  </script>
+</head>
+
+<body>
+  <!-- built files will be auto injected -->
+  <div id="app">
+    <div id="loader-wrapper">
+      <div id="loader"></div>
+      <div class="loader-section section-left"></div>
+      <div class="loader-section section-right"></div>
+      <div class="loader">
+        <div class="box">
+          <div></div>
+          <div></div>
+          <div></div>
+          <div></div>
+        </div>
+        <div class="box">
+          <div></div>
+          <div></div>
+          <div></div>
+          <div></div>
+        </div>
+        <div class="box">
+          <div></div>
+          <div></div>
+          <div></div>
+          <div></div>
+        </div>
+        <div class="box">
+          <div></div>
+          <div></div>
+          <div></div>
+          <div></div>
+        </div>
+      </div>
+      <div class="load_title">正在加载……</div>
+    </div>
+
+</body>
+
+</html>

@@ -1,0 +1,178 @@
+
+/* 游戏键盘 */
+.keyboard {
+    /* display: flex; */
+    /* height: 5rem; */
+    margin: 0 0.6rem;
+    border-radius: 5px;
+    background: rgb(26, 26, 26);
+  }
+  .control_B,
+  .control_C,
+  .control_D,
+  .control_E {
+    display: none;
+  }
+  
+  .switch div {
+    color: #fff;
+    font-size: 1.5rem;
+    display: inline-block;
+    border: dashed 1px;
+    border-radius: 0.6rem;
+    padding: 0.3rem;
+  }
+  
+  .control_direct {
+    -webkit-box-flex: 1.5; /* OLD - iOS 6-, Safari 3.1-6 */
+    -moz-box-flex: 1.5; /* OLD - Firefox 19- */
+    -webkit-flex: 1.5; /* Chrome */
+    -ms-flex: 1.5;
+    flex: 1.5;
+  }
+  .control_space {
+    -webkit-box-flex: 1; /* OLD - iOS 6-, Safari 3.1-6 */
+    -moz-box-flex: 1; /* OLD - Firefox 19- */
+    -webkit-flex: 1; /* Chrome */
+    -ms-flex: 1;
+    flex: 1;
+    text-align: center;
+    vertical-align: middle;
+  }
+  .control_direct div {
+    text-align: center;
+    height: 2.25rem;
+    -webkit-touch-callout: none;
+    -webkit-user-select: none;
+    -khtml-user-select: none;
+    -moz-user-select: none;
+    -ms-user-select: none;
+    user-select: none;
+  }
+  .key {
+    width: 2.25rem;
+    height: 2.25rem;
+    display: inline-block;
+    background-size: 100% 100% !important;
+  }
+  
+
+  
+  .control_direct div:nth-of-type(1) {
+    margin-top: 0.18rem;
+  }
+  .control_direct div:nth-of-type(3) {
+    margin-bottom: 1rem;
+  }
+  .control_direct div:nth-of-type(2) p:nth-of-type(1) {
+    margin-right: 1.5rem;
+  }
+  .rotate_left {
+    transform: rotate(-90deg);
+    -webkit-transform: rotate(-90deg); /* for Chrome || Safari */
+    -moz-transform: rotate(-90deg); /* for Firefox */
+    -ms-transform: rotate(-90deg); /* for IE */
+    -o-transform: rotate(-90deg); /* for Opera */
+  }
+  .rotate_right {
+    transform: rotate(90deg);
+    -webkit-transform: rotate(90deg); /* for Chrome || Safari */
+    -moz-transform: rotate(90deg); /* for Firefox */
+    -ms-transform: rotate(90deg); /* for IE */
+    -o-transform: rotate(90deg); /* for Opera */
+  }
+  .rotate_down {
+    transform: rotate(180deg);
+    -webkit-transform: rotate(180deg); /* for Chrome || Safari */
+    -moz-transform: rotate(180deg); /* for Firefox */
+    -ms-transform: rotate(180deg); /* for IE */
+    -o-transform: rotate(180deg); /* for Opera */
+  }
+  
+  .control_space {
+    text-align: center;
+  }
+  .control_space p {
+    display: inline-block;
+    background: url('image/space.png') no-repeat center center;
+    background-size: contain;
+    width: 5.67rem;
+    height: 5.67rem;
+    margin-top: 1.3rem;
+  }
+  
+
+
+
+.piano {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    align-content: center;
+    width: 21rem;
+    margin: 2rem 0;
+}
+.piano .key {
+    margin: 1rem 1.5rem;
+}  
+
+.letter{
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    align-content: center;
+    width: 29rem;
+    margin: 2rem 0;
+}
+.letter .key {
+    border: skyblue 3px solid;
+    border-radius: 2rem;
+    text-align: center;
+    margin: 1rem .5rem;
+}
+.letter .key span{
+    font-size: 1.5rem;
+    font-weight: 800;
+    color: skyblue;
+}
+
+
+.calculator .key{
+    margin: .5rem 1rem;
+}
+.calculator .keys {
+        border: #d3d2cb 0.5px solid;
+        background: #fefdff;
+        color: #33393d;
+        height: 3.75rem;
+        width: 20%;
+        text-align: center;
+        font-size: 2.5rem;
+        font-weight: bold;
+        transition: background 0.2s linear;
+    }
+.calculator .keys:active{
+            background: #93938E;
+}
+.calculator .keys:hover{
+     background: #d3d2cb;
+    transition: background 0s linear;
+}
+.calculator .screen {
+        background: #e9e8e5;
+        height: 14.2857142857vh;
+        width: 100%;
+        line-height: 14.2857142857vh;
+        direction: rtl;      
+    }
+.calculator .screen:last-child{
+    font-size: 10rem;
+}
+.calculator {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    align-content: center;
+    width: 16rem;
+    margin: 2rem 0;
+}

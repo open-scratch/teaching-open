@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="google" value="notranslate">
+  <link rel="shortcut icon" href="static/favicon.ico">
+  <title>Scratch 3.0 Player</title>
+  <script src="../js/jquery.min.js"></script>
+  <script src="../js/common.js"></script>
+  <script>
+    var workId = urlParams('workId')
+    window.scratchConfig = {
+      handleVmInitialized: (vm) => {
+        window.vm = vm
+      },
+      handleDefaultProjectLoaded: () => {
+        getWorkInfo(workId, function (info) {
+          window.scratch.loadProject(info.workFileUrl, () => {
+            vm.runtime.start()
+          })
+        })
+      }
+    }
+  </script>
+</head>
+
+<body>
+  <div id="scratch">
+  </div>
+</body>
+
+<script type="text/javascript" src="lib.min.js"></script>
+<script type="text/javascript" src="chunks/player.js"></script>
+<script>
+
+</script>
+
+</html>

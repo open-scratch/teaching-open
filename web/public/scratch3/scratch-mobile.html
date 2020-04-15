@@ -1,0 +1,175 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+  <title>Scratch移动端</title>
+  <meta charset="utf-8" />
+  <meta name="mobile-web-app-capable" content="yes" />
+  <meta name="apple-mobile-web-app-capable" content="yes" />
+  <meta name="apple-mobile-web-app-status-bar-style" content="default" />
+  <meta name="viewport" content="width=device-width, initial-scale=0.79, maximum-scale=1, user-scalable=no" />
+  <link rel="stylesheet" href="css/player.css" />
+  <link rel="stylesheet" href="css/keyboard.css" />
+  <script src="../js/jquery.min.js"></script>
+  <script src="../js/common.js"></script>
+  <script>
+    var workId = urlParams('workId')
+
+    window.scratchConfig = {
+      handleVmInitialized: (vm) => {
+        window.vm = vm
+        console.log(vm);
+        console.log("VM初始化完毕")
+
+        if (workId) {
+          getWorkInfo(workId, function (info) {
+            console.log(info)
+            window.scratch.loadProject(info.workFileUrl, () => {
+              document.title = info.realname + ' 编程作品'
+              vm.runtime.start()
+              $(".mask-loading").hide()
+              $(".mask-play").show()
+            })
+          })
+        }
+      }
+    }
+  </script>
+</head>
+
+<body>
+  <div class="container">
+    <div class="mask mask-loading">
+      <img src="image/loading.gif" alt="Loading">
+    </div>
+    <div class="mask mask-play">
+      <img src="image/play.png" alt="Play">
+    </div>
+    <div class="player" id="scratch">
+    </div>
+
+    <!-- 游戏键盘 -->
+    <div class="keyboard">
+      <div class="switch">
+        <div id="keyboardA">游戏</div>
+        <div id="keyboardB">双人</div>
+        <div id="keyboardC">数字</div>
+        <div id="keyboardD">琴键</div>
+        <div id="keyboardE">字母</div>
+      </div>
+      <div class="control_A flex">
+        <div class="control_direct">
+          <div>
+            <p class="key button_up" id=""
+              style='background: url("image/arrow.png") no-repeat left top;border: skyblue 3px solid;border-radius: 2rem;'>
+            </p>
+          </div>
+          <div>
+            <p class="key rotate_left button_left" id=""
+              style='background: url("image/arrow.png") no-repeat left top;border: skyblue 3px solid;border-radius: 2rem;'>
+            </p>
+            <p class="key rotate_right button_right" id=""
+              style='background: url("image/arrow.png") no-repeat left top;border: skyblue 3px solid;border-radius: 2rem;'>
+            </p>
+          </div>
+          <div>
+            <p class="key rotate_down button_down" id=""
+              style='background: url("image/arrow.png") no-repeat left top;border: skyblue 3px solid;border-radius: 2rem;'>
+            </p>
+          </div>
+        </div>
+        <div class="control_space">
+          <p class="space button_space" id="" style='background: url("image/space.png") no-repeat left top;'></p>
+        </div>
+      </div>
+      <div class="control_B flex">
+        <div class="control_direct">
+          <div>
+            <p class="key button_w" id="" style='background: url("image/w.png") no-repeat left top;'></p>
+          </div>
+          <div>
+            <p class="key button_a" id="" style='background: url("image/a.png") no-repeat left top;'></p>
+            <p class="key button_d" id="" style='background: url("image/d.png") no-repeat left top;'></p>
+          </div>
+          <div>
+            <p class="key button_s" id="" style='background: url("image/s.png") no-repeat left top;'></p>
+          </div>
+        </div>
+        <div class="control_direct">
+          <div>
+            <p class="key button_up" id=""
+              style='background: url("image/arrow.png") no-repeat left top;border: skyblue 3px solid;border-radius: 2rem;'>
+            </p>
+          </div>
+          <div>
+            <p class="key rotate_left button_left" id=""
+              style='background: url("image/arrow.png") no-repeat left top;border: skyblue 3px solid;border-radius: 2rem;'>
+            </p>
+            <p class="key rotate_right button_right" id=""
+              style='background: url("image/arrow.png") no-repeat left top;border: skyblue 3px solid;border-radius: 2rem;'>
+            </p>
+          </div>
+          <div>
+            <p class="key rotate_down button_down" id=""
+              style='background: url("image/arrow.png") no-repeat left top;border: skyblue 3px solid;border-radius: 2rem;'>
+            </p>
+          </div>
+        </div>
+      </div>
+      <div class="control_C flex">
+        <div class="calculator">
+          <div class="key button_7" style='background: url("image/7.png") no-repeat left top;' id=""></div>
+          <div class="key button_8" style='background: url("image/8.png") no-repeat left top;' id=""></div>
+          <div class="key button_9" style='background: url("image/9.png") no-repeat left top;' id=""></div>
+          <div class="key button_4" style='background: url("image/4.png") no-repeat left top;' id=""></div>
+          <div class="key button_5" style='background: url("image/5.png") no-repeat left top;' id=""></div>
+          <div class="key button_6" style='background: url("image/6.png") no-repeat left top;' id=""></div>
+          <div class="key button_1" style='background: url("image/1.png") no-repeat left top;' id=""></div>
+          <div class="key button_2" style='background: url("image/2.png") no-repeat left top;' id=""></div>
+          <div class="key button_3" style='background: url("image/3.png") no-repeat left top;' id=""></div>
+          <div class="key button_c" style='background: url("image/c.png") no-repeat left top;' id=""></div>
+          <div class="key button_0" style='background: url("image/0.png") no-repeat left top;' id=""></div>
+          <div class="key button_d" style='background: url("image/d.png") no-repeat left top;' id=""></div>
+        </div>
+      </div>
+      <div class="control_D flex">
+        <div class="piano">
+          <div class="key button_1" style='background: url("image/1.png") no-repeat left top;'></div>
+          <div class="key button_3" style='background: url("image/3.png") no-repeat left top;'></div>
+          <div class="key button_5" style='background: url("image/5.png") no-repeat left top;'></div>
+          <div class="key button_7" style='background: url("image/7.png") no-repeat left top;'></div>
+          <div class="key button_2" style='background: url("image/2.png") no-repeat left top;'></div>
+          <div class="key button_4" style='background: url("image/4.png") no-repeat left top;'></div>
+          <div class="key button_6" style='background: url("image/6.png") no-repeat left top;'></div>
+        </div>
+      </div>
+      <div class="control_E flex">
+        <div class="letter">
+          <!-- <p class="key rotate_left button_left" id="" style='background: url("image/arrow.png") no-repeat left top;'>
+          </p>
+          <p class="key rotate_right button_right" id="" style='background: url("image/arrow.png") no-repeat left top;'>
+          </p> -->
+        </div>
+      </div>
+    </div>
+  </div>
+</body>
+<!-- <script src="js/player.js?v=2"></script> -->
+<script src="js/keyboard.js?v=1"></script>
+<script src="lib.min.js"></script>
+<script src="chunks/player.js"></script>
+
+<script>
+  $('.mask').on('click', function (e) {
+    $(this).hide()
+    vm.greenFlag()
+  })
+
+  //stage自适应
+  var scale = window.innerWidth / 480
+  $(".stage_stage-wrapper_eRRuk").css("transform", "scale(" + scale + ")")
+  $(".player").css("height", scale * 360)
+
+</script>
+
+</html>

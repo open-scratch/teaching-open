@@ -1,0 +1,47 @@
+<html>
+
+<head>
+    <title>绑定微信</title>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width,initial-scale=1.0">
+</head>
+
+<body>
+
+</body>
+<footer>
+
+</footer>
+
+</html>
+<script src="../js/jquery.min.js"></script>
+<script>
+    urlParams = function (paramName) {
+        var reg = new RegExp('[?&]' + paramName + '=([^&]*)[&]?', 'i')
+        var paramVal = window.location.search.match(reg)
+        return paramVal == null ? '' : decodeURIComponent(paramVal[1])
+    }
+    var access_token = urlParams("token")
+    if (access_token) {
+        $.ajax({
+            url: '/api/wechat/userWechat/bindAccount',
+            dataType: 'json',
+            contentType: 'application/json',
+            beforeSend: function (request) {
+                request.setRequestHeader('X-Access-Token', access_token)
+            },
+            success: function (res) {
+                console.log(res)
+                if(res.status == 500){
+                    alert(res.message)
+                }else if(res.status == 200){
+                    alert(res.message)
+                }
+            
+            }
+        })
+    } else {
+        alert("缺少token")
+    }
+
+</script>

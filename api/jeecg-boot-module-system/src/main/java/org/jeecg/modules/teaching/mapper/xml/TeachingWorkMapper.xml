@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="org.jeecg.modules.teaching.mapper.TeachingWorkMapper">
+
+    <select id="studentWorkInfo" resultType="org.jeecg.modules.teaching.model.StudentWorkModel">
+        select teaching_work.*,sys_user.username,sys_user.realname, sys_user.avatar, sys_user.sex,
+       (select file_path from sys_file where sys_file.id = teaching_work.work_file) workFileUrl,
+       (select file_path from sys_file where sys_file.id = teaching_work.work_cover) coverFileUrl
+        from teaching_work
+                 left join sys_user on teaching_work.user_id = sys_user.id
+        where sys_user.del_flag=0
+        and teaching_work.id = #{workId}
+    </select>
+    <select id="listWorkModel" resultType="org.jeecg.modules.teaching.model.StudentWorkModel">
+        select teaching_work.*, sys_user.username, sys_user.realname, sys_user.update_time user_update_time,
+        (select file_path from sys_file where sys_file.id = teaching_work.work_file) workFileUrl,
+        (select file_path from sys_file where sys_file.id = teaching_work.work_cover) coverFileUrl
+        from teaching_work
+        left join sys_user on teaching_work.user_id = sys_user.id
+        ${ew.customSqlSegment}
+    </select>
+</mapper>

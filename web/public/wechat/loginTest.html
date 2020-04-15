@@ -1,0 +1,27 @@
+<html>
+<div class="img-wrap" id="qrcode"></div>
+
+</html>
+<script src="../js/jquery.min.js"></script>
+<script src="http://res.wx.qq.com/connect/zh_CN/htmledition/js/wxLogin.js"></script>
+<script>
+    $.ajax({
+        url: '/api/wechatAuth/getQrcodeLogin',
+        dataType: 'json',
+        type: 'GET',
+        success: function (res) {
+            if (res.success) {
+                var obj = new WxLogin({
+                    id: 'qrcode',
+                    appid: res.result.appId,
+                    scope: 'snsapi_login',
+                    redirect_uri: res.result.redirectUri,
+                    state: res.result.state,
+                    style: 'black',
+                    href:
+                    'data:text/css;base64,LmltcG93ZXJCb3ggLnFyY29kZSB7d2lkdGg6IDIwMHB4O30uaW1wb3dlckJveCAuaW5mbyB7Y29sb3I6IHdoaXRlfS5pbXBvd2VyQm94IC50aXRsZSB7ZGlzcGxheTogbm9uZTt9LmltcG93ZXJCb3ggLmluZm8ge3dpZHRoOiAyMDBweDt9LnN0YXR1c19pY29uIHtkaXNwbGF5Om5vbmV9LmltcG93ZXJCb3ggLnN0YXR1cyB7dGV4dC1hbGlnbjogY2VudGVyO30='
+                })
+            }
+        }
+    });
+</script>

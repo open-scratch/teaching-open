@@ -1,0 +1,132 @@
+<html>
+
+<head>
+    <title>微信支付测试</title>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width,initial-scale=1.0">
+</head>
+
+<body>
+
+    <input id="grade" type="number" value="1" placeholder="年级"/>
+    <input id="phone" type="text" placeholder="手机号"/>
+
+    <button onclick="createOrder()">点击支付</button>
+
+</body>
+<footer>
+
+</footer>
+
+</html>
+<script src="../js/jquery.min.js"></script>
+<script>
+    urlParams = function (paramName) {
+        var reg = new RegExp('[?&]' + paramName + '=([^&]*)[&]?', 'i')
+        var paramVal = window.location.search.match(reg)
+        return paramVal == null ? '' : decodeURIComponent(paramVal[1])
+    }
+    var access_token = urlParams("token")
+
+    function getStudentInfo(){
+        $.ajax({
+            url: '/api/student/order/createOrder',
+            dataType: 'json',
+            success(res){
+
+            }
+        });
+    }
+
+    function createOrder(){
+        var phone = $("#phone").val()
+        var grade = $("#grade").val()
+        var actionId = urlParams("actionId")
+        if(!phone){
+            alert("请输入手机号")
+            return
+        }
+        if(actionId==null){
+            alert("请选择班级")
+            return
+        }
+
+        $.ajax({
+            url: '/api/student/order/createOrder',
+            dataType: 'json',
+            data:{
+                actionId: actionId,
+                phone: phone,
+                grade: grade
+            },
+            success(res){
+                console.log(res)
+                if(res.success){
+                    pay(res.result.orderNo)
+                }else{
+                    alert(res.message)
+                }
+            },
+            error: function(res){
+                console.log(res)
+            }
+        })
+    }
+
+    function pay(orderNo){
+        $.ajax({
+            url: '/api/wechatPay/getPaySign',
+            dataType: 'json',
+            data: {
+                orderNo: orderNo
+            },
+            contentType: 'application/json',
+            beforeSend: function (request) {
+                request.setRequestHeader('X-Access-Token', access_token)
+            },
+            success: function (res) {
+                console.log(res)
+                if (res.success) {
+                    retrieve(res.result)
+                }else{
+                    alert(res.message)
+                }
+            },
+            error: function(res){
+                console.log(res)
+            }
+        })
+    }
+ 
+
+    function retrieve(param) {
+        if (typeof WeixinJSBridge == "undefined") {
+            if (document.addEventListener) {
+                document.addEventListener('WeixinJSBridgeReady', function () {
+                    onBridgeReady(param);
+                }, false);
+            } else if (document.attachEvent) {
+                document.attachEvent('WeixinJSBridgeReady', function () {
+                    onBridgeReady(param);
+                });
+                document.attachEvent('onWeixinJSBridgeReady', function () {
+                    onBridgeReady(param);
+                });
+            }
+        } else {
+            onBridgeReady(param);
+        }
+    }
+
+    function onBridgeReady(param) {
+        WeixinJSBridge.invoke('getBrandWCPayRequest', param, function (res) {
+            // 使用以上方式判断前端返回,微信团队郑重提示：res.err_msg将在用户支付成功后返回    ok，但并不保证它绝对可靠。
+            if(res.err_msg == "get_brand_wcpay_request:ok" ){
+                alert("支付成功")
+            }  else {
+                alert("支付失败")
+            }
+        });
+    }
+
+</script>

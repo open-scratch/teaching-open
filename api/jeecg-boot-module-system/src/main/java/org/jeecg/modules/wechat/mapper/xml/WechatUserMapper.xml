@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="org.jeecg.modules.wechat.mapper.WechatUserMapper">
+    <select id="getByOpenId" resultType="org.jeecg.modules.wechat.entity.WechatUser">
+        select * from wechat_user where open_id = #{openId}
+    </select>
+    <select id="getByUnionId" resultType="org.jeecg.modules.wechat.entity.WechatUser">
+        select * from wechat_user where union_id = #{openId}
+    </select>
+    <select id="getUserInfoByIds" resultType="org.jeecg.modules.wechat.model.SysUserWechatModel">
+        select sys_user.*,
+        wechat_user.user_id,
+        wechat_user.open_id,
+        wechat_user.union_id,
+        wechat_user.nickname,
+        wechat_user.sex wechatSex,
+        wechat_user.headimgurl,
+        wechat_user.city,
+        wechat_user.province,
+        wechat_user.county,
+        wechat_user.qr_scene,
+        wechat_user.qr_scene_str,
+        wechat_user.group_id,
+        wechat_user.id userWechatId
+        from sys_user
+        inner join wechat_user on wechat_user.user_id = sys_user.id
+        where sys_user.del_flag=0
+        <if test="userId != null">
+            and sys_user.id=#{userId}
+        </if>
+        <if test="openId != null">
+            and openId=#{openId}
+        </if>
+        <if test="unionId != null">
+            and unionId=#{unionId}
+        </if>
+        limit 1
+    </select>
+</mapper>

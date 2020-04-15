@@ -1,0 +1,280 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="google" value="notranslate">
+  <link rel="shortcut icon" href="static/favicon.ico" />
+  <link rel="stylesheet" href="../css/scratch.css" />
+  <title>Scratch3.0编辑器</title>
+  <script src="../js/jquery.min.js"></script>
+  <script src="../js/jquery.cokie.min.js"></script>
+  <script src="../js/jquery.qrcode.min.js"></script>
+  <script src="../js/qiniu.min.js"></script>
+  <script src="../js/common.js"></script>
+  <script>
+    var canShare = true
+    var uploadParam = {}
+    var workName = ''
+    var workId = urlParams('workId')
+    var courseId = urlParams('courseId')
+    var access_token = getUserToken()
+    var userInfo = getUserInfo();
+    var qn_token = getQiniuToken();
+    setInterval(function () {
+      qn_token = getQiniuToken();
+    }, 600 * 1000)
+
+
+    var observer = {
+      next(res) { },
+      error(err) {
+        console.log(1, err)
+      },
+      complete(res) {
+        console.log(res)
+        if (res.key.includes('jpg')) {
+          uploadParam.coverKey = uploadFile(res.key, '学生作业-封面', res.key)
+        } else {
+          uploadParam.projectKey = uploadFile(res.key, '学生作业-sb3', res.key)
+        }
+        if (uploadParam.projectKey && uploadParam.coverKey) {
+          uploadWork(uploadParam.projectKey, uploadParam.coverKey, uploadParam.projectTitle)
+        }
+      }
+    }
+
+    // twl mine create course
+    var scene = urlParams("scene")
+
+    window.scratchConfig = {
+      logo: {
+        show: true
+        , url: "/logo.png"
+        , handleClickLogo: () => {
+          window.open("/")
+        }
+      }
+      , menuBar: {
+        color: 'hsla(215, 100%, 65%, 1)'
+      }
+      , shareButton: {
+        show: "mine,create,course".indexOf(scene)>=0,
+        buttonName: "提交",
+        handleClick: () => {
+          console.log('分享按钮')
+          $('.scratch-filter').show()
+          $('.uploading').show()
+          var uuid = window.uuid()
+          uploadParam.projectTitle = window.scratch.getProjectName()
+          window.scratch.getProjectCoverBlob(cover => {
+            upload2Qiniu(cover, 'project3/' + uuid + '.jpg', uploadParam.projectTitle, observer)
+          })
+          window.scratch.getProjectFile(file => {
+            upload2Qiniu(file, 'project3/' + uuid + '.sb3', uploadParam.projectTitle, observer)
+          })
+        }
+      },
+      profileButton: {
+        show: "mine,create,course".indexOf(scene)>=0,
+        buttonName: "我的作品",
+        handleClick: () => {
+          window.open("/account/center");
+        }
+      },
+      handleVmInitialized: (vm) => {
+        window.vm = vm
+        console.log("VM初始化完毕")
+
+      },
+      handleProjectLoaded: () => {
+        console.log("作品载入完毕")
+      },
+      handleDefaultProjectLoaded: () => {
+        //默认作品加载完毕
+        window.scratch.setProjectName("默认项目")
+        if (workId) {
+          getWorkInfo(workId, function (info) {
+            window.scratch.loadProject(info.workFileUrl, () => {
+              $('.loading').hide()
+              $('.scratch-filter').hide()
+              window.scratch.setProjectName(info.workName)
+            })
+          })
+        } else {
+          window.scratch.loadProject('/project/project.sb3', () => {
+            window.scratch.setProjectName(userInfo.realname + '作品')
+            $('.loading').hide()
+            $('.scratch-filter').hide()
+          })
+        }
+      },
+      assetCDN: 'https://qn.wyxai.com' 
+      //若使用官方素材库请删除本配置项
+    }
+
+    //上传文件
+    function uploadFile(fileName, fileTag, filePath) {
+      var id = null;
+      $.ajax({
+        url: '/api/system/sysFile/add',
+        type: 'POST',
+        dataType: 'json',
+        contentType: 'application/json',
+        async: false,
+        beforeSend: function (request) {
+          request.setRequestHeader('X-Access-Token', access_token)
+        },
+        data: JSON.stringify({
+          fileType: 2,
+          fileName: fileName,
+          filePath: filePath,
+          fileLocation: 2,
+          fileTag: fileTag
+        }),
+        success: function (res) {
+          if (res.success) {
+            id = res.result.id
+          }
+        },
+        error: function () {
+        },
+        complete: function () {
+        }
+      })
+      return id;
+    }
+
+    //上传作业
+    function uploadWork(projectKey, coverKey, projectTitle) {
+      $.ajax({
+        url: '/api/teaching/teachingWork/submit',
+        type: 'POST',
+        dataType: 'json',
+        contentType: 'application/json',
+        beforeSend: function (request) {
+          request.setRequestHeader('X-Access-Token', access_token)
+        },
+        data: JSON.stringify({
+          workCover: coverKey,
+          workFile: projectKey,
+          workName: projectTitle,
+          id: workId,
+          workType: 2
+        }),
+        success: function (res) {
+          canShare = true
+          if (res.code == 200) {
+            $('#projectTitle').html(projectTitle)
+            var shareUrl =
+              window.location.protocol +
+              '//' +
+              window.location.hostname +
+              (window.location.port ? ':' + window.location.port : '') +
+              '/scratch3/scratch-mobile.html?workId=' +
+              res.result.id
+            createCode('qrcode', shareUrl)
+            $('.scratch-filter').show()
+            $('.release-success').show()
+          } else {
+            $('.release-false').show()
+          }
+        },
+        error: function () {
+          $('.release-false').show()
+        },
+        complete: function () {
+          $('.uploading').hide()
+        }
+      })
+    }
+
+    function upload2Qiniu(zip, key, fileName, observer) {
+      var config = {
+        useCdnDomain: true,
+        region: qiniu.region.z0,
+        disableStatisticsReport: true
+      }
+      var putExtra = {
+        fname: fileName, //文件原名
+        params: {},
+        mimeType: null
+      }
+      var observable = qiniu.upload(zip, key, qn_token, putExtra, config)
+      var subscription = observable.subscribe(observer)
+    }
+
+  </script>
+</head>
+
+<body>
+  <div class="scratch-filter">
+    <div class="loading">
+      <div class="con-box">
+        <h4>请稍后</h4>
+        <span>正在加载中……</span>
+      </div>
+    </div>
+    <div class="uploading">
+      <div class="con-box">
+        <h4>请稍后</h4>
+        <div class="watch-works">
+          <span>上传中……</span>
+        </div>
+      </div>
+      <div class="fault-code">
+        <span>&times</span>
+      </div>
+    </div>
+    <div class="release-success">
+      <div class="con-box">
+        <h4><span id="projectTitle"></span> 提交成功</h4>
+        <!-- <p class="rights-img">
+          <img src="../images/rights.png" alt="rights" />
+        </p> -->
+        <p class="ercode-img">
+          <span id="qrcode"></span>
+        </p>
+        <div class="watch-works">
+          <span>请微信扫描二维码</span>
+        </div>
+      </div>
+      <div class="fault-code">
+        <span>&times</span>
+      </div>
+    </div>
+    <div class="release-false">
+      <div class="con-box-two">
+        <h4>作品发布失败</h4>
+        <p class="smile-img">
+          <img src="../images/smile.png" alt="smile" />
+        </p>
+        <div class="refresh-release">
+          <span>请重新发布～</span>
+        </div>
+      </div>
+      <div class="fault-code">
+        <span>&times</span>
+      </div>
+    </div>
+  </div>
+
+  <div id="scratch">
+
+  </div>
+
+</body>
+<script type="text/javascript" src="lib.min.js"></script>
+<script type="text/javascript" src="chunks/gui.js"></script>
+<script>
+  $('.fault-code').on('click', function () {
+    uploadParam = {}
+    $('.scratch-filter').hide()
+    $('.scratch-middle').hide()
+    $('.release-success').hide()
+    $('.release-false').hide()
+  })
+</script>
+
+</html>
