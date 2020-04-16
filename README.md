@@ -47,8 +47,11 @@ Teaching针对机构、学校提供STEAM在线教育解决方案， 提供一个
 ## 技术架构
 
 后端技术： SpringBoot_2.1.3.RELEASE + Mybatis-plus_3.1.2 + Shiro_1.4.0 + Jwt_3.7.0 + Swagger-ui + Redis 
+
 前端技术： Ant-design-vue + Vue + Webpack
+
 其他技术： Druid（数据库连接池）、Logback（日志工具） 、poi（Excel工具）、Quartz（定时任务）、lombok（简化代码）、七牛云存储、Scratch二次开发
+
 项目构建： Maven、Jdk8、npm或yarn
 
 ## 快速开始（本地启动）
@@ -61,8 +64,16 @@ Teaching针对机构、学校提供STEAM在线教育解决方案， 提供一个
 - nodejs 最新版
 - jdk1.8
 - maven
+- 七牛云，并实名认证
+- 推荐开发工具：IDEA unlimited版和Visual Studio Code
 
 ### 后端
+
+#### 使用IDEA运行
+
+IDEA导入api/pom.xml自动会导入整个项目，等待maven依赖下载完，点击绿色三角号或运行org.jeecg.JeecgApplication的main方法
+
+#### 直接编译运行
 
 - 修改配置
 application-dev.yml
@@ -70,7 +81,7 @@ application-dev.yml
 
 - 导入数据库
 
-导入db文件夹的sql文件
+- 导入db文件夹的sql文件
 
 - 编译项目，在api目录执行
 `mvn clean package`

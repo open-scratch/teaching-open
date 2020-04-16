@@ -16,6 +16,28 @@
 - 数据库：MySQL5.0  或  Oracle 11g
 - 缓存：Redis
 
+## 项目运行
 
+#### 使用IDEA运行
 
-待补充
+IDEA导入api/pom.xml自动会导入整个项目，等待maven依赖下载完，点击绿色三角号或运行org.jeecg.JeecgApplication的main方法
+
+#### 直接编译运行
+
+- 修改配置
+  application-dev.yml
+  修改数据库、redis、七牛云存储等
+
+- 导入数据库
+
+- 导入db文件夹的sql文件
+
+- 编译项目，在api目录执行
+  `mvn clean package`
+
+- 启动项目
+  `java -jar jeecg-boot-module-system\target\jeecg-boot-module-system-2.1.4.jar`
+
+- Linux放入后台运行
+
+  `nohup java -jar jeecg-boot-module-system\target\jeecg-boot-module-system-2.1.4.jar &`
