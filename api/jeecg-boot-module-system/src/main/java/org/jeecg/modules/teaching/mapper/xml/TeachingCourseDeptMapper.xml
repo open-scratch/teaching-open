@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="org.jeecg.modules.teaching.mapper.TeachingCourseDeptMapper">
+    <select id="list" resultType="org.jeecg.modules.teaching.model.CourseDeptModel">
+        select * from teaching_course_dept
+        inner join teaching_course tc on teaching_course_dept.course_id = tc.id
+        inner join sys_depart on sys_depart.id = teaching_course_dept.dept_id
+        ${ew.customSqlSegment}
+    </select>
+</mapper>

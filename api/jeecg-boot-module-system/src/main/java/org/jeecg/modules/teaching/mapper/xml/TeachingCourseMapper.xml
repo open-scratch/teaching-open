@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="org.jeecg.modules.teaching.mapper.TeachingCourseMapper">
+
+    <select id="mineCourse" resultType="org.jeecg.modules.teaching.entity.TeachingCourse">
+        select teaching_course.*
+        from teaching_course
+        where id in (
+        select course_id from teaching_course_dept
+        inner join sys_user_depart on sys_user_depart.dep_id = teaching_course_dept.dept_id and sys_user_depart.user_id = #{userId}
+        )
+    </select>
+</mapper>

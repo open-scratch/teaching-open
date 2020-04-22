@@ -27,17 +27,14 @@
 
             <a-col :md="6" :sm="12">
             <a-form-item label="角色">
-              <a-select v-model="queryParam.roleIds" mode="single" defaultValue="" placeholder="请选择角色查询">
+              <a-select v-model="queryParam.roleId" mode="single" defaultValue="" placeholder="请选择角色查询">
                 <a-select-option value="">全部</a-select-option>
                 <a-select-option v-for="(role,index) in roleList" :key="index.toString()" :value="role.id">{{role.roleName}}</a-select-option>
               </a-select>
             </a-form-item>
           </a-col>
 
-
           <template v-if="toggleSearchStatus">
-            
-
             
           <a-col :md="6" :sm="8">
             <a-form-item label="性别">

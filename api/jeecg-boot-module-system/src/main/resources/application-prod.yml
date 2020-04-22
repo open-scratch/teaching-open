@@ -163,27 +163,6 @@ jeecg :
     secretKey: ??
     bucketName: ??
     staticDomain: ??
-  # 微信
-  weixin:
-    # 公众平台
-    mp:
-      appId: ??
-      appSecret: ??
-    # 开放平台
-    op:
-      appId: ??
-      appSecret: ??
-    # 商户平台
-    pay:
-      # 商户号
-      partner: ??
-      # 商户密钥
-      paternerKey: ??
-      # 支付成功回调地址
-      notifyUrl: ??
-      # 是否开启沙箱环境
-      sandbox: false
-
   # ElasticSearch 设置
   elasticsearch:
     cluster-name: jeecg-ES

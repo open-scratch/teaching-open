@@ -1,0 +1,66 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="org.jeecg.modules.teaching.mapper.TeachingCourseUnitMapper">
+
+    <resultMap id="baseResultMap" type="org.jeecg.modules.teaching.entity.TeachingCourseUnit">
+        <id property="id" column="id"/>
+        <result column="unit_name"  property="unitName"/>
+        <result column="unit_intro" property="unitIntro"/>
+        <result column="course_id" property="courseId"/>
+        <result column="course_work_type" property="courseWorkType"/>
+        <result column="course_work" property="courseWork"/>
+        <result column="course_work_answer" property="courseWorkAnswer"/>
+        <result column="course_video" property="courseVideo"/>
+        <result column="course_plan" property="coursePlan"/>
+        <result column="map_x" property="mapX"/>
+        <result column="map_y" property="mapY"/>
+        <result column="create_by" property="createBy"/>
+        <result column="create_time" property="createTime"/>
+        <result column="sys_org_code" property="sysOrgCode"/>
+    </resultMap>
+
+    <resultMap id="courseUnitModelMapper" type="org.jeecg.modules.teaching.model.CourseUnitModel" extends="baseResultMap">
+        <result column="course_name" property="courseName"/>
+        <collection property="courseWorks" ofType="org.jeecg.modules.teaching.entity.TeachingCourseMedia" javaType="List" column="course_work_id">
+            <id column="course_work_id" property="id"/>
+            <result column="work_name" property="mediaName"/>
+            <result column="work_url" property="mediaPath"/>
+            <result column="work_type" property="mediaType"/>
+        </collection>
+        <collection property="courseWorkIdList" ofType="String" javaType="List" column="course_work_id">
+            <id column="course_work_id"/>
+        </collection>
+        <collection property="courseWorkNameList" ofType="String" javaType="List" column="course_work_id">
+            <result column="work_name"/>
+        </collection>
+    </resultMap>
+
+    <select id="getCourseUnitAndMediaList" resultMap="courseUnitModelMapper">
+        select unit.id,unit.unit_name,unit.unit_desc,unit.content,unit.course_id,unit.map_x,unit.map_y,unit.video_url,unit.create_by,unit.sys_org_code,unit.create_time,
+        teaching_course.course_name, cw.midea_name work_name,cw.media_path work_url,cw.work_url,cw.media_type work_type, rel.course_work_id
+        from teaching_course_unit unit
+        left join teaching_course on teaching_course.id = unit.course_id
+        left join teaching_course_unit_media_rel rel on rel.unit_id = unit.id
+        left join teaching_course_media cw on cw.id = rel.course_work_id
+        ${ew.customSqlSegment}
+    </select>
+
+    <select id="getCourseUnitList" resultType="org.jeecg.modules.teaching.model.CourseUnitModel">
+        select unit.*,
+        teaching_course.course_name
+        from teaching_course_unit unit
+        left join teaching_course on teaching_course.id = unit.course_id
+        ${ew.customSqlSegment}
+    </select>
+<!--    id, unit.unit_name,unit.unit_intro,unit.map_y,unit.map_x,unit.course_id,unit.create_time,unit.sys_org_code,-->
+    <select id="getCourseWorkUnit" resultType="org.jeecg.modules.teaching.model.CourseUnitWorkModel">
+        select unit.*,
+       teaching_course.course_name,
+       mw.work_file mine_work_url, mw.id mine_work_id, mw.work_name mine_work_name, mw.work_type mine_work_type
+        from teaching_course_unit unit
+        left join teaching_course on teaching_course.id = unit.course_id
+        left join teaching_work mw on mw.course_id=unit.id and mw.user_id = #{userId}
+        where unit.id = #{unitId}
+        limit 1
+    </select>
+</mapper>

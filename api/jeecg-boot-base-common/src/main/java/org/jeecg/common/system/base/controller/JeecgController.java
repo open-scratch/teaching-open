@@ -44,6 +44,15 @@ public class JeecgController<T, S extends IService<T>> {
     @Autowired
     S service;
 
+    public LoginUser getCurrentUser(){
+        LoginUser sysUser = (LoginUser) SecurityUtils.getSubject().getPrincipal();
+        return sysUser;
+    }
+
+    public Boolean hasRole(String role){
+        return SecurityUtils.getSubject().hasRole(role);
+    }
+
     /**
      * 导出excel
      *

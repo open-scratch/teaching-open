@@ -18,7 +18,7 @@
     var uploadParam = {}
     var workName = ''
     var workId = urlParams('workId')
-    var courseId = urlParams('courseId')
+    var unitId = urlParams('unitId')
     var access_token = getUserToken()
     var userInfo = getUserInfo();
     var qn_token = getQiniuToken();
@@ -102,6 +102,14 @@
               window.scratch.setProjectName(info.workName)
             })
           })
+        } else if(unitId){
+          getUnitInfo(unitId, function(info){
+            window.scratch.loadProject(info.courseWork, () => {
+              $('.loading').hide()
+              $('.scratch-filter').hide()
+              window.scratch.setProjectName(info.unitName)
+            })
+          })
         } else {
           window.scratch.loadProject('/project/project.sb3', () => {
             window.scratch.setProjectName(userInfo.realname + '作品')
@@ -157,6 +165,7 @@
           request.setRequestHeader('X-Access-Token', access_token)
         },
         data: JSON.stringify({
+          courseId: unitId,
           workCover: coverKey,
           workFile: projectKey,
           workName: projectTitle,
@@ -189,6 +198,29 @@
         }
       })
     }
+
+     function getUnitInfo(unitId, cb){
+        $.ajax({
+          url: '/api/teaching/teachingCourseUnit/getUnitWorkInfo',
+          data: {
+            unitId: unitId
+          },
+          beforeSend: function(request) {
+            request.setRequestHeader('X-Access-Token', access_token)
+          },
+          success: function(res) {
+            console.log(res)
+            if (res.success) {
+              cb(res.result)
+            } else {
+              alert("老师还没有上传作业文件")
+            }
+          },
+          error: function(e) {
+            if (e.responseJSON.status == 500) {}
+          }
+        })
+      }
 
     function upload2Qiniu(zip, key, fileName, observer) {
       var config = {

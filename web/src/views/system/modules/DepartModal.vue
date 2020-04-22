@@ -37,7 +37,7 @@
           <template v-if="seen">
           <a-radio-group v-decorator="['orgCategory',validatorRules.orgCategory]" placeholder="请选择机构类型">
             <a-radio value="1">
-              公司
+              机构
             </a-radio>
           </a-radio-group>
           </template>
@@ -47,7 +47,7 @@
                 部门
               </a-radio>
               <a-radio value="3">
-                岗位
+                班级
               </a-radio>
             </a-radio-group>
           </template>

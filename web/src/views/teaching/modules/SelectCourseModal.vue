@@ -12,22 +12,14 @@
 
       <!-- 查询区域 -->
       <div class="table-page-search-wrapper">
-        <a-form layout="inline"  @keyup.enter.native="searchQuery">
+        <a-form layout="inline">
           <a-row :gutter="24">
 
             <a-col :span="10">
-              <a-form-item label="用户账号">
-                <a-input placeholder="请输入用户账号" v-model="queryParam.username"></a-input>
+              <a-form-item label="账号">
+                <a-input placeholder="请输入课程名" v-model="queryParam.courseName"></a-input>
               </a-form-item>
             </a-col>
-            <a-col :span="10">
-              <a-form-item label="角色">
-                <a-select v-model="queryParam.roleId" mode="single" defaultValue="" placeholder="请选择角色查询">
-                  <a-select-option value="">全部</a-select-option>
-                  <a-select-option v-for="(role,index) in roleList" :key="index.toString()" :value="role.id">{{role.roleName}}</a-select-option>
-                </a-select>
-              </a-form-item>
-              </a-col>
             <a-col :span="8">
                     <span style="float: left;overflow: hidden;" class="table-page-search-submitButtons">
                       <a-button type="primary" @click="searchQuery" icon="search">查询</a-button>
@@ -64,20 +56,18 @@
 <script>
   import {filterObj} from '@/utils/util'
   import {getAction} from '@/api/manage'
-  import {queryall} from '@/api/api'
 
   export default {
-    name: "SelectUserModal",
+    name: "SelectCourseModal",
     data() {
       return {
-        title: "添加已有用户",
+        title: "选择课程",
         names: [],
         visible: false,
         placement: 'right',
         description: '',
         // 查询条件
         queryParam: {},
-        roleList:[],
         // 表头
         columns1: [
           {
@@ -91,61 +81,42 @@
             }
           },
           {
-            title: '用户账号',
-            align: "center",
+            title:'课程名',
+            align:"center",
             width: 100,
-            dataIndex: 'username'
+            dataIndex: 'courseName'
           },
           {
-            title: '用户名称',
-            align: "center",
-            width: 100,
-            dataIndex: 'realname'
+            title:'课程介绍',
+            align:"center",
+            width: 200,
+            dataIndex: 'courseDesc'
           },
           {
-            title: '电话',
-            align: "center",
-            width: 100,
-            dataIndex: 'phone'
-          },
-          {
-            title: '角色',
-            align: 'center',
-            dataIndex: 'roleNames',
-            width: 180,
-            customRender: function(value){
-              return value?value.join():"--"
-            }
-          },
-          {
-           title: '部门',
-           align: 'center',
-            dataIndex: 'departNames',
-            width: 180,
-            customRender: function(value){
-              return value?value.join():"--"
-            }
-          },
+            title:'创建时间',
+            align:"center",
+            width: 150,
+            dataIndex: 'createTime'
+          }
         ],
         columns2: [
           {
-            title: '用户账号',
-            align: "center",
-            dataIndex: 'username',
+            title:'课程名',
+            align:"center",
+            dataIndex: 'courseName'
+          },
 
-          },
           {
-            title: '用户名称',
-            align: "center",
-            dataIndex: 'realname',
+            title:'课程介绍',
+            align:"center",
+            dataIndex: 'courseDesc'
           },
-          {
-            title: '操作',
-            dataIndex: 'action',
-            align: "center",
-            width: 100,
-            scopedSlots: {customRender: 'action'},
-          }
+           {
+            title:'创建时间',
+            align:"center",
+            dataIndex: 'createTime'
+          },
+ 
         ],
         //数据集
         dataSource1: [],
@@ -170,24 +141,14 @@
         selectedRowKeys: [],
         selectedRows: [],
         url: {
-          list: "/sys/user/list",
+          list: "/teaching/teachingCourse/list",
         }
       }
     },
     created() {
       this.loadData();
-      this.initialRoleList();
     },
     methods: {
-      initialRoleList(){
-        queryall().then((res)=>{
-          if(res.success){
-            this.roleList = res.result;
-          }else{
-            console.log(res.message);
-          }
-        });
-      },
       searchQuery() {
         this.loadData(1);
       },

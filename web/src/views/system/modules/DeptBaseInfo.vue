@@ -29,13 +29,13 @@
         label="机构类型">
           <a-radio-group :disabled="true" v-decorator="['orgCategory',{}]" placeholder="请选择机构类型">
             <a-radio value="1">
-              公司
+              机构
             </a-radio>
             <a-radio value="2">
               部门
             </a-radio>
             <a-radio value="3">
-              岗位
+              班级
             </a-radio>
           </a-radio-group>
       </a-form-item>

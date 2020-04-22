@@ -23,8 +23,10 @@
     "lodash.get": "^4.4.2",
     "lodash.pick": "^4.4.0",
     "md5": "^2.2.1",
+    "node-sass": "^4.13.1",
     "nprogress": "^0.2.0",
     "qrcode.vue": "^1.6.2",
+    "sass-loader": "^8.0.2",
     "tinymce": "^5.1.4",
     "viser-vue": "^2.4.4",
     "vue": "^2.6.10",
@@ -94,7 +96,10 @@
       "vue/no-parsing-error": 0,
       "no-console": 0,
       "no-tabs": 0,
-      "indent": [1, 4]
+      "indent": [
+        1,
+        4
+      ]
     }
   },
   "postcss": {

@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net
 --
 -- Host: localhost
--- Generation Time: 2020-04-15 11:39:07
+-- Generation Time: 2020-04-22 11:38:12
 -- 服务器版本： 5.5.61-log
 -- PHP Version: 5.6.37
 
@@ -1686,12 +1686,13 @@ CREATE TABLE IF NOT EXISTS `sys_depart` (
 
 INSERT INTO `sys_depart` (`id`, `parent_id`, `depart_name`, `depart_name_en`, `depart_name_abbr`, `depart_order`, `description`, `org_category`, `org_type`, `org_code`, `mobile`, `fax`, `address`, `memo`, `status`, `del_flag`, `create_by`, `create_time`, `update_by`, `update_time`) VALUES
 ('26c7f056a6b94ae78d736c67cd24baac', 'c6d7cb4deeac411cb3384b1b31278596', '校区1', NULL, NULL, 0, NULL, '2', '2', 'A01A06', NULL, NULL, NULL, NULL, NULL, '0', 'jeecg', '2020-04-10 15:31:07', NULL, NULL),
+('4338928a0bbc4bb89fce1523142083a6', '791a3001726c461d98488a7dabd00bbb', 'Scratch初级班', NULL, NULL, 0, NULL, '3', '3', 'A03A01A01', NULL, NULL, NULL, NULL, NULL, '0', 'jeecg', '2020-04-21 17:42:52', 'jeecg', '2020-04-21 17:43:04'),
 ('57197590443c44f083d42ae24ef26a2c', 'c6d7cb4deeac411cb3384b1b31278596', '校区2', NULL, NULL, 0, NULL, '1', '2', 'A01A05', NULL, NULL, NULL, NULL, NULL, '0', 'admin', '2019-02-21 16:14:41', 'jeecg', '2020-04-10 15:31:30'),
 ('743ba9dbdc114af8953a11022ef3096a', 'f28c6f53abd841ac87ead43afc483433', '财务部', NULL, NULL, 0, NULL, '1', '2', 'A03A01', NULL, NULL, NULL, NULL, NULL, '0', 'admin', '2019-03-22 16:45:43', NULL, NULL),
-('8d9f61e822ff43b6b2a35bce778b7a62', '', '羽流年工作室', NULL, NULL, 0, NULL, '1', '1', 'A02', NULL, NULL, NULL, NULL, NULL, '0', 'jeecg', '2020-04-10 15:30:47', NULL, NULL),
+('791a3001726c461d98488a7dabd00bbb', 'da4a5578694b45a8a34411347e51d55f', '上海XX校区', NULL, NULL, 0, NULL, '2', '2', 'A03A01', NULL, NULL, NULL, NULL, NULL, '0', 'jeecg', '2020-04-21 17:42:33', NULL, NULL),
 ('c6d7cb4deeac411cb3384b1b31278596', '', '鸽蛋网络科技', NULL, NULL, 0, NULL, '1', '1', 'A01', NULL, NULL, NULL, NULL, NULL, '0', 'admin', '2019-02-11 14:21:51', 'admin', '2020-03-09 15:33:47'),
-('d2b37ffcc3fd46ddb5bc1c3da7fc41c0', '26c7f056a6b94ae78d736c67cd24baac', '班级1', NULL, NULL, 0, NULL, '2', '3', 'A01A06A01', '', NULL, NULL, NULL, NULL, '0', 'jeecg', '2020-04-10 15:31:40', NULL, NULL),
-('f9e8ed95e3e44440a3baf701869951e5', 'd2b37ffcc3fd46ddb5bc1c3da7fc41c0', '小组1', NULL, NULL, 0, NULL, '3', '4', 'A01A06A01A01', NULL, NULL, NULL, NULL, NULL, '0', 'jeecg', '2020-04-10 15:31:49', NULL, NULL);
+('d2b37ffcc3fd46ddb5bc1c3da7fc41c0', '26c7f056a6b94ae78d736c67cd24baac', '班级1', NULL, NULL, 0, NULL, '3', '3', 'A01A06A01', '', NULL, NULL, NULL, NULL, '0', 'jeecg', '2020-04-10 15:31:40', 'jeecg', '2020-04-22 11:34:15'),
+('da4a5578694b45a8a34411347e51d55f', '', '上海地区', NULL, NULL, 0, NULL, '1', '1', 'A03', NULL, NULL, NULL, NULL, NULL, '0', 'jeecg', '2020-04-21 17:42:19', NULL, NULL);
 
 -- --------------------------------------------------------
 
@@ -1807,13 +1808,14 @@ INSERT INTO `sys_dict` (`id`, `dict_name`, `dict_code`, `description`, `del_flag
 ('1209733563293962241', '数据库类型', 'database_type', '', 0, 'admin', '2019-12-25 15:12:12', NULL, NULL, 0),
 ('1236290896288133121', '订单状态', 'order_status', '', 0, 'admin', '2020-03-07 22:01:33', NULL, NULL, 0),
 ('1236290944946253825', '支付方式', 'pay_method', '', 0, 'admin', '2020-03-07 22:01:45', NULL, NULL, 0),
-('1236543470144708610', '学生状态', 'student_status', '', 0, 'admin', '2020-03-08 14:45:11', NULL, NULL, 0),
+('1236543470144708610', '学生状态', 'student_status', '', 1, 'admin', '2020-03-08 14:45:11', NULL, NULL, 0),
 ('1236543506538684417', '学生年级', 'grade', '', 0, 'admin', '2020-03-08 14:45:20', NULL, NULL, 0),
-('1237261139620921345', '活动类型', 'activity_type', '', 0, 'jeecg', '2020-03-10 14:16:57', NULL, NULL, 0),
+('1237261139620921345', '活动类型', 'activity_type', '', 1, 'jeecg', '2020-03-10 14:16:57', NULL, NULL, 0),
 ('1249164380827549698', '文件类型', 'file_type', '', 0, 'jeecg', '2020-04-12 10:36:11', NULL, NULL, 0),
 ('1249164719404351490', '文件位置', 'file_location', '存储位置', 0, 'jeecg', '2020-04-12 10:37:32', NULL, NULL, 0),
 ('1249175047563493377', '作业类型', 'work_type', '作品类型', 0, 'jeecg', '2020-04-12 11:18:34', NULL, NULL, 0),
-('236e8a4baff0db8c62c00dd95632834f', '同步工作流引擎', 'activiti_sync', '同步工作流引擎', 0, 'admin', '2019-05-15 15:27:33', NULL, NULL, 0),
+('1252531120982810626', '课程资源类型', 'course_media_type', '', 0, 'jeecg', '2020-04-21 17:34:24', NULL, NULL, 0),
+('236e8a4baff0db8c62c00dd95632834f', '同步工作流引擎', 'activiti_sync', '同步工作流引擎', 1, 'admin', '2019-05-15 15:27:33', NULL, NULL, 0),
 ('2e02df51611a4b9632828ab7e5338f00', '权限策略', 'perms_type', '权限策略', 0, 'admin', '2019-04-26 18:26:55', NULL, NULL, 0),
 ('2f0320997ade5dd147c90130f7218c3e', '推送类别', 'msg_type', '', 0, 'admin', '2019-03-17 21:21:32', 'admin', '2019-03-26 19:57:45', 0),
 ('3486f32803bb953e7155dab3513dc68b', '删除状态', 'del_flag', NULL, 0, 'admin', '2019-01-18 21:46:26', 'admin', '2019-03-30 11:17:11', 0),
@@ -1828,7 +1830,7 @@ INSERT INTO `sys_dict` (`id`, `dict_name`, `dict_code`, `description`, `del_flag
 ('68168534ff5065a152bfab275c2136f8', '有效无效状态', 'valid_status', '有效无效状态', 0, 'admin', '2020-09-26 19:21:14', 'admin', '2019-04-26 19:21:23', 0),
 ('6b78e3f59faec1a4750acff08030a79b', '用户类型', 'user_type', NULL, 1, NULL, '2019-01-04 14:59:01', 'admin', '2019-03-18 23:28:18', 0),
 ('72cce0989df68887546746d8f09811aa', 'Online表单类型', 'cgform_table_type', '', 0, 'admin', '2019-01-27 10:13:02', 'admin', '2019-03-30 11:37:36', 0),
-('78bda155fe380b1b3f175f1e88c284c6', '流程状态', 'bpm_status', '流程状态', 0, 'admin', '2019-05-09 16:31:52', NULL, NULL, 0),
+('78bda155fe380b1b3f175f1e88c284c6', '流程状态', 'bpm_status', '流程状态', 1, 'admin', '2019-05-09 16:31:52', NULL, NULL, 0),
 ('83bfb33147013cc81640d5fd9eda030c', '日志类型', 'log_type', NULL, 0, 'admin', '2019-03-18 23:22:19', NULL, NULL, 1),
 ('845da5006c97754728bf48b6a10f79cc', '状态', 'status', NULL, 1, 'admin', '2019-03-18 21:45:25', 'admin', '2019-03-18 21:58:25', 0),
 ('880a895c98afeca9d9ac39f29e67c13e', '操作类型', 'operate_type', '操作类型', 0, 'admin', '2019-07-22 10:54:29', NULL, NULL, 0),
@@ -1840,7 +1842,7 @@ INSERT INTO `sys_dict` (`id`, `dict_name`, `dict_code`, `description`, `del_flag
 ('bd1b8bc28e65d6feefefb6f3c79f42fd', 'Online图表数据类型', 'online_graph_data_type', 'Online图表数据类型', 0, 'admin', '2019-04-12 17:24:24', 'admin', '2019-04-12 17:24:57', 0),
 ('c36169beb12de8a71c8683ee7c28a503', '部门状态', 'depart_status', NULL, 0, 'admin', '2019-03-18 21:59:51', NULL, NULL, 0),
 ('c5a14c75172783d72cbee6ee7f5df5d1', 'Online图表类型', 'online_graph_type', 'Online图表类型', 0, 'admin', '2019-04-12 17:04:06', NULL, NULL, 0),
-('d6e1152968b02d69ff358c75b48a6ee1', '流程类型', 'bpm_process_type', NULL, 0, 'admin', '2021-02-22 19:26:54', 'admin', '2019-03-30 18:14:44', 0),
+('d6e1152968b02d69ff358c75b48a6ee1', '流程类型', 'bpm_process_type', NULL, 1, 'admin', '2021-02-22 19:26:54', 'admin', '2019-03-30 18:14:44', 0),
 ('fc6cd58fde2e8481db10d3a1e68ce70c', '用户状态', 'user_status', NULL, 0, 'admin', '2019-03-18 21:57:25', 'admin', '2019-03-18 23:11:58', 1);
 
 -- --------------------------------------------------------
@@ -1920,6 +1922,11 @@ INSERT INTO `sys_dict_item` (`id`, `dict_id`, `item_text`, `item_value`, `descri
 ('1249164781949812738', '1249164719404351490', '七牛', '2', '', 1, 1, 'jeecg', '2020-04-12 10:37:47', NULL, NULL),
 ('1249175102324326401', '1249175047563493377', 'Scratch2.0', '1', '', 1, 1, 'jeecg', '2020-04-12 11:18:47', 'jeecg', '2020-04-12 17:01:26'),
 ('1249175128622612481', '1249175047563493377', 'Scratch3.0', '2', '', 1, 1, 'jeecg', '2020-04-12 11:18:53', 'jeecg', '2020-04-12 17:01:20'),
+('1252531170790170625', '1252531120982810626', '课程视频', '1', '', 1, 1, 'jeecg', '2020-04-21 17:34:36', NULL, NULL),
+('1252531204344602626', '1252531120982810626', '课程答案', '2', '', 2, 0, 'jeecg', '2020-04-21 17:34:44', 'jeecg', '2020-04-21 17:35:18'),
+('1252531254416203778', '1252531120982810626', '课程PPT', '3', '', 3, 1, 'jeecg', '2020-04-21 17:34:56', NULL, NULL),
+('1252531329372610561', '1252531120982810626', '课程教案', '4', '', 4, 0, 'jeecg', '2020-04-21 17:35:14', NULL, NULL),
+('1252531400281513985', '1252531120982810626', '作业文件', '5', '', 5, 1, 'jeecg', '2020-04-21 17:35:31', 'jeecg', '2020-04-21 17:35:40'),
 ('147c48ff4b51545032a9119d13f3222a', 'd6e1152968b02d69ff358c75b48a6ee1', '测试流程', 'test', NULL, 1, 1, 'admin', '2019-03-22 19:27:05', NULL, NULL),
 ('1543fe7e5e26fb97cdafe4981bedc0c8', '4c03fca6bf1f0299c381213961566349', '单排布局', 'single', NULL, 2, 1, 'admin', '2022-07-12 17:43:39', 'admin', '2019-04-12 17:43:57'),
 ('1b8a6341163062dad8cb2fddd34e0c3b', '404a04a15f371566c658ee9ef9fc392a', '22', '222', NULL, 1, 1, 'admin', '2019-03-30 11:17:48', NULL, NULL),
@@ -2052,7 +2059,19 @@ INSERT INTO `sys_file` (`id`, `create_time`, `update_by`, `create_by`, `update_t
 ('1249334840617930753', '2020-04-12 21:53:32', NULL, 'jeecg', NULL, 'A01', 2, 'project3/528436b4-0d81-4c52-86ed-8e249e607011.sb3', 'project3/528436b4-0d81-4c52-86ed-8e249e607011.sb3', '2', '学生作业-sb3', 0),
 ('1249334841465180161', '2020-04-12 21:53:32', NULL, 'jeecg', NULL, 'A01', 2, 'project3/528436b4-0d81-4c52-86ed-8e249e607011.jpg', 'project3/528436b4-0d81-4c52-86ed-8e249e607011.jpg', '2', '学生作业-封面', 0),
 ('1249335188527058945', '2020-04-12 21:54:55', NULL, 'jeecg', NULL, 'A01', 2, 'project3/90097042-860c-4b35-8bd7-4f61fcf23cf3.sb3', 'project3/90097042-860c-4b35-8bd7-4f61fcf23cf3.sb3', '2', '学生作业-sb3', 0),
-('1249335189294616578', '2020-04-12 21:54:55', NULL, 'jeecg', NULL, 'A01', 2, 'project3/90097042-860c-4b35-8bd7-4f61fcf23cf3.jpg', 'project3/90097042-860c-4b35-8bd7-4f61fcf23cf3.jpg', '2', '学生作业-封面', 0);
+('1249335189294616578', '2020-04-12 21:54:55', NULL, 'jeecg', NULL, 'A01', 2, 'project3/90097042-860c-4b35-8bd7-4f61fcf23cf3.jpg', 'project3/90097042-860c-4b35-8bd7-4f61fcf23cf3.jpg', '2', '学生作业-封面', 0),
+('1252531650056511490', '2020-04-21 17:36:30', NULL, 'jeecg', NULL, 'A01', NULL, 'QQ短视频20200102165005.mp4', '0e73cf86-192b-41b6-a787-f6db208add34.mp4', '2', '后台上传', 0),
+('1252595723188142081', '2020-04-21 21:51:07', NULL, 'student', NULL, 'A03A01A01', 2, 'project3/e1e64ec1-626d-43ab-bd61-44f24e7bc2dc.jpg', 'project3/e1e64ec1-626d-43ab-bd61-44f24e7bc2dc.jpg', '2', '学生作业-封面', 0),
+('1252595724018614273', '2020-04-21 21:51:07', NULL, 'student', NULL, 'A03A01A01', 2, 'project3/e1e64ec1-626d-43ab-bd61-44f24e7bc2dc.sb3', 'project3/e1e64ec1-626d-43ab-bd61-44f24e7bc2dc.sb3', '2', '学生作业-sb3', 0),
+('1252596145659412481', '2020-04-21 21:52:47', NULL, 'jeecg', NULL, 'A01', NULL, 'u=2342150752,4008770294&fm=26&gp=0.jpg', 'e8ebdb12-2a1f-4c4e-8875-0b95b990f2f1.jpg', '2', '后台上传', 0),
+('1252596169101377537', '2020-04-21 21:52:53', NULL, 'jeecg', NULL, 'A01', NULL, '3eb6334e6ac84762ab28e1148e8a7be9.png', 'f75fdd0c-5fe1-4771-b1ac-cc9a3b1bd0c0.png', '2', '后台上传', 0),
+('1252596186318995458', '2020-04-21 21:52:57', NULL, 'jeecg', NULL, 'A01', NULL, '3eb6334e6ac84762ab28e1148e8a7be9.png', '5609516d-cd03-4a93-8544-f99090b6eb50.png', '2', '后台上传', 0),
+('1252596862008786945', '2020-04-21 21:55:38', NULL, 'jeecg', NULL, 'A01', NULL, '  (10).jpg', '875b98a3-46ee-4482-8b73-cb70d77febfd.jpg', '2', '后台上传', 0),
+('1252780032465383426', '2020-04-22 10:03:29', NULL, 'jeecg', NULL, 'A01', NULL, 'QQ短视频20200102165005.mp4', '6ae53024-3b08-4be4-af46-2c4fc8d5d516.mp4', '2', '后台上传', 0),
+('1252780072244162562', '2020-04-22 10:03:39', NULL, 'jeecg', NULL, 'A01', NULL, '忍者.sb3', '312339bf-09c1-4273-8e3f-40330fba4a65.sb3', '2', '后台上传', 0),
+('1252780824173817857', '2020-04-22 10:06:38', NULL, 'jeecg', NULL, 'A01', NULL, '忍者.sb3', '4512df08-4bbb-472d-af2d-bed70e814231.sb3', '2', '后台上传', 0),
+('1252780841546625026', '2020-04-22 10:06:42', NULL, 'jeecg', NULL, 'A01', NULL, 'QQ短视频20200102165005.mp4', 'aee3ddf3-a1ef-4f78-86f7-f585d318097f.mp4', '2', '后台上传', 0),
+('1252780871653339138', '2020-04-22 10:06:50', NULL, 'jeecg', NULL, 'A01', NULL, '第一节 课件.pdf', 'f876877f-11a0-4fd4-821c-a4cae27c7b52.pdf', '2', '后台上传', 0);
 
 -- --------------------------------------------------------
 
@@ -3660,7 +3679,249 @@ INSERT INTO `sys_log` (`id`, `log_type`, `log_content`, `operate_type`, `userid`
 ('1249538514560503809', 2, '学生作业详情', 1, NULL, NULL, '127.0.0.1', 'org.jeecg.modules.teaching.controller.TeachingWorkController.studentWorkInfo()', NULL, '["1249358947245985794"]', NULL, 14, NULL, '2020-04-13 11:22:51', NULL, NULL),
 ('1249538687692984321', 2, '学生作业详情', 1, NULL, NULL, '127.0.0.1', 'org.jeecg.modules.teaching.controller.TeachingWorkController.studentWorkInfo()', NULL, '["1249267730541785090"]', NULL, 22, NULL, '2020-04-13 11:23:33', NULL, NULL),
 ('1249538694663917569', 2, '获取七牛上传Token', 1, NULL, NULL, '127.0.0.1', 'org.jeecg.modules.common.controller.QiniuController.getQiniuToken()', NULL, '[]', NULL, 14, NULL, '2020-04-13 11:23:34', NULL, NULL),
-('1249538960331132929', 2, '学生表-分页列表查询', 1, 'jeecg', 'jeecg', '127.0.0.1', 'org.jeecg.modules.teaching.controller.TeachingStudentController.queryPageList()', NULL, NULL, NULL, 180, 'jeecg', '2020-04-13 11:24:38', NULL, NULL);
+('1249538960331132929', 2, '学生表-分页列表查询', 1, 'jeecg', 'jeecg', '127.0.0.1', 'org.jeecg.modules.teaching.controller.TeachingStudentController.queryPageList()', NULL, NULL, NULL, 180, 'jeecg', '2020-04-13 11:24:38', NULL, NULL),
+('1251087608500318209', 2, '课程-分页列表查询', 1, 'jeecg', 'jeecg', '127.0.0.1', 'org.jeecg.modules.teaching.controller.TeachingCourseController.queryPageList()', NULL, NULL, NULL, 222, 'jeecg', '2020-04-17 17:58:24', NULL, NULL),
+('1251087615878098946', 2, '课程单元-分页列表查询', 1, 'jeecg', 'jeecg', '127.0.0.1', 'org.jeecg.modules.teaching.controller.TeachingCourseUnitController.queryPageList()', NULL, NULL, NULL, 88, 'jeecg', '2020-04-17 17:58:26', NULL, NULL),
+('1251087615920041986', 2, '课程-分页列表查询', 1, 'jeecg', 'jeecg', '127.0.0.1', 'org.jeecg.modules.teaching.controller.TeachingCourseController.queryPageList()', NULL, NULL, NULL, 90, 'jeecg', '2020-04-17 17:58:26', NULL, NULL),
+('1251087622605762561', 2, '课程-分页列表查询', 1, 'jeecg', 'jeecg', '127.0.0.1', 'org.jeecg.modules.teaching.controller.TeachingCourseController.queryPageList()', NULL, NULL, NULL, 80, 'jeecg', '2020-04-17 17:58:27', NULL, NULL),
+('1251087626321915905', 2, '获取七牛上传Token', 1, NULL, NULL, '127.0.0.1', 'org.jeecg.modules.common.controller.QiniuController.getQiniuToken()', NULL, '[]', NULL, 17, NULL, '2020-04-17 17:58:28', NULL, NULL),
+('1251087627320160257', 2, '获取七牛上传Token', 1, NULL, NULL, '127.0.0.1', 'org.jeecg.modules.common.controller.QiniuController.getQiniuToken()', NULL, '[]', NULL, 0, NULL, '2020-04-17 17:58:29', NULL, NULL),
+('1251087627710230529', 2, '获取七牛上传Token', 1, NULL, NULL, '127.0.0.1', 'org.jeecg.modules.common.controller.QiniuController.getQiniuToken()', NULL, '[]', NULL, 1, NULL, '2020-04-17 17:58:29', NULL, NULL),
+('1251157675976028161', 1, '用户名: jeecg,退出成功！', NULL, NULL, NULL, '127.0.0.1', NULL, NULL, NULL, NULL, NULL, NULL, '2020-04-17 22:36:49', NULL, NULL),
+('1251157754673754113', 1, '用户名: jeecg,登录成功！', NULL, NULL, NULL, '127.0.0.1', NULL, NULL, NULL, NULL, NULL, NULL, '2020-04-17 22:37:08', NULL, NULL),
+('1251157767646736385', 2, '课程-分页列表查询', 1, 'jeecg', 'jeecg', '127.0.0.1', 'org.jeecg.modules.teaching.controller.TeachingCourseController.queryPageList()', NULL, NULL, NULL, 1119, 'jeecg', '2020-04-17 22:37:11', NULL, NULL),
+('1252530254737399810', 1, '用户名: jeecg,退出成功！', NULL, NULL, NULL, '127.0.0.1', NULL, NULL, NULL, NULL, NULL, NULL, '2020-04-21 17:30:57', NULL, NULL),
+('1252530279722868738', 1, '用户名: jeecg,登录成功！', NULL, NULL, NULL, '127.0.0.1', NULL, NULL, NULL, NULL, NULL, NULL, '2020-04-21 17:31:04', NULL, NULL),
+('1252530304108552193', 2, '作业列表-分页列表查询', 1, 'jeecg', 'jeecg', '127.0.0.1', 'org.jeecg.modules.teaching.controller.TeachingWorkController.queryPageList()', NULL, NULL, NULL, 1842, 'jeecg', '2020-04-21 17:31:10', NULL, NULL),
+('1252530356851924993', 2, '课程单元-分页列表查询', 1, 'jeecg', 'jeecg', '127.0.0.1', 'org.jeecg.modules.teaching.controller.TeachingCourseUnitController.queryPageList()', NULL, NULL, NULL, 110, 'jeecg', '2020-04-21 17:31:22', NULL, NULL),
+('1252530358101827586', 2, '课程-分页列表查询', 1, 'jeecg', 'jeecg', '127.0.0.1', 'org.jeecg.modules.teaching.controller.TeachingCourseController.queryPageList()', NULL, NULL, NULL, 101, 'jeecg', '2020-04-21 17:31:22', NULL, NULL),
+('1252530362237411329', 2, '课程-分页列表查询', 1, 'jeecg', 'jeecg', '127.0.0.1', 'org.jeecg.modules.teaching.controller.TeachingCourseController.queryPageList()', NULL, NULL, NULL, 78, 'jeecg', '2020-04-21 17:31:23', NULL, NULL),
+('1252530397423427585', 2, '获取七牛上传Token', 1, NULL, NULL, '127.0.0.1', 'org.jeecg.modules.common.controller.QiniuController.getQiniuToken()', NULL, '[]', NULL, 36, NULL, '2020-04-21 17:31:32', NULL, NULL),
+('1252530886957424642', 2, '获取七牛上传Token', 1, NULL, NULL, '127.0.0.1', 'org.jeecg.modules.common.controller.QiniuController.getQiniuToken()', NULL, '[]', NULL, 1, NULL, '2020-04-21 17:33:29', NULL, NULL),
+('1252531601255784449', 2, '获取七牛上传Token', 1, NULL, NULL, '127.0.0.1', 'org.jeecg.modules.common.controller.QiniuController.getQiniuToken()', NULL, '[]', NULL, 1, NULL, '2020-04-21 17:36:19', NULL, NULL),
+('1252531650241060865', 2, '文件管理-添加', 2, 'jeecg', 'jeecg', '127.0.0.1', 'org.jeecg.modules.system.controller.SysFileController.add()', NULL, '[{"createBy":"jeecg","createTime":1587461790941,"fileLocation":"2","fileName":"QQ短视频20200102165005.mp4","filePath":"0e73cf86-192b-41b6-a787-f6db208add34.mp4","fileTag":"后台上传","id":"1252531650056511490","sysOrgCode":"A01"}]', NULL, 61, 'jeecg', '2020-04-21 17:36:30', NULL, NULL),
+('1252531699146645505', 2, '课程单元-分页列表查询', 1, 'jeecg', 'jeecg', '127.0.0.1', 'org.jeecg.modules.teaching.controller.TeachingCourseUnitController.queryPageList()', NULL, NULL, NULL, 77, 'jeecg', '2020-04-21 17:36:42', NULL, NULL),
+('1252531699234725889', 2, '课程-分页列表查询', 1, 'jeecg', 'jeecg', '127.0.0.1', 'org.jeecg.modules.teaching.controller.TeachingCourseController.queryPageList()', NULL, NULL, NULL, 88, 'jeecg', '2020-04-21 17:36:42', NULL, NULL),
+('1252531704267890690', 2, '获取七牛上传Token', 1, NULL, NULL, '127.0.0.1', 'org.jeecg.modules.common.controller.QiniuController.getQiniuToken()', NULL, '[]', NULL, 0, NULL, '2020-04-21 17:36:43', NULL, NULL),
+('1252531705777840130', 2, '获取七牛上传Token', 1, NULL, NULL, '127.0.0.1', 'org.jeecg.modules.common.controller.QiniuController.getQiniuToken()', NULL, '[]', NULL, 1, NULL, '2020-04-21 17:36:44', NULL, NULL),
+('1252531707128406018', 2, '获取七牛上传Token', 1, NULL, NULL, '127.0.0.1', 'org.jeecg.modules.common.controller.QiniuController.getQiniuToken()', NULL, '[]', NULL, 1, NULL, '2020-04-21 17:36:44', NULL, NULL),
+('1252531708504137729', 2, '获取七牛上传Token', 1, NULL, NULL, '127.0.0.1', 'org.jeecg.modules.common.controller.QiniuController.getQiniuToken()', NULL, '[]', NULL, 0, NULL, '2020-04-21 17:36:44', NULL, NULL),
+('1252531709858897922', 2, '获取七牛上传Token', 1, NULL, NULL, '127.0.0.1', 'org.jeecg.modules.common.controller.QiniuController.getQiniuToken()', NULL, '[]', NULL, 1, NULL, '2020-04-21 17:36:45', NULL, NULL),
+('1252532810121306113', 2, '职务表-分页列表查询', 1, 'jeecg', 'jeecg', '127.0.0.1', 'org.jeecg.modules.system.controller.SysPositionController.queryPageList()', NULL, NULL, NULL, 189, 'jeecg', '2020-04-21 17:41:07', NULL, NULL),
+('1252532852693491714', 2, '职务表-分页列表查询', 1, 'jeecg', 'jeecg', '127.0.0.1', 'org.jeecg.modules.system.controller.SysPositionController.queryPageList()', NULL, NULL, NULL, 63, 'jeecg', '2020-04-21 17:41:17', NULL, NULL),
+('1252532865066688514', 2, '编辑用户，id： a75d45a015c44384a04449ee80dc3503', 2, 'jeecg', 'jeecg', '127.0.0.1', NULL, NULL, NULL, NULL, NULL, 'jeecg', '2020-04-21 17:41:20', NULL, NULL),
+('1252535220130623489', 1, '用户名: jeecg,登录成功！', NULL, NULL, NULL, '127.0.0.1', NULL, NULL, NULL, NULL, NULL, NULL, '2020-04-21 17:50:41', NULL, NULL),
+('1252535266284744705', 2, '文件管理-分页列表查询', 1, 'jeecg', 'jeecg', '127.0.0.1', 'org.jeecg.modules.system.controller.SysFileController.queryPageList()', NULL, NULL, NULL, 795, 'jeecg', '2020-04-21 17:50:53', NULL, NULL),
+('1252535273847074818', 2, '作业列表-分页列表查询', 1, 'jeecg', 'jeecg', '127.0.0.1', 'org.jeecg.modules.teaching.controller.TeachingWorkController.queryPageList()', NULL, NULL, NULL, 912, 'jeecg', '2020-04-21 17:50:54', NULL, NULL),
+('1252535303760850945', 2, '我的作业-分页列表查询', 1, 'jeecg', 'jeecg', '127.0.0.1', 'org.jeecg.modules.teaching.controller.TeachingWorkController.mine()', NULL, NULL, NULL, 355, 'jeecg', '2020-04-21 17:51:02', NULL, NULL),
+('1252535471323295746', 2, '我的作业-分页列表查询', 1, 'jeecg', 'jeecg', '127.0.0.1', 'org.jeecg.modules.teaching.controller.TeachingWorkController.mine()', NULL, NULL, NULL, 327, 'jeecg', '2020-04-21 17:51:42', NULL, NULL),
+('1252535828615081986', 2, '我的作业-分页列表查询', 1, 'jeecg', 'jeecg', '127.0.0.1', 'org.jeecg.modules.teaching.controller.TeachingWorkController.mine()', NULL, NULL, NULL, 370, 'jeecg', '2020-04-21 17:53:07', NULL, NULL),
+('1252536090524200961', 2, '我的作业-分页列表查询', 1, 'jeecg', 'jeecg', '127.0.0.1', 'org.jeecg.modules.teaching.controller.TeachingWorkController.mine()', NULL, NULL, NULL, 333, 'jeecg', '2020-04-21 17:54:09', NULL, NULL),
+('1252536244090253313', 2, '我的作业-分页列表查询', 1, 'jeecg', 'jeecg', '127.0.0.1', 'org.jeecg.modules.teaching.controller.TeachingWorkController.mine()', NULL, NULL, NULL, 325, 'jeecg', '2020-04-21 17:54:46', NULL, NULL),
+('1252536408997703681', 2, '作业列表-通过id删除', 4, 'jeecg', 'jeecg', '127.0.0.1', 'org.jeecg.modules.teaching.controller.TeachingWorkController.delete()', NULL, '["1249283608884809730"]', NULL, 121, 'jeecg', '2020-04-21 17:55:25', NULL, NULL),
+('1252536410813837313', 2, '我的作业-分页列表查询', 1, 'jeecg', 'jeecg', '127.0.0.1', 'org.jeecg.modules.teaching.controller.TeachingWorkController.mine()', NULL, NULL, NULL, 310, 'jeecg', '2020-04-21 17:55:25', NULL, NULL),
+('1252536416752971777', 2, '作业列表-通过id删除', 4, 'jeecg', 'jeecg', '127.0.0.1', 'org.jeecg.modules.teaching.controller.TeachingWorkController.delete()', NULL, '["1249284574480699394"]', NULL, 92, 'jeecg', '2020-04-21 17:55:27', NULL, NULL),
+('1252536419298914305', 2, '我的作业-分页列表查询', 1, 'jeecg', 'jeecg', '127.0.0.1', 'org.jeecg.modules.teaching.controller.TeachingWorkController.mine()', NULL, NULL, NULL, 238, 'jeecg', '2020-04-21 17:55:28', NULL, NULL),
+('1252536423287697409', 2, '作业列表-通过id删除', 4, 'jeecg', 'jeecg', '127.0.0.1', 'org.jeecg.modules.teaching.controller.TeachingWorkController.delete()', NULL, '["1249285357716639746"]', NULL, 94, 'jeecg', '2020-04-21 17:55:28', NULL, NULL),
+('1252536425640701953', 2, '我的作业-分页列表查询', 1, 'jeecg', 'jeecg', '127.0.0.1', 'org.jeecg.modules.teaching.controller.TeachingWorkController.mine()', NULL, NULL, NULL, 194, 'jeecg', '2020-04-21 17:55:29', NULL, NULL),
+('1252536430376071169', 2, '作业列表-通过id删除', 4, 'jeecg', 'jeecg', '127.0.0.1', 'org.jeecg.modules.teaching.controller.TeachingWorkController.delete()', NULL, '["1249297577167032321"]', NULL, 98, 'jeecg', '2020-04-21 17:55:30', NULL, NULL),
+('1252536432565497857', 2, '我的作业-分页列表查询', 1, 'jeecg', 'jeecg', '127.0.0.1', 'org.jeecg.modules.teaching.controller.TeachingWorkController.mine()', NULL, NULL, NULL, 152, 'jeecg', '2020-04-21 17:55:31', NULL, NULL),
+('1252536436390703105', 2, '作业列表-通过id删除', 4, 'jeecg', 'jeecg', '127.0.0.1', 'org.jeecg.modules.teaching.controller.TeachingWorkController.delete()', NULL, '["1249327740042919938"]', NULL, 88, 'jeecg', '2020-04-21 17:55:32', NULL, NULL),
+('1252536438424940545', 2, '我的作业-分页列表查询', 1, 'jeecg', 'jeecg', '127.0.0.1', 'org.jeecg.modules.teaching.controller.TeachingWorkController.mine()', NULL, NULL, NULL, 121, 'jeecg', '2020-04-21 17:55:32', NULL, NULL),
+('1252536442497609729', 2, '作业列表-通过id删除', 4, 'jeecg', 'jeecg', '127.0.0.1', 'org.jeecg.modules.teaching.controller.TeachingWorkController.delete()', NULL, '["1249327817754984450"]', NULL, 107, 'jeecg', '2020-04-21 17:55:33', NULL, NULL),
+('1252536444364075009', 2, '我的作业-分页列表查询', 1, 'jeecg', 'jeecg', '127.0.0.1', 'org.jeecg.modules.teaching.controller.TeachingWorkController.mine()', NULL, NULL, NULL, 75, 'jeecg', '2020-04-21 17:55:33', NULL, NULL),
+('1252536944400609282', 2, '我的作业-分页列表查询', 1, 'jeecg', 'jeecg', '127.0.0.1', 'org.jeecg.modules.teaching.controller.TeachingWorkController.mine()', NULL, NULL, NULL, 79, 'jeecg', '2020-04-21 17:57:33', NULL, NULL),
+('1252537105038258177', 2, '作业列表-分页列表查询', 1, 'jeecg', 'jeecg', '127.0.0.1', 'org.jeecg.modules.teaching.controller.TeachingWorkController.queryPageList()', NULL, NULL, NULL, 1053, 'jeecg', '2020-04-21 17:58:11', NULL, NULL),
+('1252537978497871874', 2, '我的作业-分页列表查询', 1, 'jeecg', 'jeecg', '127.0.0.1', 'org.jeecg.modules.teaching.controller.TeachingWorkController.mine()', NULL, NULL, NULL, 84, 'jeecg', '2020-04-21 18:01:39', NULL, NULL),
+('1252538005605658626', 1, '用户名: jeecg,退出成功！', NULL, NULL, NULL, '127.0.0.1', NULL, NULL, NULL, NULL, NULL, NULL, '2020-04-21 18:01:46', NULL, NULL),
+('1252592309637062658', 1, '用户名: jeecg,登录成功！', NULL, NULL, NULL, '127.0.0.1', NULL, NULL, NULL, NULL, NULL, NULL, '2020-04-21 21:37:33', NULL, NULL),
+('1252592375391166465', 1, '用户名: jeecg,退出成功！', NULL, NULL, NULL, '127.0.0.1', NULL, NULL, NULL, NULL, NULL, NULL, '2020-04-21 21:37:48', NULL, NULL),
+('1252592422807773186', 1, '用户登录失败，用户不存在！', NULL, NULL, NULL, '127.0.0.1', NULL, NULL, NULL, NULL, NULL, NULL, '2020-04-21 21:38:00', NULL, NULL),
+('1252592435508125698', 1, '用户登录失败，用户不存在！', NULL, NULL, NULL, '127.0.0.1', NULL, NULL, NULL, NULL, NULL, NULL, '2020-04-21 21:38:03', NULL, NULL),
+('1252592463001788418', 1, '用户登录失败，用户不存在！', NULL, NULL, NULL, '127.0.0.1', NULL, NULL, NULL, NULL, NULL, NULL, '2020-04-21 21:38:09', NULL, NULL),
+('1252592482517884930', 1, '用户登录失败，用户不存在！', NULL, NULL, NULL, '127.0.0.1', NULL, NULL, NULL, NULL, NULL, NULL, '2020-04-21 21:38:14', NULL, NULL),
+('1252592495117574145', 1, '用户名: admin,登录成功！', NULL, NULL, NULL, '127.0.0.1', NULL, NULL, NULL, NULL, NULL, NULL, '2020-04-21 21:38:17', NULL, NULL),
+('1252592585701957634', 2, '职务表-分页列表查询', 1, 'admin', '管理员', '127.0.0.1', 'org.jeecg.modules.system.controller.SysPositionController.queryPageList()', NULL, NULL, NULL, 60, 'admin', '2020-04-21 21:38:39', NULL, NULL),
+('1252592768451977217', 2, '编辑用户，id： 2cb6e8e9b9ac4ccca17a1c3020a118d4', 2, 'admin', '管理员', '127.0.0.1', NULL, NULL, NULL, NULL, NULL, 'admin', '2020-04-21 21:39:22', NULL, NULL),
+('1252592778455392257', 2, '职务表-分页列表查询', 1, 'admin', '管理员', '127.0.0.1', 'org.jeecg.modules.system.controller.SysPositionController.queryPageList()', NULL, NULL, NULL, 70, 'admin', '2020-04-21 21:39:25', NULL, NULL),
+('1252592802631360514', 2, '职务表-分页列表查询', 1, 'admin', '管理员', '127.0.0.1', 'org.jeecg.modules.system.controller.SysPositionController.queryPageList()', NULL, NULL, NULL, 54, 'admin', '2020-04-21 21:39:30', NULL, NULL),
+('1252593423329632258', 1, '用户名: 管理员,退出成功！', NULL, NULL, NULL, '127.0.0.1', NULL, NULL, NULL, NULL, NULL, NULL, '2020-04-21 21:41:58', NULL, NULL),
+('1252593466602266625', 1, '用户名: teacher,登录成功！', NULL, NULL, NULL, '127.0.0.1', NULL, NULL, NULL, NULL, NULL, NULL, '2020-04-21 21:42:09', NULL, NULL),
+('1252593482200883201', 2, '作业列表-分页列表查询', 1, 'teacher', '老师', '127.0.0.1', 'org.jeecg.modules.teaching.controller.TeachingWorkController.queryPageList()', NULL, NULL, NULL, 142, 'teacher', '2020-04-21 21:42:12', NULL, NULL),
+('1252593699260309506', 1, '用户名: 老师,退出成功！', NULL, 'teacher', '老师', '127.0.0.1', NULL, NULL, NULL, NULL, NULL, 'teacher', '2020-04-21 21:43:04', NULL, NULL),
+('1252593743657017345', 1, '用户名: admin,登录成功！', NULL, NULL, NULL, '127.0.0.1', NULL, NULL, NULL, NULL, NULL, NULL, '2020-04-21 21:43:15', NULL, NULL),
+('1252593843586310145', 2, '编辑用户，id： 2cb6e8e9b9ac4ccca17a1c3020a118d4', 2, 'admin', '管理员', '127.0.0.1', NULL, NULL, NULL, NULL, NULL, 'admin', '2020-04-21 21:43:39', NULL, NULL),
+('1252593869469360129', 1, '用户名: 管理员,退出成功！', NULL, NULL, NULL, '127.0.0.1', NULL, NULL, NULL, NULL, NULL, NULL, '2020-04-21 21:43:45', NULL, NULL),
+('1252593906542813185', 1, '用户名: jeecg,登录成功！', NULL, NULL, NULL, '127.0.0.1', NULL, NULL, NULL, NULL, NULL, NULL, '2020-04-21 21:43:54', NULL, NULL),
+('1252594067566338049', 1, '用户名: teacher,登录成功！', NULL, NULL, NULL, '127.0.0.1', NULL, NULL, NULL, NULL, NULL, NULL, '2020-04-21 21:44:32', NULL, NULL),
+('1252594577253965826', 2, '作业列表-分页列表查询', 1, 'teacher', '老师', '127.0.0.1', 'org.jeecg.modules.teaching.controller.TeachingWorkController.queryPageList()', NULL, NULL, NULL, 124, 'teacher', '2020-04-21 21:46:33', NULL, NULL),
+('1252594602465927169', 2, '作业列表-分页列表查询', 1, 'teacher', '老师', '127.0.0.1', 'org.jeecg.modules.teaching.controller.TeachingWorkController.queryPageList()', NULL, NULL, NULL, 99, 'teacher', '2020-04-21 21:46:39', NULL, NULL),
+('1252594713954721794', 2, '作业列表-分页列表查询', 1, 'jeecg', 'jeecg', '127.0.0.1', 'org.jeecg.modules.teaching.controller.TeachingWorkController.queryPageList()', NULL, NULL, NULL, 547, 'jeecg', '2020-04-21 21:47:06', NULL, NULL),
+('1252594739502227457', 2, '作业列表-通过id删除', 4, 'jeecg', 'jeecg', '127.0.0.1', 'org.jeecg.modules.teaching.controller.TeachingWorkController.delete()', NULL, '["1249358947245985794"]', NULL, 74, 'jeecg', '2020-04-21 21:47:12', NULL, NULL),
+('1252594741943312386', 2, '作业列表-分页列表查询', 1, 'jeecg', 'jeecg', '127.0.0.1', 'org.jeecg.modules.teaching.controller.TeachingWorkController.queryPageList()', NULL, NULL, NULL, 181, 'jeecg', '2020-04-21 21:47:13', NULL, NULL),
+('1252594830279548930', 2, '作品评论集合-通过id查询', 1, 'jeecg', 'jeecg', '127.0.0.1', 'org.jeecg.modules.teaching.controller.TeachingWorkController.queryTeachingWorkCommentListByMainId()', NULL, '["1249358947480866818"]', NULL, 34, 'jeecg', '2020-04-21 21:47:34', NULL, NULL),
+('1252594834566127618', 2, '作业批改集合-通过id查询', 1, 'jeecg', 'jeecg', '127.0.0.1', 'org.jeecg.modules.teaching.controller.TeachingWorkController.queryTeachingWorkCorrectListByMainId()', NULL, '["1249358947480866818"]', NULL, 1031, 'jeecg', '2020-04-21 21:47:35', NULL, NULL),
+('1252594895773605890', 2, '作品评论集合-通过id查询', 1, 'jeecg', 'jeecg', '127.0.0.1', 'org.jeecg.modules.teaching.controller.TeachingWorkController.queryTeachingWorkCommentListByMainId()', NULL, '["1249358947480866818"]', NULL, 16, 'jeecg', '2020-04-21 21:47:49', NULL, NULL),
+('1252594897040285697', 2, '作业批改集合-通过id查询', 1, 'jeecg', 'jeecg', '127.0.0.1', 'org.jeecg.modules.teaching.controller.TeachingWorkController.queryTeachingWorkCorrectListByMainId()', NULL, '["1249358947480866818"]', NULL, 15, 'jeecg', '2020-04-21 21:47:50', NULL, NULL),
+('1252595520674562049', 2, '作业列表-编辑', 3, 'jeecg', 'jeecg', '127.0.0.1', 'org.jeecg.modules.teaching.controller.TeachingWorkController.edit()', NULL, '[{"collectNum":0,"createBy":"admin","createTime":1586705359000,"delFlag":0,"id":"1249358947480866818","starNum":0,"sysOrgCode":"A01","teachingWorkCorrectList":[{"createBy":"jeecg","createTime":1587477018466,"id":"1252595520087359489","score":4,"sysOrgCode":"A01","workId":"1249358947480866818"}],"userId":"e9ca23d68d884d4ebb19d07889727dae","viewNum":0,"workFile":"1249284572001865729","workName":"忍者","workType":"2"}]', NULL, 501, 'jeecg', '2020-04-21 21:50:18', NULL, NULL),
+('1252595523082092546', 2, '作业列表-分页列表查询', 1, 'jeecg', 'jeecg', '127.0.0.1', 'org.jeecg.modules.teaching.controller.TeachingWorkController.queryPageList()', NULL, NULL, NULL, 352, 'jeecg', '2020-04-21 21:50:19', NULL, NULL),
+('1252595552949731330', 2, '作业列表-分页列表查询', 1, 'teacher', '老师', '127.0.0.1', 'org.jeecg.modules.teaching.controller.TeachingWorkController.queryPageList()', NULL, NULL, NULL, 150, 'teacher', '2020-04-21 21:50:26', NULL, NULL),
+('1252595600139845633', 1, '用户名: 老师,退出成功！', NULL, 'teacher', '老师', '127.0.0.1', NULL, NULL, NULL, NULL, NULL, 'teacher', '2020-04-21 21:50:37', NULL, NULL),
+('1252595663935209474', 1, '用户名: student,登录成功！', NULL, NULL, NULL, '127.0.0.1', NULL, NULL, NULL, NULL, NULL, NULL, '2020-04-21 21:50:53', NULL, NULL),
+('1252595682037825537', 2, '获取七牛上传Token', 1, NULL, NULL, '127.0.0.1', 'org.jeecg.modules.common.controller.QiniuController.getQiniuToken()', NULL, '[]', NULL, 13, NULL, '2020-04-21 21:50:57', NULL, NULL),
+('1252595682230763522', 2, '获取七牛上传Token', 1, NULL, NULL, '127.0.0.1', 'org.jeecg.modules.common.controller.QiniuController.getQiniuToken()', NULL, '[]', NULL, 0, NULL, '2020-04-21 21:50:57', NULL, NULL),
+('1252595723439800322', 2, '文件管理-添加', 2, 'student', '学生', '127.0.0.1', 'org.jeecg.modules.system.controller.SysFileController.add()', NULL, '[{"createBy":"student","createTime":1587477067168,"fileLocation":"2","fileName":"project3/e1e64ec1-626d-43ab-bd61-44f24e7bc2dc.jpg","filePath":"project3/e1e64ec1-626d-43ab-bd61-44f24e7bc2dc.jpg","fileTag":"学生作业-封面","fileType":2,"id":"1252595723188142081","sysOrgCode":"A03A01A01"}]', NULL, 64, 'student', '2020-04-21 21:51:07', NULL, NULL),
+('1252595724098306050', 2, '文件管理-添加', 2, 'student', '学生', '127.0.0.1', 'org.jeecg.modules.system.controller.SysFileController.add()', NULL, '[{"createBy":"student","createTime":1587477067366,"fileLocation":"2","fileName":"project3/e1e64ec1-626d-43ab-bd61-44f24e7bc2dc.sb3","filePath":"project3/e1e64ec1-626d-43ab-bd61-44f24e7bc2dc.sb3","fileTag":"学生作业-sb3","fileType":2,"id":"1252595724018614273","sysOrgCode":"A03A01A01"}]', NULL, 19, 'student', '2020-04-21 21:51:07', NULL, NULL),
+('1252595747536076801', 2, '我的作业-分页列表查询', 1, 'student', '学生', '127.0.0.1', 'org.jeecg.modules.teaching.controller.TeachingWorkController.mine()', NULL, NULL, NULL, 168, 'student', '2020-04-21 21:51:12', NULL, NULL),
+('1252595761494720513', 2, '获取七牛上传Token', 1, NULL, NULL, '127.0.0.1', 'org.jeecg.modules.common.controller.QiniuController.getQiniuToken()', NULL, '[]', NULL, 0, NULL, '2020-04-21 21:51:16', NULL, NULL),
+('1252595767240916994', 2, '学生作业详情', 1, NULL, NULL, '127.0.0.1', 'org.jeecg.modules.teaching.controller.TeachingWorkController.studentWorkInfo()', NULL, '["1252595724924583937"]', NULL, 15, NULL, '2020-04-21 21:51:17', NULL, NULL),
+('1252595786685710337', 2, '我的作业-分页列表查询', 1, 'student', '学生', '127.0.0.1', 'org.jeecg.modules.teaching.controller.TeachingWorkController.mine()', NULL, NULL, NULL, 76, 'student', '2020-04-21 21:51:22', NULL, NULL),
+('1252596044509577218', 2, '课程-分页列表查询', 1, 'jeecg', 'jeecg', '127.0.0.1', 'org.jeecg.modules.teaching.controller.TeachingCourseController.queryPageList()', NULL, NULL, NULL, 163, 'jeecg', '2020-04-21 21:52:23', NULL, NULL),
+('1252596056656281601', 2, '获取七牛上传Token', 1, NULL, NULL, '127.0.0.1', 'org.jeecg.modules.common.controller.QiniuController.getQiniuToken()', NULL, '[]', NULL, 0, NULL, '2020-04-21 21:52:26', NULL, NULL),
+('1252596058052984834', 2, '获取七牛上传Token', 1, NULL, NULL, '127.0.0.1', 'org.jeecg.modules.common.controller.QiniuController.getQiniuToken()', NULL, '[]', NULL, 1, NULL, '2020-04-21 21:52:27', NULL, NULL),
+('1252596059428716545', 2, '获取七牛上传Token', 1, NULL, NULL, '127.0.0.1', 'org.jeecg.modules.common.controller.QiniuController.getQiniuToken()', NULL, '[]', NULL, 0, NULL, '2020-04-21 21:52:27', NULL, NULL),
+('1252596145793630209', 2, '文件管理-添加', 2, 'jeecg', 'jeecg', '127.0.0.1', 'org.jeecg.modules.system.controller.SysFileController.add()', NULL, '[{"createBy":"jeecg","createTime":1587477167893,"fileLocation":"2","fileName":"u=2342150752,4008770294&fm=26&gp=0.jpg","filePath":"e8ebdb12-2a1f-4c4e-8875-0b95b990f2f1.jpg","fileTag":"后台上传","id":"1252596145659412481","sysOrgCode":"A01"}]', NULL, 33, 'jeecg', '2020-04-21 21:52:47', NULL, NULL),
+('1252596169185263617', 2, '文件管理-添加', 2, 'jeecg', 'jeecg', '127.0.0.1', 'org.jeecg.modules.system.controller.SysFileController.add()', NULL, '[{"createBy":"jeecg","createTime":1587477173482,"fileLocation":"2","fileName":"3eb6334e6ac84762ab28e1148e8a7be9.png","filePath":"f75fdd0c-5fe1-4771-b1ac-cc9a3b1bd0c0.png","fileTag":"后台上传","id":"1252596169101377537","sysOrgCode":"A01"}]', NULL, 19, 'jeecg', '2020-04-21 21:52:53', NULL, NULL),
+('1252596186436435970', 2, '文件管理-添加', 2, 'jeecg', 'jeecg', '127.0.0.1', 'org.jeecg.modules.system.controller.SysFileController.add()', NULL, '[{"createBy":"jeecg","createTime":1587477177586,"fileLocation":"2","fileName":"3eb6334e6ac84762ab28e1148e8a7be9.png","filePath":"5609516d-cd03-4a93-8544-f99090b6eb50.png","fileTag":"后台上传","id":"1252596186318995458","sysOrgCode":"A01"}]', NULL, 28, 'jeecg', '2020-04-21 21:52:57', NULL, NULL),
+('1252596862130421761', 2, '文件管理-添加', 2, 'jeecg', 'jeecg', '127.0.0.1', 'org.jeecg.modules.system.controller.SysFileController.add()', NULL, '[{"createBy":"jeecg","createTime":1587477338684,"fileLocation":"2","fileName":"  (10).jpg","filePath":"875b98a3-46ee-4482-8b73-cb70d77febfd.jpg","fileTag":"后台上传","id":"1252596862008786945","sysOrgCode":"A01"}]', NULL, 30, 'jeecg', '2020-04-21 21:55:38', NULL, NULL),
+('1252596872351940610', 2, '课程-添加', 2, 'jeecg', 'jeecg', '127.0.0.1', 'org.jeecg.modules.teaching.controller.TeachingCourseController.add()', NULL, '[{"courseCover":"5609516d-cd03-4a93-8544-f99090b6eb50.png","courseDesc":"介绍介绍介绍介绍介绍","courseIcon":"f75fdd0c-5fe1-4771-b1ac-cc9a3b1bd0c0.png","courseMap":"875b98a3-46ee-4482-8b73-cb70d77febfd.jpg","courseName":"Scratch初级课","createBy":"jeecg","createTime":1587477341133,"id":"1252596872280637441","sysOrgCode":"A01"}]', NULL, 18, 'jeecg', '2020-04-21 21:55:41', NULL, NULL),
+('1252596874432315394', 2, '课程-分页列表查询', 1, 'jeecg', 'jeecg', '127.0.0.1', 'org.jeecg.modules.teaching.controller.TeachingCourseController.queryPageList()', NULL, NULL, NULL, 84, 'jeecg', '2020-04-21 21:55:41', NULL, NULL),
+('1252597101763592194', 2, '课程-分页列表查询', 1, 'jeecg', 'jeecg', '127.0.0.1', 'org.jeecg.modules.teaching.controller.TeachingCourseController.queryPageList()', NULL, NULL, NULL, 1101, 'jeecg', '2020-04-21 21:56:35', NULL, NULL),
+('1252597112823971842', 2, '获取七牛上传Token', 1, NULL, NULL, '127.0.0.1', 'org.jeecg.modules.common.controller.QiniuController.getQiniuToken()', NULL, '[]', NULL, 0, NULL, '2020-04-21 21:56:38', NULL, NULL),
+('1252597113868353537', 2, '获取七牛上传Token', 1, NULL, NULL, '127.0.0.1', 'org.jeecg.modules.common.controller.QiniuController.getQiniuToken()', NULL, '[]', NULL, 0, NULL, '2020-04-21 21:56:38', NULL, NULL),
+('1252597114208092161', 2, '获取七牛上传Token', 1, NULL, NULL, '127.0.0.1', 'org.jeecg.modules.common.controller.QiniuController.getQiniuToken()', NULL, '[]', NULL, 1, NULL, '2020-04-21 21:56:38', NULL, NULL),
+('1252778339996610562', 1, '用户名: jeecg,登录成功！', NULL, NULL, NULL, '127.0.0.1', NULL, NULL, NULL, NULL, NULL, NULL, '2020-04-22 09:56:46', NULL, NULL),
+('1252778412922974209', 2, '课程-分页列表查询', 1, 'jeecg', 'jeecg', '127.0.0.1', 'org.jeecg.modules.teaching.controller.TeachingCourseController.queryPageList()', NULL, NULL, NULL, 106, 'jeecg', '2020-04-22 09:57:03', NULL, NULL),
+('1252778418371375106', 2, '课程-分页列表查询', 1, 'jeecg', 'jeecg', '127.0.0.1', 'org.jeecg.modules.teaching.controller.TeachingCourseController.queryPageList()', NULL, NULL, NULL, 76, 'jeecg', '2020-04-22 09:57:05', NULL, NULL),
+('1252778418488815617', 2, '课程单元-分页列表查询', 1, 'jeecg', 'jeecg', '127.0.0.1', 'org.jeecg.modules.teaching.controller.TeachingCourseUnitController.queryPageList()', NULL, NULL, NULL, 89, 'jeecg', '2020-04-22 09:57:05', NULL, NULL),
+('1252778423505203201', 2, '课程-分页列表查询', 1, 'jeecg', 'jeecg', '127.0.0.1', 'org.jeecg.modules.teaching.controller.TeachingCourseController.queryPageList()', NULL, NULL, NULL, 100, 'jeecg', '2020-04-22 09:57:06', NULL, NULL),
+('1252778497270427649', 2, '课程-分页列表查询', 1, 'jeecg', 'jeecg', '127.0.0.1', 'org.jeecg.modules.teaching.controller.TeachingCourseController.queryPageList()', NULL, NULL, NULL, 109, 'jeecg', '2020-04-22 09:57:23', NULL, NULL),
+('1252778770034405378', 2, '课程-分页列表查询', 1, 'jeecg', 'jeecg', '127.0.0.1', 'org.jeecg.modules.teaching.controller.TeachingCourseController.queryPageList()', NULL, NULL, NULL, 103, 'jeecg', '2020-04-22 09:58:28', NULL, NULL),
+('1252778923462045697', 2, '课程-分页列表查询', 1, 'jeecg', 'jeecg', '127.0.0.1', 'org.jeecg.modules.teaching.controller.TeachingCourseController.queryPageList()', NULL, NULL, NULL, 117, 'jeecg', '2020-04-22 09:59:05', NULL, NULL),
+('1252779249485295618', 2, '课程-分页列表查询', 1, 'jeecg', 'jeecg', '127.0.0.1', 'org.jeecg.modules.teaching.controller.TeachingCourseController.queryPageList()', NULL, NULL, NULL, 96, 'jeecg', '2020-04-22 10:00:23', NULL, NULL),
+('1252779395908448257', 2, '课程-分页列表查询', 1, 'jeecg', 'jeecg', '127.0.0.1', 'org.jeecg.modules.teaching.controller.TeachingCourseController.queryPageList()', NULL, NULL, NULL, 95, 'jeecg', '2020-04-22 10:00:58', NULL, NULL),
+('1252779921148555265', 2, '课程-分页列表查询', 1, 'jeecg', 'jeecg', '127.0.0.1', 'org.jeecg.modules.teaching.controller.TeachingCourseController.queryPageList()', NULL, NULL, NULL, 112, 'jeecg', '2020-04-22 10:03:03', NULL, NULL),
+('1252779938328424449', 2, '课程单元-分页列表查询', 1, 'jeecg', 'jeecg', '127.0.0.1', 'org.jeecg.modules.teaching.controller.TeachingCourseUnitController.queryPageList()', NULL, NULL, NULL, 150, 'jeecg', '2020-04-22 10:03:07', NULL, NULL),
+('1252779938538139650', 2, '课程-分页列表查询', 1, 'jeecg', 'jeecg', '127.0.0.1', 'org.jeecg.modules.teaching.controller.TeachingCourseController.queryPageList()', NULL, NULL, NULL, 178, 'jeecg', '2020-04-22 10:03:07', NULL, NULL),
+('1252779941377683458', 2, '获取七牛上传Token', 1, NULL, NULL, '127.0.0.1', 'org.jeecg.modules.common.controller.QiniuController.getQiniuToken()', NULL, '[]', NULL, 17, NULL, '2020-04-22 10:03:08', NULL, NULL),
+('1252779942803746817', 2, '获取七牛上传Token', 1, NULL, NULL, '127.0.0.1', 'org.jeecg.modules.common.controller.QiniuController.getQiniuToken()', NULL, '[]', NULL, 0, NULL, '2020-04-22 10:03:08', NULL, NULL),
+('1252779944171089922', 2, '获取七牛上传Token', 1, NULL, NULL, '127.0.0.1', 'org.jeecg.modules.common.controller.QiniuController.getQiniuToken()', NULL, '[]', NULL, 0, NULL, '2020-04-22 10:03:08', NULL, NULL),
+('1252779945530044417', 2, '获取七牛上传Token', 1, NULL, NULL, '127.0.0.1', 'org.jeecg.modules.common.controller.QiniuController.getQiniuToken()', NULL, '[]', NULL, 1, NULL, '2020-04-22 10:03:09', NULL, NULL),
+('1252779946884804609', 2, '获取七牛上传Token', 1, NULL, NULL, '127.0.0.1', 'org.jeecg.modules.common.controller.QiniuController.getQiniuToken()', NULL, '[]', NULL, 0, NULL, '2020-04-22 10:03:09', NULL, NULL),
+('1252780032599601154', 2, '文件管理-添加', 2, 'jeecg', 'jeecg', '127.0.0.1', 'org.jeecg.modules.system.controller.SysFileController.add()', NULL, '[{"createBy":"jeecg","createTime":1587521009924,"fileLocation":"2","fileName":"QQ短视频20200102165005.mp4","filePath":"6ae53024-3b08-4be4-af46-2c4fc8d5d516.mp4","fileTag":"后台上传","id":"1252780032465383426","sysOrgCode":"A01"}]', NULL, 38, 'jeecg', '2020-04-22 10:03:29', NULL, NULL),
+('1252780072420323329', 2, '文件管理-添加', 2, 'jeecg', 'jeecg', '127.0.0.1', 'org.jeecg.modules.system.controller.SysFileController.add()', NULL, '[{"createBy":"jeecg","createTime":1587521019409,"fileLocation":"2","fileName":"忍者.sb3","filePath":"312339bf-09c1-4273-8e3f-40330fba4a65.sb3","fileTag":"后台上传","id":"1252780072244162562","sysOrgCode":"A01"}]', NULL, 41, 'jeecg', '2020-04-22 10:03:39', NULL, NULL),
+('1252780166863466498', 2, '课程单元-分页列表查询', 1, 'jeecg', 'jeecg', '127.0.0.1', 'org.jeecg.modules.teaching.controller.TeachingCourseUnitController.queryPageList()', NULL, NULL, NULL, 87, 'jeecg', '2020-04-22 10:04:01', NULL, NULL),
+('1252780166989295617', 2, '课程-分页列表查询', 1, 'jeecg', 'jeecg', '127.0.0.1', 'org.jeecg.modules.teaching.controller.TeachingCourseController.queryPageList()', NULL, NULL, NULL, 99, 'jeecg', '2020-04-22 10:04:01', NULL, NULL),
+('1252780356936740866', 2, '课程单元-分页列表查询', 1, 'jeecg', 'jeecg', '127.0.0.1', 'org.jeecg.modules.teaching.controller.TeachingCourseUnitController.queryPageList()', NULL, NULL, NULL, 76, 'jeecg', '2020-04-22 10:04:47', NULL, NULL),
+('1252780357918208001', 2, '课程-分页列表查询', 1, 'jeecg', 'jeecg', '127.0.0.1', 'org.jeecg.modules.teaching.controller.TeachingCourseController.queryPageList()', NULL, NULL, NULL, 94, 'jeecg', '2020-04-22 10:04:47', NULL, NULL),
+('1252780367380557825', 2, '获取七牛上传Token', 1, NULL, NULL, '127.0.0.1', 'org.jeecg.modules.common.controller.QiniuController.getQiniuToken()', NULL, '[]', NULL, 1, NULL, '2020-04-22 10:04:49', NULL, NULL),
+('1252780368747900930', 2, '获取七牛上传Token', 1, NULL, NULL, '127.0.0.1', 'org.jeecg.modules.common.controller.QiniuController.getQiniuToken()', NULL, '[]', NULL, 1, NULL, '2020-04-22 10:04:50', NULL, NULL),
+('1252780370111049729', 2, '获取七牛上传Token', 1, NULL, NULL, '127.0.0.1', 'org.jeecg.modules.common.controller.QiniuController.getQiniuToken()', NULL, '[]', NULL, 0, NULL, '2020-04-22 10:04:50', NULL, NULL),
+('1252780371470004226', 2, '获取七牛上传Token', 1, NULL, NULL, '127.0.0.1', 'org.jeecg.modules.common.controller.QiniuController.getQiniuToken()', NULL, '[]', NULL, 1, NULL, '2020-04-22 10:04:50', NULL, NULL),
+('1252780372820570113', 2, '获取七牛上传Token', 1, NULL, NULL, '127.0.0.1', 'org.jeecg.modules.common.controller.QiniuController.getQiniuToken()', NULL, '[]', NULL, 1, NULL, '2020-04-22 10:04:51', NULL, NULL),
+('1252780521277960193', 2, '课程-分页列表查询', 1, 'jeecg', 'jeecg', '127.0.0.1', 'org.jeecg.modules.teaching.controller.TeachingCourseController.queryPageList()', NULL, NULL, NULL, 96, 'jeecg', '2020-04-22 10:05:26', NULL, NULL),
+('1252780525040250881', 2, '获取七牛上传Token', 1, NULL, NULL, '127.0.0.1', 'org.jeecg.modules.common.controller.QiniuController.getQiniuToken()', NULL, '[]', NULL, 0, NULL, '2020-04-22 10:05:27', NULL, NULL),
+('1252780526399205377', 2, '获取七牛上传Token', 1, NULL, NULL, '127.0.0.1', 'org.jeecg.modules.common.controller.QiniuController.getQiniuToken()', NULL, '[]', NULL, 0, NULL, '2020-04-22 10:05:27', NULL, NULL),
+('1252780527808491522', 2, '获取七牛上传Token', 1, NULL, NULL, '127.0.0.1', 'org.jeecg.modules.common.controller.QiniuController.getQiniuToken()', NULL, '[]', NULL, 0, NULL, '2020-04-22 10:05:28', NULL, NULL),
+('1252780529175834625', 2, '获取七牛上传Token', 1, NULL, NULL, '127.0.0.1', 'org.jeecg.modules.common.controller.QiniuController.getQiniuToken()', NULL, '[]', NULL, 0, NULL, '2020-04-22 10:05:28', NULL, NULL),
+('1252780530547372034', 2, '获取七牛上传Token', 1, NULL, NULL, '127.0.0.1', 'org.jeecg.modules.common.controller.QiniuController.getQiniuToken()', NULL, '[]', NULL, 0, NULL, '2020-04-22 10:05:28', NULL, NULL),
+('1252780620326449153', 2, '课程-分页列表查询', 1, 'jeecg', 'jeecg', '127.0.0.1', 'org.jeecg.modules.teaching.controller.TeachingCourseController.queryPageList()', NULL, NULL, NULL, 92, 'jeecg', '2020-04-22 10:05:50', NULL, NULL),
+('1252780626169114626', 2, '获取七牛上传Token', 1, NULL, NULL, '127.0.0.1', 'org.jeecg.modules.common.controller.QiniuController.getQiniuToken()', NULL, '[]', NULL, 1, NULL, '2020-04-22 10:05:51', NULL, NULL),
+('1252780627624538113', 2, '获取七牛上传Token', 1, NULL, NULL, '127.0.0.1', 'org.jeecg.modules.common.controller.QiniuController.getQiniuToken()', NULL, '[]', NULL, 0, NULL, '2020-04-22 10:05:51', NULL, NULL),
+('1252780628975104002', 2, '获取七牛上传Token', 1, NULL, NULL, '127.0.0.1', 'org.jeecg.modules.common.controller.QiniuController.getQiniuToken()', NULL, '[]', NULL, 1, NULL, '2020-04-22 10:05:52', NULL, NULL),
+('1252780630359224322', 2, '获取七牛上传Token', 1, NULL, NULL, '127.0.0.1', 'org.jeecg.modules.common.controller.QiniuController.getQiniuToken()', NULL, '[]', NULL, 1, NULL, '2020-04-22 10:05:52', NULL, NULL),
+('1252780631722373122', 2, '获取七牛上传Token', 1, NULL, NULL, '127.0.0.1', 'org.jeecg.modules.common.controller.QiniuController.getQiniuToken()', NULL, '[]', NULL, 0, NULL, '2020-04-22 10:05:52', NULL, NULL),
+('1252780717999206401', 2, '课程单元-分页列表查询', 1, 'jeecg', 'jeecg', '127.0.0.1', 'org.jeecg.modules.teaching.controller.TeachingCourseUnitController.queryPageList()', NULL, NULL, NULL, 83, 'jeecg', '2020-04-22 10:06:13', NULL, NULL),
+('1252780718250864642', 2, '课程-分页列表查询', 1, 'jeecg', 'jeecg', '127.0.0.1', 'org.jeecg.modules.teaching.controller.TeachingCourseController.queryPageList()', NULL, NULL, NULL, 124, 'jeecg', '2020-04-22 10:06:13', NULL, NULL),
+('1252780746675662849', 2, '获取七牛上传Token', 1, NULL, NULL, '127.0.0.1', 'org.jeecg.modules.common.controller.QiniuController.getQiniuToken()', NULL, '[]', NULL, 0, NULL, '2020-04-22 10:06:20', NULL, NULL),
+('1252780747501940738', 2, '获取七牛上传Token', 1, NULL, NULL, '127.0.0.1', 'org.jeecg.modules.common.controller.QiniuController.getQiniuToken()', NULL, '[]', NULL, 1, NULL, '2020-04-22 10:06:20', NULL, NULL),
+('1252780747715850241', 2, '获取七牛上传Token', 1, NULL, NULL, '127.0.0.1', 'org.jeecg.modules.common.controller.QiniuController.getQiniuToken()', NULL, '[]', NULL, 0, NULL, '2020-04-22 10:06:20', NULL, NULL),
+('1252780748189806593', 2, '获取七牛上传Token', 1, NULL, NULL, '127.0.0.1', 'org.jeecg.modules.common.controller.QiniuController.getQiniuToken()', NULL, '[]', NULL, 0, NULL, '2020-04-22 10:06:20', NULL, NULL),
+('1252780824287064065', 2, '文件管理-添加', 2, 'jeecg', 'jeecg', '127.0.0.1', 'org.jeecg.modules.system.controller.SysFileController.add()', NULL, '[{"createBy":"jeecg","createTime":1587521198681,"fileLocation":"2","fileName":"忍者.sb3","filePath":"4512df08-4bbb-472d-af2d-bed70e814231.sb3","fileTag":"后台上传","id":"1252780824173817857","sysOrgCode":"A01"}]', NULL, 29, 'jeecg', '2020-04-22 10:06:38', NULL, NULL),
+('1252780841689231361', 2, '文件管理-添加', 2, 'jeecg', 'jeecg', '127.0.0.1', 'org.jeecg.modules.system.controller.SysFileController.add()', NULL, '[{"createBy":"jeecg","createTime":1587521202823,"fileLocation":"2","fileName":"QQ短视频20200102165005.mp4","filePath":"aee3ddf3-a1ef-4f78-86f7-f585d318097f.mp4","fileTag":"后台上传","id":"1252780841546625026","sysOrgCode":"A01"}]', NULL, 36, 'jeecg', '2020-04-22 10:06:42', NULL, NULL),
+('1252780871766585346', 2, '文件管理-添加', 2, 'jeecg', 'jeecg', '127.0.0.1', 'org.jeecg.modules.system.controller.SysFileController.add()', NULL, '[{"createBy":"jeecg","createTime":1587521210002,"fileLocation":"2","fileName":"第一节 课件.pdf","filePath":"f876877f-11a0-4fd4-821c-a4cae27c7b52.pdf","fileTag":"后台上传","id":"1252780871653339138","sysOrgCode":"A01"}]', NULL, 26, 'jeecg', '2020-04-22 10:06:50', NULL, NULL),
+('1252780886178213890', 2, '课程单元-添加', 2, 'jeecg', 'jeecg', '127.0.0.1', 'org.jeecg.modules.teaching.controller.TeachingCourseUnitController.add()', NULL, '[{"courseId":"1252596872280637441","coursePpt":"f876877f-11a0-4fd4-821c-a4cae27c7b52.pdf","courseVideo":"aee3ddf3-a1ef-4f78-86f7-f585d318097f.mp4","courseWork":"4512df08-4bbb-472d-af2d-bed70e814231.sb3","courseWorkType":2,"createBy":"jeecg","createTime":1587521213432,"id":"1252780886052384769","mapX":200,"mapY":200,"sysOrgCode":"A01","unitIntro":"第一节介绍","unitName":"第一节"}]', NULL, 28, 'jeecg', '2020-04-22 10:06:53', NULL, NULL),
+('1252780889525268482', 2, '课程单元-分页列表查询', 1, 'jeecg', 'jeecg', '127.0.0.1', 'org.jeecg.modules.teaching.controller.TeachingCourseUnitController.queryPageList()', NULL, NULL, NULL, 352, 'jeecg', '2020-04-22 10:06:54', NULL, NULL),
+('1252780914267467777', 2, '课程单元-分页列表查询', 1, 'jeecg', 'jeecg', '127.0.0.1', 'org.jeecg.modules.teaching.controller.TeachingCourseUnitController.queryPageList()', NULL, NULL, NULL, 118, 'jeecg', '2020-04-22 10:07:00', NULL, NULL),
+('1252780915588673538', 2, '课程-分页列表查询', 1, 'jeecg', 'jeecg', '127.0.0.1', 'org.jeecg.modules.teaching.controller.TeachingCourseController.queryPageList()', NULL, NULL, NULL, 120, 'jeecg', '2020-04-22 10:07:00', NULL, NULL),
+('1252780975625940993', 1, '用户名: student,登录成功！', NULL, NULL, NULL, '127.0.0.1', NULL, NULL, NULL, NULL, NULL, NULL, '2020-04-22 10:07:14', NULL, NULL),
+('1252781073445498881', 2, '文件管理-分页列表查询', 1, 'jeecg', 'jeecg', '127.0.0.1', 'org.jeecg.modules.system.controller.SysFileController.queryPageList()', NULL, NULL, NULL, 535, 'jeecg', '2020-04-22 10:07:38', NULL, NULL),
+('1252781090398875650', 2, '职务表-分页列表查询', 1, 'jeecg', 'jeecg', '127.0.0.1', 'org.jeecg.modules.system.controller.SysPositionController.queryPageList()', NULL, NULL, NULL, 138, 'jeecg', '2020-04-22 10:07:42', NULL, NULL),
+('1252781094689648641', 2, '职务表-分页列表查询', 1, 'jeecg', 'jeecg', '127.0.0.1', 'org.jeecg.modules.system.controller.SysPositionController.queryPageList()', NULL, NULL, NULL, 60, 'jeecg', '2020-04-22 10:07:43', NULL, NULL),
+('1252781434696708097', 2, '职务表-分页列表查询', 1, 'jeecg', 'jeecg', '127.0.0.1', 'org.jeecg.modules.system.controller.SysPositionController.queryPageList()', NULL, NULL, NULL, 58, 'jeecg', '2020-04-22 10:09:04', NULL, NULL),
+('1252781521963397122', 2, '职务表-分页列表查询', 1, 'jeecg', 'jeecg', '127.0.0.1', 'org.jeecg.modules.system.controller.SysPositionController.queryPageList()', NULL, NULL, NULL, 56, 'jeecg', '2020-04-22 10:09:25', NULL, NULL),
+('1252781957642530817', 2, '部门角色-分页列表查询', 1, 'jeecg', 'jeecg', '127.0.0.1', 'org.jeecg.modules.system.controller.SysDepartRoleController.queryPageList()', NULL, NULL, NULL, 131, 'jeecg', '2020-04-22 10:11:08', NULL, NULL),
+('1252781957697056770', 2, '课程-分页列表查询', 1, 'jeecg', 'jeecg', '127.0.0.1', 'org.jeecg.modules.teaching.controller.TeachingCourseController.queryPageList()', NULL, NULL, NULL, 79, 'jeecg', '2020-04-22 10:11:08', NULL, NULL),
+('1252781989477298178', 2, '班级课程表-分页列表查询', 1, 'jeecg', 'jeecg', '127.0.0.1', 'org.jeecg.modules.teaching.controller.TeachingCourseDeptController.queryPageList()', NULL, NULL, NULL, 31, 'jeecg', '2020-04-22 10:11:16', NULL, NULL),
+('1252781989590544385', 2, '部门角色-分页列表查询', 1, 'jeecg', 'jeecg', '127.0.0.1', 'org.jeecg.modules.system.controller.SysDepartRoleController.queryPageList()', NULL, NULL, NULL, 72, 'jeecg', '2020-04-22 10:11:16', NULL, NULL),
+('1252782054916829186', 2, '课程-分页列表查询', 1, 'jeecg', 'jeecg', '127.0.0.1', 'org.jeecg.modules.teaching.controller.TeachingCourseController.queryPageList()', NULL, NULL, NULL, 110, 'jeecg', '2020-04-22 10:11:32', NULL, NULL),
+('1252782058926583809', 2, '部门角色-分页列表查询', 1, 'jeecg', 'jeecg', '127.0.0.1', 'org.jeecg.modules.system.controller.SysDepartRoleController.queryPageList()', NULL, NULL, NULL, 1121, 'jeecg', '2020-04-22 10:11:33', NULL, NULL),
+('1252784812436828161', 2, '部门角色-分页列表查询', 1, 'jeecg', 'jeecg', '127.0.0.1', 'org.jeecg.modules.system.controller.SysDepartRoleController.queryPageList()', NULL, NULL, NULL, 103, 'jeecg', '2020-04-22 10:22:29', NULL, NULL),
+('1252784813892251649', 2, '课程-分页列表查询', 1, 'jeecg', 'jeecg', '127.0.0.1', 'org.jeecg.modules.teaching.controller.TeachingCourseController.queryPageList()', NULL, NULL, NULL, 80, 'jeecg', '2020-04-22 10:22:29', NULL, NULL),
+('1252784828941414401', 2, '班级课程表-分页列表查询', 1, 'jeecg', 'jeecg', '127.0.0.1', 'org.jeecg.modules.teaching.controller.TeachingCourseDeptController.queryPageList()', NULL, NULL, NULL, 21, 'jeecg', '2020-04-22 10:22:33', NULL, NULL),
+('1252784829138546690', 2, '部门角色-分页列表查询', 1, 'jeecg', 'jeecg', '127.0.0.1', 'org.jeecg.modules.system.controller.SysDepartRoleController.queryPageList()', NULL, NULL, NULL, 78, 'jeecg', '2020-04-22 10:22:33', NULL, NULL),
+('1252784844380647425', 2, '班级课程表-分页列表查询', 1, 'jeecg', 'jeecg', '127.0.0.1', 'org.jeecg.modules.teaching.controller.TeachingCourseDeptController.queryPageList()', NULL, NULL, NULL, 17, 'jeecg', '2020-04-22 10:22:37', NULL, NULL),
+('1252784844825243650', 2, '部门角色-分页列表查询', 1, 'jeecg', 'jeecg', '127.0.0.1', 'org.jeecg.modules.system.controller.SysDepartRoleController.queryPageList()', NULL, NULL, NULL, 114, 'jeecg', '2020-04-22 10:22:37', NULL, NULL),
+('1252784845102067713', 2, '班级课程表-分页列表查询', 1, 'jeecg', 'jeecg', '127.0.0.1', 'org.jeecg.modules.teaching.controller.TeachingCourseDeptController.queryPageList()', NULL, NULL, NULL, 22, 'jeecg', '2020-04-22 10:22:37', NULL, NULL),
+('1252784845148205057', 2, '部门角色-分页列表查询', 1, 'jeecg', 'jeecg', '127.0.0.1', 'org.jeecg.modules.system.controller.SysDepartRoleController.queryPageList()', NULL, NULL, NULL, 43, 'jeecg', '2020-04-22 10:22:37', NULL, NULL),
+('1252802202289647617', 1, '用户名: jeecg,退出成功！', NULL, NULL, NULL, '127.0.0.1', NULL, NULL, NULL, NULL, NULL, NULL, '2020-04-22 11:31:35', NULL, NULL),
+('1252802236678746114', 1, '用户名: jeecg,登录成功！', NULL, NULL, NULL, '127.0.0.1', NULL, NULL, NULL, NULL, NULL, NULL, '2020-04-22 11:31:43', NULL, NULL),
+('1252802273592815618', 2, '部门角色-分页列表查询', 1, 'jeecg', 'jeecg', '127.0.0.1', 'org.jeecg.modules.system.controller.SysDepartRoleController.queryPageList()', NULL, NULL, NULL, 182, 'jeecg', '2020-04-22 11:31:52', NULL, NULL),
+('1252802273903194114', 2, '课程-分页列表查询', 1, 'jeecg', 'jeecg', '127.0.0.1', 'org.jeecg.modules.teaching.controller.TeachingCourseController.queryPageList()', NULL, NULL, NULL, 200, 'jeecg', '2020-04-22 11:31:52', NULL, NULL),
+('1252802287849254913', 2, '班级课程表-分页列表查询', 1, 'jeecg', 'jeecg', '127.0.0.1', 'org.jeecg.modules.teaching.controller.TeachingCourseDeptController.queryPageList()', NULL, NULL, NULL, 19, 'jeecg', '2020-04-22 11:31:56', NULL, NULL),
+('1252802288050581505', 2, '部门角色-分页列表查询', 1, 'jeecg', 'jeecg', '127.0.0.1', 'org.jeecg.modules.system.controller.SysDepartRoleController.queryPageList()', NULL, NULL, NULL, 79, 'jeecg', '2020-04-22 11:31:56', NULL, NULL),
+('1252802339846041601', 2, '班级课程表-分页列表查询', 1, 'jeecg', 'jeecg', '127.0.0.1', 'org.jeecg.modules.teaching.controller.TeachingCourseDeptController.queryPageList()', NULL, NULL, NULL, 17, 'jeecg', '2020-04-22 11:32:08', NULL, NULL);
+INSERT INTO `sys_log` (`id`, `log_type`, `log_content`, `operate_type`, `userid`, `username`, `ip`, `method`, `request_url`, `request_param`, `request_type`, `cost_time`, `create_by`, `create_time`, `update_by`, `update_time`) VALUES
+('1252802340122865665', 2, '部门角色-分页列表查询', 1, 'jeecg', 'jeecg', '127.0.0.1', 'org.jeecg.modules.system.controller.SysDepartRoleController.queryPageList()', NULL, NULL, NULL, 72, 'jeecg', '2020-04-22 11:32:08', NULL, NULL),
+('1252802506754174977', 2, '编辑用户，id： 2cb6e8e9b9ac4ccca17a1c3020a118d4', 2, 'jeecg', 'jeecg', '127.0.0.1', NULL, NULL, NULL, NULL, NULL, 'jeecg', '2020-04-22 11:32:48', NULL, NULL),
+('1252802519152537601', 2, '部门角色-分页列表查询', 1, 'jeecg', 'jeecg', '127.0.0.1', 'org.jeecg.modules.system.controller.SysDepartRoleController.queryPageList()', NULL, NULL, NULL, 149, 'jeecg', '2020-04-22 11:32:51', NULL, NULL),
+('1252802520662487041', 2, '课程-分页列表查询', 1, 'jeecg', 'jeecg', '127.0.0.1', 'org.jeecg.modules.teaching.controller.TeachingCourseController.queryPageList()', NULL, NULL, NULL, 113, 'jeecg', '2020-04-22 11:32:51', NULL, NULL),
+('1252802539197116417', 2, '班级课程表-分页列表查询', 1, 'jeecg', 'jeecg', '127.0.0.1', 'org.jeecg.modules.teaching.controller.TeachingCourseDeptController.queryPageList()', NULL, NULL, NULL, 34, 'jeecg', '2020-04-22 11:32:55', NULL, NULL),
+('1252802539515883521', 2, '部门角色-分页列表查询', 1, 'jeecg', 'jeecg', '127.0.0.1', 'org.jeecg.modules.system.controller.SysDepartRoleController.queryPageList()', NULL, NULL, NULL, 102, 'jeecg', '2020-04-22 11:32:56', NULL, NULL),
+('1252802545811533826', 2, '班级课程表-分页列表查询', 1, 'jeecg', 'jeecg', '127.0.0.1', 'org.jeecg.modules.teaching.controller.TeachingCourseDeptController.queryPageList()', NULL, NULL, NULL, 12, 'jeecg', '2020-04-22 11:32:57', NULL, NULL),
+('1252802545979305986', 2, '部门角色-分页列表查询', 1, 'jeecg', 'jeecg', '127.0.0.1', 'org.jeecg.modules.system.controller.SysDepartRoleController.queryPageList()', NULL, NULL, NULL, 69, 'jeecg', '2020-04-22 11:32:57', NULL, NULL),
+('1252802774287855617', 2, '班级课程表-分页列表查询', 1, 'jeecg', 'jeecg', '127.0.0.1', 'org.jeecg.modules.teaching.controller.TeachingCourseDeptController.queryPageList()', NULL, NULL, NULL, 19, 'jeecg', '2020-04-22 11:33:51', NULL, NULL),
+('1252802774317215746', 2, '部门角色-分页列表查询', 1, 'jeecg', 'jeecg', '127.0.0.1', 'org.jeecg.modules.system.controller.SysDepartRoleController.queryPageList()', NULL, NULL, NULL, 26, 'jeecg', '2020-04-22 11:33:52', NULL, NULL),
+('1252802780143104002', 2, '班级课程表-分页列表查询', 1, 'jeecg', 'jeecg', '127.0.0.1', 'org.jeecg.modules.teaching.controller.TeachingCourseDeptController.queryPageList()', NULL, NULL, NULL, 15, 'jeecg', '2020-04-22 11:33:53', NULL, NULL),
+('1252802780419928065', 2, '部门角色-分页列表查询', 1, 'jeecg', 'jeecg', '127.0.0.1', 'org.jeecg.modules.system.controller.SysDepartRoleController.queryPageList()', NULL, NULL, NULL, 72, 'jeecg', '2020-04-22 11:33:53', NULL, NULL),
+('1252802785167880194', 2, '班级课程表-分页列表查询', 1, 'jeecg', 'jeecg', '127.0.0.1', 'org.jeecg.modules.teaching.controller.TeachingCourseDeptController.queryPageList()', NULL, NULL, NULL, 20, 'jeecg', '2020-04-22 11:33:54', NULL, NULL),
+('1252802785272737794', 2, '部门角色-分页列表查询', 1, 'jeecg', 'jeecg', '127.0.0.1', 'org.jeecg.modules.system.controller.SysDepartRoleController.queryPageList()', NULL, NULL, NULL, 33, 'jeecg', '2020-04-22 11:33:54', NULL, NULL),
+('1252802787969675265', 2, '班级课程表-分页列表查询', 1, 'jeecg', 'jeecg', '127.0.0.1', 'org.jeecg.modules.teaching.controller.TeachingCourseDeptController.queryPageList()', NULL, NULL, NULL, 14, 'jeecg', '2020-04-22 11:33:55', NULL, NULL),
+('1252802788183584770', 2, '部门角色-分页列表查询', 1, 'jeecg', 'jeecg', '127.0.0.1', 'org.jeecg.modules.system.controller.SysDepartRoleController.queryPageList()', NULL, NULL, NULL, 71, 'jeecg', '2020-04-22 11:33:55', NULL, NULL),
+('1252802790624669698', 2, '班级课程表-分页列表查询', 1, 'jeecg', 'jeecg', '127.0.0.1', 'org.jeecg.modules.teaching.controller.TeachingCourseDeptController.queryPageList()', NULL, NULL, NULL, 17, 'jeecg', '2020-04-22 11:33:55', NULL, NULL),
+('1252802790641446914', 2, '部门角色-分页列表查询', 1, 'jeecg', 'jeecg', '127.0.0.1', 'org.jeecg.modules.system.controller.SysDepartRoleController.queryPageList()', NULL, NULL, NULL, 33, 'jeecg', '2020-04-22 11:33:55', NULL, NULL),
+('1252802796840628225', 2, '班级课程表-分页列表查询', 1, 'jeecg', 'jeecg', '127.0.0.1', 'org.jeecg.modules.teaching.controller.TeachingCourseDeptController.queryPageList()', NULL, NULL, NULL, 17, 'jeecg', '2020-04-22 11:33:57', NULL, NULL),
+('1252802796970651649', 2, '部门角色-分页列表查询', 1, 'jeecg', 'jeecg', '127.0.0.1', 'org.jeecg.modules.system.controller.SysDepartRoleController.queryPageList()', NULL, NULL, NULL, 38, 'jeecg', '2020-04-22 11:33:57', NULL, NULL),
+('1252802799067803649', 2, '班级课程表-分页列表查询', 1, 'jeecg', 'jeecg', '127.0.0.1', 'org.jeecg.modules.teaching.controller.TeachingCourseDeptController.queryPageList()', NULL, NULL, NULL, 16, 'jeecg', '2020-04-22 11:33:57', NULL, NULL),
+('1252802799285907457', 2, '部门角色-分页列表查询', 1, 'jeecg', 'jeecg', '127.0.0.1', 'org.jeecg.modules.system.controller.SysDepartRoleController.queryPageList()', NULL, NULL, NULL, 80, 'jeecg', '2020-04-22 11:33:57', NULL, NULL),
+('1252802889408917506', 2, '部门角色-分页列表查询', 1, 'jeecg', 'jeecg', '127.0.0.1', 'org.jeecg.modules.system.controller.SysDepartRoleController.queryPageList()', NULL, NULL, NULL, 147, 'jeecg', '2020-04-22 11:34:19', NULL, NULL),
+('1252802890822397954', 2, '课程-分页列表查询', 1, 'jeecg', 'jeecg', '127.0.0.1', 'org.jeecg.modules.teaching.controller.TeachingCourseController.queryPageList()', NULL, NULL, NULL, 100, 'jeecg', '2020-04-22 11:34:19', NULL, NULL),
+('1252802924490076161', 2, '部门角色-分页列表查询', 1, 'jeecg', 'jeecg', '127.0.0.1', 'org.jeecg.modules.system.controller.SysDepartRoleController.queryPageList()', NULL, NULL, NULL, 134, 'jeecg', '2020-04-22 11:34:27', NULL, NULL),
+('1252802924645265410', 2, '课程-分页列表查询', 1, 'jeecg', 'jeecg', '127.0.0.1', 'org.jeecg.modules.teaching.controller.TeachingCourseController.queryPageList()', NULL, NULL, NULL, 94, 'jeecg', '2020-04-22 11:34:27', NULL, NULL),
+('1252802946669555713', 2, '班级课程表-分页列表查询', 1, 'jeecg', 'jeecg', '127.0.0.1', 'org.jeecg.modules.teaching.controller.TeachingCourseDeptController.queryPageList()', NULL, NULL, NULL, 13, 'jeecg', '2020-04-22 11:34:33', NULL, NULL),
+('1252802946841522178', 2, '部门角色-分页列表查询', 1, 'jeecg', 'jeecg', '127.0.0.1', 'org.jeecg.modules.system.controller.SysDepartRoleController.queryPageList()', NULL, NULL, NULL, 63, 'jeecg', '2020-04-22 11:34:33', NULL, NULL),
+('1252802962695991297', 2, '班级课程表-分页列表查询', 1, 'jeecg', 'jeecg', '127.0.0.1', 'org.jeecg.modules.teaching.controller.TeachingCourseDeptController.queryPageList()', NULL, NULL, NULL, 32, 'jeecg', '2020-04-22 11:34:36', NULL, NULL),
+('1252802983348744193', 2, '职务表-分页列表查询', 1, 'jeecg', 'jeecg', '127.0.0.1', 'org.jeecg.modules.system.controller.SysPositionController.queryPageList()', NULL, NULL, NULL, 51, 'jeecg', '2020-04-22 11:34:41', NULL, NULL),
+('1252803028701753346', 2, '编辑用户，id： d05cb1b6d5f64789a9d6f0e8ee1185db', 2, 'jeecg', 'jeecg', '127.0.0.1', NULL, NULL, NULL, NULL, NULL, 'jeecg', '2020-04-22 11:34:52', NULL, NULL),
+('1252803101972049921', 1, '用户名: 学生,退出成功！', NULL, NULL, NULL, '127.0.0.1', NULL, NULL, NULL, NULL, NULL, NULL, '2020-04-22 11:35:10', NULL, NULL),
+('1252803138089201666', 1, '用户名: student,登录成功！', NULL, NULL, NULL, '127.0.0.1', NULL, NULL, NULL, NULL, NULL, NULL, '2020-04-22 11:35:18', NULL, NULL),
+('1252803153901727746', 2, '课程-通过id查询', 1, 'student', '学生', '127.0.0.1', 'org.jeecg.modules.teaching.controller.TeachingCourseController.queryById()', NULL, '["1252596872280637441"]', NULL, 25, 'student', '2020-04-22 11:35:22', NULL, NULL),
+('1252803154417627137', 2, '课程单元-分页列表查询', 1, 'student', '学生', '127.0.0.1', 'org.jeecg.modules.teaching.controller.TeachingCourseUnitController.queryPageList()', NULL, NULL, NULL, 113, 'student', '2020-04-22 11:35:22', NULL, NULL),
+('1252803170339205121', 2, '课程-通过id查询', 1, 'student', '学生', '127.0.0.1', 'org.jeecg.modules.teaching.controller.TeachingCourseController.queryById()', NULL, '["1252596872280637441"]', NULL, 16, 'student', '2020-04-22 11:35:26', NULL, NULL),
+('1252803171261952001', 2, '课程单元-分页列表查询', 1, 'student', '学生', '127.0.0.1', 'org.jeecg.modules.teaching.controller.TeachingCourseUnitController.queryPageList()', NULL, NULL, NULL, 230, 'student', '2020-04-22 11:35:26', NULL, NULL),
+('1252803214056435714', 2, '课程-通过id查询', 1, 'student', '学生', '127.0.0.1', 'org.jeecg.modules.teaching.controller.TeachingCourseController.queryById()', NULL, '["1252596872280637441"]', NULL, 17, 'student', '2020-04-22 11:35:36', NULL, NULL),
+('1252803214576529409', 2, '课程单元-分页列表查询', 1, 'student', '学生', '127.0.0.1', 'org.jeecg.modules.teaching.controller.TeachingCourseUnitController.queryPageList()', NULL, NULL, NULL, 115, 'student', '2020-04-22 11:35:36', NULL, NULL),
+('1252803376845762562', 2, '课程-分页列表查询', 1, 'jeecg', 'jeecg', '127.0.0.1', 'org.jeecg.modules.teaching.controller.TeachingCourseController.queryPageList()', NULL, NULL, NULL, 93, 'jeecg', '2020-04-22 11:36:15', NULL, NULL),
+('1252803376933842945', 2, '课程单元-分页列表查询', 1, 'jeecg', 'jeecg', '127.0.0.1', 'org.jeecg.modules.teaching.controller.TeachingCourseUnitController.queryPageList()', NULL, NULL, NULL, 124, 'jeecg', '2020-04-22 11:36:15', NULL, NULL),
+('1252803382336106498', 2, '获取七牛上传Token', 1, NULL, NULL, '127.0.0.1', 'org.jeecg.modules.common.controller.QiniuController.getQiniuToken()', NULL, '[]', NULL, 2, NULL, '2020-04-22 11:36:16', NULL, NULL),
+('1252803383380488193', 2, '获取七牛上传Token', 1, NULL, NULL, '127.0.0.1', 'org.jeecg.modules.common.controller.QiniuController.getQiniuToken()', NULL, '[]', NULL, 0, NULL, '2020-04-22 11:36:17', NULL, NULL),
+('1252803383749586946', 2, '获取七牛上传Token', 1, NULL, NULL, '127.0.0.1', 'org.jeecg.modules.common.controller.QiniuController.getQiniuToken()', NULL, '[]', NULL, 0, NULL, '2020-04-22 11:36:17', NULL, NULL),
+('1252803402745589761', 2, '课程单元-编辑', 3, 'jeecg', 'jeecg', '127.0.0.1', 'org.jeecg.modules.teaching.controller.TeachingCourseUnitController.edit()', NULL, '[{"courseId":"1252596872280637441","coursePpt":"f876877f-11a0-4fd4-821c-a4cae27c7b52.pdf","courseVideo":"aee3ddf3-a1ef-4f78-86f7-f585d318097f.mp4","courseWork":"4512df08-4bbb-472d-af2d-bed70e814231.sb3","courseWorkType":2,"createBy":"jeecg","createTime":1587521213000,"id":"1252780886052384769","mapX":400,"mapY":280,"sysOrgCode":"A01","unitIntro":"第一节介绍","unitName":"第一节","updateBy":"jeecg","updateTime":1587526581805}]', NULL, 28, 'jeecg', '2020-04-22 11:36:21', NULL, NULL),
+('1252803404972765186', 2, '课程单元-分页列表查询', 1, 'jeecg', 'jeecg', '127.0.0.1', 'org.jeecg.modules.teaching.controller.TeachingCourseUnitController.queryPageList()', NULL, NULL, NULL, 110, 'jeecg', '2020-04-22 11:36:22', NULL, NULL),
+('1252803443929460737', 2, '课程-通过id查询', 1, 'student', '学生', '127.0.0.1', 'org.jeecg.modules.teaching.controller.TeachingCourseController.queryById()', NULL, '["1252596872280637441"]', NULL, 19, 'student', '2020-04-22 11:36:31', NULL, NULL),
+('1252803445284220929', 2, '课程单元-分页列表查询', 1, 'student', '学生', '127.0.0.1', 'org.jeecg.modules.teaching.controller.TeachingCourseUnitController.queryPageList()', NULL, NULL, NULL, 153, 'student', '2020-04-22 11:36:31', NULL, NULL),
+('1252803460450824194', 2, '课程-通过id查询', 1, 'student', '学生', '127.0.0.1', 'org.jeecg.modules.teaching.controller.TeachingCourseController.queryById()', NULL, '["1252596872280637441"]', NULL, 15, 'student', '2020-04-22 11:36:35', NULL, NULL),
+('1252803460840894466', 2, '课程单元-分页列表查询', 1, 'student', '学生', '127.0.0.1', 'org.jeecg.modules.teaching.controller.TeachingCourseUnitController.queryPageList()', NULL, NULL, NULL, 97, 'student', '2020-04-22 11:36:35', NULL, NULL);
 
 -- --------------------------------------------------------
 
@@ -3715,28 +3976,25 @@ INSERT INTO `sys_permission` (`id`, `parent_id`, `name`, `url`, `component`, `co
 ('1166535831146504193', '2a470fc0c3954d9dbb61de6d80846549', '对象存储', '/oss/file', 'modules/oss/OSSFileList', NULL, NULL, 1, NULL, '1', 1.00, 0, '', 1, 1, 0, 0, NULL, 'admin', '2019-08-28 02:19:50', 'admin', '2019-08-28 02:20:57', 0, 0, '1', NULL),
 ('1170592628746878978', 'd7d6e2e4e2934f2c9385a623fd98c6f3', '菜单管理2', '/isystem/newPermissionList', 'system/NewPermissionList', NULL, NULL, 1, NULL, '1', 100.00, 0, NULL, 1, 1, 0, 0, NULL, 'admin', '2019-09-08 15:00:05', 'admin', '2019-12-25 09:58:18', 0, 0, '1', 0),
 ('1174506953255182338', 'd7d6e2e4e2934f2c9385a623fd98c6f3', '职务管理', '/isystem/position', 'system/SysPositionList', NULL, NULL, 1, NULL, '1', 2.00, 0, NULL, 1, 1, 0, 0, NULL, 'admin', '2019-09-19 10:14:13', 'admin', '2019-09-19 10:15:22', 0, 0, '1', 0),
-('1174590283938041857', 'd7d6e2e4e2934f2c9385a623fd98c6f3', '通讯录', '/isystem/addressList', 'system/AddressList', NULL, NULL, 1, NULL, '1', 3.00, 0, NULL, 1, 1, 0, 0, NULL, 'admin', '2019-09-19 15:45:21', NULL, NULL, 0, 0, '1', 0),
+('1174590283938041857', 'd7d6e2e4e2934f2c9385a623fd98c6f3', '通讯录', '/isystem/addressList', 'system/AddressList', NULL, NULL, 1, NULL, '1', 3.00, 0, 'idcard', 1, 1, 0, 0, NULL, 'admin', '2019-09-19 15:45:21', 'jeecg', '2020-04-21 17:58:49', 0, 0, '1', 0),
 ('1192318987661234177', 'e41b69c57a941a3bbcce45032fe57605', '系统编码生成规则', '/isystem/fillRule', 'system/SysFillRuleList', NULL, NULL, 1, NULL, '1', 3.00, 0, NULL, 1, 1, 0, 0, NULL, 'admin', '2019-11-07 13:52:53', 'admin', '2020-02-23 22:42:30', 0, 0, '1', 0),
-('1205097455226462210', '', '大屏设计', '/big/screen', 'layouts/RouteView', NULL, NULL, 0, NULL, '1', 1.10, 0, 'area-chart', 1, 0, 0, 0, NULL, 'admin', '2019-12-12 20:09:58', 'admin', '2020-02-23 23:17:59', 0, 0, '1', 0),
-('1205098241075453953', '1205097455226462210', '生产销售监控', '{{ window._CONFIG[''domianURL''] }}/big/screen/templat/index1', 'layouts/IframePageView', NULL, NULL, 1, NULL, '1', 1.00, 0, NULL, 1, 1, 0, 0, NULL, 'admin', '2019-12-12 20:13:05', 'admin', '2019-12-12 20:15:27', 0, 0, '1', 1),
-('1205306106780364802', '1205097455226462210', '智慧物流监控', '{{ window._CONFIG[''domianURL''] }}/big/screen/templat/index2', 'layouts/IframePageView', NULL, NULL, 1, NULL, '1', 2.00, 0, NULL, 1, 1, 0, 0, NULL, 'admin', '2019-12-13 09:59:04', 'admin', '2019-12-25 09:28:03', 0, 0, '1', 0),
 ('1209731624921534465', 'e41b69c57a941a3bbcce45032fe57605', '多数据源管理', '/isystem/dataSource', 'system/SysDataSourceList', NULL, NULL, 1, NULL, '1', 6.00, 0, NULL, 1, 1, 0, 0, NULL, 'admin', '2019-12-25 15:04:30', 'admin', '2020-02-23 22:43:37', 0, 0, '1', 0),
 ('1224641973866467330', 'e41b69c57a941a3bbcce45032fe57605', '系统编码校验规则', '/isystem/checkRule', 'system/SysCheckRuleList', NULL, NULL, 1, NULL, '1', 5.00, 0, NULL, 1, 1, 0, 0, NULL, 'admin', '2019-11-07 13:52:53', 'admin', '2020-02-23 22:43:05', 0, 0, '1', 0),
 ('1229674163694841857', 'e41b69c57a941a3bbcce45032fe57605', 'AUTO在线表单ERP', '/online/cgformErpList/:code', 'modules/online/cgform/auto/erp/OnlCgformErpList', NULL, NULL, 1, NULL, '1', 5.00, 0, NULL, 1, 1, 0, 1, NULL, 'admin', '2020-02-18 15:49:00', 'admin', '2020-02-18 15:52:25', 0, 0, '1', 0),
-('1236319333954482178', NULL, '销售管理', '/sale', 'layouts/RouteView', NULL, NULL, 0, NULL, '1', 1.00, 0, 'money-collect', 1, 0, 0, 0, NULL, 'admin', '2020-03-07 23:54:33', NULL, NULL, 0, 0, '1', 0),
-('1236319494499856386', '1236319333954482178', '订单管理', '/sale/order', 'teaching/TeachingOrderList', NULL, NULL, 1, NULL, '1', 1.00, 0, NULL, 1, 1, 0, 0, NULL, 'admin', '2020-03-07 23:55:11', NULL, NULL, 0, 0, '1', 0),
-('1236542260197023745', NULL, '学生管理', '/student', 'layouts/RouteView', NULL, NULL, 0, NULL, '1', 1.00, 0, NULL, 1, 0, 0, 0, NULL, 'admin', '2020-03-08 14:40:23', NULL, NULL, 0, 0, '1', 0),
-('1236542357244829698', '1236542260197023745', '学生列表', '/student/list', 'teaching/TeachingStudentList', NULL, NULL, 1, NULL, '1', 1.00, 0, NULL, 1, 1, 0, 0, NULL, 'admin', '2020-03-08 14:40:46', 'admin', '2020-03-08 14:40:59', 0, 0, '1', 0),
-('1236617970584498178', '1236319333954482178', '营销活动', '/sale/activity', 'teaching/TeachingActivityList', NULL, NULL, 1, NULL, '1', 1.00, 0, NULL, 1, 1, 0, 0, NULL, 'admin', '2020-03-08 19:41:14', NULL, NULL, 0, 0, '1', 0),
 ('1249162576878370817', 'd7d6e2e4e2934f2c9385a623fd98c6f3', '文件管理', '/isystem/file', 'system/SysFileList', NULL, NULL, 1, NULL, '1', 1.00, 0, 'folder', 1, 1, 0, 0, NULL, 'jeecg', '2020-04-12 10:29:01', 'jeecg', '2020-04-12 10:30:47', 0, 0, '1', 0),
-('1249206567527260161', NULL, '作业管理', '/teaching/workList', 'teaching/TeachingWorkList', NULL, NULL, 0, NULL, '1', 1.00, 0, NULL, 1, 1, 0, 0, NULL, 'jeecg', '2020-04-12 13:23:49', NULL, NULL, 0, 0, '1', 0),
+('1249206567527260161', '', '作业管理', '/teaching/workList', 'teaching/TeachingWorkList', NULL, NULL, 0, NULL, '1', 1.00, 0, 'form', 1, 1, 0, 0, NULL, 'jeecg', '2020-04-12 13:23:49', 'jeecg', '2020-04-21 17:59:40', 0, 1, '1', 0),
 ('1249217230806978561', '', '创作', '/create', 'layouts/RouteView', NULL, NULL, 0, NULL, '1', 0.10, 0, 'highlight', 1, 0, 0, 0, NULL, 'jeecg', '2020-04-12 14:06:11', 'jeecg', '2020-04-12 21:37:20', 0, 0, '1', 0),
 ('1249217881238671362', '1249217230806978561', 'Scratch3.0', '{{ window._CONFIG[''webURL''] }}/scratch3/index.html?scene=create', 'layouts/IframePageView', NULL, NULL, 1, NULL, '1', 1.00, 0, NULL, 1, 1, 0, 0, NULL, 'jeecg', '2020-04-12 14:08:46', 'jeecg', '2020-04-12 21:25:01', 0, 0, '1', 1),
 ('1249315662297042946', '', '个人中心', '/account', 'layouts/RouteView', NULL, NULL, 0, NULL, '1', 0.20, 0, 'user', 1, 0, 0, 0, NULL, 'jeecg', '2020-04-12 20:37:19', 'jeecg', '2020-04-12 21:01:53', 0, 0, '1', 0),
-('1249316121405558786', '1249315662297042946', '个人中心', '/account/center', 'account/center/Index', NULL, NULL, 1, NULL, '1', 1.00, 0, NULL, 1, 1, 0, 0, NULL, 'jeecg', '2020-04-12 20:39:09', NULL, NULL, 0, 0, '1', 0),
-('1249320110008307713', '1249315662297042946', '我的作业', '/account/mineWork', 'account/center/MineWorkList', NULL, NULL, 1, NULL, '1', 2.00, 0, NULL, 1, 1, 0, 0, NULL, 'jeecg', '2020-04-12 20:55:00', NULL, NULL, 0, 0, '1', 0),
-('1249320400874901505', '1249315662297042946', '个人设置', '/account/settings/base', 'account/settings/Index', NULL, NULL, 1, NULL, '1', 3.00, 1, NULL, 1, 0, 0, 0, NULL, 'jeecg', '2020-04-12 20:56:09', 'jeecg', '2020-04-12 20:56:16', 0, 0, '1', 0),
+('1249316121405558786', '1249315662297042946', '个人中心', '/account/center', 'account/center/Index', NULL, NULL, 1, NULL, '1', 1.00, 0, 'idcard', 1, 1, 0, 0, NULL, 'jeecg', '2020-04-12 20:39:09', 'jeecg', '2020-04-21 17:57:53', 0, 0, '1', 0),
+('1249320110008307713', '1249315662297042946', '我的作业', '/account/mineWork', 'account/center/MineWorkList', NULL, NULL, 1, NULL, '1', 2.00, 0, 'form', 1, 1, 0, 0, NULL, 'jeecg', '2020-04-12 20:55:00', 'jeecg', '2020-04-21 17:57:16', 0, 0, '1', 0),
+('1249320400874901505', '1249315662297042946', '个人设置', '/account/settings/base', 'account/settings/Index', NULL, NULL, 1, NULL, '1', 3.00, 1, 'setting', 1, 0, 0, 0, NULL, 'jeecg', '2020-04-12 20:56:09', 'jeecg', '2020-04-21 17:57:02', 0, 0, '1', 0),
 ('1249320532483772418', '1249320400874901505', '基本信息', '/account/settings/base', 'account/settings/BaseSetting', NULL, NULL, 1, NULL, '1', 1.00, 0, NULL, 1, 1, 0, 0, NULL, 'jeecg', '2020-04-12 20:56:40', NULL, NULL, 0, 0, '1', 0),
+('1249927823277002753', '', '课程管理', '/course', 'layouts/RouteView', NULL, NULL, 0, NULL, '1', 1.10, 0, 'book', 1, 0, 0, 0, NULL, 'jeecg', '2020-04-14 13:09:49', 'jeecg', '2020-04-14 13:59:38', 0, 0, '1', 0),
+('1249928454356176898', '1249927823277002753', '课程管理', '/course/course', 'teaching/TeachingCourseList', NULL, NULL, 1, NULL, '1', 1.00, 0, 'read', 1, 1, 0, 0, NULL, 'jeecg', '2020-04-14 13:12:20', 'jeecg', '2020-04-14 13:59:44', 0, 0, '1', 0),
+('1249928626473635842', '1249927823277002753', '课程单元管理', '/course/courseUnit', 'teaching/TeachingCourseUnitList', NULL, NULL, 1, NULL, '1', 1.00, 0, 'bars', 1, 1, 0, 0, NULL, 'jeecg', '2020-04-14 13:13:01', NULL, NULL, 0, 0, '1', 0),
+('1249990084771192834', '1249315662297042946', '我的课程', '/teaching/mineCourse/cardList', 'account/course/CourseListCard', NULL, NULL, 1, NULL, '1', 1.50, 0, 'read', 1, 1, 0, 0, NULL, 'jeecg', '2020-04-14 17:17:14', 'jeecg', '2020-04-14 17:39:35', 0, 0, '1', 0),
+('1249993808843472897', '1249315662297042946', '课程详情', '/teaching/mineCourse/courseUnitMap', 'account/course/CourseUnitMap', NULL, NULL, 1, NULL, '1', 1.00, 0, 'idcard', 1, 1, 0, 1, NULL, 'jeecg', '2020-04-14 17:32:02', 'jeecg', '2020-04-21 17:56:52', 0, 0, '1', 0),
 ('13212d3416eb690c2e1d5033166ff47a', '2e42e3835c2b44ec9f7bc26c146ee531', '失败', '/result/fail', 'result/Error', NULL, NULL, 1, NULL, NULL, 2.00, NULL, NULL, 1, 1, NULL, NULL, NULL, NULL, '2018-12-25 20:34:38', NULL, NULL, 0, 0, NULL, NULL),
 ('1367a93f2c410b169faa7abcbad2f77c', '6e73eb3c26099c191bf03852ee1310a1', '基本设置', '/account/settings/base', 'account/settings/BaseSetting', NULL, NULL, 1, 'BaseSettings', NULL, NULL, 0, NULL, 1, 1, NULL, 1, NULL, NULL, '2018-12-26 18:58:35', 'admin', '2019-03-20 12:57:31', 0, 0, NULL, NULL),
 ('190c2b43bec6a5f7a4194a85db67d96a', 'd7d6e2e4e2934f2c9385a623fd98c6f3', '角色管理', '/isystem/roleUserList', 'system/RoleUserList', NULL, NULL, 1, NULL, NULL, 1.20, 0, 'team', 1, 1, 0, 0, NULL, 'admin', '2019-04-17 15:13:56', 'jeecg', '2020-04-12 23:03:18', 0, 0, NULL, 0),
@@ -3750,7 +4008,7 @@ INSERT INTO `sys_permission` (`id`, `parent_id`, `name`, `url`, `component`, `co
 ('2dbbafa22cda07fa5d169d741b81fe12', '08e6b9dc3c04489c8e1ff2ce6f105aa4', '在线文档', '{{ window._CONFIG[''domianURL''] }}/doc.html', 'layouts/IframePageView', NULL, NULL, 1, NULL, NULL, 3.00, 0, NULL, 1, 1, NULL, 0, NULL, 'admin', '2019-01-30 10:00:01', 'admin', '2019-03-23 19:44:43', 0, 0, NULL, NULL),
 ('2e42e3835c2b44ec9f7bc26c146ee531', '', '结果页', '/result', 'layouts/PageView', NULL, NULL, 0, NULL, NULL, 8.00, 0, 'check-circle-o', 1, 0, NULL, 0, NULL, NULL, '2018-12-25 20:34:38', 'admin', '2019-04-02 11:46:56', 0, 0, NULL, NULL),
 ('339329ed54cf255e1f9392e84f136901', '2a470fc0c3954d9dbb61de6d80846549', 'helloworld', '/jeecg/helloworld', 'jeecg/helloworld', NULL, NULL, 1, NULL, NULL, 4.00, 0, NULL, 1, 1, NULL, 0, NULL, NULL, '2018-12-25 20:34:38', 'admin', '2019-02-15 16:24:56', 0, 0, NULL, NULL),
-('3f915b2769fc80648e92d04e84ca059d', 'd7d6e2e4e2934f2c9385a623fd98c6f3', '用户管理', '/isystem/user', 'system/UserList', NULL, NULL, 1, NULL, NULL, 1.10, 0, 'idcard', 1, 0, 0, 0, NULL, NULL, '2018-12-25 20:34:38', 'jeecg', '2020-04-12 23:03:31', 0, 0, NULL, 0),
+('3f915b2769fc80648e92d04e84ca059d', 'd7d6e2e4e2934f2c9385a623fd98c6f3', '用户管理', '/isystem/user', 'system/UserList', NULL, NULL, 1, NULL, NULL, 1.10, 0, 'idcard', 1, 0, 0, 0, NULL, NULL, '2018-12-25 20:34:38', 'jeecg', '2020-04-21 18:00:25', 0, 1, NULL, 0),
 ('3fac0d3c9cd40fa53ab70d4c583821f8', '2a470fc0c3954d9dbb61de6d80846549', '分屏', '/jeecg/splitPanel', 'jeecg/SplitPanel', NULL, NULL, 1, NULL, NULL, 6.00, 0, NULL, 1, 1, NULL, 0, NULL, 'admin', '2019-04-25 16:27:06', NULL, NULL, 0, 0, NULL, NULL),
 ('4148ec82b6acd69f470bea75fe41c357', '2a470fc0c3954d9dbb61de6d80846549', '单表模型示例', '/jeecg/jeecgDemoList', 'jeecg/JeecgDemoList', 'DemoList', NULL, 1, NULL, NULL, 1.00, 0, NULL, 1, 1, NULL, 0, NULL, NULL, '2018-12-28 15:57:30', 'admin', '2019-02-15 16:24:37', 0, 0, NULL, NULL),
 ('418964ba087b90a84897b62474496b93', '540a2936940846cb98114ffb0d145cb8', '查询表格', '/list/query-list', 'list/TableList', NULL, NULL, 1, NULL, NULL, 1.00, NULL, NULL, 1, 1, NULL, NULL, NULL, NULL, '2018-12-25 20:34:38', NULL, NULL, 0, 0, NULL, NULL),
@@ -3762,10 +4020,10 @@ INSERT INTO `sys_permission` (`id`, `parent_id`, `name`, `url`, `component`, `co
 ('53a9230444d33de28aa11cc108fb1dba', '5c8042bd6c601270b2bbd9b20bccc68b', '我的消息', '/isps/userAnnouncement', 'system/UserAnnouncementList', NULL, NULL, 1, NULL, NULL, 3.00, 0, NULL, 1, 1, 0, 0, NULL, 'admin', '2019-04-19 10:16:00', 'admin', '2019-12-25 09:54:34', 0, 0, NULL, 0),
 ('54097c6a3cf50fad0793a34beff1efdf', 'e41b69c57a941a3bbcce45032fe57605', 'AUTO在线表单', '/online/cgformList/:code', 'modules/online/cgform/auto/OnlCgformAutoList', NULL, NULL, 1, NULL, NULL, 9.00, 0, NULL, 1, 1, NULL, 1, NULL, 'admin', '2019-03-19 16:03:06', 'admin', '2019-04-30 18:19:03', 0, 0, NULL, NULL),
 ('540a2936940846cb98114ffb0d145cb8', '', '列表页', '/list', 'layouts/PageView', NULL, '/list/query-list', 0, NULL, NULL, 9.00, 0, 'table', 1, 0, NULL, 0, NULL, NULL, '2018-12-25 20:34:38', 'admin', '2019-03-31 22:20:20', 0, 0, NULL, NULL),
-('54dd5457a3190740005c1bfec55b1c34', 'd7d6e2e4e2934f2c9385a623fd98c6f3', '菜单管理', '/isystem/permission', 'system/PermissionList', NULL, NULL, 1, NULL, NULL, 1.30, 0, NULL, 1, 1, 0, 0, NULL, NULL, '2018-12-25 20:34:38', 'admin', '2019-12-25 09:36:39', 0, 0, NULL, 0),
+('54dd5457a3190740005c1bfec55b1c34', 'd7d6e2e4e2934f2c9385a623fd98c6f3', '菜单管理', '/isystem/permission', 'system/PermissionList', NULL, NULL, 1, NULL, NULL, 1.30, 0, 'bars', 1, 1, 0, 0, NULL, NULL, '2018-12-25 20:34:38', 'jeecg', '2020-04-21 17:55:58', 0, 0, NULL, 0),
 ('58857ff846e61794c69208e9d3a85466', '08e6b9dc3c04489c8e1ff2ce6f105aa4', '日志管理', '/isystem/log', 'system/LogList', NULL, NULL, 1, NULL, NULL, 1.00, 0, '', 1, 1, NULL, 0, NULL, NULL, '2018-12-26 10:11:18', 'admin', '2019-04-02 11:38:17', 0, 0, NULL, NULL),
 ('58b9204feaf07e47284ddb36cd2d8468', '2a470fc0c3954d9dbb61de6d80846549', '图片翻页', '/jeecg/imgTurnPage', 'jeecg/ImgTurnPage', NULL, NULL, 1, NULL, NULL, 4.00, 0, NULL, 1, 1, NULL, 0, NULL, 'admin', '2019-04-25 11:36:42', NULL, NULL, 0, 0, NULL, NULL),
-('5c2f42277948043026b7a14692456828', 'd7d6e2e4e2934f2c9385a623fd98c6f3', '我的部门', '/isystem/departUserList', 'system/DepartUserList', NULL, NULL, 1, NULL, NULL, 2.00, 0, NULL, 1, 1, 0, 0, NULL, 'admin', '2019-04-17 15:12:24', 'admin', '2019-12-25 09:35:26', 0, 0, NULL, 0),
+('5c2f42277948043026b7a14692456828', 'd7d6e2e4e2934f2c9385a623fd98c6f3', '我的部门', '/isystem/departDetailList', 'system/DepartDetailList', NULL, NULL, 1, NULL, NULL, 2.00, 0, 'cluster', 1, 1, 0, 0, NULL, 'admin', '2019-04-17 15:12:24', 'jeecg', '2020-04-22 10:09:40', 0, 0, NULL, 0),
 ('5c8042bd6c601270b2bbd9b20bccc68b', '', '消息中心', '/message', 'layouts/RouteView', NULL, NULL, 0, NULL, NULL, 6.00, 0, 'message', 1, 0, NULL, 0, NULL, 'admin', '2019-04-09 11:05:04', 'admin', '2019-04-11 19:47:54', 0, 0, NULL, NULL),
 ('6531cf3421b1265aeeeabaab5e176e6d', 'e3c13679c73a4f829bcff2aba8fd68b1', '分步表单', '/form/step-form', 'form/stepForm/StepForm', NULL, NULL, 1, NULL, NULL, 2.00, NULL, NULL, 1, 1, NULL, NULL, NULL, NULL, '2018-12-25 20:34:38', NULL, NULL, 0, 0, NULL, NULL),
 ('655563cd64b75dcf52ef7bcdd4836953', '2a470fc0c3954d9dbb61de6d80846549', '图片预览', '/jeecg/ImagPreview', 'jeecg/ImagPreview', NULL, NULL, 1, NULL, NULL, 1.00, 0, NULL, 1, 1, NULL, 0, NULL, 'admin', '2019-04-17 11:18:45', NULL, NULL, 0, 0, NULL, NULL),
@@ -3814,7 +4072,7 @@ INSERT INTO `sys_permission` (`id`, `parent_id`, `name`, `url`, `component`, `co
 ('e6bfd1fcabfd7942fdd05f076d1dad38', '2a470fc0c3954d9dbb61de6d80846549', '打印测试', '/jeecg/PrintDemo', 'jeecg/PrintDemo', NULL, NULL, 1, NULL, NULL, 3.00, 0, NULL, 1, 1, NULL, 0, NULL, 'admin', '2019-02-19 15:58:48', 'admin', '2019-05-07 20:14:39', 0, 0, NULL, NULL),
 ('ebb9d82ea16ad864071158e0c449d186', 'd7d6e2e4e2934f2c9385a623fd98c6f3', '分类字典', '/isys/category', 'system/SysCategoryList', NULL, NULL, 1, NULL, '1', 5.20, 0, NULL, 1, 1, 0, 0, NULL, 'admin', '2019-05-29 18:48:07', 'admin', '2020-02-23 22:45:33', 0, 0, '1', 0),
 ('ec8d607d0156e198b11853760319c646', '6e73eb3c26099c191bf03852ee1310a1', '安全设置', '/account/settings/security', 'account/settings/Security', NULL, NULL, 1, 'SecuritySettings', NULL, NULL, NULL, NULL, 1, 1, NULL, NULL, NULL, NULL, '2018-12-26 18:59:52', NULL, NULL, 0, 0, NULL, NULL),
-('f0675b52d89100ee88472b6800754a08', '', '统计报表', '/report', 'layouts/RouteView', NULL, NULL, 0, NULL, NULL, 1.00, 0, 'bar-chart', 1, 0, NULL, 0, NULL, 'admin', '2019-04-03 18:32:02', 'admin', '2019-05-19 18:34:13', 0, 0, NULL, NULL),
+('f0675b52d89100ee88472b6800754a08', '', '统计报表', '/report', 'layouts/RouteView', NULL, NULL, 0, NULL, NULL, 3.00, 0, 'bar-chart', 1, 0, 0, 0, NULL, 'admin', '2019-04-03 18:32:02', 'jeecg', '2020-04-21 17:58:18', 0, 0, NULL, 0),
 ('f1cb187abf927c88b89470d08615f5ac', 'd7d6e2e4e2934f2c9385a623fd98c6f3', '数据字典', '/isystem/dict', 'system/DictList', NULL, NULL, 1, NULL, NULL, 5.00, 0, NULL, 1, 1, 0, 0, NULL, NULL, '2018-12-28 13:54:43', 'admin', '2020-02-23 22:45:25', 0, 0, NULL, 0),
 ('f23d9bfff4d9aa6b68569ba2cff38415', '540a2936940846cb98114ffb0d145cb8', '标准列表', '/list/basic-list', 'list/StandardList', NULL, NULL, 1, NULL, NULL, 6.00, NULL, NULL, 1, 1, NULL, NULL, NULL, NULL, '2018-12-25 20:34:38', NULL, NULL, 0, 0, NULL, NULL),
 ('f2849d3814fc97993bfc519ae6bbf049', 'e41b69c57a941a3bbcce45032fe57605', 'AUTO复制表单', '/online/copyform/:code', 'modules/online/cgform/OnlCgformCopyList', NULL, NULL, 1, NULL, '1', 1.00, 0, NULL, 1, 1, 0, 1, NULL, 'admin', '2019-08-29 16:05:37', NULL, NULL, 0, 0, '1', NULL),
@@ -3850,6 +4108,8 @@ CREATE TABLE IF NOT EXISTS `sys_permission_data_rule` (
 --
 
 INSERT INTO `sys_permission_data_rule` (`id`, `permission_id`, `rule_name`, `rule_column`, `rule_conditions`, `rule_value`, `status`, `create_time`, `create_by`, `update_time`, `update_by`) VALUES
+('1252537480092921858', '1249206567527260161', '本部门和子部门', '', 'USE_SQL_RULES', 'teaching_work.sys_org_code like ''#{sys_org_code}%''', '1', '2020-04-21 17:59:40', 'jeecg', NULL, NULL),
+('1252537667125325826', '3f915b2769fc80648e92d04e84ca059d', '本部门和子部门', '', 'USE_SQL_RULES', 'sys_depart.org_code like ''#{sys_org_code}%''', '1', '2020-04-21 18:00:25', 'jeecg', '2020-04-21 21:46:06', 'jeecg'),
 ('32b62cb04d6c788d9d92e3ff5e66854e', '8d4683aacaa997ab86b966b464360338', '000', '00', '!=', '00', '1', '2019-04-02 18:36:08', 'admin', NULL, NULL),
 ('40283181614231d401614234fe670003', '40283181614231d401614232cd1c0001', 'createBy', 'createBy', '=', '#{sys_user_code}', '1', '2018-01-29 21:57:04', 'admin', NULL, NULL),
 ('4028318161424e730161424fca6f0004', '4028318161424e730161424f61510002', 'createBy', 'createBy', '=', '#{sys_user_code}', '1', '2018-01-29 22:26:20', 'admin', NULL, NULL),
@@ -3954,7 +4214,8 @@ CREATE TABLE IF NOT EXISTS `sys_role` (
 
 INSERT INTO `sys_role` (`id`, `role_name`, `role_code`, `description`, `create_by`, `create_time`, `update_by`, `update_time`) VALUES
 ('1236319727061430274', '开发调试', 'dev', NULL, 'admin', '2020-03-07 23:56:07', NULL, NULL),
-('ee8626f80f7c2619917b6236f3a7f02b', '临时角色', 'test', '这是新建的临时角色123', NULL, '2018-12-20 10:59:04', 'admin', '2019-02-19 15:08:37'),
+('1252532277234982913', '学生', 'student', NULL, 'jeecg', '2020-04-21 17:39:00', NULL, NULL),
+('1252532323347161090', '教师', 'teacher', NULL, 'jeecg', '2020-04-21 17:39:11', NULL, NULL),
 ('f6817f48af4fb3af11b9e8bf182f618b', '管理员', 'admin', '管理员', NULL, '2018-12-21 18:03:39', 'admin', '2019-05-20 11:40:26');
 
 -- --------------------------------------------------------
@@ -3976,8 +4237,6 @@ CREATE TABLE IF NOT EXISTS `sys_role_permission` (
 
 INSERT INTO `sys_role_permission` (`id`, `role_id`, `permission_id`, `data_rule_ids`) VALUES
 ('00b0748f04d3ea52c8cfa179c1c9d384', '52b0cf022ac4187b2a70dfa4f8b2d940', 'd7d6e2e4e2934f2c9385a623fd98c6f3', NULL),
-('0d9d14bc66e9d5e99b0280095fdc8587', 'ee8626f80f7c2619917b6236f3a7f02b', '277bfabef7d76e89b33062b16a9a5020', NULL),
-('0dec36b68c234767cd35466efef3b941', 'ee8626f80f7c2619917b6236f3a7f02b', '54dd5457a3190740005c1bfec55b1c34', NULL),
 ('115a6673ae6c0816d3f60de221520274', '21c5a3187763729408b40afb0d0fdfa8', '63b551e81c5956d5c861593d366d8c57', NULL),
 ('1236319684904480770', 'f6817f48af4fb3af11b9e8bf182f618b', '1236319333954482178', NULL),
 ('1236319684917063682', 'f6817f48af4fb3af11b9e8bf182f618b', '1236319494499856386', NULL),
@@ -4106,43 +4365,94 @@ INSERT INTO `sys_role_permission` (`id`, `role_id`, `permission_id`, `data_rule_
 ('1249321530170281987', '1236319727061430274', '1249320110008307713', NULL),
 ('1249321530178670593', '1236319727061430274', '1249320400874901505', NULL),
 ('1249321530178670594', '1236319727061430274', '1249320532483772418', NULL),
-('16ef8ed3865ccc6f6306200760896c50', 'ee8626f80f7c2619917b6236f3a7f02b', 'e8af452d8948ea49d37c934f5100ae6a', NULL),
+('1251087577303085058', '1236319727061430274', '1249990084771192834', NULL),
+('1251087577349222401', '1236319727061430274', '1249993808843472897', NULL),
+('1251087577357611009', '1236319727061430274', '1249927823277002753', NULL),
+('1251087577357611010', '1236319727061430274', '1249928454356176898', NULL),
+('1251087577365999618', '1236319727061430274', '1249928626473635842', NULL),
+('1251087577370193921', '1236319727061430274', '1249928212038651906', NULL),
+('1252532419610632193', '1252532277234982913', '9502685863ab87f0ad1134142788a385', NULL),
+('1252532419627409410', '1252532277234982913', '1249217230806978561', NULL),
+('1252532419627409411', '1252532277234982913', '1249217881238671362', NULL),
+('1252532419635798018', '1252532277234982913', '1249315662297042946', NULL),
+('1252532419635798019', '1252532277234982913', '1249316121405558786', NULL),
+('1252532419639992321', '1252532277234982913', '1249993808843472897', NULL),
+('1252532419639992322', '1252532277234982913', '1249990084771192834', NULL),
+('1252532419648380930', '1252532277234982913', '1249320110008307713', NULL),
+('1252532419652575233', '1252532277234982913', '1249320400874901505', NULL),
+('1252532419652575234', '1252532277234982913', '1249320532483772418', NULL),
+('1252532721726349313', 'f6817f48af4fb3af11b9e8bf182f618b', '1249217230806978561', NULL),
+('1252532721730543617', 'f6817f48af4fb3af11b9e8bf182f618b', '1249217881238671362', NULL),
+('1252532721738932225', 'f6817f48af4fb3af11b9e8bf182f618b', '1249315662297042946', NULL),
+('1252532721738932226', 'f6817f48af4fb3af11b9e8bf182f618b', '1249993808843472897', NULL),
+('1252532721738932227', 'f6817f48af4fb3af11b9e8bf182f618b', '1249316121405558786', NULL),
+('1252532721747320833', 'f6817f48af4fb3af11b9e8bf182f618b', '1249990084771192834', NULL),
+('1252532721751515138', 'f6817f48af4fb3af11b9e8bf182f618b', '1249320110008307713', NULL),
+('1252532721751515139', 'f6817f48af4fb3af11b9e8bf182f618b', '1249320400874901505', NULL),
+('1252532721764098049', 'f6817f48af4fb3af11b9e8bf182f618b', '1249320532483772418', NULL),
+('1252532721764098050', 'f6817f48af4fb3af11b9e8bf182f618b', '1249206567527260161', NULL),
+('1252532721768292353', 'f6817f48af4fb3af11b9e8bf182f618b', 'f0675b52d89100ee88472b6800754a08', NULL),
+('1252532721768292354', 'f6817f48af4fb3af11b9e8bf182f618b', '2aeddae571695cd6380f6d6d334d6e7d', NULL),
+('1252532721768292355', 'f6817f48af4fb3af11b9e8bf182f618b', '1249162576878370817', NULL),
+('1252532721776680962', 'f6817f48af4fb3af11b9e8bf182f618b', '5c2f42277948043026b7a14692456828', NULL),
+('1252532721776680963', 'f6817f48af4fb3af11b9e8bf182f618b', '08e6b9dc3c04489c8e1ff2ce6f105aa4', NULL),
+('1252532721780875265', 'f6817f48af4fb3af11b9e8bf182f618b', '700b7f95165c46cc7a78bf227aa8fed3', NULL),
+('1252532721780875266', 'f6817f48af4fb3af11b9e8bf182f618b', '58857ff846e61794c69208e9d3a85466', NULL),
+('1252532721780875267', 'f6817f48af4fb3af11b9e8bf182f618b', '841057b8a1bef8f6b4b20f9a618a7fa6', NULL),
+('1252532721780875268', 'f6817f48af4fb3af11b9e8bf182f618b', 'aedbf679b5773c1f25e9f7b10111da73', NULL),
+('1252532721789263873', 'f6817f48af4fb3af11b9e8bf182f618b', '97c8629abc7848eccdb6d77c24bb3ebb', NULL),
+('1252532721789263874', 'f6817f48af4fb3af11b9e8bf182f618b', 'fc810a2267dd183e4ef7c71cc60f4670', NULL),
+('1252532721789263875', 'f6817f48af4fb3af11b9e8bf182f618b', '8b3bff2eee6f1939147f5c68292a1642', NULL),
+('1252532721797652481', 'f6817f48af4fb3af11b9e8bf182f618b', '024f1fd1283dc632458976463d8984e1', NULL),
+('1252532721797652482', 'f6817f48af4fb3af11b9e8bf182f618b', '8d1ebd663688965f1fd86a2f0ead3416', NULL),
+('1252532721797652483', 'f6817f48af4fb3af11b9e8bf182f618b', 'd07a2c87a451434c99ab06296727ec4f', NULL),
+('1252532721797652484', 'f6817f48af4fb3af11b9e8bf182f618b', '1174506953255182338', NULL),
+('1252532721806041090', 'f6817f48af4fb3af11b9e8bf182f618b', '45c966826eeff4c99b8f8ebfe74511fc', NULL),
+('1252532721806041091', 'f6817f48af4fb3af11b9e8bf182f618b', '1174590283938041857', NULL),
+('1252532721806041092', 'f6817f48af4fb3af11b9e8bf182f618b', 'f1cb187abf927c88b89470d08615f5ac', NULL),
+('1252532721806041093', 'f6817f48af4fb3af11b9e8bf182f618b', '54dd5457a3190740005c1bfec55b1c34', NULL),
+('1252532721814429698', 'f6817f48af4fb3af11b9e8bf182f618b', '190c2b43bec6a5f7a4194a85db67d96a', NULL),
+('1252537791708737538', '1252532323347161090', '9502685863ab87f0ad1134142788a385', NULL),
+('1252537791725514754', '1252532323347161090', '1249217230806978561', NULL),
+('1252537791725514755', '1252532323347161090', '1249217881238671362', NULL),
+('1252537791738097665', '1252532323347161090', '1249315662297042946', NULL),
+('1252537791742291969', '1252532323347161090', '1249316121405558786', NULL),
+('1252537791742291970', '1252532323347161090', '1249993808843472897', NULL),
+('1252537791750680578', '1252532323347161090', '1249990084771192834', NULL),
+('1252537791759069185', '1252532323347161090', '1249320110008307713', NULL),
+('1252537791759069186', '1252532323347161090', '1249320400874901505', NULL),
+('1252537791767457794', '1252532323347161090', '1249206567527260161', '1252537480092921858'),
+('1252537791771652097', '1252532323347161090', '1249320532483772418', NULL),
+('1252537902933291010', '1252532323347161090', '3f915b2769fc80648e92d04e84ca059d', '1252537667125325826'),
+('1252537902937485313', '1252532323347161090', 'd7d6e2e4e2934f2c9385a623fd98c6f3', NULL),
+('1252593091560185858', 'f6817f48af4fb3af11b9e8bf182f618b', '020b06793e4de2eee0007f603000c769', NULL),
+('1252593091572768770', 'f6817f48af4fb3af11b9e8bf182f618b', 'e41b69c57a941a3bbcce45032fe57605', NULL),
+('1252593091572768771', 'f6817f48af4fb3af11b9e8bf182f618b', 'e08cb190ef230d5d4f03824198773950', NULL),
+('1252593091581157377', 'f6817f48af4fb3af11b9e8bf182f618b', 'f2849d3814fc97993bfc519ae6bbf049', NULL),
+('1252593091585351681', 'f6817f48af4fb3af11b9e8bf182f618b', '5c8042bd6c601270b2bbd9b20bccc68b', NULL),
+('1252593091593740289', 'f6817f48af4fb3af11b9e8bf182f618b', '944abf0a8fc22fe1f1154a389a574154', NULL),
+('1252593091597934593', 'f6817f48af4fb3af11b9e8bf182f618b', 'f780d0d3083d849ccbdb1b1baee4911d', NULL),
+('1252593091597934594', 'f6817f48af4fb3af11b9e8bf182f618b', '53a9230444d33de28aa11cc108fb1dba', NULL),
+('1252593091606323201', 'f6817f48af4fb3af11b9e8bf182f618b', 'b1cb0a3fedf7ed0e4653cb5a229837ee', NULL),
 ('17ead5b7d97ed365398ab20009a69ea3', '52b0cf022ac4187b2a70dfa4f8b2d940', 'e08cb190ef230d5d4f03824198773950', NULL),
 ('1ac1688ef8456f384091a03d88a89ab1', '52b0cf022ac4187b2a70dfa4f8b2d940', '693ce69af3432bd00be13c3971a57961', NULL),
-('1af4babaa4227c3cbb830bc5eb513abb', 'ee8626f80f7c2619917b6236f3a7f02b', 'e08cb190ef230d5d4f03824198773950', NULL),
-('1ba162bbc2076c25561f8622f610d5bf', 'ee8626f80f7c2619917b6236f3a7f02b', 'aedbf679b5773c1f25e9f7b10111da73', NULL),
 ('1fe4d408b85f19618c15bcb768f0ec22', '1750a8fb3e6d90cb7957c02de1dc8e59', '9502685863ab87f0ad1134142788a385', NULL),
 ('248d288586c6ff3bd14381565df84163', '52b0cf022ac4187b2a70dfa4f8b2d940', '3f915b2769fc80648e92d04e84ca059d', NULL),
-('25f5443f19c34d99718a016d5f54112e', 'ee8626f80f7c2619917b6236f3a7f02b', '6e73eb3c26099c191bf03852ee1310a1', NULL),
 ('27489816708b18859768dfed5945c405', 'a799c3b1b12dd3ed4bd046bfaef5fe6e', '9502685863ab87f0ad1134142788a385', NULL),
 ('296f9c75ca0e172ae5ce4c1022c996df', '646c628b2b8295fbdab2d34044de0354', '732d48f8e0abe99fe6a23d18a3171cd1', NULL),
-('29fb4d37aa29b9fa400f389237cf9fe7', 'ee8626f80f7c2619917b6236f3a7f02b', '05b3c82ddb2536a4a5ee1a4c46b5abef', NULL),
 ('2c462293cbb0eab7e8ae0a3600361b5f', '52b0cf022ac4187b2a70dfa4f8b2d940', '9502685863ab87f0ad1134142788a385', NULL),
-('2dc1a0eb5e39aaa131ddd0082a492d76', 'ee8626f80f7c2619917b6236f3a7f02b', '08e6b9dc3c04489c8e1ff2ce6f105aa4', NULL),
-('2ea2382af618ba7d1e80491a0185fb8a', 'ee8626f80f7c2619917b6236f3a7f02b', 'f23d9bfff4d9aa6b68569ba2cff38415', NULL),
-('2fcfa2ac3dcfadc7c67107dae9a0de6d', 'ee8626f80f7c2619917b6236f3a7f02b', '73678f9daa45ed17a3674131b03432fb', NULL),
 ('2fdaed22dfa4c8d4629e44ef81688c6a', '52b0cf022ac4187b2a70dfa4f8b2d940', 'aedbf679b5773c1f25e9f7b10111da73', NULL),
 ('300c462b7fec09e2ff32574ef8b3f0bd', '52b0cf022ac4187b2a70dfa4f8b2d940', '2a470fc0c3954d9dbb61de6d80846549', NULL),
-('326181da3248a62a05e872119a462be1', 'ee8626f80f7c2619917b6236f3a7f02b', '3f915b2769fc80648e92d04e84ca059d', NULL),
 ('35ac7cae648de39eb56213ca1b649713', '52b0cf022ac4187b2a70dfa4f8b2d940', 'b1cb0a3fedf7ed0e4653cb5a229837ee', NULL),
-('37112f4d372541e105473f18da3dc50d', 'ee8626f80f7c2619917b6236f3a7f02b', 'a400e4f4d54f79bf5ce160ae432231af', NULL),
-('37789f70cd8bd802c4a69e9e1f633eaa', 'ee8626f80f7c2619917b6236f3a7f02b', 'ae4fed059f67086fd52a73d913cf473d', NULL),
-('381504a717cb3ce77dcd4070c9689a7e', 'ee8626f80f7c2619917b6236f3a7f02b', '4f84f9400e5e92c95f05b554724c2b58', NULL),
 ('3e563751942b0879c88ca4de19757b50', '1750a8fb3e6d90cb7957c02de1dc8e59', '58857ff846e61794c69208e9d3a85466', NULL),
 ('412e2de37a35b3442d68db8dd2f3c190', '52b0cf022ac4187b2a70dfa4f8b2d940', 'f1cb187abf927c88b89470d08615f5ac', NULL),
 ('4204f91fb61911ba8ce40afa7c02369f', 'f6817f48af4fb3af11b9e8bf182f618b', '3f915b2769fc80648e92d04e84ca059d', NULL),
 ('439568ff7db6f329bf6dd45b3dfc9456', 'f6817f48af4fb3af11b9e8bf182f618b', '7593c9e3523a17bca83b8d7fe8a34e58', NULL),
-('44b5a73541bcb854dd5d38c6d1fb93a1', 'ee8626f80f7c2619917b6236f3a7f02b', '418964ba087b90a84897b62474496b93', NULL),
-('4d56ce2f67c94b74a1d3abdbea340e42', 'ee8626f80f7c2619917b6236f3a7f02b', 'd86f58e7ab516d3bc6bfb1fe10585f97', NULL),
 ('4f2fd4a190db856e21476de2704bbd99', 'f6817f48af4fb3af11b9e8bf182f618b', '1a0811914300741f4e11838ff37a1d3a', NULL),
 ('4faad8ff93cb2b5607cd3d07c1b624ee', 'a799c3b1b12dd3ed4bd046bfaef5fe6e', '70b8f33da5f39de1981bf89cf6c99792', NULL),
 ('57c0b3a547b815ea3ec8e509b08948b3', '1750a8fb3e6d90cb7957c02de1dc8e59', '3f915b2769fc80648e92d04e84ca059d', NULL),
 ('593ee05c4fe4645c7826b7d5e14f23ec', '52b0cf022ac4187b2a70dfa4f8b2d940', '8fb8172747a78756c11916216b8b8066', NULL),
-('5affc85021fcba07d81c09a6fdfa8dc6', 'ee8626f80f7c2619917b6236f3a7f02b', '078f9558cdeab239aecb2bda1a8ed0d1', NULL),
 ('5fc194b709336d354640fe29fefd65a3', 'a799c3b1b12dd3ed4bd046bfaef5fe6e', '9ba60e626bf2882c31c488aba62b89f0', NULL),
-('6451dac67ba4acafb570fd6a03f47460', 'ee8626f80f7c2619917b6236f3a7f02b', 'e3c13679c73a4f829bcff2aba8fd68b1', NULL),
-('6c43fd3f10fdaf2a0646434ae68709b5', 'ee8626f80f7c2619917b6236f3a7f02b', '540a2936940846cb98114ffb0d145cb8', NULL),
-('71a5f54a90aa8c7a250a38b7dba39f6f', 'ee8626f80f7c2619917b6236f3a7f02b', '8fb8172747a78756c11916216b8b8066', NULL),
 ('75002588591820806', '16457350655250432', '5129710648430592', NULL),
 ('75002588604403712', '16457350655250432', '5129710648430593', NULL),
 ('75002588612792320', '16457350655250432', '40238597734928384', NULL),
@@ -4277,46 +4587,21 @@ INSERT INTO `sys_role_permission` (`id`, `role_id`, `permission_id`, `data_rule_
 ('77277860376612865', '496138616573953', '16438800255291392', NULL),
 ('77277860385001472', '496138616573953', '16438962738434048', NULL),
 ('77277860389195776', '496138616573953', '16439068543946752', NULL),
-('7750f9be48ee09cd561fce718219a3e2', 'ee8626f80f7c2619917b6236f3a7f02b', '882a73768cfd7f78f3a37584f7299656', NULL),
 ('7a5d31ba48fe3fb1266bf186dc5f7ba7', '52b0cf022ac4187b2a70dfa4f8b2d940', '58857ff846e61794c69208e9d3a85466', NULL),
-('7d2ea745950be3357747ec7750c31c57', 'ee8626f80f7c2619917b6236f3a7f02b', '2a470fc0c3954d9dbb61de6d80846549', NULL),
 ('7de42bdc0b8c5446b7d428c66a7abc12', '52b0cf022ac4187b2a70dfa4f8b2d940', '54dd5457a3190740005c1bfec55b1c34', NULL),
 ('7e19d90cec0dd87aaef351b9ff8f4902', '646c628b2b8295fbdab2d34044de0354', 'f9d3f4f27653a71c52faa9fb8070fbe7', NULL),
-('7f862c47003eb20e8bad05f506371f92', 'ee8626f80f7c2619917b6236f3a7f02b', 'd7d6e2e4e2934f2c9385a623fd98c6f3', NULL),
-('83f704524b21b6a3ae324b8736c65333', 'ee8626f80f7c2619917b6236f3a7f02b', '7ac9eb9ccbde2f7a033cd4944272bf1e', NULL),
-('84d32474316a43b01256d6644e6e7751', 'ee8626f80f7c2619917b6236f3a7f02b', 'ec8d607d0156e198b11853760319c646', NULL),
-('8703a2410cddb713c33232ce16ec04b9', 'ee8626f80f7c2619917b6236f3a7f02b', '1367a93f2c410b169faa7abcbad2f77c', NULL),
-('885c1a827383e5b2c6c4f8ca72a7b493', 'ee8626f80f7c2619917b6236f3a7f02b', '4148ec82b6acd69f470bea75fe41c357', NULL),
 ('8a60df8d8b4c9ee5fa63f48aeee3ec00', '1750a8fb3e6d90cb7957c02de1dc8e59', 'd7d6e2e4e2934f2c9385a623fd98c6f3', NULL),
-('8b1e326791375f325d3e6b797753b65e', 'ee8626f80f7c2619917b6236f3a7f02b', '2dbbafa22cda07fa5d169d741b81fe12', NULL),
 ('8ce1022dac4e558ff9694600515cf510', '1750a8fb3e6d90cb7957c02de1dc8e59', '08e6b9dc3c04489c8e1ff2ce6f105aa4', NULL),
 ('8d848ca7feec5b7ebb3ecb32b2c8857a', '52b0cf022ac4187b2a70dfa4f8b2d940', '4148ec82b6acd69f470bea75fe41c357', NULL),
-('8eec2c510f1ac9c5eee26c041b1f00ca', 'ee8626f80f7c2619917b6236f3a7f02b', '58857ff846e61794c69208e9d3a85466', NULL),
-('8f762ff80253f634b08cf59a77742ba4', 'ee8626f80f7c2619917b6236f3a7f02b', '9502685863ab87f0ad1134142788a385', NULL),
-('903b790e6090414343502c6dc393b7c9', 'ee8626f80f7c2619917b6236f3a7f02b', 'de13e0f6328c069748de7399fcc1dbbd', NULL),
-('90996d56357730e173e636b99fc48bea', 'ee8626f80f7c2619917b6236f3a7f02b', 'fb07ca05a3e13674dbf6d3245956da2e', NULL),
-('90e1c607a0631364eec310f3cc4acebd', 'ee8626f80f7c2619917b6236f3a7f02b', '4f66409ef3bbd69c1d80469d6e2a885e', NULL),
 ('9264104cee9b10c96241d527b2d0346d', '1750a8fb3e6d90cb7957c02de1dc8e59', '54dd5457a3190740005c1bfec55b1c34', NULL),
 ('980171fda43adfe24840959b1d048d4d', 'f6817f48af4fb3af11b9e8bf182f618b', 'd7d6e2e4e2934f2c9385a623fd98c6f3', NULL),
-('98f02353f91dd569e3c6b8fd6b4f4034', 'ee8626f80f7c2619917b6236f3a7f02b', '6531cf3421b1265aeeeabaab5e176e6d', NULL),
 ('9d8772c310b675ae43eacdbc6c7fa04a', 'a799c3b1b12dd3ed4bd046bfaef5fe6e', '1663f3faba244d16c94552f849627d84', NULL),
 ('9f8311ecccd44e079723098cf2ffe1cc', '1750a8fb3e6d90cb7957c02de1dc8e59', '693ce69af3432bd00be13c3971a57961', NULL),
-('a098e2acc3f90316f161f6648d085640', 'ee8626f80f7c2619917b6236f3a7f02b', 'e6bfd1fcabfd7942fdd05f076d1dad38', NULL),
-('a66feaaf128417ad762e946abccf27ec', 'ee8626f80f7c2619917b6236f3a7f02b', 'c6cf95444d80435eb37b2f9db3971ae6', NULL),
-('a7ab87eac0f8fafa2efa4b1f9351923f', 'ee8626f80f7c2619917b6236f3a7f02b', 'fedfbf4420536cacc0218557d263dfea', NULL),
-('abdc324a2df9f13ee6e73d44c6e62bc8', 'ee8626f80f7c2619917b6236f3a7f02b', 'f1cb187abf927c88b89470d08615f5ac', NULL),
 ('aefc8c22e061171806e59cd222f6b7e1', '52b0cf022ac4187b2a70dfa4f8b2d940', 'e8af452d8948ea49d37c934f5100ae6a', NULL),
-('b131ebeafcfd059f3c7e542606ea9ff5', 'ee8626f80f7c2619917b6236f3a7f02b', 'e5973686ed495c379d829ea8b2881fc6', NULL),
-('b2b2dcfff6986d3d7f890ea62d474651', 'ee8626f80f7c2619917b6236f3a7f02b', '200006f0edf145a2b50eacca07585451', NULL),
-('b495a46fa0e0d4637abe0db7fd12fe1a', 'ee8626f80f7c2619917b6236f3a7f02b', '717f6bee46f44a3897eca9abd6e2ec44', NULL),
-('c8571839e6b14796e661f3e2843b80b6', 'ee8626f80f7c2619917b6236f3a7f02b', '45c966826eeff4c99b8f8ebfe74511fc', NULL),
 ('d37ad568e26f46ed0feca227aa9c2ffa', 'f6817f48af4fb3af11b9e8bf182f618b', '9502685863ab87f0ad1134142788a385', NULL),
 ('d3fe195d59811531c05d31d8436f5c8b', '1750a8fb3e6d90cb7957c02de1dc8e59', 'e8af452d8948ea49d37c934f5100ae6a', NULL),
-('e258ca8bf7ee168b93bfee739668eb15', 'ee8626f80f7c2619917b6236f3a7f02b', 'fb367426764077dcf94640c843733985', NULL),
-('e339f7db7418a4fd2bd2c113f1182186', 'ee8626f80f7c2619917b6236f3a7f02b', 'b1cb0a3fedf7ed0e4653cb5a229837ee', NULL),
 ('e3e922673f4289b18366bb51b6200f17', '52b0cf022ac4187b2a70dfa4f8b2d940', '45c966826eeff4c99b8f8ebfe74511fc', NULL),
 ('f17ab8ad1e71341140857ef4914ef297', '21c5a3187763729408b40afb0d0fdfa8', '732d48f8e0abe99fe6a23d18a3171cd1', NULL),
-('fd86f6b08eb683720ba499f9d9421726', 'ee8626f80f7c2619917b6236f3a7f02b', '693ce69af3432bd00be13c3971a57961', NULL),
 ('fed41a4671285efb266cd404f24dd378', '52b0cf022ac4187b2a70dfa4f8b2d940', '00a2a0ae65cdca5e93209cdbde97cbe6', NULL);
 
 -- --------------------------------------------------------
@@ -4422,7 +4707,9 @@ CREATE TABLE IF NOT EXISTS `sys_user` (
 --
 
 INSERT INTO `sys_user` (`id`, `username`, `realname`, `password`, `salt`, `avatar`, `birthday`, `sex`, `email`, `phone`, `org_code`, `status`, `del_flag`, `activiti_sync`, `work_no`, `post`, `telephone`, `create_by`, `create_time`, `update_by`, `update_time`, `identity`, `depart_ids`) VALUES
-('a75d45a015c44384a04449ee80dc3503', 'jeecg', 'jeecg', '3dd8371f3cf8240e', 'vDDkDzrK', 'user/20190220/e1fe9925bc315c60addea1b98eb1cb1349547719_1550656892940.jpg', '2020-04-12 00:00:00', 1, '858134843@qq.com', '17721211032', 'A01', 1, 0, 1, '001', '', NULL, 'admin', '2019-02-13 16:02:36', 'jeecg', '2020-04-12 23:00:07', 2, 'c6d7cb4deeac411cb3384b1b31278596'),
+('2cb6e8e9b9ac4ccca17a1c3020a118d4', 'student', '学生', 'e4e236c0add71a04', 'F8tqiPzu', '[]', NULL, 1, NULL, NULL, 'A01A06A01', 1, 0, 1, NULL, NULL, NULL, 'jeecg', '2020-04-21 17:41:46', 'jeecg', '2020-04-22 11:32:48', 1, ''),
+('a75d45a015c44384a04449ee80dc3503', 'jeecg', 'jeecg', '3dd8371f3cf8240e', 'vDDkDzrK', 'user/20190220/e1fe9925bc315c60addea1b98eb1cb1349547719_1550656892940.jpg', '2020-04-12 00:00:00', 1, '858134843@qq.com', '17721211032', 'A01', 1, 0, 1, '001', '', NULL, 'admin', '2019-02-13 16:02:36', 'jeecg', '2020-04-21 17:41:20', 2, 'c6d7cb4deeac411cb3384b1b31278596'),
+('d05cb1b6d5f64789a9d6f0e8ee1185db', 'teacher', '老师', '3b1b68508ed6b0f5', 'kafIgeoy', '[]', NULL, NULL, NULL, NULL, 'A03A01A01', 1, 0, 1, '101', '', NULL, 'admin', '2020-04-21 21:39:06', 'jeecg', '2020-04-22 11:34:52', 2, 'd2b37ffcc3fd46ddb5bc1c3da7fc41c0'),
 ('e9ca23d68d884d4ebb19d07889727dae', 'admin', '管理员', 'cb362cfeefbf3d8d', 'RCGTeGiH', 'temp/11_1582468686154.jpg', '2018-12-05 00:00:00', 1, '11@qq.com', '18566666661', 'A01', 1, 0, 1, '111', '', NULL, NULL, '2038-06-21 17:54:10', 'admin', '2020-02-23 22:44:00', 2, 'c6d7cb4deeac411cb3384b1b31278596');
 
 -- --------------------------------------------------------
@@ -4465,9 +4752,11 @@ CREATE TABLE IF NOT EXISTS `sys_user_depart` (
 --
 
 INSERT INTO `sys_user_depart` (`ID`, `user_id`, `dep_id`) VALUES
+('1252802508238958594', '2cb6e8e9b9ac4ccca17a1c3020a118d4', 'd2b37ffcc3fd46ddb5bc1c3da7fc41c0'),
 ('0c42ba309c2c4cad35836ec2336676fa', '42d153bffeea74f72a9c1697874fa4a7', '6d35e179cd814e3299bd588ea7daed3f'),
-('1248513528752336898', 'a75d45a015c44384a04449ee80dc3503', 'c6d7cb4deeac411cb3384b1b31278596'),
+('1252532866262065153', 'a75d45a015c44384a04449ee80dc3503', 'c6d7cb4deeac411cb3384b1b31278596'),
 ('1f3a0267811327b9eca86b0cc2b956f3', 'bcbe1290783a469a83ae3bd8effe15d4', '5159cde220114246b045e574adceafe9'),
+('1252803029632888833', 'd05cb1b6d5f64789a9d6f0e8ee1185db', 'd2b37ffcc3fd46ddb5bc1c3da7fc41c0'),
 ('1231590533597499393', 'e9ca23d68d884d4ebb19d07889727dae', 'c6d7cb4deeac411cb3384b1b31278596'),
 ('ac52f23ae625eb6560c9227170b88166', 'f0019fdebedb443c98dcb17d88222c38', '57197590443c44f083d42ae24ef26a2c'),
 ('179660a8b9a122f66b73603799a10924', 'f0019fdebedb443c98dcb17d88222c38', '67fc001af12a4f9b8458005d3f19934a');
@@ -4490,18 +4779,99 @@ CREATE TABLE IF NOT EXISTS `sys_user_role` (
 
 INSERT INTO `sys_user_role` (`id`, `user_id`, `role_id`) VALUES
 ('b3ffd9311a1ca296c44e2409b547384f', '01b802058ea94b978a2c96f4807f6b48', '1'),
-('0ede6d23d53bc7dc990346ff14faabee', '3db4cf42353f4e868b7ccfeef90505d2', 'ee8626f80f7c2619917b6236f3a7f02b'),
-('e78d210d24aaff48e0a736e2ddff4cdc', '3e177fede453430387a8279ced685679', 'ee8626f80f7c2619917b6236f3a7f02b'),
+('1252802507320406018', '2cb6e8e9b9ac4ccca17a1c3020a118d4', '1252532277234982913'),
 ('f2922a38ba24fb53749e45a0c459adb3', '439ae3e9bcf7418583fcd429cadb1d72', '1'),
-('f72c6190b0722e798147e73c776c6ac9', '439ae3e9bcf7418583fcd429cadb1d72', 'ee8626f80f7c2619917b6236f3a7f02b'),
 ('ee45d0343ecec894b6886effc92cb0b7', '4d8fef4667574b24a9ccfedaf257810c', 'f6817f48af4fb3af11b9e8bf182f618b'),
-('be2639167ede09379937daca7fc3bb73', '526f300ab35e44faaed54a9fb0742845', 'ee8626f80f7c2619917b6236f3a7f02b'),
-('79d66ef7aa137cfa9957081a1483009d', '9a668858c4c74cf5a2b25ad9608ba095', 'ee8626f80f7c2619917b6236f3a7f02b'),
-('1248513527456296961', 'a75d45a015c44384a04449ee80dc3503', '1236319727061430274'),
-('1248513527527600129', 'a75d45a015c44384a04449ee80dc3503', 'ee8626f80f7c2619917b6236f3a7f02b'),
-('1248513527598903297', 'a75d45a015c44384a04449ee80dc3503', 'f6817f48af4fb3af11b9e8bf182f618b'),
-('1231590533484253186', 'e9ca23d68d884d4ebb19d07889727dae', 'f6817f48af4fb3af11b9e8bf182f618b'),
-('d2233e5be091d39da5abb0073c766224', 'f0019fdebedb443c98dcb17d88222c38', 'ee8626f80f7c2619917b6236f3a7f02b');
+('1252532865448370177', 'a75d45a015c44384a04449ee80dc3503', '1236319727061430274'),
+('1252803028907274242', 'd05cb1b6d5f64789a9d6f0e8ee1185db', '1252532323347161090'),
+('1231590533484253186', 'e9ca23d68d884d4ebb19d07889727dae', 'f6817f48af4fb3af11b9e8bf182f618b');
+
+-- --------------------------------------------------------
+
+--
+-- 表的结构 `teaching_course`
+--
+
+CREATE TABLE IF NOT EXISTS `teaching_course` (
+  `id` varchar(36) NOT NULL COMMENT '主键',
+  `create_by` varchar(50) DEFAULT NULL COMMENT '创建人',
+  `create_time` datetime DEFAULT NULL COMMENT '创建日期',
+  `update_by` varchar(50) DEFAULT NULL COMMENT '更新人',
+  `update_time` datetime DEFAULT NULL COMMENT '更新日期',
+  `sys_org_code` varchar(64) DEFAULT NULL COMMENT '所属部门',
+  `del_flag` int(1) DEFAULT NULL COMMENT '删除标志',
+  `course_name` varchar(32) NOT NULL COMMENT '科目名',
+  `course_desc` text COMMENT '科目介绍',
+  `course_icon` varchar(256) DEFAULT NULL COMMENT '科目图标',
+  `course_cover` varchar(256) DEFAULT NULL COMMENT '科目封面',
+  `course_map` varchar(256) DEFAULT NULL COMMENT '课程地图'
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+--
+-- 转存表中的数据 `teaching_course`
+--
+
+INSERT INTO `teaching_course` (`id`, `create_by`, `create_time`, `update_by`, `update_time`, `sys_org_code`, `del_flag`, `course_name`, `course_desc`, `course_icon`, `course_cover`, `course_map`) VALUES
+('1252596872280637441', 'jeecg', '2020-04-21 21:55:41', NULL, NULL, 'A01', NULL, 'Scratch初级课', '介绍介绍介绍介绍介绍', 'f75fdd0c-5fe1-4771-b1ac-cc9a3b1bd0c0.png', '5609516d-cd03-4a93-8544-f99090b6eb50.png', '875b98a3-46ee-4482-8b73-cb70d77febfd.jpg');
+
+-- --------------------------------------------------------
+
+--
+-- 表的结构 `teaching_course_dept`
+--
+
+CREATE TABLE IF NOT EXISTS `teaching_course_dept` (
+  `id` varchar(36) NOT NULL,
+  `create_by` varchar(50) DEFAULT NULL COMMENT '创建人',
+  `create_time` datetime DEFAULT NULL COMMENT '创建日期',
+  `update_by` varchar(50) DEFAULT NULL COMMENT '更新人',
+  `update_time` datetime DEFAULT NULL COMMENT '更新日期',
+  `sys_org_code` varchar(64) DEFAULT NULL COMMENT '所属部门',
+  `dept_id` varchar(32) NOT NULL COMMENT '班级',
+  `course_id` varchar(32) NOT NULL COMMENT '课程',
+  `open_time` datetime DEFAULT NULL COMMENT '课程开课时间'
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+--
+-- 转存表中的数据 `teaching_course_dept`
+--
+
+INSERT INTO `teaching_course_dept` (`id`, `create_by`, `create_time`, `update_by`, `update_time`, `sys_org_code`, `dept_id`, `course_id`, `open_time`) VALUES
+('1252802961609666562', 'jeecg', '2020-04-22 11:34:36', NULL, NULL, 'A01', 'd2b37ffcc3fd46ddb5bc1c3da7fc41c0', '1252596872280637441', NULL);
+
+-- --------------------------------------------------------
+
+--
+-- 表的结构 `teaching_course_unit`
+--
+
+CREATE TABLE IF NOT EXISTS `teaching_course_unit` (
+  `id` varchar(36) NOT NULL,
+  `create_by` varchar(50) DEFAULT NULL COMMENT '创建人',
+  `create_time` datetime DEFAULT NULL COMMENT '创建日期',
+  `update_by` varchar(50) DEFAULT NULL COMMENT '更新人',
+  `update_time` datetime DEFAULT NULL COMMENT '更新日期',
+  `sys_org_code` varchar(64) DEFAULT NULL COMMENT '所属部门',
+  `del_flag` int(11) DEFAULT NULL COMMENT '删除标识',
+  `unit_name` varchar(64) NOT NULL COMMENT '单元名称',
+  `unit_intro` varchar(256) DEFAULT NULL COMMENT '单元简介',
+  `course_id` varchar(32) NOT NULL COMMENT '课程外键ID',
+  `course_video` varchar(256) DEFAULT NULL COMMENT '课程视频',
+  `course_ppt` varchar(256) DEFAULT NULL COMMENT '课件PPT',
+  `course_work_type` int(11) DEFAULT NULL COMMENT '作业类型',
+  `course_work` varchar(256) DEFAULT NULL COMMENT '课程作业',
+  `course_work_answer` varchar(256) DEFAULT NULL COMMENT '课程作业答案',
+  `course_plan` varchar(256) DEFAULT NULL COMMENT '教案',
+  `map_x` int(11) DEFAULT NULL COMMENT '地图X坐标',
+  `map_y` int(11) DEFAULT NULL COMMENT '地图Y坐标'
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+--
+-- 转存表中的数据 `teaching_course_unit`
+--
+
+INSERT INTO `teaching_course_unit` (`id`, `create_by`, `create_time`, `update_by`, `update_time`, `sys_org_code`, `del_flag`, `unit_name`, `unit_intro`, `course_id`, `course_video`, `course_ppt`, `course_work_type`, `course_work`, `course_work_answer`, `course_plan`, `map_x`, `map_y`) VALUES
+('1252780886052384769', 'jeecg', '2020-04-22 10:06:53', 'jeecg', '2020-04-22 11:36:21', 'A01', NULL, '第一节', '第一节介绍', '1252596872280637441', 'aee3ddf3-a1ef-4f78-86f7-f585d318097f.mp4', 'f876877f-11a0-4fd4-821c-a4cae27c7b52.pdf', 2, '4512df08-4bbb-472d-af2d-bed70e814231.sb3', NULL, NULL, 400, 280);
 
 -- --------------------------------------------------------
 
@@ -4535,14 +4905,8 @@ CREATE TABLE IF NOT EXISTS `teaching_work` (
 INSERT INTO `teaching_work` (`id`, `create_by`, `create_time`, `update_by`, `update_time`, `sys_org_code`, `user_id`, `course_id`, `work_name`, `work_type`, `work_file`, `work_cover`, `view_num`, `star_num`, `collect_num`, `del_flag`) VALUES
 ('1249207980923822082', 'jeecg', '2020-04-12 13:29:26', 'jeecg', '2020-04-12 13:30:59', 'A01', 'e9ca23d68d884d4ebb19d07889727dae', NULL, '123', '1', '123', NULL, 1, 1, 1, 0),
 ('1249267730541785090', 'jeecg', '2020-04-12 21:54:55', 'jeecg', '2020-04-12 21:54:55', 'A01', 'a75d45a015c44384a04449ee80dc3503', NULL, 'Scratch作品', '2', '1249335188527058945', '1249335189294616578', 0, 0, 0, 0),
-('1249283608884809730', 'jeecg', '2020-04-12 18:29:57', NULL, NULL, 'A01', 'a75d45a015c44384a04449ee80dc3503', NULL, 'Scratch作品', '2', '1249283605948796930', NULL, 0, 0, 0, 0),
-('1249284574480699394', 'jeecg', '2020-04-12 18:33:47', NULL, NULL, 'A01', 'a75d45a015c44384a04449ee80dc3503', NULL, '忍者', '2', '1249284572001865729', NULL, 0, 0, 0, 0),
-('1249285357716639746', 'jeecg', '2020-04-12 18:36:54', NULL, NULL, 'A01', 'a75d45a015c44384a04449ee80dc3503', NULL, 'Scratch作品', '2', '1249285356554817537', NULL, 0, 0, 0, 0),
-('1249297577167032321', 'jeecg', '2020-04-12 19:25:27', NULL, NULL, 'A01', 'a75d45a015c44384a04449ee80dc3503', NULL, 'Scratch作品', '2', '1249297576437223425', NULL, 0, 0, 0, 0),
-('1249327740042919938', 'jeecg', '2020-04-12 21:25:19', NULL, NULL, 'A01', 'a75d45a015c44384a04449ee80dc3503', NULL, 'Scratch作品', '2', '1249327738251952130', NULL, 0, 0, 0, 0),
-('1249327817754984450', 'jeecg', '2020-04-12 21:25:37', NULL, NULL, 'A01', 'a75d45a015c44384a04449ee80dc3503', NULL, 'Scratch作品', '2', '1249327816664465409', NULL, 0, 0, 0, 0),
-('1249358947245985794', 'test22', '2020-04-12 23:29:19', 'jeecg', '2020-04-12 23:40:56', 'A01', '42d153bffeea74f72a9c1697874fa4a7', NULL, '忍者', '2', '1249284572001865729', NULL, 0, 0, 0, 0),
-('1249358947480866818', 'admin', '2020-04-12 23:29:19', NULL, NULL, 'A01', 'e9ca23d68d884d4ebb19d07889727dae', NULL, '忍者', '2', '1249284572001865729', NULL, 0, 0, 0, 0);
+('1249358947480866818', 'admin', '2020-04-12 23:29:19', 'jeecg', '2020-04-21 21:50:18', 'A01', 'e9ca23d68d884d4ebb19d07889727dae', NULL, '忍者', '2', '1249284572001865729', NULL, 0, 0, 0, 0),
+('1252595724924583937', 'student', '2020-04-21 21:51:07', NULL, NULL, 'A03A01A01', '2cb6e8e9b9ac4ccca17a1c3020a118d4', '', 'Scratch作品', '2', '1252595724018614273', '1252595723188142081', 0, 0, 0, 0);
 
 -- --------------------------------------------------------
 
@@ -4593,7 +4957,7 @@ CREATE TABLE IF NOT EXISTS `teaching_work_correct` (
 
 INSERT INTO `teaching_work_correct` (`id`, `create_by`, `create_time`, `update_by`, `update_time`, `sys_org_code`, `work_id`, `score`, `comment`) VALUES
 ('1249208370612412418', 'jeecg', '2020-04-12 13:30:59', NULL, NULL, 'A01', '1249207980923822082', 99, '不错'),
-('1249361835817013249', 'jeecg', '2020-04-12 23:40:48', NULL, NULL, 'A01', '1249358947245985794', 3, '哈哈哈');
+('1252595520087359489', 'jeecg', '2020-04-21 21:50:18', NULL, NULL, 'A01', '1249358947480866818', 4, NULL);
 
 -- --------------------------------------------------------
 
@@ -5158,6 +5522,27 @@ ALTER TABLE `sys_user_role`
   ADD KEY `index2_groupuu_user_id` (`user_id`) USING BTREE,
   ADD KEY `index2_groupuu_ole_id` (`role_id`) USING BTREE,
   ADD KEY `index2_groupuu_useridandroleid` (`user_id`,`role_id`) USING BTREE;
+
+--
+-- Indexes for table `teaching_course`
+--
+ALTER TABLE `teaching_course`
+  ADD PRIMARY KEY (`id`),
+  ADD KEY `courseName` (`course_name`);
+
+--
+-- Indexes for table `teaching_course_dept`
+--
+ALTER TABLE `teaching_course_dept`
+  ADD PRIMARY KEY (`id`);
+
+--
+-- Indexes for table `teaching_course_unit`
+--
+ALTER TABLE `teaching_course_unit`
+  ADD PRIMARY KEY (`id`),
+  ADD KEY `courseId` (`course_id`),
+  ADD KEY `unitName` (`unit_name`);
 
 --
 -- Indexes for table `teaching_work`

@@ -97,8 +97,8 @@ spring:
       datasource:
         master:
           url: jdbc:mysql://127.0.0.1:3306/teaching?characterEncoding=UTF-8&useUnicode=true&useSSL=false&tinyInt1isBit=false
-          username: root
-          password: root
+          username: teaching
+          password: teaching
           driver-class-name: com.mysql.jdbc.Driver
           # 多数据源配置
           #multi-datasource1:
@@ -138,7 +138,7 @@ mybatis-plus:
 #jeecg专用配置
 jeecg :
   # 站点域名
-  domain: http://songguo.tiebayun.cn
+  domain: http://localhost
   # 本地：local\Minio：minio\阿里云：alioss
   uploadType: local
   path :
@@ -161,31 +161,10 @@ jeecg :
     staticDomain: ??
   #七牛云存储配置
   qiniu:
-    accessKey: AY1BSxNj8MRN13sCJ8b2dHzr-Cas7FVUdQSLOnP1
-    secretKey: H08ZZLBeHjp3rwu3Q_QtOZuaDk-cpEx_BNJVEokG
-    bucketName: teaching-open
-    staticDomain: //q8nlj54u7.bkt.clouddn.com
-
-  # 微信
-  weixin:
-    # 公众平台
-    mp:
-      appId: wx2154aa8b958db927
-      appSecret: f314648b027a21b776f6cdc166b3c4d2
-    # 开放平台
-    op:
-      appId: ??
-      appSecret: ??
-    # 商户平台
-    pay:
-      # 商户号
-      partner: 1575782511
-      # 商户密钥
-      paternerKey: nanhuchangxiangsongguoai88888888
-      # 支付成功回调地址
-      notifyUrl: http://songguo.tiebayun.cn/api/wechatPay/notify
-      # 是否开启沙箱环境
-      sandbox: false
+    accessKey: ??
+    secretKey: ??
+    bucketName: teaching
+    staticDomain: //open.qn.teaching.vip
     
   # ElasticSearch 设置
   elasticsearch:

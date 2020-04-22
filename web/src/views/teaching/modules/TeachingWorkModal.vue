@@ -42,21 +42,7 @@
               <a-input v-decorator="[ 'workCover', validatorRules.workCover]" placeholder="请输入作业封面"></a-input>
             </a-form-item>
           </a-col>
-          <a-col :span="12">
-            <a-form-item label="查看次数" :labelCol="labelCol" :wrapperCol="wrapperCol">
-              <a-input-number v-decorator="[ 'viewNum', validatorRules.viewNum]" placeholder="请输入查看次数" style="width: 100%"/>
-            </a-form-item>
-          </a-col>
-          <a-col :span="12">
-            <a-form-item label="点赞次数" :labelCol="labelCol" :wrapperCol="wrapperCol">
-              <a-input-number v-decorator="[ 'starNum', validatorRules.starNum]" placeholder="请输入点赞次数" style="width: 100%"/>
-            </a-form-item>
-          </a-col>
-          <a-col :span="12">
-            <a-form-item label="收藏次数" :labelCol="labelCol" :wrapperCol="wrapperCol">
-              <a-input-number v-decorator="[ 'collectNum', validatorRules.collectNum]" placeholder="请输入收藏次数" style="width: 100%"/>
-            </a-form-item>
-          </a-col>
+
 
         </a-row>
       </a-form>

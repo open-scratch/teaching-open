@@ -1,7 +1,7 @@
 <template>
   <div class="app-list">
     <a-list :grid="{ gutter: 24, lg: 3, md: 1, sm: 1, xs: 1 }" :dataSource="dataSource">
-      <a-list-item slot="renderItem" slot-scope="item, index">
+      <a-list-item slot="renderItem" slot-scope="item">
         <a-card :hoverable="true">
           <template class="ant-card-extra" slot="extra">
             <span class="create-time">{{item.createTime}}</span>
@@ -16,8 +16,8 @@
             <div style="margin-bottom: 3px" slot="title">{{ item.workName }}</div>
             <!-- <a-avatar class="card-avatar" slot="avatar" :src="item.avatar" size="small" /> -->
             <div class="meta-cardInfo" slot="description">
-              <a :href="'/scratch3/index.html?projectUrl='+item.workKey+'&projectName='+item.workName" target="_blank">
-                <img :src="qn_base+item.workCover" />
+              <a :href="'/scratch3/index.html?workId='+item.id" target="_blank">
+                <img :src="item.coverFileUrl" />
               </a>
             </div>
           </a-card-meta>
