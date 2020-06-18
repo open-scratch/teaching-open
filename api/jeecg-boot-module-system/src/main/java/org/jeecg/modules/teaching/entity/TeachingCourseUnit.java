@@ -71,6 +71,9 @@ public class TeachingCourseUnit implements Serializable {
 	@Excel(name = "单元简介", width = 15)
     @ApiModelProperty(value = "单元简介")
     private java.lang.String unitIntro;
+    @Excel(name = "单元封面", width = 15)
+    @ApiModelProperty(value = "单元封面")
+    private java.lang.String unitCover;
 	/**课程外键ID*/
 	@Excel(name = "课程外键ID", width = 15)
     @ApiModelProperty(value = "课程外键ID")

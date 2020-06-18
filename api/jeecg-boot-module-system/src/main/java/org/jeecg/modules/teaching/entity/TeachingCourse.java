@@ -79,6 +79,9 @@ public class TeachingCourse implements Serializable {
 	@Excel(name = "课程封面", width = 15)
     @ApiModelProperty(value = "课程封面")
     private java.lang.String courseCover;
+
+	/**展示类型*/
+	private java.lang.Integer showType;
 	/**课程地图*/
 	@Excel(name = "课程地图", width = 15)
     @ApiModelProperty(value = "课程地图")

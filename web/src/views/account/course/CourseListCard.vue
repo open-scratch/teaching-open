@@ -11,8 +11,11 @@
           <a-card-meta>
             <div style="margin-bottom: 3px" slot="title">{{ item.courseName }}</div>
             <div class="meta-cardInfo" slot="description">
-               <router-link :to="{ name: 'teaching-mineCourse-courseUnitMap',  query: {id:item.id}}">
-                 <img :src="getQiniuFile(item.courseMap)" height="25px" alt="图片不存在" style="width:100%;height:100%;"/>
+               <router-link v-if="item.showType==1" :to="{ name: 'teaching-mineCourse-courseUnitMap',  query: {id:item.id}}">
+                 <img :src="getQiniuFile(item.courseCover)" height="25px" alt="图片不存在" style="width:100%;height:100%;"/>
+              </router-link>
+               <router-link v-if="item.showType==2" :to="{ name: 'teaching-mineCourse-courseUnitCard',  query: {id:item.id}}">
+                 <img :src="getQiniuFile(item.courseCover)" height="25px" alt="图片不存在" style="width:100%;height:100%;"/>
               </router-link>
             </div>
           </a-card-meta>
@@ -35,10 +38,10 @@ export default {
     }
   },
   mounted() {
-    this.getWorkList()
+    this.mineWorkList()
   },
   methods: {
-    getWorkList: function() {
+    mineWorkList: function() {
       getAction('/teaching/teachingCourse/mineCourse', {}).then(res => {
         if (res.success) {
           this.dataSource = res.result

@@ -17,7 +17,10 @@
           <a-input v-decorator="[ 'unitName', validatorRules.unitName]" placeholder="请输入单元名称"></a-input>
         </a-form-item>
         <a-form-item label="单元简介" :labelCol="labelCol" :wrapperCol="wrapperCol">
-          <a-input v-decorator="[ 'unitIntro', validatorRules.unitIntro]" placeholder="请输入单元简介"></a-input>
+          <a-textarea v-decorator="[ 'unitIntro', validatorRules.unitIntro]" placeholder="请输入单元简介"></a-textarea>
+        </a-form-item>
+        <a-form-item label="课程封面" :labelCol="labelCol" :wrapperCol="wrapperCol">
+          <j-upload v-decorator="['unitCover', validatorRules.unitCover]" :uploadTarget="'qiniu'" :maxFile="1" :trigger-change="true"></j-upload>
         </a-form-item>
         <a-form-item label="课程视频" :labelCol="labelCol" :wrapperCol="wrapperCol">
           <j-upload v-decorator="['courseVideo', validatorRules.courseVideo]" :uploadTarget="'qiniu'" :maxFile="1" :trigger-change="true"></j-upload>
@@ -79,6 +82,7 @@
           ]},
           unitIntro: {rules: [
           ]},
+          unitCover: {},
           courseId: {rules: [
             {required: true, message: '请选择所属课程!'},
           ]},
