@@ -207,13 +207,13 @@
   <!-- 全局配置 -->
   <script>
     window._CONFIG = {};
-    window._CONFIG['domianURL'] = 'http://127.0.0.1:8080/api';
+    window._CONFIG['domianURL'] = window.location.protocol + '//' + window.location.hostname + (window.location.port ? ':' + window.location.port : '') + '/api';
     window._CONFIG['webURL'] = window.location.protocol + '//' + window.location.hostname + (window.location.port ? ':' + window.location.port : '')
     window._CONFIG['casPrefixUrl'] = 'http://cas.example.org:8443/cas';
     window._CONFIG['onlinePreviewDomainURL'] = 'http://fileview.jeecg.com/onlinePreview'
     window._CONFIG['staticDomainURL'] = window._CONFIG['domianURL'] + '/sys/common/static';
     window._CONFIG['pdfDomainURL'] = window._CONFIG['domianURL'] + '/sys/common/pdf/pdfPreviewIframe';
-    window._CONFIG['qn_base'] = "//open.qn.teaching.vip/"
+    window._CONFIG['qn_base'] = "//qn.teaching.com/"
   </script>
 </head>
 

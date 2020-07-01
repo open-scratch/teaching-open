@@ -22,6 +22,7 @@
   import RouteView from "@/components/layouts/RouteView"
   import { GreatWorksPage, MineWorksPage } from './page'
   import { mapGetters } from 'vuex'
+  import { getFileAccessHttpUrl } from '@/api/manage';
 
   export default {
     components: {
@@ -50,7 +51,7 @@
     methods: {
       ...mapGetters(["nickname", "avatar"]),
       getAvatar(){
-          return window._CONFIG['imgDomainURL']+"/"+this.avatar();
+          return getFileAccessHttpUrl(this.avatar());
       },
       getTeams() {
         this.$http.get('/api/workplace/teams')

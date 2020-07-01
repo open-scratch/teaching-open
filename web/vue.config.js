@@ -1,4 +1,5 @@
 const path = require('path')
+const CompressionPlugin = require("compression-webpack-plugin")
 
 function resolve (dir) {
   return path.join(__dirname, dir)
@@ -14,8 +15,9 @@ module.exports = {
   // 如果你不需要生产环境的 source map，可以将其设置为 false 以加速生产环境构建。
   productionSourceMap: false,
 
-  // 打包app时放开该配置
-  // publicPath:'./',
+
+  //打包app时放开该配置
+  //publicPath:'./',
   configureWebpack: config => {
     // 生产环境取消 console.log
     if (process.env.NODE_ENV === 'production') {
@@ -30,6 +32,17 @@ module.exports = {
       .set('@comp', resolve('src/components'))
       .set('@views', resolve('src/views'))
       .set('@layout', resolve('src/layout'))
+      .set('@static', resolve('src/static'))
+      .set('@mobile', resolve('src/modules/mobile'))
+
+    //生产环境，开启js\css压缩
+    if (process.env.NODE_ENV === 'production') {
+        config.plugin('compressionPlugin').use(new CompressionPlugin({
+          test: /\.js$|.\css|.\less/, // 匹配文件名
+          threshold: 10240, // 对超过10k的数据压缩
+          deleteOriginalAssets: false // 不删除源文件
+        }))
+    }
 
     // 配置 webpack 识别 markdown 为普通的文件
     config.module
@@ -55,16 +68,8 @@ module.exports = {
   },
 
   devServer: {
-    port: 3000,
+    port: 80,
     proxy: {
-     /* '/api': {
-        target: 'https://mock.ihx.me/mock/5baf3052f7da7e07e04a5116/antd-pro', //mock API接口系统
-        ws: false,
-        changeOrigin: true,
-        pathRewrite: {
-          '/jeecg-boot': ''  //默认所有请求都加了jeecg-boot前缀，需要去掉
-        }
-      },*/
       '/api': {
         target: 'http://localhost:8080', 
         ws: false,

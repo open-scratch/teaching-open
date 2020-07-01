@@ -38,10 +38,10 @@ export default {
     }
   },
   mounted() {
-    this.mineWorkList()
+    this.getCourseList()
   },
   methods: {
-    mineWorkList: function() {
+    getCourseList: function() {
       getAction('/teaching/teachingCourse/mineCourse', {}).then(res => {
         if (res.success) {
           this.dataSource = res.result
