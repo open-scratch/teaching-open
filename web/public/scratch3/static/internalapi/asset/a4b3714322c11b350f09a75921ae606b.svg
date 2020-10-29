@@ -1,0 +1,84 @@
+<svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="138.825" height="191.4288818359375" viewBox="0.08749999999999991 -0.7562500000000001 138.825 191.4288818359375" version="1.1" xml:space="preserve">
+  <!-- Generator: Sketch 50.2 (55047) - http://www.bohemiancoding.com/sketch -->
+  <defs/>
+  <g>
+    <title>Slice 1</title>
+    <desc>Created with Sketch.</desc>
+    <g id="Page-1" stroke="none" fill-rule="evenodd">
+      <g id="MediaLab_Sprites_Room_Easel-01">
+        <g id="Group">
+          <path d="M 60 156.25 L 30.5 57.5 L 29.5 64 C 29.5 64 53.5 157.75 53 157.5 L 53.25 158 C 53.5 159.25 54.5 160.25 55.75 160.5 C 57 160.75 58.25 160.5 59.25 159.5 C 60.25 158.75 60.5 157.5 60 156.25 Z " id="Shape" fill="#CE8049" fill-rule="nonzero" stroke-width="1"/>
+          <path d="M 54.75 157.75 C 56.25 157 57 155.25 56.5 153.75 L 29.5 64 L 28 74.25 L 53 157.5 C 53.5 157.75 54.25 158 54.75 157.75 Z " id="Shape" fill="#DB9463" fill-rule="nonzero" stroke-width="1"/>
+          <path d="M 60 156.25 L 30.5 57.5 L 28 74.25 L 53 157.5 L 53.25 158 C 53.75 160 55.75 161 57.75 160.5 C 59.5 160 60.75 158 60 156.25 Z " id="Shape" stroke="#8E4639" stroke-width="1.2" stroke-linecap="round" stroke-linejoin="round" fill="none"/>
+          <g id="Shape" fill-rule="nonzero">
+            <path d="M 13 162.25 L 46.25 125.5 " stroke="#8E4639" stroke-width="4.825" fill="#FFFFFF" stroke-linecap="round" stroke-linejoin="round"/>
+            <path d="M 37.5 1.75 C 36.5 1.5 35.5 1.75 34.75 2.5 C 34 3.25 33.5 4 33.25 4.75 L 33 6.75 C 33.5 6.25 7.25 184 7 183.5 L 7 184 C 6.75 185.75 8.25 187.5 10 187.75 C 11.75 188 13.5 186.75 14 185 L 40.5 6 C 40.75 5 40.5 4 39.75 3.25 C 39.25 2.5 38.5 2 37.5 1.75 Z " fill="#CE8049" stroke-width="1"/>
+            <path d="M 8.5 184.25 C 10.25 184.25 11.5 183 11.75 181.25 L 37 10 C 37.5 8.25 36.5 6.75 34.75 6.25 C 34.25 6.25 33.5 6.25 33 6.75 L 7 183.25 C 7.25 183.75 8 184 8.5 184.25 Z " fill="#DB9463" stroke-width="1"/>
+          </g>
+          <path d="M 37.5 1.75 C 36.5 1.5 35.5 1.75 34.75 2.5 C 34 3.25 33.5 4 33.25 4.75 L 33 6.75 L 7 183.5 L 7 184 C 6.75 185.75 8.25 187.5 10 187.75 C 11.75 188 13.5 186.75 14 185 L 40.5 6 C 40.75 5 40.5 4 39.75 3.25 C 39 2.5 38.5 2 37.5 1.75 Z " id="Shape" stroke="#8E4639" stroke-width="1.2" stroke-linecap="round" stroke-linejoin="round" fill="none"/>
+        </g>
+        <g id="Group" stroke-linecap="round" stroke-linejoin="round" stroke="#8E4639">
+          <polygon id="Shape" stroke-width="1.2" fill="#FFDB48" fill-rule="nonzero" points="0.5 8.75 86.75 8.75 97.75 2 11.5 2" transform="matrix(1,0,0,1,2,115)"/>
+          <polygon id="Shape" stroke-width="1.2" fill="#FFDB48" fill-rule="nonzero" points="0.5 8.75 86.75 8.75 86.75 15.25 0.5 15.25" transform="matrix(1,0,0,1,2,115)"/>
+          <g id="Shape">
+            <path d="M 6 130.25 C 7 127.75 8.5 125.5 10.25 123.5 C 13 120.75 16.5 119.25 20.5 119.25 C 24.25 119 27.75 120.75 29.75 123.75 C 31.25 126 33 128.25 35 130.25 " stroke-width="0.6" fill="none"/>
+            <path d="M 11.5 130.25 C 12.25 127.75 13.5 125.5 15.25 123.75 C 17.75 121.75 21.75 121.25 24 123.75 C 25.5 126 27 128.25 28.5 130.25 " stroke-width="0.6" fill="none"/>
+            <path d="M 15.75 130.25 C 15.75 130.25 16.5 126.25 19.25 126.25 C 22 126.25 21.75 128.25 23.75 130.25 " stroke-width="0.6" fill="none"/>
+            <path d="M 32.25 120.25 C 32.5 121.5 33.25 122.75 34 123.75 C 36.5 126.5 39.5 128.5 43 130.25 L 76.75 130.25 C 79.75 128.5 82.5 126.25 85 123.75 C 85.75 122.75 86.25 121.5 86.5 120.5 " stroke-width="0.6" fill="none"/>
+            <path d="M 39.25 120.5 C 39.75 121.75 40.25 122.75 41 123.75 C 43.25 126.25 46 128.5 49 130.25 L 68.75 130.25 C 72.25 128.5 75.5 126.25 78.5 123.75 C 79.25 122.75 79.75 121.5 80 120.5 " stroke-width="0.6" fill="none"/>
+            <path d="M 45.75 120.5 C 45.75 121.75 46.25 123 47 123.75 C 48.25 125.25 53.5 127.5 58.75 127.5 C 63.25 127.75 68 126.25 71.5 123.5 C 72.5 122.75 73.25 121.5 73.75 120.25 " stroke-width="0.6" fill="none"/>
+            <path d="M 51.25 120.5 C 51.25 120.5 53 122.25 59.25 122.25 C 62.25 122.5 65.25 122 68 120.75 " stroke-width="0.6" fill="none"/>
+          </g>
+          <polygon id="Shape" stroke-width="1.2" fill="#FFDB48" fill-rule="nonzero" points="86.75 8.75 86.75 15.25 97.75 8.25 97.75 2" transform="matrix(1,0,0,1,2,115)"/>
+        </g>
+        <g id="Group">
+          <polygon id="Shape" stroke="#FBD6CC" stroke-width="0.6" fill="#FBD6CC" fill-rule="nonzero" stroke-linecap="round" stroke-linejoin="round" points="15.25 2 1 99.75 78.5 99.75 93 2" transform="matrix(1,0,0,1,12,20)"/>
+          <polygon id="Shape" fill="#FFA6B9" fill-rule="nonzero" points="0.75 101 77.25 101 80 83.25 3.25 83" stroke-width="1" transform="matrix(1,0,0,1,12,20)"/>
+          <g id="Shape">
+            <path d="M 20.5 107.25 C 23.75 106.25 23.25 109.25 27.5 109 C 33 109 33.75 111.75 33 114 C 32.25 116.25 26 117 21.5 113.5 C 19 111.5 17.25 108.25 20.5 107.25 Z " stroke="#FF8AAE" stroke-width="0.6" fill="#FF8AAE" fill-rule="nonzero"/>
+            <path d="M 34.25 106.5 C 35.5 107 36.25 108 37 109 C 37.5 110 37.75 111.25 37.25 112.5 " stroke="#FF8AAE" stroke-width="1.2" fill="none"/>
+            <path d="M 80 108.5 C 81 108 82.25 107.75 83.25 107.75 C 84.5 108 85.5 108.5 86.25 109.5 " stroke="#FF8AAE" stroke-width="1.2" fill="none"/>
+            <path d="M 55 117 C 55 115.75 55.5 114.75 56.25 113.75 C 57 112.75 58 112.25 59.25 112 " stroke="#FF8AAE" stroke-width="1.2" fill="none"/>
+            <path d="M 53.5 107 C 52.75 107.75 51.5 108.25 50.5 108.5 C 49.25 108.5 48.25 108.25 47.25 107.5 " stroke="#FF8AAE" stroke-width="1.2" fill="none"/>
+            <path d="M 62.75 114 C 61.75 112.5 63.75 111.25 65.5 110.5 C 66.25 110.25 66.75 109.75 67.25 109 C 67.5 108.25 67.5 107.5 67.25 106.75 C 66.75 105.5 68.75 104.75 69.5 107.25 C 70 109.25 69.5 111.25 68 112.75 C 66.25 114.5 63.5 115.25 62.75 114 Z " stroke="#FF8AAE" stroke-width="1.2" fill="#FF8AAE" fill-rule="nonzero"/>
+            <path d="M 71.75 114.75 C 72.25 112.75 75.25 111.5 77.5 111.5 C 79.75 111.75 81 113.5 80.5 115 C 80 116.5 77.25 116.75 75.75 117 C 74 117.25 71.5 116.25 71.75 114.75 Z " stroke="#FF8AAE" stroke-width="1.2" fill="#FF8AAE" fill-rule="nonzero"/>
+            <path d="M 50.5 116.5 C 49.25 117.5 47.75 116.5 46.5 116 C 44.5 115.5 43.75 117.25 41.5 116 C 40 115.25 39.5 112.25 42.5 111 C 47 109.5 52.75 114.5 50.5 116.5 Z " stroke="#FF8AAE" stroke-width="0.6" fill="#FF8AAE" fill-rule="nonzero"/>
+            <path d="M 30 81.5 L 33.75 86.75 " stroke="#FFE4DE" stroke-width="1.2" fill="none"/>
+            <path d="M 75 98.5 L 79 95.25 " stroke="#FFE4DE" stroke-width="1.2" fill="none"/>
+            <path d="M 86.25 66.5 L 89.25 70.5 " stroke="#FFE4DE" stroke-width="1.2" fill="none"/>
+            <path d="M 97.75 34.25 L 94.25 37.75 " stroke="#FFE4DE" stroke-width="1.2" fill="none"/>
+            <path d="M 78.75 27.25 L 83 29.75 " stroke="#FFE4DE" stroke-width="1.2" fill="none"/>
+            <path d="M 63.75 29.25 L 60.25 32.75 " stroke="#FFE4DE" stroke-width="1.2" fill="none"/>
+            <path d="M 39.25 52.25 L 34.75 50 " stroke="#FFE4DE" stroke-width="1.2" fill="none"/>
+            <path d="M 51.5 45 L 52 40 " stroke="#FFE4DE" stroke-width="1.2" fill="none"/>
+            <path d="M 48.5 62.5 L 52 59 " stroke="#FFE4DE" stroke-width="1.2" fill="none"/>
+            <path d="M 63 73.5 L 61.75 68.5 " stroke="#FFE4DE" stroke-width="1.2" fill="none"/>
+            <path d="M 48.5 74.25 L 43.5 74.25 " stroke="#FFE4DE" stroke-width="1.2" fill="none"/>
+            <path d="M 66.5 88.75 L 62.5 85.75 " stroke="#FFE4DE" stroke-width="1.2" fill="none"/>
+            <path d="M 49.5 92.25 L 50 87.25 " stroke="#FFE4DE" stroke-width="1.2" fill="none"/>
+            <path d="M 68.25 52 L 63.5 50 " stroke="#FFE4DE" stroke-width="1.2" fill="none"/>
+            <path d="M 77.75 75.75 L 76.5 80.75 " stroke="#FFE4DE" stroke-width="1.2" fill="none"/>
+            <path d="M 83 50.25 L 81 55 " stroke="#FFE4DE" stroke-width="1.2" fill="none"/>
+            <path d="M 75.5 41.75 L 72 38 " stroke="#FFE4DE" stroke-width="1.2" fill="none"/>
+            <path d="M 42.25 28.5 L 42.75 33.5 " stroke="#FFE4DE" stroke-width="1.2" fill="none"/>
+            <path d="M 29.75 40.25 L 34 38.5 " stroke="#FFE4DE" stroke-width="1.2" fill="none"/>
+            <path d="M 28.75 67.25 L 26.75 72.75 " stroke="#FFE4DE" stroke-width="1.2" fill="none"/>
+            <path d="M 29 95.5 L 23.25 97.25 " stroke="#FFE4DE" stroke-width="1.2" fill="none"/>
+          </g>
+          <path d="M 110.25 25 L 105 21 L 104.75 21 L 27.25 21 C 27 21 26.75 21.25 26.75 21.5 L 12.25 120.5 C 12.25 120.75 12.25 120.75 12.5 121 C 12.75 121.25 12.75 121.25 13 121.25 L 90.25 121.25 L 90.5 121.25 L 97.5 117 C 97.75 117 97.75 116.75 97.75 116.5 L 111.25 25.75 C 110.5 25.25 110.5 25 110.25 25 Z M 27.5 22 L 104 22 L 98 61 L 89 119.75 L 13 119.75 L 27.5 22 Z " id="Shape" fill="#5E154D" fill-rule="nonzero" stroke-width="1"/>
+        </g>
+        <g id="Group">
+          <g id="Shape" fill-rule="nonzero">
+            <path d="M 136.25 156.25 L 106.75 57.5 L 105.75 64 C 105.75 64 129.75 157.75 129.25 157.5 L 129.5 158 C 129.75 159.25 130.75 160.25 132 160.5 C 133.25 160.75 134.5 160.5 135.5 159.5 C 136.5 158.75 136.75 157.25 136.25 156.25 Z " fill="#CE8049" stroke-width="1"/>
+            <path d="M 131 157.75 C 132.5 157 133.25 155.25 132.75 153.75 L 105.75 64 L 104.25 74.25 L 129.25 157.5 C 129.75 157.75 130.5 158 131 157.75 Z " fill="#DB9463" stroke-width="1"/>
+            <path d="M 91.25 164.5 L 121.25 131.25 " stroke="#8E4639" stroke-width="4.825" fill="#FFFFFF" stroke-linecap="round" stroke-linejoin="round"/>
+          </g>
+          <path d="M 136.25 156.25 L 106.75 57.5 L 104.25 74.25 L 129.25 157.5 L 129.5 158 C 129.75 159.25 130.75 160.25 132 160.5 C 133.25 160.75 134.5 160.5 135.5 159.5 C 136.5 158.5 136.75 157.25 136.25 156.25 Z " id="Shape" stroke="#8E4639" stroke-width="1.2" stroke-linecap="round" stroke-linejoin="round" fill="none"/>
+          <path d="M 114.25 1.75 C 113.25 1.5 112.25 1.75 111.5 2.5 C 110.75 3 110.25 4 110 4.75 L 109.75 6.75 C 110.25 6.25 84 184 83.75 183.5 L 83.75 184 C 83.5 185.25 84 186.75 85 187.5 C 86 188.25 87.5 188.5 88.75 188 C 90 187.5 90.75 186.25 91 185 L 117.25 6 C 117.5 5 117.25 4 116.5 3.25 C 116 2.5 115.25 2 114.25 1.75 Z " id="Shape" fill="#CE8049" fill-rule="nonzero" stroke-width="1"/>
+          <path d="M 85.25 184.25 C 87 184.25 88.25 183 88.5 181.25 L 113.75 10 C 114 9.25 113.75 8.25 113.5 7.75 C 113.25 7.25 112.5 6.5 111.5 6.25 C 111 6.25 110.25 6.25 109.75 6.75 L 83.75 183.25 C 84 183.75 84.5 184 85.25 184.25 Z " id="Shape" fill="#DB9463" fill-rule="nonzero" stroke-width="1"/>
+          <path d="M 114.25 1.75 C 113.25 1.5 112.25 1.75 111.5 2.5 C 110.75 3 110.25 4 110 4.75 L 109.75 6.75 L 83.75 183.5 L 83.75 184 C 83.5 185.25 84 186.75 85 187.5 C 86 188.25 87.5 188.5 88.75 188 C 90 187.5 90.75 186.25 91 185 L 117.25 6 C 117.5 5 117.25 4 116.5 3.25 C 116 2.5 115.25 2 114.25 1.75 Z " id="Shape" stroke="#8E4639" stroke-width="1.2" stroke-linecap="round" stroke-linejoin="round" fill="none"/>
+        </g>
+      </g>
+    </g>
+  </g>
+</svg>

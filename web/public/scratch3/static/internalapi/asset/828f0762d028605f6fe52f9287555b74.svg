@@ -1,0 +1,187 @@
+<svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="102.2001953125" height="77.34000396728516" viewBox="0.899899959564209 0.10000002384185791 102.2001953125 77.34000396728516" version="1.1" xml:space="preserve">
+  <!-- Generator: Sketch 50.2 (55047) - http://www.bohemiancoding.com/sketch -->
+  <defs/>
+  <g>
+    <title>Slice 1</title>
+    <desc>Created with Sketch.</desc>
+    <g id="Page-1" stroke="none" fill-rule="evenodd">
+      <g id="MediaLab_Sprites_Room_Radio-01">
+        <g id="Handle" fill-rule="nonzero">
+          <polygon id="Shape" stroke="#1C9B47" fill="#1C9B47" points="87.08 0.1 0.9 0.1 0.9 17.38 1.76 17.38 1.76 1.14 86.22 1.14 86.22 17.38 87.08 17.38" stroke-width="2" transform="matrix(1,0,0,1,8,1)"/>
+          <polygon id="Shape" stroke="#007C2C" fill="#007C2C" points="1.76 1.14 1.76 17.38 3.78 17.38 3.78 3.08 84.22 3.08 84.22 17.38 86.22 17.38 86.22 1.14" stroke-width="2" transform="matrix(1,0,0,1,8,1)"/>
+        </g>
+        <g id="Background-Colors">
+          <path d="M 2.46 19.84 C 2.0902 20.382 1.8949 21.0239 1.9 21.68 L 1.8999 33.28 L 102.1001 33.28 L 102.1 21.68 C 102.1051 21.0239 101.9098 20.382 101.54 19.84 L 2.46 19.84 Z " id="Shape" fill="#FFDB48" fill-rule="nonzero" stroke-width="1"/>
+          <path d="M 98.8 18.38 L 5.2 18.38 C 4.1022 18.3868 3.0779 18.9326 2.46 19.84 L 101.54 19.84 C 100.9221 18.9326 99.8978 18.3868 98.8 18.38 Z " id="Shape" fill="#FFED9F" fill-rule="nonzero" stroke-width="1"/>
+          <path d="M 102.1 73.14 L 102.1 33.28 L 2 33.28 L 2 73.14 C 2.0031 73.5795 2.0914 74.0141 2.26 74.42 L 101.84 74.42 C 102.0086 74.0141 102.0969 73.5795 102.1 73.14 Z " id="Shape" fill="#D2A6CC" fill-rule="nonzero" stroke-width="1"/>
+          <path d="M 2.16 74.42 C 2.6852 75.6321 3.879 76.4175 5.2 76.42 L 98.8 76.42 C 100.121 76.4175 101.3148 75.6321 101.84 74.42 L 2.16 74.42 Z " id="Shape" fill="#9F509E" fill-rule="nonzero" stroke-width="1"/>
+          <path d="M 5.98 46.64 L 6.58 48.18 " id="Shape" stroke="#CA90C7" stroke-width="0.5" stroke-linecap="round" stroke-linejoin="round" fill="none"/>
+          <path d="M 37.6 47.96 L 36.16 49.22 " id="Shape" stroke="#CA90C7" stroke-width="0.5" stroke-linecap="round" stroke-linejoin="round" fill="none"/>
+          <path d="M 28.54 42.36 L 29.5 43.36 " id="Shape" stroke="#CA90C7" stroke-width="0.5" stroke-linecap="round" stroke-linejoin="round" fill="none"/>
+          <path d="M 31.12 71.82 L 29.34 72.68 " id="Shape" stroke="#CA90C7" stroke-width="0.5" stroke-linecap="round" stroke-linejoin="round" fill="none"/>
+          <path d="M 8.12 72.24 L 8.42 70.94 " id="Shape" stroke="#CA90C7" stroke-width="0.5" stroke-linecap="round" stroke-linejoin="round" fill="none"/>
+          <path d="M 4.38 60.8 L 4.38 59.04 " id="Shape" stroke="#CA90C7" stroke-width="0.5" stroke-linecap="round" stroke-linejoin="round" fill="none"/>
+          <path d="M 36.7 65.08 L 36.04 66.82 " id="Shape" stroke="#CA90C7" stroke-width="0.5" stroke-linecap="round" stroke-linejoin="round" fill="none"/>
+          <path d="M 70.62 45.76 L 71.42 44.36 " id="Shape" stroke="#CA90C7" stroke-width="0.5" stroke-linecap="round" stroke-linejoin="round" fill="none"/>
+          <path d="M 94.86 43.92 L 95.48 45.32 " id="Shape" stroke="#CA90C7" stroke-width="0.5" stroke-linecap="round" stroke-linejoin="round" fill="none"/>
+          <path d="M 99 66.38 L 97.72 67.28 " id="Shape" stroke="#CA90C7" stroke-width="0.5" stroke-linecap="round" stroke-linejoin="round" fill="none"/>
+          <path d="M 92.02 72.58 L 93.6 72.58 " id="Shape" stroke="#CA90C7" stroke-width="0.5" stroke-linecap="round" stroke-linejoin="round" fill="none"/>
+          <path d="M 74.2 72.4 L 73.04 71.06 " id="Shape" stroke="#CA90C7" stroke-width="0.5" stroke-linecap="round" stroke-linejoin="round" fill="none"/>
+          <path d="M 67.72 63.2 L 67.72 65.04 " id="Shape" stroke="#CA90C7" stroke-width="0.5" stroke-linecap="round" stroke-linejoin="round" fill="none"/>
+          <path d="M 67.18 51.64 L 68.26 53.26 " id="Shape" stroke="#CA90C7" stroke-width="0.5" stroke-linecap="round" stroke-linejoin="round" fill="none"/>
+          <path d="M 13.9 42.86 L 15.76 42.86 " id="Shape" stroke="#CA90C7" stroke-width="0.5" stroke-linecap="round" stroke-linejoin="round" fill="none"/>
+        </g>
+        <g id="Top-Buttons">
+          <rect id="Rectangle-path" fill="#C9E2B3" fill-rule="nonzero" x="0.56" y="3.46" width="5.86" height="2" stroke-width="1" transform="matrix(1,0,0,1,16,13)"/>
+          <rect id="Rectangle-path" fill="#FFFFFF" fill-rule="nonzero" x="0.56" y="1.54" width="5.86" height="2" stroke-width="1" transform="matrix(1,0,0,1,16,13)"/>
+          <rect id="Rectangle-path" fill="#FFFFFF" fill-rule="nonzero" x="8.5" y="1.54" width="5.86" height="2" stroke-width="1" transform="matrix(1,0,0,1,16,13)"/>
+          <rect id="Rectangle-path" fill="#C9E2B3" fill-rule="nonzero" x="8.5" y="3.46" width="5.86" height="2" stroke-width="1" transform="matrix(1,0,0,1,16,13)"/>
+          <rect id="Rectangle-path" fill="#C9E2B3" fill-rule="nonzero" x="20.88" y="3.46" width="5.86" height="2" stroke-width="1" transform="matrix(1,0,0,1,16,13)"/>
+          <rect id="Rectangle-path" fill="#FFFFFF" fill-rule="nonzero" x="20.88" y="1.54" width="5.86" height="2" stroke-width="1" transform="matrix(1,0,0,1,16,13)"/>
+          <rect id="Rectangle-path" fill="#C9E2B3" fill-rule="nonzero" x="28.82" y="3.46" width="5.86" height="2" stroke-width="1" transform="matrix(1,0,0,1,16,13)"/>
+          <rect id="Rectangle-path" fill="#FFFFFF" fill-rule="nonzero" x="28.82" y="1.54" width="5.86" height="2" stroke-width="1" transform="matrix(1,0,0,1,16,13)"/>
+          <rect id="Rectangle-path" fill="#FFFFFF" fill-rule="nonzero" x="36.7" y="3.46" width="5.86" height="2" stroke-width="1" transform="matrix(1,0,0,1,16,13)"/>
+          <rect id="Rectangle-path" fill="#C9E2B3" fill-rule="nonzero" x="44.64" y="3.46" width="5.86" height="2" stroke-width="1" transform="matrix(1,0,0,1,16,13)"/>
+          <rect id="Rectangle-path" fill="#FFFFFF" fill-rule="nonzero" x="44.64" y="1.54" width="5.86" height="2" stroke-width="1" transform="matrix(1,0,0,1,16,13)"/>
+          <rect id="Rectangle-path" fill="#FFFFFF" fill-rule="nonzero" x="57.62" y="1.54" width="5.86" height="2" stroke-width="1" transform="matrix(1,0,0,1,16,13)"/>
+          <rect id="Rectangle-path" fill="#C9E2B3" fill-rule="nonzero" x="57.62" y="3.46" width="5.86" height="2" stroke-width="1" transform="matrix(1,0,0,1,16,13)"/>
+          <rect id="Rectangle-path" fill="#FFFFFF" fill-rule="nonzero" x="65.54" y="1.54" width="5.86" height="2" stroke-width="1" transform="matrix(1,0,0,1,16,13)"/>
+          <rect id="Rectangle-path" fill="#C9E2B3" fill-rule="nonzero" x="65.54" y="3.46" width="5.86" height="2" stroke-width="1" transform="matrix(1,0,0,1,16,13)"/>
+          <polygon id="Shape" stroke="#149948" stroke-width="0.5" stroke-linecap="round" stroke-linejoin="round" points="0.56 3.46 0.56 5.38 6.42 5.38 6.42 3.46 6.42 1.54 0.56 1.54" fill="none" transform="matrix(1,0,0,1,16,13)"/>
+          <polygon id="Shape" stroke="#149948" stroke-width="0.5" stroke-linecap="round" stroke-linejoin="round" points="8.48 3.46 8.48 5.38 14.36 5.38 14.36 3.46 14.36 1.54 8.48 1.54" fill="none" transform="matrix(1,0,0,1,16,13)"/>
+          <polygon id="Shape" stroke="#149948" stroke-width="0.5" stroke-linecap="round" stroke-linejoin="round" points="20.88 3.46 20.88 5.38 26.74 5.38 26.74 3.46 26.74 1.54 20.88 1.54" fill="none" transform="matrix(1,0,0,1,16,13)"/>
+          <polygon id="Shape" stroke="#149948" stroke-width="0.5" stroke-linecap="round" stroke-linejoin="round" points="28.82 3.46 28.82 5.38 34.68 5.38 34.68 3.46 34.68 1.54 28.82 1.54" fill="none" transform="matrix(1,0,0,1,16,13)"/>
+          <rect id="Rectangle-path" stroke="#149948" stroke-width="0.5" stroke-linecap="round" stroke-linejoin="round" x="36.7" y="3.46" width="5.86" height="2" fill="none" transform="matrix(1,0,0,1,16,13)"/>
+          <polygon id="Shape" stroke="#149948" stroke-width="0.5" stroke-linecap="round" stroke-linejoin="round" points="44.64 3.46 44.64 5.38 50.5 5.38 50.5 3.46 50.5 1.54 44.64 1.54" fill="none" transform="matrix(1,0,0,1,16,13)"/>
+          <polygon id="Shape" stroke="#149948" stroke-width="0.5" stroke-linecap="round" stroke-linejoin="round" points="57.62 3.46 57.62 5.38 63.48 5.38 63.48 3.46 63.48 1.54 57.62 1.54" fill="none" transform="matrix(1,0,0,1,16,13)"/>
+          <polygon id="Shape" stroke="#149948" stroke-width="0.5" stroke-linecap="round" stroke-linejoin="round" points="65.54 1.54 65.54 3.46 65.54 5.38 71.4 5.38 71.4 3.46 71.4 1.54" fill="none" transform="matrix(1,0,0,1,16,13)"/>
+        </g>
+        <g id="White-Panel">
+          <rect id="Rectangle-path" stroke="#5E154D" stroke-width="0.72" fill="#FFFFFF" fill-rule="nonzero" x="1.28" y="1.14" width="68.84" height="7.46" transform="matrix(1,0,0,1,16,21)"/>
+          <path d="M 41.02 24.76 L 82.08 24.76 " id="Shape" stroke="#5E154D" stroke-width="0.5" fill="none"/>
+          <path d="M 41.02 27.02 L 82.08 27.02 " id="Shape" stroke="#5E154D" stroke-width="0.5" fill="none"/>
+          <path d="M 61.56 22.14 L 61.56 29.62 " id="Shape" stroke="#5E154D" stroke-width="0.5" fill="none"/>
+          <g id="Group-2" fill-rule="nonzero">
+            <rect id="Rectangle-path" stroke="#007C2C" fill="#007C2C" x="1.66" y="1.76" width="3.5" height="2.26" stroke-width="2" transform="matrix(1,0,0,1,20,23)"/>
+            <rect id="Rectangle-path" stroke="#F05822" fill="#F05822" x="5.16" y="1.76" width="3.38" height="2.26" stroke-width="2" transform="matrix(1,0,0,1,20,23)"/>
+            <rect id="Rectangle-path" stroke="#007C2C" fill="#007C2C" x="8.54" y="1.76" width="3.38" height="2.26" stroke-width="2" transform="matrix(1,0,0,1,20,23)"/>
+            <rect id="Rectangle-path" stroke="#F05822" fill="#F05822" x="11.92" y="1.76" width="3.5" height="2.26" stroke-width="2" transform="matrix(1,0,0,1,20,23)"/>
+          </g>
+        </g>
+        <g id="Left-Orange-Speaker" stroke-linecap="round" stroke-linejoin="round" stroke="#F05822">
+          <circle id="Oval" stroke-width="0.96" fill="#FFFFFF" fill-rule="nonzero" cx="5.62" cy="6.88" r="4.92" transform="matrix(1,0,0,1,4,19)"/>
+          <path d="M 5.06 27.68 L 11.42 21.34 " id="Shape" stroke-width="0.5" fill="none"/>
+          <path d="M 6.34 28.96 L 12.68 22.62 " id="Shape" stroke-width="0.5" fill="none"/>
+          <path d="M 7.58 30.2 L 13.92 23.84 " id="Shape" stroke-width="0.5" fill="none"/>
+          <path d="M 14.16 27.92 L 7.82 21.58 " id="Shape" stroke-width="0.5" fill="none"/>
+          <path d="M 12.88 29.2 L 6.54 22.86 " id="Shape" stroke-width="0.5" fill="none"/>
+          <path d="M 11.66 30.44 L 5.3 24.08 " id="Shape" stroke-width="0.5" fill="none"/>
+          <circle id="Oval" stroke-width="0.5" cx="5.62" cy="6.88" r="3.64" fill="none" transform="matrix(1,0,0,1,4,19)"/>
+        </g>
+        <g id="Right-orange-speaker" stroke-linecap="round" stroke-linejoin="round" stroke="#F05822">
+          <circle id="Oval" stroke-width="0.96" fill="#FFFFFF" fill-rule="nonzero" cx="6.08" cy="6.88" r="4.92" transform="matrix(1,0,0,1,88,19)"/>
+          <circle id="Oval" stroke-width="0.5" cx="6.08" cy="6.88" r="3.64" fill="none" transform="matrix(1,0,0,1,88,19)"/>
+          <path d="M 89.52 27.68 L 95.88 21.34 " id="Shape" stroke-width="0.5" fill="none"/>
+          <path d="M 90.8 28.96 L 97.14 22.62 " id="Shape" stroke-width="0.5" fill="none"/>
+          <path d="M 92.04 30.2 L 98.38 23.84 " id="Shape" stroke-width="0.5" fill="none"/>
+          <path d="M 98.62 27.92 L 92.28 21.58 " id="Shape" stroke-width="0.5" fill="none"/>
+          <path d="M 97.36 29.2 L 91 22.86 " id="Shape" stroke-width="0.5" fill="none"/>
+          <path d="M 96.12 30.44 L 89.76 24.08 " id="Shape" stroke-width="0.5" fill="none"/>
+        </g>
+        <g id="Left-Speaker">
+          <circle id="Oval" fill="#CA90C7" fill-rule="nonzero" cx="17.02" cy="16.8" r="14.44" stroke-width="1" transform="matrix(1,0,0,1,4,41)"/>
+          <circle id="Oval" stroke="#EAC5DD" stroke-width="0.5" fill="#EAC5DD" fill-rule="nonzero" stroke-linecap="round" stroke-linejoin="round" cx="17.02" cy="16.8" r="11.68" transform="matrix(1,0,0,1,4,41)"/>
+          <g id="Group" stroke-linecap="round" stroke-linejoin="round" stroke="#9F509E">
+            <path d="M 5.64 61.38 L 24.7 42.32 " id="Shape" stroke-width="0.72" fill="none"/>
+            <path d="M 8 63.78 L 27.06 44.72 " id="Shape" stroke-width="0.72" fill="none"/>
+            <path d="M 10.36 66.18 L 29.44 47.1 " id="Shape" stroke-width="0.72" fill="none"/>
+            <path d="M 12.72 68.56 L 31.8 49.5 " id="Shape" stroke-width="0.72" fill="none"/>
+            <path d="M 15.08 70.96 L 34.16 51.9 " id="Shape" stroke-width="0.72" fill="none"/>
+            <path d="M 17.46 73.36 L 36.52 54.28 " id="Shape" stroke-width="0.72" fill="none"/>
+            <path d="M 24.62 73.28 L 5.56 54.2 " id="Shape" stroke-width="0.72" fill="none"/>
+            <path d="M 27.02 70.92 L 7.96 51.84 " id="Shape" stroke-width="0.72" fill="none"/>
+            <path d="M 29.42 68.56 L 10.34 49.48 " id="Shape" stroke-width="0.72" fill="none"/>
+            <path d="M 31.8 66.18 L 12.74 47.12 " id="Shape" stroke-width="0.72" fill="none"/>
+            <path d="M 34.2 63.82 L 15.14 44.76 " id="Shape" stroke-width="0.72" fill="none"/>
+            <path d="M 36.6 61.46 L 17.52 42.4 " id="Shape" stroke-width="0.72" fill="none"/>
+          </g>
+          <circle id="Oval" stroke="#5E154D" stroke-width="0.96" stroke-linecap="round" stroke-linejoin="round" cx="17.02" cy="16.8" r="11.68" fill="none" transform="matrix(1,0,0,1,4,41)"/>
+        </g>
+        <g id="Left-Speaker">
+          <g id="Group" stroke-linecap="round" stroke-linejoin="round" stroke="#9F509E">
+            <path d="M 67.64 61.38 L 86.7 42.32 " id="Shape" stroke-width="0.72" fill="none"/>
+            <path d="M 70 63.78 L 89.06 44.72 " id="Shape" stroke-width="0.72" fill="none"/>
+            <path d="M 72.36 66.18 L 91.44 47.1 " id="Shape" stroke-width="0.72" fill="none"/>
+            <path d="M 74.72 68.56 L 93.8 49.5 " id="Shape" stroke-width="0.72" fill="none"/>
+            <path d="M 77.08 70.96 L 96.16 51.9 " id="Shape" stroke-width="0.72" fill="none"/>
+            <path d="M 79.46 73.36 L 98.52 54.28 " id="Shape" stroke-width="0.72" fill="none"/>
+            <path d="M 86.62 73.28 L 67.56 54.2 " id="Shape" stroke-width="0.72" fill="none"/>
+            <path d="M 89.02 70.92 L 69.96 51.84 " id="Shape" stroke-width="0.72" fill="none"/>
+            <path d="M 91.42 68.56 L 72.34 49.48 " id="Shape" stroke-width="0.72" fill="none"/>
+            <path d="M 93.8 66.18 L 74.74 47.12 " id="Shape" stroke-width="0.72" fill="none"/>
+            <path d="M 96.2 63.82 L 77.14 44.76 " id="Shape" stroke-width="0.72" fill="none"/>
+            <path d="M 98.6 61.46 L 79.52 42.4 " id="Shape" stroke-width="0.72" fill="none"/>
+          </g>
+          <circle id="Oval" fill="#CA90C7" fill-rule="nonzero" cx="17.02" cy="16.8" r="14.44" stroke-width="1" transform="matrix(1,0,0,1,66,41)"/>
+          <circle id="Oval" stroke="#EAC5DD" stroke-width="0.5" fill="#EAC5DD" fill-rule="nonzero" stroke-linecap="round" stroke-linejoin="round" cx="17.02" cy="16.8" r="11.68" transform="matrix(1,0,0,1,66,41)"/>
+          <g id="Group" stroke-linecap="round" stroke-linejoin="round" stroke="#9F509E">
+            <path d="M 68.04 61.38 L 87.12 42.32 " id="Shape" stroke-width="0.72" fill="none"/>
+            <path d="M 70.4 63.78 L 89.48 44.72 " id="Shape" stroke-width="0.72" fill="none"/>
+            <path d="M 72.78 66.18 L 91.84 47.1 " id="Shape" stroke-width="0.72" fill="none"/>
+            <path d="M 75.14 68.56 L 94.2 49.5 " id="Shape" stroke-width="0.72" fill="none"/>
+            <path d="M 77.5 70.96 L 96.56 51.9 " id="Shape" stroke-width="0.72" fill="none"/>
+            <path d="M 79.86 73.36 L 98.92 54.28 " id="Shape" stroke-width="0.72" fill="none"/>
+            <path d="M 87.04 73.28 L 67.96 54.2 " id="Shape" stroke-width="0.72" fill="none"/>
+            <path d="M 89.44 70.92 L 70.36 51.84 " id="Shape" stroke-width="0.72" fill="none"/>
+            <path d="M 91.82 68.56 L 72.76 49.48 " id="Shape" stroke-width="0.72" fill="none"/>
+            <path d="M 94.22 66.18 L 75.14 47.12 " id="Shape" stroke-width="0.72" fill="none"/>
+            <path d="M 96.62 63.82 L 77.54 44.76 " id="Shape" stroke-width="0.72" fill="none"/>
+            <path d="M 99 61.46 L 79.94 42.4 " id="Shape" stroke-width="0.72" fill="none"/>
+          </g>
+          <circle id="Oval" stroke="#5E154D" stroke-width="0.96" stroke-linecap="round" stroke-linejoin="round" cx="17.02" cy="16.8" r="11.68" fill="none" transform="matrix(1,0,0,1,66,41)"/>
+        </g>
+        <g id="Purple-Vents">
+          <rect id="Rectangle-path" stroke="#EAC5DD" stroke-width="0.5" fill="#EAC5DD" fill-rule="nonzero" x="0.56" y="0.86" width="28.88" height="4.5" transform="matrix(1,0,0,1,6,35)"/>
+          <rect id="Rectangle-path" stroke="#EC2777" stroke-width="0.5" fill="#EAC5DD" fill-rule="nonzero" x="63.14" y="0.86" width="28.88" height="4.5" transform="matrix(1,0,0,1,6,35)"/>
+          <rect id="Rectangle-path" stroke="#9F509E" stroke-width="0.72" x="63.14" y="0.92" width="28.88" height="4.5" fill="none" transform="matrix(1,0,0,1,6,35)"/>
+          <path d="M 6.56 37.36 L 35.44 37.36 " id="Shape" stroke="#9F509E" stroke-width="0.5" fill="none"/>
+          <path d="M 6.58 38.88 L 35.44 38.88 " id="Shape" stroke="#9F509E" stroke-width="0.5" fill="none"/>
+          <path d="M 69.14 37.36 L 98.02 37.36 " id="Shape" stroke="#9F509E" stroke-width="0.5" fill="none"/>
+          <path d="M 69.14 38.88 L 98.02 38.88 " id="Shape" stroke="#9F509E" stroke-width="0.5" fill="none"/>
+          <rect id="Rectangle-path" stroke="#9F509E" stroke-width="0.72" x="0.56" y="0.86" width="28.88" height="4.5" fill="none" transform="matrix(1,0,0,1,6,35)"/>
+        </g>
+        <g id="Center-Panel">
+          <rect id="Rectangle-path" stroke="#5E154D" stroke-width="0.96" fill="#5E154D" fill-rule="nonzero" stroke-linecap="round" stroke-linejoin="round" x="4.5" y="12.96" width="20.3" height="10.6" transform="matrix(1,0,0,1,38,35)"/>
+          <rect id="Rectangle-path" fill="#FFDB48" fill-rule="nonzero" x="2.06" y="0.92" width="25.3" height="9.66" stroke-width="1" transform="matrix(1,0,0,1,38,35)"/>
+          <rect id="Rectangle-path" fill="#007C2C" fill-rule="nonzero" x="2.06" y="26.52" width="25.3" height="11.06" stroke-width="1" transform="matrix(1,0,0,1,38,35)"/>
+          <rect id="Rectangle-path" x="2.06" y="10.58" width="25.3" height="15.96" stroke-width="1" fill="none" transform="matrix(1,0,0,1,38,35)"/>
+          <polygon id="Shape" stroke="#5E154D" stroke-width="0.72" fill="#5E154D" fill-rule="nonzero" stroke-linecap="round" stroke-linejoin="round" points="29.18 41.44 0.12 41.44 2.06 37.6 27.36 37.6" transform="matrix(1,0,0,1,38,35)"/>
+          <rect id="Rectangle-path" fill="#F05822" fill-rule="nonzero" x="2.06" y="0.92" width="25.3" height="9.66" stroke-width="1" transform="matrix(1,0,0,1,38,35)"/>
+          <polygon id="Shape" stroke="#5E154D" stroke-width="0.72" stroke-linecap="round" stroke-linejoin="round" points="2.06 0.92 2.06 10.58 2.06 26.54 2.06 37.6 27.36 37.6 27.36 26.54 27.36 10.58 27.36 0.92" fill="none" transform="matrix(1,0,0,1,38,35)"/>
+          <rect id="Rectangle-path" stroke="#5E154D" stroke-width="0.72" fill="#FFDB48" fill-rule="nonzero" stroke-linecap="round" stroke-linejoin="round" x="4.5" y="3.68" width="20.3" height="4.5" transform="matrix(1,0,0,1,38,35)"/>
+          <path d="M 44.84 40 L 44.84 41.86 " id="Shape" stroke="#5E154D" stroke-width="0.5" stroke-linecap="round" stroke-linejoin="round" fill="none"/>
+          <path d="M 50.08 40 L 50.08 41.86 " id="Shape" stroke="#5E154D" stroke-width="0.5" stroke-linecap="round" stroke-linejoin="round" fill="none"/>
+          <path d="M 55.32 40 L 55.32 41.86 " id="Shape" stroke="#5E154D" stroke-width="0.5" stroke-linecap="round" stroke-linejoin="round" fill="none"/>
+          <path d="M 60.56 40 L 60.56 41.86 " id="Shape" stroke="#5E154D" stroke-width="0.5" stroke-linecap="round" stroke-linejoin="round" fill="none"/>
+          <path d="M 42.5 40.92 L 62.8 40.92 " id="Shape" stroke="#5E154D" stroke-width="0.5" stroke-linecap="round" stroke-linejoin="round" fill="none"/>
+          <g id="Tape-Buttons" stroke-linecap="round" stroke-linejoin="round" stroke="#5E154D">
+            <rect id="Rectangle-path" fill="#FFFFFF" fill-rule="nonzero" x="0.5" y="0.98" width="20.3" height="3.02" stroke-width="0.72" transform="matrix(1,0,0,1,42,63)"/>
+            <rect id="Rectangle-path" fill="#FFDB48" fill-rule="nonzero" x="0.5" y="4" width="20.3" height="3.02" stroke-width="0.72" transform="matrix(1,0,0,1,42,63)"/>
+            <path d="M 47.66 63.96 L 47.66 67 " id="Shape" stroke-width="0.72" fill="none"/>
+            <path d="M 57.62 63.96 L 57.62 67 " id="Shape" stroke-width="0.72" fill="none"/>
+            <path d="M 52.64 63.96 L 52.64 67 " id="Shape" stroke-width="0.72" fill="none"/>
+          </g>
+          <path d="M 47.42 56.04 C 45.8846 56.04 44.64 54.7954 44.64 53.26 C 44.64 51.7246 45.8846 50.48 47.42 50.48 C 48.9554 50.48 50.2 51.7246 50.2 53.26 C 50.2 54.7954 48.9554 56.04 47.42 56.04 Z M 52 53.26 L 53.28 53.26 L 52 53.26 Z " id="Oval" stroke="#FFFFFF" stroke-width="0.72" stroke-linecap="round" stroke-linejoin="round" fill="none"/>
+          <circle id="Oval" stroke="#FFFFFF" stroke-width="0.72" stroke-linecap="round" stroke-linejoin="round" cx="19.88" cy="18.26" r="2.78" fill="none" transform="matrix(1,0,0,1,38,35)"/>
+          <circle id="Oval" stroke="#FFFFFF" stroke-width="0.5" fill="#FFFFFF" fill-rule="nonzero" stroke-linecap="round" stroke-linejoin="round" cx="9.42" cy="18.26" r="2" transform="matrix(1,0,0,1,38,35)"/>
+          <circle id="Oval" stroke="#FFFFFF" stroke-width="0.5" fill="#FFFFFF" fill-rule="nonzero" stroke-linecap="round" stroke-linejoin="round" cx="19.88" cy="18.26" r="2" transform="matrix(1,0,0,1,38,35)"/>
+        </g>
+        <g id="Reflection" stroke-linecap="round" stroke-linejoin="round" stroke="#FFFFFF">
+          <path d="M 99.98 58.74 L 99.98 61.1 " id="Shape" stroke-width="0.96" fill="none"/>
+          <path d="M 99.98 42.24 L 99.98 56.76 " id="Shape" stroke-width="0.96" fill="none"/>
+        </g>
+        <path d="M 98.8 18.38 L 5.2 18.38 C 3.4166 18.4341 1.9992 19.8958 2 21.68 L 2 73.14 C 2 74.9625 3.4775 76.44 5.3 76.44 L 98.8 76.44 C 99.6752 76.44 100.5146 76.0923 101.1335 75.4735 C 101.7523 74.8546 102.1 74.0152 102.1 73.14 L 102.1 21.68 C 102.1 19.8575 100.6225 18.38 98.8 18.38 Z " id="Shape" stroke="#5E154D" stroke-width="0.96" stroke-linecap="round" stroke-linejoin="round" fill="none"/>
+      </g>
+    </g>
+  </g>
+</svg>

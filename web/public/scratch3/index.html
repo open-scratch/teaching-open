@@ -50,16 +50,73 @@
 
     window.scratchConfig = {
       logo: {
-        show: true
-        , url: "/logo.png"
-        , handleClickLogo: () => {
+        show: true, 
+        url: "/logo.png",
+        handleClickLogo: () => {
           window.open("/")
         }
-      }
-      , menuBar: {
-        color: 'hsla(215, 100%, 65%, 1)'
-      }
-      , shareButton: {
+      }, 
+      stageArea: {
+        scale: 1,
+        width: 480,
+        height: 360,
+        showControl: true,
+        showLoading: false,
+        fullscreenButton:{ //全屏按钮
+          show: true,
+          handleBeforeSetStageUnFull(){ //退出全屏前的操作
+            return true
+          },
+          handleBeforeSetStageFull(){ //全屏前的操作
+            return true
+          }
+        },
+        startButton:{ //开始按钮
+          show: true,
+          handleBeforeStart(){ //开始前的操作
+            return true
+          }
+        },
+        stopButton:{ // 停止按钮
+          show: true,
+          handleBeforeStop(){ //停止前的操作
+            return true
+          }
+        }
+      },
+      menuBar: {
+        color: 'hsla(215, 100%, 65%, 1)',
+        //新建按钮
+        newButton:{
+          show: true,
+          handleBefore(){
+            return true
+          }
+        },
+        //从计算机加载按钮
+        loadFileButton:{
+          show: true,
+          handleBefore(){
+            return true
+          }
+        },
+        //保存到计算机按钮
+        saveFileButton:{
+          show: true,
+          handleBefore(){
+            return true
+          }
+        },
+        //加速模式按钮
+        turboModeButton:{
+          show: true
+        },
+        //教程按钮
+        helpButton:{
+          show: true
+        }
+      },
+      shareButton: {
         show: "mine,create,course".indexOf(scene)>=0,
         buttonName: "提交",
         handleClick: () => {
@@ -118,8 +175,10 @@
           })
         }
       },
-      assetCDN: 'https://qn.wyxai.com' 
-      //若使用官方素材库请删除本配置项
+      //若使用官方素材库请删除本配置项,也可将素材上传至云存储
+      assetCDN: './static',
+      //默认项目地址
+      defaultProjectURL: "./static/project.sb3",
     }
 
     //上传文件
