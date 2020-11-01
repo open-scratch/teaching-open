@@ -97,7 +97,7 @@
   }
 </script>
 
-<style lang="scss" scoped>
+<style lang="less" scoped>
   .account-settings-info-main {
     width: 100%;
     display: flex;

@@ -62,7 +62,7 @@ export default {
   }
 }
 </script>
-<style lang="scss" scoped>
+<style lang="less" scoped>
 .video-area{
   video{
     width: 100%;
