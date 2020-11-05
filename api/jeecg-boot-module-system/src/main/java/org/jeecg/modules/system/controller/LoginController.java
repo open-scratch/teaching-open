@@ -54,7 +54,8 @@ public class LoginController {
 	@Autowired
     private ISysDictService sysDictService;
 
-	private static final String BASE_CHECK_CODES = "qwertyuiplkjhgfdsazxcvbnmQWERTYUPLKJHGFDSAZXCVBNM1234567890";
+//	private static final String BASE_CHECK_CODES = "qwertyuiplkjhgfdsazxcvbnmQWERTYUPLKJHGFDSAZXCVBNM1234567890";
+	private static final String BASE_CHECK_CODES = "1234567890";
 
 	@ApiOperation("登录接口")
 	@RequestMapping(value = "/login", method = RequestMethod.POST)
@@ -389,7 +390,7 @@ public class LoginController {
 			String code = RandomUtil.randomString(BASE_CHECK_CODES,4);
 			String lowerCaseCode = code.toLowerCase();
 			String realKey = MD5Util.MD5Encode(lowerCaseCode+key, "utf-8");
-			redisUtil.set(realKey, lowerCaseCode, 60);
+			redisUtil.set(realKey, lowerCaseCode, 600);
 			String base64 = RandImageUtil.generate(code);
 			res.setSuccess(true);
 			res.setResult(base64);

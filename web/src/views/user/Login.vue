@@ -9,7 +9,7 @@
           <a-form-item>
             <a-input
               size="large"
-              v-decorator="['username',{initialValue:'admin', rules: validatorRules.username.rules}]"
+              v-decorator="['username',{initialValue:'', rules: validatorRules.username.rules}]"
               type="text"
               placeholder="请输入帐户名">
               <a-icon slot="prefix" type="user" :style="{ color: 'rgba(0,0,0,.25)' }"/>
@@ -18,7 +18,7 @@
 
           <a-form-item>
             <a-input
-              v-decorator="['password',{initialValue:'123456', rules: validatorRules.password.rules}]"
+              v-decorator="['password',{initialValue:'', rules: validatorRules.password.rules}]"
               size="large"
               type="password"
               autocomplete="false"
