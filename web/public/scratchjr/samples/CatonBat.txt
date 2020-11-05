@@ -1,0 +1,424 @@
+[
+  {
+    "gallery": "samples",
+    "name": "Cat on Bat",
+    "version": "iOSv01",
+    "deleted": "NO",
+    "pos": 6,
+    "altmd5": "5399f5c93eb1263040000026",
+    "json": {
+      "currentPage": "page 1",
+      "page 3": {
+        "Text 3": {
+          "shown": true,
+          "w": 280,
+          "color": "rgb(143, 86, 227)",
+          "ycoor": 63,
+          "homex": 172,
+          "homey": 63,
+          "cy": 33,
+          "cx": 140,
+          "fontsize": 56,
+          "str": "Cat on Bat",
+          "h": 66,
+          "xcoor": 172,
+          "type": "text",
+          "id": "Text 3",
+          "speed": 2
+        },
+        "layers": [
+          "Bat 2",
+          "Cat 2",
+          "Text 3",
+          "Star 1"
+        ],
+        "lastSprite": "Cat 2",
+        "textstartat": 84.6,
+        "num": 3,
+        "Star 1": {
+          "homeflip": false,
+          "cy": 31,
+          "cx": 32,
+          "sounds": [
+            "pop.mp3"
+          ],
+          "speed": 2,
+          "id": "Star 1",
+          "shown": true,
+          "scale": 0.7,
+          "angle": 0,
+          "type": "sprite",
+          "scripts": [
+            [
+              [
+                "onclick",
+                "null",
+                235,
+                37
+              ],
+              [
+                "gotopage",
+                1,
+                308,
+                37
+              ]
+            ]
+          ],
+          "md5": "Star2.svg",
+          "name": "Star",
+          "ycoor": 324,
+          "homex": 429,
+          "homey": 324,
+          "flip": false,
+          "homescale": 0.7,
+          "w": 64,
+          "h": 63,
+          "xcoor": 429,
+          "homeshown": true,
+          "defaultScale": 0.5
+        },
+        "Cat 2": {
+          "homeflip": false,
+          "cy": 116,
+          "cx": 83,
+          "sounds": [
+            "pop.mp3"
+          ],
+          "speed": 4,
+          "id": "Cat 2",
+          "shown": true,
+          "scale": 0.5,
+          "angle": 0,
+          "type": "sprite",
+          "scripts": [
+            [
+              [
+                "onflag",
+                "null",
+                236,
+                32
+              ],
+              [
+                "setspeed",
+                2,
+                309,
+                32
+              ],
+              [
+                "forward",
+                6,
+                374,
+                32
+              ],
+              [
+                "back",
+                7,
+                439,
+                32
+              ],
+              [
+                "forward",
+                1,
+                504,
+                32
+              ]
+            ]
+          ],
+          "md5": "Cat.svg",
+          "name": "Cat",
+          "ycoor": 171,
+          "homex": 124,
+          "homey": 171,
+          "flip": false,
+          "homescale": 0.5,
+          "w": 166,
+          "h": 232,
+          "xcoor": 124,
+          "homeshown": true,
+          "defaultScale": 0.5
+        },
+        "sprites": [
+          "Cat 2",
+          "Bat 2",
+          "Text 3",
+          "Star 1"
+        ],
+        "Bat 2": {
+          "homeflip": false,
+          "cy": 42,
+          "cx": 87,
+          "sounds": [
+            "pop.mp3"
+          ],
+          "speed": 4,
+          "id": "Bat 2",
+          "shown": true,
+          "scale": 1.1,
+          "angle": 0,
+          "type": "sprite",
+          "scripts": [
+            [
+              [
+                "onflag",
+                "null",
+                240,
+                28
+              ],
+              [
+                "setspeed",
+                2,
+                313,
+                28
+              ],
+              [
+                "forward",
+                6,
+                378,
+                28
+              ],
+              [
+                "back",
+                7,
+                443,
+                28
+              ],
+              [
+                "forward",
+                1,
+                508,
+                28
+              ]
+            ]
+          ],
+          "md5": "Bat.svg",
+          "name": "Bat",
+          "ycoor": 240,
+          "homex": 173,
+          "homey": 240,
+          "flip": false,
+          "homescale": 1.1,
+          "w": 174,
+          "h": 85,
+          "xcoor": 173,
+          "homeshown": true,
+          "defaultScale": 0.5
+        }
+      },
+      "pages": [
+        "page 1",
+        "page 2",
+        "page 3"
+      ],
+      "page 1": {
+        "layers": [
+          "Text 1",
+          "Cat 1"
+        ],
+        "Text 1": {
+          "shown": true,
+          "w": 91,
+          "color": "rgb(13, 80, 171)",
+          "ycoor": 63,
+          "homex": 84,
+          "homey": 63,
+          "cy": 33,
+          "cx": 45.5,
+          "fontsize": 56,
+          "str": "Cat",
+          "h": 66,
+          "xcoor": 84,
+          "type": "text",
+          "id": "Text 1",
+          "speed": 2
+        },
+        "lastSprite": "Cat 1",
+        "textstartat": 84.6,
+        "num": 1,
+        "Cat 1": {
+          "homeflip": false,
+          "cy": 116,
+          "cx": 83,
+          "sounds": [
+            "pop.mp3"
+          ],
+          "speed": 2,
+          "id": "Cat 1",
+          "shown": true,
+          "scale": 0.7,
+          "angle": 0,
+          "type": "sprite",
+          "scripts": [
+            [
+              [
+                "onflag",
+                "null",
+                239,
+                46
+              ],
+              [
+                "left",
+                1,
+                312,
+                46
+              ],
+              [
+                "right",
+                2,
+                377,
+                46
+              ],
+              [
+                "left",
+                1,
+                442,
+                46
+              ],
+              [
+                "wait",
+                5,
+                507,
+                46
+              ],
+              [
+                "gotopage",
+                2,
+                572,
+                46
+              ]
+            ]
+          ],
+          "md5": "Cat.svg",
+          "name": "Cat",
+          "ycoor": 195,
+          "homex": 232,
+          "homey": 195,
+          "flip": false,
+          "homescale": 0.7,
+          "w": 166,
+          "h": 232,
+          "xcoor": 232,
+          "homeshown": true,
+          "defaultScale": 0.5
+        },
+        "sprites": [
+          "Text 1",
+          "Cat 1"
+        ]
+      },
+      "page 2": {
+        "layers": [
+          "Bat 1",
+          "Text 2"
+        ],
+        "Text 2": {
+          "shown": true,
+          "w": 91,
+          "color": "rgb(196, 40, 27)",
+          "ycoor": 60,
+          "homex": 342,
+          "homey": 60,
+          "cy": 33,
+          "cx": 45.5,
+          "fontsize": 56,
+          "str": "Bat",
+          "h": 66,
+          "xcoor": 342,
+          "type": "text",
+          "id": "Text 2",
+          "speed": 2
+        },
+        "lastSprite": "Bat 1",
+        "textstartat": 84.6,
+        "sprites": [
+          "Bat 1",
+          "Text 2"
+        ],
+        "num": 2,
+        "Bat 1": {
+          "homeflip": true,
+          "cy": 42,
+          "cx": 87,
+          "sounds": [
+            "pop.mp3"
+          ],
+          "speed": 2,
+          "id": "Bat 1",
+          "shown": true,
+          "scale": 1.2,
+          "angle": 0,
+          "type": "sprite",
+          "scripts": [
+            [
+              [
+                "onflag",
+                "null",
+                232,
+                30
+              ],
+              [
+                "hop",
+                3,
+                305,
+                30
+              ],
+              [
+                "hop",
+                3,
+                370,
+                30
+              ]
+            ],
+            [
+              [
+                "onflag",
+                "null",
+                497,
+                36
+              ],
+              [
+                "forward",
+                3,
+                570,
+                36
+              ],
+              [
+                "back",
+                3,
+                635,
+                36
+              ],
+              [
+                "wait",
+                5,
+                700,
+                36
+              ],
+              [
+                "gotopage",
+                3,
+                765,
+                36
+              ]
+            ]
+          ],
+          "md5": "Bat.svg",
+          "name": "Bat",
+          "ycoor": 189,
+          "homex": 218,
+          "homey": 189,
+          "flip": true,
+          "homescale": 1.2,
+          "w": 174,
+          "h": 85,
+          "xcoor": 218,
+          "homeshown": true,
+          "defaultScale": 0.5
+        }
+      }
+    },
+    "thumbnail": {
+      "pagecount": 3,
+      "md5": "samples/CatonBat.png"
+    }
+  }
+]

@@ -72,8 +72,8 @@
 
         <span slot="action" slot-scope="text, record">
           <a @click="handleView(record)">查看</a>
-          <a-divider type="vertical" />
-          <a-popover trigger="click">
+          <a-divider type="vertical" v-if="record.workType==1||record.workType==2"/>
+          <a-popover trigger="click" v-if="record.workType==1||record.workType==2">
             <template slot="content">
               <qrcode :value="url.shareUrl + record.id" :size="250"></qrcode>
             </template>
@@ -181,7 +181,19 @@ export default {
   computed: {},
   methods: {
     handleView: function(record) {
-      window.open('/scratch3/index.html?workId=' + record.id)
+      switch(record.workType){
+        case '1':
+          window.open( '/scratch3/index.html?workId='+record.id)
+          break;
+        case '2':
+          return window.open('/scratch3/index.html?workId='+record.id)
+          break;
+        case '3':
+          return window.open('/scratchjr/editor.html?mode=edit&filepath=' + record.workFileUrl)
+          break;
+        default:
+          return window.open(record.workFileUrl)
+      }
     }
   }
 }

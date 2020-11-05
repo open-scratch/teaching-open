@@ -98,16 +98,15 @@
 
         <span slot="action" slot-scope="text, record">
           <a @click="handleEdit(record)">编辑</a>
+          <a-divider type="vertical" v-if="record.workType==1||record.workType==2"/>
+          <a @click="handlePreview(record)" v-if="record.workType==1||record.workType==2">预览</a>
           <a-divider type="vertical" />
-          <a @click="handlePreview(record)">预览</a>
-          <a-divider type="vertical" />
-          <a :href="'/scratch3/index.html?scene=twl&workId='+record.id" target="_blank">查看代码</a>
-
+          <a @click="handleView(record)">查看</a>
           <a-divider type="vertical" />
           <a-dropdown>
             <a class="ant-dropdown-link">更多 <a-icon type="down" /></a>
             <a-menu slot="overlay">
-              <a-menu-item>
+              <a-menu-item v-if="record.workType==1||record.workType==2">
                 <a-popover trigger="click">
                 <template slot="content">
                   <qrcode :value="url.shareUrl + record.id" :size="250"></qrcode>
@@ -261,6 +260,21 @@
       },
       download(url){
         window.open(url)
+      },
+      handleView: function(record) {
+        switch(record.workType){
+          case '1':
+            window.open( '/scratch3/index.html?workId='+record.id)
+            break;
+          case '2':
+            return window.open('/scratch3/index.html?workId='+record.id)
+            break;
+          case '3':
+            return window.open('/scratchjr/editor.html?mode=edit&filepath=' + record.workFileUrl)
+            break;
+          default:
+            return window.open(record.workFileUrl)
+        }
       }
     }
   }

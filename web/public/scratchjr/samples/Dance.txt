@@ -1,0 +1,164 @@
+[{
+    "gallery": "samples",
+    "version": "iOSv01",
+    "thumbnail": {
+        "pagecount": 3,
+        "md5": "samples/Dance.png"
+    },
+    "ctime": "2016-01-15 19:10:25",
+    "deleted": "NO",
+    "mtime": "1452886841634",
+    "name": "Dance",
+    "id": "3",
+    "json": {
+        "pages": ["page 1", "page 2", "page 3"],
+        "currentPage": "page 1",
+        "page 1": {
+            "textstartat": 36,
+            "sprites": ["Teen 1"],
+            "md5": "Theatre.svg",
+            "num": 1,
+            "lastSprite": "Teen 1",
+            "Teen 1": {
+                "shown": true,
+                "type": "sprite",
+                "md5": "TeenBoy2.svg",
+                "id": "Teen 1",
+                "flip": true,
+                "name": "key_character_teen_boy",
+                "angle": 0,
+                "scale": 0.4,
+                "speed": 2,
+                "defaultScale": 0.5,
+                "sounds": ["pop.mp3", "samples/Dance_celebrate.wav"],
+                "xcoor": 203,
+                "ycoor": 191,
+                "cx": 87,
+                "cy": 199,
+                "w": 174,
+                "h": 398,
+                "homex": 203,
+                "homey": 191,
+                "homescale": 0.4,
+                "homeshown": true,
+                "homeflip": true,
+                "scripts": [
+                    [
+                        ["onflag", "null", 331, 16],
+                        ["playusersnd", 1, 404, 16]
+                    ],
+                    [
+                        ["onflag", "null", 181.44, 137.28],
+                        ["repeat", 2, 254.44, 121.67999999999999, [
+                            ["forward", 3, 289.44, 137.28],
+                            ["back", 2, 354.44, 137.28],
+                            ["hop", 3, 419.44000000000005, 137.28]
+                        ]],
+                        ["wait", 5, 548.2, 137.28],
+                        ["gotopage", 2, 613.2, 137.28]
+                    ]
+                ]
+            },
+            "layers": ["Teen 1"]
+        },
+        "page 2": {
+            "textstartat": 36,
+            "sprites": ["Scuba Diver 1"],
+            "md5": "Underwater.svg",
+            "num": 2,
+            "lastSprite": "Scuba Diver 1",
+            "Scuba Diver 1": {
+                "shown": true,
+                "type": "sprite",
+                "md5": "Scubadiver.svg",
+                "id": "Scuba Diver 1",
+                "flip": false,
+                "name": "key_dance_scubadiver",
+                "angle": 0,
+                "scale": 0.5,
+                "speed": 2,
+                "defaultScale": 0.5,
+                "sounds": ["pop.mp3", "samples/Dance_magic.wav"],
+                "xcoor": 240,
+                "ycoor": 180,
+                "cx": 255,
+                "cy": 117,
+                "w": 510,
+                "h": 235,
+                "homex": 240,
+                "homey": 180,
+                "homescale": 0.5,
+                "homeshown": true,
+                "scripts": [
+                    [
+                        ["onflag", "null", 323, 24],
+                        ["playusersnd", 1, 396, 24]
+                    ],
+                    [
+                        ["onflag", "null", 220.79999999999998, 144],
+                        ["repeat", 2, 293.8, 128.39999999999998, [
+                            ["up", 5, 328.79999999999995, 144],
+                            ["down", 5, 393.8, 144],
+                            ["right", 12, 458.80000000000007, 144]
+                        ]],
+                        ["forward", 4, 587.5600000000001, 144],
+                        ["gotopage", 3, 652.5600000000001, 144]
+                    ]
+                ]
+            },
+            "layers": ["Scuba Diver 1"]
+        },
+        "page 3": {
+            "textstartat": 36,
+            "sprites": ["Snake 1"],
+            "md5": "Woods.svg",
+            "num": 3,
+            "lastSprite": "Snake 1",
+            "Snake 1": {
+                "shown": true,
+                "type": "sprite",
+                "md5": "Snake.svg",
+                "id": "Snake 1",
+                "flip": false,
+                "name": "key_dance_snake",
+                "angle": 0,
+                "scale": 0.8,
+                "speed": 2,
+                "defaultScale": 0.5,
+                "sounds": ["pop.mp3", "samples/Dance_slowmo.wav"],
+                "xcoor": 93,
+                "ycoor": 302,
+                "cx": 134,
+                "cy": 39,
+                "w": 269,
+                "h": 79,
+                "homex": 93,
+                "homey": 302,
+                "homescale": 0.8,
+                "homeshown": true,
+                "homeflip": false,
+                "scripts": [
+                    [
+                        ["onflag", "null", 332, 32],
+                        ["playusersnd", 1, 405, 32]
+                    ],
+                    [
+                        ["onflag", "null", 191.04, 137.28],
+                        ["repeat", 2, 264.04, 106.08, [
+                            ["repeat", 3, 299.03999999999996, 121.67999999999999, [
+                                ["forward", 3, 334.03999999999996, 137.28],
+                                ["back", 3, 399.03999999999996, 137.28]
+                            ]],
+                            ["forward", 1, 527.52, 137.28],
+                            ["grow", 5, 592.52, 137.28],
+                            ["shrink", 5, 657.52, 137.28]
+                        ]],
+                        ["hide", "null", 786.28, 137.51999999999998],
+                        ["endstack", "null", 851.2800000000001, 137.51999999999998]
+                    ]
+                ]
+            },
+            "layers": ["Snake 1"]
+        }
+    }
+}]

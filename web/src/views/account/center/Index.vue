@@ -10,7 +10,6 @@
           @tabChange="key => handleTabChange(key, 'noTitleKey')"
         >
           <mineWorks-page v-if="noTitleKey === 'mineWorks'"></mineWorks-page>
-          <greatWorks-page v-else-if="noTitleKey === 'greatWorks'"></greatWorks-page>
         </a-card>
       </a-col>
     </a-row>
@@ -20,7 +19,7 @@
 <script>
   import PageLayout from '@/components/page/PageLayout'
   import RouteView from "@/components/layouts/RouteView"
-  import { GreatWorksPage, MineWorksPage } from './page'
+  import { MineWorksPage } from './page'
   import { mapGetters } from 'vuex'
   import { getFileAccessHttpUrl } from '@/api/manage';
 
@@ -28,7 +27,6 @@
     components: {
       RouteView,
       PageLayout,
-      GreatWorksPage,
       MineWorksPage
     },
     data() {

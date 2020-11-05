@@ -1,0 +1,395 @@
+[
+  {
+    "gallery": "samples",
+    "name": "Jack Be Nimble",
+    "version": "iOSv01",
+    "deleted": "NO",
+    "pos": 7,
+    "altmd5": "5399f5c93eb1263041000026",
+    "json": {
+      "currentPage": "page 1",
+      "page 3": {
+        "Text 3": {
+          "shown": true,
+          "w": 305,
+          "color": "rgb(255, 221, 51)",
+          "ycoor": 66,
+          "homex": 175,
+          "homey": 66,
+          "cy": 21.5,
+          "cx": 152.5,
+          "fontsize": 36,
+          "str": "Jack jumped over",
+          "h": 43,
+          "xcoor": 175,
+          "type": "text",
+          "id": "Text 3",
+          "speed": 2
+        },
+        "layers": [
+          "Character 1",
+          "Teen 3",
+          "Text 3",
+          "Text 4",
+          "Star 1"
+        ],
+        "Text 4": {
+          "shown": true,
+          "w": 261,
+          "color": "rgb(255, 221, 51)",
+          "ycoor": 107.6,
+          "homex": 173,
+          "homey": 107.6,
+          "cy": 21.5,
+          "cx": 130.5,
+          "fontsize": 36,
+          "str": "the candlestick",
+          "h": 43,
+          "xcoor": 173,
+          "type": "text",
+          "id": "Text 4",
+          "speed": 2
+        },
+        "lastSprite": "Teen 3",
+        "textstartat": 133.2,
+        "Teen 3": {
+          "homeflip": false,
+          "cy": 199,
+          "cx": 87,
+          "sounds": [
+            "pop.mp3"
+          ],
+          "speed": 2,
+          "id": "Teen 3",
+          "shown": true,
+          "scale": 0.3,
+          "angle": 0,
+          "type": "sprite",
+          "scripts": [
+            [
+              [
+                "onflag",
+                "null",
+                226,
+                28
+              ],
+              [
+                "forward",
+                3,
+                299,
+                28
+              ]
+            ],
+            [
+              [
+                "onflag",
+                "null",
+                491,
+                32
+              ],
+              [
+                "hop",
+                3,
+                564,
+                32
+              ]
+            ]
+          ],
+          "md5": "TeenBoy2.svg",
+          "name": "Teen",
+          "ycoor": 199,
+          "homex": 229,
+          "homey": 199,
+          "flip": false,
+          "homescale": 0.3,
+          "w": 174,
+          "h": 398,
+          "xcoor": 229,
+          "homeshown": true,
+          "defaultScale": 0.5
+        },
+        "num": 3,
+        "Star 1": {
+          "homeflip": false,
+          "cy": 31,
+          "cx": 32,
+          "sounds": [
+            "pop.mp3"
+          ],
+          "speed": 2,
+          "id": "Star 1",
+          "shown": true,
+          "scale": 0.7,
+          "angle": 0,
+          "type": "sprite",
+          "scripts": [
+            [
+              [
+                "onclick",
+                "null",
+                218,
+                36
+              ],
+              [
+                "gotopage",
+                1,
+                291,
+                36
+              ]
+            ]
+          ],
+          "md5": "Star2.svg",
+          "name": "Star",
+          "ycoor": 314,
+          "homex": 437,
+          "homey": 314,
+          "flip": false,
+          "homescale": 0.7,
+          "w": 64,
+          "h": 63,
+          "xcoor": 437,
+          "homeshown": true,
+          "defaultScale": 0.5
+        },
+        "Character 1": {
+          "homeflip": false,
+          "cy": 97,
+          "cx": 61,
+          "sounds": [
+            "pop.mp3"
+          ],
+          "speed": 2,
+          "id": "Character 1",
+          "shown": true,
+          "scale": 0.2,
+          "angle": 0,
+          "type": "sprite",
+          "scripts": [],
+          "md5": "samples/67c1368fed520f7c8a39ef9329abfd49.svg",
+          "name": "Character",
+          "ycoor": 239,
+          "homex": 268,
+          "homey": 239,
+          "flip": false,
+          "homescale": 0.2,
+          "w": 122,
+          "h": 194,
+          "xcoor": 268,
+          "homeshown": true,
+          "defaultScale": 0.5
+        },
+        "sprites": [
+          "Teen 3",
+          "Character 1",
+          "Text 3",
+          "Text 4",
+          "Star 1"
+        ],
+        "md5": "Theatre.svg"
+      },
+      "pages": [
+        "page 1",
+        "page 2",
+        "page 3"
+      ],
+      "page 1": {
+        "layers": [
+          "Teen 1",
+          "Text 1"
+        ],
+        "Text 1": {
+          "shown": true,
+          "w": 259,
+          "color": "rgb(255, 221, 51)",
+          "ycoor": 82,
+          "homex": 311,
+          "homey": 82,
+          "cy": 21.5,
+          "cx": 129.5,
+          "fontsize": 36,
+          "str": "Jack be nimble",
+          "h": 43,
+          "xcoor": 311,
+          "type": "text",
+          "id": "Text 1",
+          "speed": 2
+        },
+        "textstartat": 84.6,
+        "lastSprite": "Teen 1",
+        "Teen 1": {
+          "homeflip": false,
+          "cy": 199,
+          "cx": 87,
+          "sounds": [
+            "pop.mp3"
+          ],
+          "speed": 4,
+          "id": "Teen 1",
+          "shown": true,
+          "scale": 0.3,
+          "angle": 0,
+          "type": "sprite",
+          "scripts": [
+            [
+              [
+                "onflag",
+                "null",
+                223,
+                38
+              ],
+              [
+                "setspeed",
+                2,
+                296,
+                38
+              ],
+              [
+                "hop",
+                2,
+                361,
+                38
+              ],
+              [
+                "hop",
+                2,
+                426,
+                38
+              ],
+              [
+                "wait",
+                15,
+                491,
+                38
+              ],
+              [
+                "gotopage",
+                2,
+                556,
+                38
+              ]
+            ]
+          ],
+          "md5": "TeenBoy2.svg",
+          "name": "Teen",
+          "ycoor": 176,
+          "homex": 149,
+          "homey": 176,
+          "flip": false,
+          "homescale": 0.3,
+          "w": 174,
+          "h": 398,
+          "xcoor": 149,
+          "homeshown": true,
+          "defaultScale": 0.5
+        },
+        "num": 1,
+        "sprites": [
+          "Teen 1",
+          "Text 1"
+        ],
+        "md5": "Theatre.svg"
+      },
+      "page 2": {
+        "layers": [
+          "Teen 2",
+          "Text 2"
+        ],
+        "Text 2": {
+          "shown": true,
+          "w": 237,
+          "color": "rgb(255, 221, 51)",
+          "ycoor": 67,
+          "homex": 167,
+          "homey": 67,
+          "cy": 21.5,
+          "cx": 118.5,
+          "fontsize": 36,
+          "str": "Jack be quick",
+          "h": 43,
+          "xcoor": 167,
+          "type": "text",
+          "id": "Text 2",
+          "speed": 2
+        },
+        "lastSprite": "Teen 2",
+        "textstartat": 84.6,
+        "Teen 2": {
+          "homeflip": false,
+          "cy": 199,
+          "cx": 87,
+          "sounds": [
+            "pop.mp3"
+          ],
+          "speed": 4,
+          "id": "Teen 2",
+          "shown": true,
+          "scale": 0.3,
+          "angle": 0,
+          "type": "sprite",
+          "scripts": [
+            [
+              [
+                "onflag",
+                "null",
+                223,
+                41
+              ],
+              [
+                "setspeed",
+                2,
+                296,
+                41
+              ],
+              [
+                "forward",
+                5,
+                361,
+                41
+              ],
+              [
+                "back",
+                5,
+                426,
+                41
+              ],
+              [
+                "wait",
+                15,
+                491,
+                41
+              ],
+              [
+                "gotopage",
+                3,
+                556,
+                41
+              ]
+            ]
+          ],
+          "md5": "TeenBoy2.svg",
+          "name": "Teen",
+          "ycoor": 193,
+          "homex": 157,
+          "homey": 193,
+          "flip": true,
+          "homescale": 0.3,
+          "w": 174,
+          "h": 398,
+          "xcoor": 157,
+          "homeshown": true,
+          "defaultScale": 0.5
+        },
+        "num": 2,
+        "sprites": [
+          "Teen 2",
+          "Text 2"
+        ],
+        "md5": "Theatre.svg"
+      }
+    },
+    "thumbnail": {
+      "pagecount": 3,
+      "md5": "samples/JackBeNimble.png"
+    }
+  }
+]

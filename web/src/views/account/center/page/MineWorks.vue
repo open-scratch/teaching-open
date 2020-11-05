@@ -1,22 +1,22 @@
 <template>
   <div class="app-list">
-    <a-list :grid="{ gutter: 24, lg: 3, md: 1, sm: 1, xs: 1 }" :dataSource="dataSource">
+    <a-list :grid="{ gutter: 24, lg: 4, md: 3, sm: 2, xs: 1 }" :dataSource="dataSource">
       <a-list-item slot="renderItem" slot-scope="item">
         <a-card :hoverable="true">
           <template class="ant-card-extra" slot="extra">
+            <span style="margin-bottom: 3px">{{ item.workType_dictText }}</span>
+            <a-divider type="vertical"/>
             <span class="create-time">{{item.createTime}}</span>
             <a-popconfirm title="确定删除吗?" @confirm="() => handleDelete(item.id)">
-              <a>
-                <a-icon type="delete" />
-              </a>
+              <a><a-icon type="delete" /></a>
             </a-popconfirm>
           </template>
-          
           <a-card-meta>
-            <div style="margin-bottom: 3px" slot="title">{{ item.workName }}</div>
+            
             <!-- <a-avatar class="card-avatar" slot="avatar" :src="item.avatar" size="small" /> -->
             <div class="meta-cardInfo" slot="description">
-              <a :href="'/scratch3/index.html?workId='+item.id" target="_blank">
+              <div slot="title">{{item.workName}}</div>
+              <a :href="getEditorHref(item)" target="_blank">
                 <img :src="item.coverFileUrl" />
               </a>
             </div>
@@ -82,7 +82,7 @@ export default {
       getAction(that.url.list, null).then(res => {
         if (res.success) {
           that.dataSource = res.result.records
-          that.ipagination.total = res.result.total
+          // that.ipagination.total = res.result.total
         }
         if (res.code === 510) {
           that.$message.warning(res.message)
@@ -100,6 +100,21 @@ export default {
           that.$message.warning(res.message);
         }
       });
+    },
+    getEditorHref(item){
+      switch(item.workType){
+        case '1':
+          return '/scratch3/index.html?workId='+item.id
+          break;
+        case '2':
+          return '/scratch3/index.html?workId='+item.id
+          break;
+        case '3':
+          return '/scratchjr/editor.html?mode=edit&filepath=' + item.workFileUrl
+          break;
+        default:
+          return item.workFileUrl
+      }
     }
   }
 }
@@ -107,6 +122,9 @@ export default {
 
 <style lang="less" scoped>
 .app-list {
+  .ant-card-extra{
+    margin-left:0!important;
+  }
   .meta-cardInfo {
     zoom: 1;
     margin-top: 16px;

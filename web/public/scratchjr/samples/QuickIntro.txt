@@ -1,0 +1,298 @@
+[
+  {
+    "gallery": "samples",
+    "name": "Quick Intro",
+    "version": "iOSv01",
+    "deleted": "NO",
+    "pos": 3,
+    "altmd5": "5399f5c93eb1263040000024",
+    "json": {
+      "currentPage": "page 1",
+      "pages": [
+        "page 1",
+        "page 2"
+      ],
+      "page 1": {
+        "layers": [
+          "Cat 1",
+          "Red 1"
+        ],
+        "lastSprite": "Cat 1",
+        "textstartat": 36,
+        "Red 1": {
+          "homeflip": false,
+          "cy": 99,
+          "cx": 106,
+          "sounds": [
+            "pop.mp3"
+          ],
+          "speed": 2,
+          "id": "Red 1",
+          "shown": true,
+          "scale": 0.5,
+          "angle": 0,
+          "type": "sprite",
+          "scripts": [
+            [
+              [
+                "onflag",
+                "null",
+                218,
+                43
+              ],
+              [
+                "back",
+                1,
+                291,
+                43
+              ],
+              [
+                "repeat",
+                8,
+                356,
+                27,
+                [
+                  [
+                    "grow",
+                    2,
+                    391,
+                    43
+                  ],
+                  [
+                    "shrink",
+                    2,
+                    456,
+                    43
+                  ]
+                ]
+              ]
+            ]
+          ],
+          "md5": "Red.svg",
+          "name": "key_quickintro_toc",
+          "ycoor": 253,
+          "homex": 355,
+          "homey": 253,
+          "flip": true,
+          "homescale": 0.5,
+          "w": 213,
+          "h": 198,
+          "xcoor": 355,
+          "homeshown": true,
+          "defaultScale": 0.5
+        },
+        "num": 1,
+        "Cat 1": {
+          "homeflip": false,
+          "cy": 116,
+          "cx": 83,
+          "sounds": [
+            "pop.mp3"
+          ],
+          "speed": 2,
+          "id": "Cat 1",
+          "shown": true,
+          "scale": 0.5,
+          "angle": 0,
+          "type": "sprite",
+          "scripts": [
+            [
+              [
+                "onflag",
+                "null",
+                150,
+                46
+              ],
+              [
+                "repeat",
+                4,
+                223,
+                30,
+                [
+                  [
+                    "forward",
+                    1,
+                    258,
+                    46
+                  ],
+                  [
+                    "hop",
+                    6,
+                    323,
+                    46
+                  ]
+                ]
+              ]
+            ],
+            [
+              [
+                "onclick",
+                "null",
+                495,
+                43
+              ],
+              [
+                "up",
+                5,
+                568,
+                43
+              ],
+              [
+                "hide",
+                "null",
+                633,
+                43
+              ],
+              [
+                "gotopage",
+                2,
+                698,
+                43
+              ]
+            ],
+            [
+              [
+                "show",
+                "null",
+                850,
+                48
+              ]
+            ]
+          ],
+          "md5": "Cat.svg",
+          "name": "key_character_cat",
+          "ycoor": 246,
+          "homex": 115,
+          "homey": 246,
+          "flip": false,
+          "homescale": 0.5,
+          "w": 166,
+          "h": 232,
+          "xcoor": 115,
+          "homeshown": true,
+          "defaultScale": 0.5
+        },
+        "sprites": [
+          "Cat 1",
+          "Red 1"
+        ],
+        "md5": "BeachDay.svg"
+      },
+      "page 2": {
+        "layers": [
+          "Fish 1",
+          "Cat 2"
+        ],
+        "lastSprite": "Cat 2",
+        "textstartat": 36,
+        "num": 2,
+        "Fish 1": {
+          "homeflip": false,
+          "cy": 54,
+          "cx": 98,
+          "sounds": [
+            "pop.mp3"
+          ],
+          "speed": 2,
+          "id": "Fish 1",
+          "shown": true,
+          "scale": 0.5,
+          "angle": 0,
+          "type": "sprite",
+          "scripts": [
+            [
+              [
+                "onflag",
+                "null",
+                236,
+                24
+              ],
+              [
+                "forward",
+                1,
+                309,
+                24
+              ],
+              [
+                "forever",
+                "null",
+                374,
+                24
+              ]
+            ]
+          ],
+          "md5": "Fish1.svg",
+          "name": "key_quickintro_fish",
+          "ycoor": 65,
+          "homex": 138,
+          "homey": 65,
+          "flip": false,
+          "homescale": 0.5,
+          "w": 196,
+          "h": 109,
+          "xcoor": 138,
+          "homeshown": true,
+          "defaultScale": 0.5
+        },
+        "Cat 2": {
+          "homeflip": false,
+          "cy": 116,
+          "cx": 83,
+          "sounds": [
+            "pop.mp3",
+            "samples/glubglub.wav"
+          ],
+          "speed": 2,
+          "id": "Cat 2",
+          "shown": true,
+          "scale": 0.5,
+          "angle": 0,
+          "type": "sprite",
+          "scripts": [
+            [
+              [
+                "onflag",
+                "null",
+                240,
+                33
+              ],
+              [
+                "wait",
+                10,
+                313,
+                33
+              ],
+              [
+                "playusersnd",
+                1,
+                378,
+                33
+              ]
+            ]
+          ],
+          "md5": "samples/e975f53aff72b28d2cf9827e0e2ab442.svg",
+          "name": "key_character_cat",
+          "ycoor": 194,
+          "homex": 273,
+          "homey": 194,
+          "flip": false,
+          "homescale": 0.5,
+          "w": 166,
+          "h": 232,
+          "xcoor": 273,
+          "homeshown": true,
+          "defaultScale": 0.5
+        },
+        "sprites": [
+          "Cat 2",
+          "Fish 1"
+        ],
+        "md5": "Underwater.svg"
+      }
+    },
+    "thumbnail": {
+      "pagecount": 2,
+      "md5": "samples/QuickIntro.png"
+    }
+  }
+]

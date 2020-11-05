@@ -17,11 +17,14 @@ window.uuid = function() {
   return uuid
 }
 
+
 window.getUserInfo = function() {
   userInfo = localStorage.getItem('pro__Login_Userinfo')
-  userInfo = JSON.parse(userInfo).value
-  console.log(userInfo)
-  return userInfo
+  if(userInfo){
+    userInfo = JSON.parse(userInfo).value
+    console.log(userInfo)
+    return userInfo
+  }
 }
 
 window.getUserToken = function() {
@@ -77,6 +80,15 @@ function createCode(id, src) {
     height: 250
   })
   qrcode.makeCode(src)
+}
+
+function dataURLtoBlob(dataurl) {
+  var arr = dataurl.split(','), mime = arr[0].match(/:(.*?);/)[1],
+      bstr = atob(arr[1]), n = bstr.length, u8arr = new Uint8Array(n);
+  while (n--) {
+      u8arr[n] = bstr.charCodeAt(n);
+  }
+  return new Blob([u8arr], { type: mime });
 }
 
 

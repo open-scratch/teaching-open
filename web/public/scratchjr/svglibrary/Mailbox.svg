@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- Generator: Adobe Illustrator 15.0.0, SVG Export Plug-In . SVG Version: 6.00 Build 0)  -->
+<!DOCTYPE svg PUBLIC "-//W3C//DTD SVG 1.1//EN" "http://www.w3.org/Graphics/SVG/1.1/DTD/svg11.dtd">
+<svg version="1.1" id="Layer_1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px"
+	 width="71px" height="210px" viewBox="0 0 71 210" enable-background="new 0 0 71 210" xml:space="preserve">
+<g id="Mailbox.svg">
+	<path id="sBorder" fill="#BC9A46" d="M31.485,76.575h9.257v123.427h-9.257V76.575z"/>
+	<path id="nBorder" fill="#40B6F2" d="M35.638,10.957c-13.75,0-24.895,11.146-24.895,24.896v42.599h49.791V35.853
+		C60.534,22.103,49.385,10.957,35.638,10.957"/>
+	<path id="Wood" fill="#9B782C" d="M31.485,76.575h9.257v27.122h-9.257V76.575z"/>
+	<path id="mBorder" fill="#B3EAFF" d="M30.147,13.693c-10.716,0-19.404,8.688-19.404,19.407v45.351h38.81V33.1
+		C49.553,22.383,40.866,13.693,30.147,13.693"/>
+	<polygon id="flagBorder" fill="#C93543" points="60.534,10.911 51.538,10.911 48.538,10.911 45.538,10.911 45.538,35.995 
+		51.538,35.995 51.538,20.729 60.534,20.729 	"/>
+	<path id="Slit" fill="#155F7C" d="M17.361,35.107h24.5v3h-24.5V35.107z"/>
+</g>
+</svg>

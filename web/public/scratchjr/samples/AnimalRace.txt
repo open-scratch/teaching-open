@@ -1,0 +1,156 @@
+[{
+    "gallery": "samples",
+    "version": "iOSv01",
+    "thumbnail": {
+        "pagecount": 1,
+        "md5": "samples/AnimalRace.png"
+    },
+    "ctime": "2016-01-15 19:54:45",
+    "deleted": "NO",
+    "mtime": "1452887756770",
+    "name": "Animal Race",
+    "id": "5",
+    "json": {
+        "pages": ["page 1"],
+        "currentPage": "page 1",
+        "page 1": {
+            "textstartat": 36,
+            "sprites": ["Cat 1", "Elephant 1", "Giraffe 1", "Monkey 1"],
+            "md5": "samples/AnimalRace_savannah.svg",
+            "num": 1,
+            "lastSprite": "Cat 1",
+            "Cat 1": {
+                "shown": true,
+                "type": "sprite",
+                "md5": "Cat.svg",
+                "id": "Cat 1",
+                "flip": true,
+                "name": "key_character_cat",
+                "angle": 0,
+                "scale": 0.5,
+                "speed": 2,
+                "defaultScale": 0.5,
+                "sounds": ["pop.mp3", "samples/AnimalRace_horn.wav"],
+                "xcoor": 442,
+                "ycoor": 299,
+                "cx": 83,
+                "cy": 116,
+                "w": 166,
+                "h": 232,
+                "homex": 442,
+                "homey": 299,
+                "homescale": 0.5,
+                "homeshown": true,
+                "homeflip": true,
+                "scripts": [
+                    [
+                        ["onflag", "null", 314, 56],
+                        ["say", "3...", 387, 56],
+                        ["say", "2...", 452, 56],
+                        ["say", "1...", 517, 56],
+                        ["playusersnd", 1, 582, 56],
+                        ["message", "Orange", 647, 56]
+                    ]
+                ]
+            },
+            "Elephant 1": {
+                "shown": true,
+                "type": "sprite",
+                "md5": "Elephant.svg",
+                "id": "Elephant 1",
+                "flip": false,
+                "name": "key_animalrace_elephant",
+                "angle": 0,
+                "scale": 0.3,
+                "speed": 4,
+                "defaultScale": 0.5,
+                "sounds": ["pop.mp3"],
+                "xcoor": 63,
+                "ycoor": 146,
+                "cx": 329,
+                "cy": 224,
+                "w": 659,
+                "h": 448,
+                "homex": 63,
+                "homey": 146,
+                "homescale": 0.3,
+                "homeshown": true,
+                "homeflip": false,
+                "scripts": [
+                    [
+                        ["onmessage", "Orange", 289, 68],
+                        ["setspeed", 0, 362, 68],
+                        ["forward", 4, 427, 68],
+                        ["setspeed", 2, 492, 68],
+                        ["forward", 11, 557, 68]
+                    ]
+                ]
+            },
+            "Giraffe 1": {
+                "shown": true,
+                "type": "sprite",
+                "md5": "Giraffe.svg",
+                "id": "Giraffe 1",
+                "flip": false,
+                "name": "key_animalrace_giraffe",
+                "angle": 0,
+                "scale": 0.3,
+                "speed": 2,
+                "defaultScale": 0.5,
+                "sounds": ["pop.mp3"],
+                "xcoor": 68,
+                "ycoor": 218,
+                "cx": 235,
+                "cy": 327,
+                "w": 471,
+                "h": 655,
+                "homex": 68,
+                "homey": 218,
+                "homescale": 0.3,
+                "homeshown": true,
+                "homeflip": false,
+                "scripts": [
+                    [
+                        ["onmessage", "Orange", 322, 59],
+                        ["setspeed", 1, 395, 59],
+                        ["forward", 15, 460, 59]
+                    ]
+                ]
+            },
+            "Monkey 1": {
+                "shown": true,
+                "type": "sprite",
+                "md5": "Monkey.svg",
+                "id": "Monkey 1",
+                "flip": false,
+                "name": "key_animalrace_monkey",
+                "angle": 0,
+                "scale": 0.4,
+                "speed": 1,
+                "defaultScale": 0.5,
+                "sounds": ["pop.mp3"],
+                "xcoor": 45,
+                "ycoor": 308,
+                "cx": 193,
+                "cy": 117,
+                "w": 387,
+                "h": 235,
+                "homex": 45,
+                "homey": 308,
+                "homescale": 0.4,
+                "homeshown": true,
+                "homeflip": false,
+                "scripts": [
+                    [
+                        ["onmessage", "Orange", 281, 84],
+                        ["setspeed", 2, 354, 84],
+                        ["forward", 7, 419, 84],
+                        ["setspeed", 0, 484, 84],
+                        ["forward", 8, 549, 84]
+                    ]
+                ]
+            },
+            "layers": ["Elephant 1", "Giraffe 1", "Monkey 1", "Cat 1"]
+        }
+    }
+}]

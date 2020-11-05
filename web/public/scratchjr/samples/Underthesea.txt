@@ -1,0 +1,294 @@
+[
+  {
+    "gallery": "samples",
+    "name": "Under the sea",
+    "version": "iOSv01",
+    "deleted": "NO",
+    "pos": 4,
+    "altmd5": "5399f5c93eb1263041000024",
+    "json": {
+      "currentPage": "page 3",
+      "page 3": {
+        "layers": [
+          "Starfish 1",
+          "Fish 2",
+          "Fish 1",
+          "Seahorse 1"
+        ],
+        "Starfish 1": {
+          "homeflip": false,
+          "cy": 61,
+          "cx": 60,
+          "sounds": [
+            "pop.mp3"
+          ],
+          "speed": 1,
+          "id": "Starfish 1",
+          "shown": true,
+          "scale": 0.5,
+          "angle": 0,
+          "type": "sprite",
+          "scripts": [
+            [
+              [
+                "onflag",
+                "null",
+                223,
+                30
+              ],
+              [
+                "setspeed",
+                0,
+                296,
+                30
+              ]
+            ],
+            [
+              [
+                "onflag",
+                "null",
+                460,
+                27
+              ],
+              [
+                "right",
+                1,
+                533,
+                27
+              ],
+              [
+                "left",
+                2,
+                598,
+                27
+              ],
+              [
+                "right",
+                1,
+                663,
+                27
+              ],
+              [
+                "forever",
+                "null",
+                728,
+                27
+              ]
+            ]
+          ],
+          "md5": "Starfish.svg",
+          "name": "key_under_the_sea_starfish",
+          "ycoor": 324,
+          "homex": 280,
+          "homey": 324,
+          "flip": false,
+          "homescale": 0.5,
+          "w": 121,
+          "h": 123,
+          "xcoor": 280,
+          "homeshown": true,
+          "defaultScale": 0.5
+        },
+        "Fish 1": {
+          "homeflip": false,
+          "cy": 54,
+          "cx": 98,
+          "sounds": [
+            "pop.mp3"
+          ],
+          "speed": 2,
+          "id": "Fish 1",
+          "shown": true,
+          "scale": 0.7000000000000002,
+          "angle": 0,
+          "type": "sprite",
+          "scripts": [
+            [
+              [
+                "onflag",
+                "null",
+                230,
+                34
+              ],
+              [
+                "forward",
+                2,
+                303,
+                34
+              ],
+              [
+                "forward",
+                -2,
+                368,
+                34
+              ],
+              [
+                "forever",
+                "null",
+                433,
+                34
+              ]
+            ]
+          ],
+          "md5": "Fish1.svg",
+          "name": "key_under_the_sea_fish",
+          "ycoor": 80,
+          "homex": 232,
+          "homey": 80,
+          "flip": false,
+          "homescale": 0.7000000000000002,
+          "w": 196,
+          "h": 109,
+          "xcoor": 232,
+          "homeshown": true,
+          "defaultScale": 0.5
+        },
+        "Fish 2": {
+          "homeflip": true,
+          "cy": 61,
+          "cx": 84,
+          "sounds": [
+            "pop.mp3"
+          ],
+          "speed": 2,
+          "id": "Fish 2",
+          "shown": true,
+          "scale": 0.7000000000000002,
+          "angle": 0,
+          "type": "sprite",
+          "scripts": [
+            [
+              [
+                "onflag",
+                "null",
+                230,
+                31
+              ],
+              [
+                "back",
+                -2,
+                303,
+                31
+              ],
+              [
+                "back",
+                2,
+                368,
+                31
+              ],
+              [
+                "forever",
+                "null",
+                433,
+                31
+              ]
+            ]
+          ],
+          "md5": "Fish2.svg",
+          "name": "key_under_the_sea_fish",
+          "ycoor": 70,
+          "homex": 371,
+          "homey": 70,
+          "flip": true,
+          "homescale": 0.7000000000000002,
+          "w": 169,
+          "h": 122,
+          "xcoor": 371,
+          "homeshown": true,
+          "defaultScale": 0.5
+        },
+        "textstartat": 36,
+        "num": 1,
+        "lastSprite": "Fish 1",
+        "Seahorse 1": {
+          "homeflip": false,
+          "cy": 85,
+          "cx": 40,
+          "sounds": [
+            "pop.mp3"
+          ],
+          "speed": 2,
+          "id": "Seahorse 1",
+          "shown": true,
+          "scale": 0.7000000000000002,
+          "angle": 0,
+          "type": "sprite",
+          "scripts": [
+            [
+              [
+                "onflag",
+                "null",
+                226,
+                32
+              ],
+              [
+                "forward",
+                99,
+                299,
+                32
+              ],
+              [
+                "forever",
+                "null",
+                364,
+                32
+              ]
+            ],
+            [
+              [
+                "onflag",
+                "null",
+                512,
+                30
+              ],
+              [
+                "hop",
+                1,
+                585,
+                30
+              ],
+              [
+                "hop",
+                -1,
+                650,
+                30
+              ],
+              [
+                "forever",
+                "null",
+                715,
+                30
+              ]
+            ]
+          ],
+          "md5": "Seahorse.svg",
+          "name": "key_under_the_sea_seahorse",
+          "ycoor": 199.20000000000002,
+          "homex": 201,
+          "homey": 199.20000000000002,
+          "flip": false,
+          "homescale": 0.7000000000000002,
+          "w": 80,
+          "h": 171,
+          "xcoor": 201,
+          "homeshown": true,
+          "defaultScale": 0.5
+        },
+        "sprites": [
+          "Fish 1",
+          "Fish 2",
+          "Seahorse 1",
+          "Starfish 1"
+        ],
+        "md5": "Underwater.svg"
+      },
+      "pages": [
+        "page 3"
+      ]
+    },
+    "thumbnail": {
+      "pagecount": 1,
+      "md5": "samples/Underthesea.png"
+    }
+  }
+]

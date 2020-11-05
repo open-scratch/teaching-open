@@ -1,0 +1,192 @@
+[
+  {
+    "gallery": "samples",
+    "name": "Bump",
+    "version": "iOSv01",
+    "deleted": "NO",
+    "pos": 2,
+    "altmd5": "5399f5c93eb126304300002c",
+    "json": {
+      "currentPage": "page 1",
+      "pages": [
+        "page 1"
+      ],
+      "page 1": {
+        "layers": [
+          "Duck 1",
+          "Duck 2",
+          "Duck 3"
+        ],
+        "lastSprite": "Duck 1",
+        "textstartat": 36,
+        "num": 1,
+        "md5": "samples/f63d8716c8262eb633b29c118966d782.svg",
+        "Duck 1": {
+          "homeflip": false,
+          "cy": 58,
+          "cx": 77,
+          "sounds": [
+            "pop.mp3"
+          ],
+          "speed": 2,
+          "id": "Duck 1",
+          "shown": true,
+          "scale": 0.5,
+          "angle": 0,
+          "type": "sprite",
+          "scripts": [
+            [
+              [
+                "onflag",
+                "null",
+                233,
+                39
+              ],
+              [
+                "forward",
+                4,
+                306,
+                39
+              ],
+              [
+                "back",
+                5,
+                371,
+                39
+              ],
+              [
+                "forward",
+                1,
+                436,
+                39
+              ]
+            ]
+          ],
+          "md5": "samples/8001bd1f3dbbe7f1c725a208e83bf6e2.svg",
+          "name": "key_bump_yellow_duck",
+          "ycoor": 243,
+          "homex": 108,
+          "homey": 243,
+          "flip": false,
+          "homescale": 0.5,
+          "w": 155,
+          "h": 116,
+          "xcoor": 108,
+          "homeshown": true,
+          "defaultScale": 0.5
+        },
+        "sprites": [
+          "Duck 1",
+          "Duck 2",
+          "Duck 3"
+        ],
+        "Duck 3": {
+          "homeflip": false,
+          "cy": 58,
+          "cx": 77,
+          "sounds": [
+            "pop.mp3"
+          ],
+          "speed": 2,
+          "id": "Duck 3",
+          "shown": true,
+          "scale": 0.5,
+          "angle": 0,
+          "type": "sprite",
+          "scripts": [
+            [
+              [
+                "ontouch",
+                "null",
+                233,
+                30
+              ],
+              [
+                "hop",
+                5,
+                306,
+                30
+              ],
+              [
+                "hop",
+                5,
+                371,
+                30
+              ]
+            ]
+          ],
+          "md5": "Duck.svg",
+          "name": "key_bump_green_duck",
+          "ycoor": 242,
+          "homex": 386,
+          "homey": 242,
+          "flip": false,
+          "homescale": 0.5,
+          "w": 155,
+          "h": 116,
+          "xcoor": 386,
+          "homeshown": true,
+          "defaultScale": 0.5
+        },
+        "Duck 2": {
+          "homeflip": false,
+          "cy": 58,
+          "cx": 77,
+          "sounds": [
+            "pop.mp3"
+          ],
+          "speed": 2,
+          "id": "Duck 2",
+          "shown": true,
+          "scale": 0.5,
+          "angle": 0,
+          "type": "sprite",
+          "scripts": [
+            [
+              [
+                "ontouch",
+                "null",
+                243,
+                31
+              ],
+              [
+                "forward",
+                4,
+                316,
+                31
+              ],
+              [
+                "back",
+                5,
+                381,
+                31
+              ],
+              [
+                "forward",
+                1,
+                446,
+                31
+              ]
+            ]
+          ],
+          "md5": "samples/58cdafe2c3944549c926c01bb7eebe9e.svg",
+          "name": "key_bump_blue_duck",
+          "ycoor": 243,
+          "homex": 244,
+          "homey": 243,
+          "flip": false,
+          "homescale": 0.5,
+          "w": 155,
+          "h": 116,
+          "xcoor": 244,
+          "homeshown": true,
+          "defaultScale": 0.5
+        }
+      }
+    },
+    "thumbnail": {
+      "pagecount": 1,
+      "md5": "samples/Bump.png"
+    }
+  }
+]

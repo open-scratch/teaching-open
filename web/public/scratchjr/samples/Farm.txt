@@ -1,0 +1,299 @@
+[
+  {
+    "gallery": "samples",
+    "name": "Farm",
+    "version": "iOSv01",
+    "deleted": "NO",
+    "pos": 5,
+    "altmd5": "5399f5c93eb126304300002e",
+    "json": {
+      "currentPage": "page 1",
+      "pages": [
+        "page 1"
+      ],
+      "page 1": {
+        "layers": [
+          "Barn 1",
+          "Pig 1",
+          "Text 1",
+          "Chicken 1",
+          "Horse 1"
+        ],
+        "Text 1": {
+          "shown": true,
+          "w": 158,
+          "color": "#1b2a34",
+          "ycoor": 33,
+          "homex": 247,
+          "homey": 33,
+          "cy": 21.5,
+          "cx": 79,
+          "fontsize": 36,
+          "str": "key_farm_tap_them",
+          "h": 43,
+          "xcoor": 247,
+          "type": "text",
+          "id": "Text 1",
+          "speed": 2
+        },
+        "Barn 1": {
+          "homeflip": false,
+          "cy": 190,
+          "cx": 297,
+          "sounds": [
+            "pop.mp3"
+          ],
+          "speed": 2,
+          "id": "Barn 1",
+          "shown": true,
+          "scale": 0.5,
+          "angle": 0,
+          "type": "sprite",
+          "scripts": [],
+          "md5": "Barn.svg",
+          "name": "key_farm_barn",
+          "ycoor": 170,
+          "homex": 98,
+          "homey": 170,
+          "flip": false,
+          "homescale": 0.5,
+          "w": 594,
+          "h": 380,
+          "xcoor": 98,
+          "homeshown": true,
+          "defaultScale": 0.5
+        },
+        "lastSprite": "Pig 1",
+        "textstartat": 84.6,
+        "sprites": [
+          "Pig 1",
+          "Horse 1",
+          "Chicken 1",
+          "Barn 1",
+          "Text 1"
+        ],
+        "num": 1,
+        "Horse 1": {
+          "homeflip": true,
+          "cy": 208,
+          "cx": 211,
+          "sounds": [
+            "pop.mp3",
+            "samples/horse.wav"
+          ],
+          "speed": 2,
+          "id": "Horse 1",
+          "shown": true,
+          "scale": 0.3,
+          "angle": 0,
+          "type": "sprite",
+          "scripts": [
+            [
+              [
+                "onclick",
+                "null",
+                225,
+                33
+              ],
+              [
+                "playusersnd",
+                1,
+                298,
+                33
+              ]
+            ],
+            [
+              [
+                "onclick",
+                "null",
+                439,
+                36
+              ],
+              [
+                "repeat",
+                2,
+                512,
+                20,
+                [
+                  [
+                    "right",
+                    1,
+                    547,
+                    36
+                  ],
+                  [
+                    "left",
+                    2,
+                    612,
+                    36
+                  ],
+                  [
+                    "right",
+                    1,
+                    677,
+                    36
+                  ]
+                ]
+              ]
+            ]
+          ],
+          "md5": "Horse.svg",
+          "name": "key_farm_horse",
+          "ycoor": 195,
+          "homex": 335,
+          "homey": 195,
+          "flip": true,
+          "homescale": 0.3,
+          "w": 422,
+          "h": 417,
+          "xcoor": 335,
+          "homeshown": true,
+          "defaultScale": 0.5
+        },
+        "Pig 1": {
+          "homeflip": false,
+          "cy": 105,
+          "cx": 137,
+          "sounds": [
+            "pop.mp3",
+            "samples/pig.wav"
+          ],
+          "speed": 2,
+          "id": "Pig 1",
+          "shown": true,
+          "scale": 0.4,
+          "angle": 0,
+          "type": "sprite",
+          "scripts": [
+            [
+              [
+                "onclick",
+                "null",
+                230,
+                33
+              ],
+              [
+                "playusersnd",
+                1,
+                303,
+                33
+              ]
+            ],
+            [
+              [
+                "onclick",
+                "null",
+                457,
+                34
+              ],
+              [
+                "hop",
+                4,
+                530,
+                34
+              ],
+              [
+                "hop",
+                6,
+                595,
+                34
+              ],
+              [
+                "hop",
+                1,
+                660,
+                34
+              ]
+            ]
+          ],
+          "md5": "Pig.svg",
+          "name": "key_farm_pig",
+          "ycoor": 309,
+          "homex": 142,
+          "homey": 309,
+          "flip": false,
+          "homescale": 0.4,
+          "w": 275,
+          "h": 211,
+          "xcoor": 142,
+          "homeshown": true,
+          "defaultScale": 0.5
+        },
+        "Chicken 1": {
+          "homeflip": true,
+          "cy": 74,
+          "cx": 71,
+          "sounds": [
+            "pop.mp3",
+            "samples/chicken.wav"
+          ],
+          "speed": 2,
+          "id": "Chicken 1",
+          "shown": true,
+          "scale": 0.5,
+          "angle": 0,
+          "type": "sprite",
+          "scripts": [
+            [
+              [
+                "onclick",
+                "null",
+                234,
+                29
+              ],
+              [
+                "playusersnd",
+                1,
+                307,
+                29
+              ]
+            ],
+            [
+              [
+                "onclick",
+                "null",
+                477,
+                27
+              ],
+              [
+                "back",
+                3,
+                550,
+                27
+              ],
+              [
+                "forward",
+                3,
+                615,
+                27
+              ],
+              [
+                "back",
+                0,
+                680,
+                27
+              ]
+            ]
+          ],
+          "md5": "Chicken.svg",
+          "name": "key_farm_chicken",
+          "ycoor": 307,
+          "homex": 401,
+          "homey": 307,
+          "flip": true,
+          "homescale": 0.5,
+          "w": 142,
+          "h": 148,
+          "xcoor": 401,
+          "homeshown": true,
+          "defaultScale": 0.5
+        },
+        "md5": "samples/63b6fade5e12e1abe9c97806a04984ad.svg"
+      }
+    },
+    "thumbnail": {
+      "pagecount": 1,
+      "md5": "samples/Farm.png"
+    }
+  }
+]

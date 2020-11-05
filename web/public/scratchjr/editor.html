@@ -1,0 +1,150 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:xlink="http://www.w3.org/1999/xlink">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no"/>
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta http-equiv="cache-control" content="no-cache">
+<meta charset="utf-8">
+
+<head>
+<title>Junior</title>
+<script src="../js/jquery.min.js"></script>
+<script src="../js/jquery.cokie.min.js"></script>
+<script src="../js/qiniu.min.js"></script>
+<script src="../js/common.js"></script>
+<script>
+    var uploadParam = {}
+    var workId = urlParams('workId')
+    var unitId = urlParams('unitId')
+    var access_token = getUserToken()
+    var userInfo = getUserInfo();
+    var qn_token = getQiniuToken();
+    setInterval(function () {
+      qn_token = getQiniuToken();
+    }, 600 * 1000)
+
+
+    var observer = {
+      next(res) { },
+      error(err) {
+        console.log(1, err)
+      },
+      complete(res) {
+        console.log(res)
+        if (res.key.includes('png')) {
+          uploadParam.coverKey = uploadFile(res.key, '学生作业-封面', res.key)
+        } else {
+          uploadParam.projectKey = uploadFile(res.key, '学生作业-sjr', res.key)
+        }
+        if (uploadParam.projectKey && uploadParam.coverKey) {
+          uploadWork(uploadParam.projectKey, uploadParam.coverKey, uploadParam.projectTitle)
+        }
+      }
+    }
+
+
+    window.scratchJrPage = 'editor';
+    window.JrConfig = {
+        onSaveCloud: function(contents, name){
+            console.log("content:" + contents);
+            console.log(name);
+            var uuid = window.uuid()
+            uploadParam.projectTitle = name
+            upload2Qiniu(contents, 'scratchjr/' + uuid + '.sjr', name, observer)
+            window.ScratchJr.getProjectCover((r)=>{
+                blob = dataURLtoBlob(r)
+                upload2Qiniu(blob, 'scratchjr/' + uuid + '.png', name, observer)
+            })
+            
+        }
+    }
+
+    //上传文件
+    function uploadFile(fileName, fileTag, filePath) {
+      var id = null;
+      $.ajax({
+        url: '/api/system/sysFile/add',
+        type: 'POST',
+        dataType: 'json',
+        contentType: 'application/json',
+        async: false,
+        beforeSend: function (request) {
+          request.setRequestHeader('X-Access-Token', access_token)
+        },
+        data: JSON.stringify({
+          fileType: 2,
+          fileName: fileName,
+          filePath: filePath,
+          fileLocation: 2,
+          fileTag: fileTag
+        }),
+        success: function (res) {
+          if (res.success) {
+            id = res.result.id
+          }
+        },
+        error: function () {
+        },
+        complete: function () {
+        }
+      })
+      return id;
+    }
+
+    //上传作业
+    function uploadWork(projectKey, coverKey, projectTitle) {
+      $.ajax({
+        url: '/api/teaching/teachingWork/submit',
+        type: 'POST',
+        dataType: 'json',
+        contentType: 'application/json',
+        beforeSend: function (request) {
+          request.setRequestHeader('X-Access-Token', access_token)
+        },
+        data: JSON.stringify({
+          courseId: unitId,
+          workCover: coverKey,
+          workFile: projectKey,
+          workName: projectTitle,
+          id: workId,
+          workType: 3
+        }),
+        success: function (res) {
+          canShare = true
+          if (res.code == 200) {
+            alert("上传成功")
+          } else {
+          }
+        },
+        error: function () {
+          
+        },
+        complete: function () {
+        }
+      })
+    }
+
+    function upload2Qiniu(zip, key, fileName, observer) {
+      var config = {
+        useCdnDomain: true,
+        region: qiniu.region.z0,
+        disableStatisticsReport: true
+      }
+      var putExtra = {
+        fname: fileName, //文件原名
+        params: {},
+        mimeType: null
+      }
+      var observable = qiniu.upload(zip, key, qn_token, putExtra, config)
+      var subscription = observable.subscribe(observer)
+    }
+
+</script>
+<script type="text/javascript" src="app.bundle.js"></script>
+</head>
+<body style="background: white;">
+<div class="frame" id="frame"></div>
+<div class="libframe" id="libframe"></div>
+<div class="paintframe" id="paintframe"></div>
+
+</body>
+</html>
