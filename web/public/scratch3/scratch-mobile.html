@@ -16,6 +16,34 @@
     var workId = urlParams('workId')
 
     window.scratchConfig = {
+      stageArea: {
+        scale: 1,
+        width: 480,
+        height: 360,
+        showControl: true,
+        showLoading: false,
+        fullscreenButton:{ //全屏按钮
+          show: true,
+          handleBeforeSetStageUnFull(){ //退出全屏前的操作
+            return true
+          },
+          handleBeforeSetStageFull(){ //全屏前的操作
+            return true
+          }
+        },
+        startButton:{ //开始按钮
+          show: true,
+          handleBeforeStart(){ //开始前的操作
+            return true
+          }
+        },
+        stopButton:{ // 停止按钮
+          show: true,
+          handleBeforeStop(){ //停止前的操作
+            return true
+          }
+        }
+      },
       handleVmInitialized: (vm) => {
         window.vm = vm
         console.log(vm);
