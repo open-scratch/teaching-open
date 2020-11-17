@@ -1,6 +1,6 @@
 spring:
   profiles:
-    active: dev
+    active: prod # dev开发测试环境  prod线上正式环境
 swagger:
   production: false
   basic:

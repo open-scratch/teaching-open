@@ -7,7 +7,7 @@
   <meta name="google" value="notranslate">
   <link rel="shortcut icon" href="static/favicon.ico" />
   <link rel="stylesheet" href="../css/scratch.css" />
-  <title>Scratch3.0编辑器</title>
+  <title>在线图形化编程</title>
   <script src="../js/jquery.min.js"></script>
   <script src="../js/jquery.cokie.min.js"></script>
   <script src="../js/jquery.qrcode.min.js"></script>
@@ -284,7 +284,7 @@
     function upload2Qiniu(zip, key, fileName, observer) {
       var config = {
         useCdnDomain: true,
-        region: qiniu.region.z0,
+        region: qiniu.region[JSON.parse(localStorage.getItem("CONFIG")).qn_area],
         disableStatisticsReport: true
       }
       var putExtra = {

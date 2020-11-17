@@ -62,7 +62,7 @@
         },
         uploadAction:{
           local:window._CONFIG['domianURL']+"/sys/common/upload",
-          qiniu: "//upload-z0.qiniup.com",
+          qiniu: '//upload-' + window._CONFIG['qn_area'] + '.qiniup.com',
           oss: "",
           cos: ""
         },

@@ -1,7 +1,5 @@
-Teaching 在线教学平台
+# Teaching 在线教学平台
 ===============
-
-
 
 ## 项目介绍
 
@@ -9,6 +7,9 @@ Teaching针对机构、学校提供STEAM在线教育解决方案， 提供一个
 
 平台集成CRM系统、教务系统、作业系统、题库系统、赛事系统、社区系统。并封装了常用的工具，如各种工具类、微信生态对接、支付对接等等。
 
+[前往官网](http://teaching.vip)
+
+[查看本开源版DEMO](http://open.teaching.vip)
 ## 开源版功能
 
 ```
@@ -16,6 +17,7 @@ Teaching针对机构、学校提供STEAM在线教育解决方案， 提供一个
 ├─创作
 │  ├─Scratch3.0
 │  ├─Scratch2.0
+│  ├─ScratchJr
 ├─个人中心
 │  ├─个人中心
 │  ├─个人设置
@@ -28,9 +30,9 @@ Teaching针对机构、学校提供STEAM在线教育解决方案， 提供一个
 |  ├─角色管理
 │  ├─菜单管理
 │  ├─权限设置
-│  ├─部门管理
+│  ├─班级管理
 │  └─字典管理
-│  └─我的部门
+│  └─我的班级
 │  └─职务管理
 │  └─通讯录
 ├─在线开发
@@ -42,9 +44,9 @@ Teaching针对机构、学校提供STEAM在线教育解决方案， 提供一个
 ```
 ## 教学工具对接
 
-- [Scratch2.0](https://github.com/open-scratch/scratch2)
+- [Scratch2.0](https://github.com/open-scratch/scratch2) (已淘汰)
 - [Scratch3.0](https://github.com/open-scratch/scratch3)
-- 其他正在开发中
+- [ScratchJr](https://github.com/open-scratch/scratchjr)
 
   
 ## 技术架构
@@ -57,64 +59,146 @@ Teaching针对机构、学校提供STEAM在线教育解决方案， 提供一个
 
 项目构建： Maven、Jdk8、npm或yarn
 
-## 快速开始（本地启动）
-
-本项目基于jeecg框架开发，采用前后端分离架构，如果您了解jeecg将更容易上手本项目[jeecg-boot](https://github.com/zhangdaiscott/jeecg-boot)
+## 部署教程
 
 ### 环境准备
-- mysql 5.6以上
-- redis
-- nodejs 最新版
-- jdk1.8
-- maven
-- 七牛云，并实名认证
-- 推荐开发工具：IDEA unlimited版和Visual Studio Code
+以CentOS服务器为例
+#### 安装mysql5.6
+- 设置数据库表名忽略大小写
+lower_case_table_names=1
+- 导入api/db文件夹的sql文件
+
+#### 安装 redis 6.0
+略
+
+#### 安装Java
+yum install -y java-1.8.0-openjdk
+
+#### 安装Nginx
+略
+
+#### 注册配置七牛云
+
+- qiniu.com 注册后实名认证
+- 新建对象存储Kodo，访问控制设为：开放
+- 绑定域名（免费分配的测试域名一个月后过期）
+- 获取accessKey，secretKey以备后续配置
 
 ### 后端
 
-#### 使用IDEA运行
+#### 修改配置
 
-IDEA导入api/pom.xml自动会导入整个项目，等待maven依赖下载完，点击绿色三角号或运行org.jeecg.JeecgApplication的main方法
+修改application-prod.yml或application-dev.yml配置
 
-#### 直接编译运行
+修改application.yml切换测试和线上环境
 
-- 修改配置
-application-dev.yml
-修改数据库、redis、七牛云存储等
+参考：
+```
+domain: 您的站点域名
 
-- 导入数据库
+# 数据库连接配置
+datasource:
+        master:
+          url: jdbc:mysql://127.0.0.1:3306/teachingopen?characterEncoding=UTF-8&useUnicode=true&useSSL=false&tinyInt1isBit=false
+          username: teachingopen
+          password: teachingopen
 
-- 导入db文件夹的sql文件
+#Redis连接配置
+redis:  
+    database: 1
+    host: 127.0.0.1
+    password: ''
+    port: 6379
 
-- 编译项目，在api目录执行
+  qiniu:
+    accessKey: 您的七牛accessKey
+    secretKey: 您的七牛secretKey
+    bucketName: 您的七牛bucketName
+    staticDomain: 您的七牛域名//qn.sgs.pub
+```
+
+- 编译项目
+
+在api目录执行
+  
 `mvn clean package`
 
-- 启动项目
-  `java -jar jeecg-boot-module-system\target\jeecg-boot-module-system-2.1.4.jar`
+编译成功后得到jar文件：\target\teaching-open-xxx.jar &
 
-- Linux放入后台运行
+- 上传到服务器
 
-  `nohup java -jar jeecg-boot-module-system\target\jeecg-boot-module-system-2.1.4.jar &`
+- 启动后端api
+
+  `nohup java -jar teaching-open-xxx.jar &`
 
 ### 前端
 
-- 修改七牛云存储的域名
+- 安装nodejs版本v12
 
-  public/index.html  >  `window._CONFIG['qn_base']`
+- 修改配置
 
-- 修改七牛云存储区域，默认z0（华东区）
+  public/index.html
 
-  public/scratch3/index.html >  `region: qiniu.region.z0`
+  ```js
+    <!-- 全局配置 -->
+  <script>
+    window._CONFIG['qn_base'] = "//qn.open.teaching.vip/" //七牛域名
+    window._CONFIG['qn_area'] = 'z0' //七牛存储区域 z0华东 z1华北 z2华南 na0北美 as0东南亚
+    window._CONFIG['brandName'] = "Teaching" //品牌名
+  </script>
+  ```
 
 - 安装依赖
   `npm install` 或 `yarn install`
 
-- 启动服务
-  `npm run serve` 或 `yarn run serve`
+- 编译
+  `npm run build` 或 `yarn run build`
 
 - 部署
+  
+将编译后的dist文件夹上传至服务器网站根目录
 
-  将nginx代理到编译后的build目录
+- 配置Nginx
+
+配置实例:
+```
+server
+{
+    listen 80;
+    server_name open.teaching.vip;
+    location / {
+      index index.html index.htm;
+     root /www/wwwroot/teaching;
+      if (!-e $request_filename) {
+          rewrite ^(.*)$ /index.html?s=$1 last;
+          break;
+      }
+      gzip on;
+      gzip_min_length 1k;
+      gzip_comp_level 9;
+      gzip_types text/plain application/javascript application/x-javascript text/css application/xml text/javascript application/x-httpd-php image/jpeg image/gif image/png;
+      gzip_vary on;
+      gzip_disable "MSIE [1-6]\.";
+    }
+    
+    location ^~ /api
+    {
+        expires 12h;
+        if ($request_uri ~* "(php|jsp|cgi|asp|aspx)")
+        {
+            expires 0;
+        }
+        proxy_pass              http://127.0.0.1:8080/api/;
+        proxy_set_header        Host 127.0.0.1;
+        proxy_set_header        X-Real-IP $remote_addr;
+        proxy_set_header        X-Forwarded-For $proxy_add_x_forwarded_for;
+        add_header X-Cache $upstream_cache_status;
+      #Set Nginx Cache
+      add_header Cache-Control no-cache;
+    }
+}
+```
+
 
 ### 测试账号
 
@@ -125,6 +209,4 @@ application-dev.yml
 - teacher —— 老师
 - student —— 学生
 
-## 技术文档
-
-- QQ交流群 ：  191723983
+## QQ交流群 ：  191723983

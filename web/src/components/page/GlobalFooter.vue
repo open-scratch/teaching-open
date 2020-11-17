@@ -1,17 +1,15 @@
 <template>
   <div class="footer">
     <div class="links">
-      <a href="http://teaching.vip" target="_blank">Teaching 首页</a>
+      <a href="http://teaching.vip" target="_blank">首页</a>
       <a href="https://github.com/open-scratch/teaching" target="_blank">
         <a-icon type="github"/>
       </a>
-      <a href="https://github.com/open-scratch/scratch3">Scratch3.0</a>
-      <a href="https://github.com/open-scratch/scratch2">Scratch2.0</a>
     </div>
     <div class="copyright">
       Copyright
       <a-icon type="copyright"/>
-      2020 <span>OpenScratch开源社区 出品</span>
+      2020 <span>{{window._CONFIG['brandName']}}</span>
     </div>
   </div>
 </template>

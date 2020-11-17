@@ -5,11 +5,11 @@
         <div class="header">
           <a href="/">
             <img src="~@/assets/logo.svg" class="logo" alt="logo">
-            <span class="title">Teaching</span>
+            <span class="title">{{brandName}}</span>
           </a>
         </div>
         <div class="desc">
-          Teaching 开源的快速开发教学平台
+          {{brandName}}教学平台
         </div>
       </div>
 
@@ -36,7 +36,9 @@
     components: { RouteView },
     mixins: [mixinDevice],
     data () {
-      return {}
+      return {
+         brandName: window._CONFIG['brandName']
+      }
     },
     mounted () {
       document.body.classList.add('userLayout')

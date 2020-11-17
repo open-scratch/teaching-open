@@ -126,7 +126,7 @@
     function upload2Qiniu(zip, key, fileName, observer) {
       var config = {
         useCdnDomain: true,
-        region: qiniu.region.z0,
+        region: qiniu.region[JSON.parse(localStorage.getItem("CONFIG")).qn_area],
         disableStatisticsReport: true
       }
       var putExtra = {
