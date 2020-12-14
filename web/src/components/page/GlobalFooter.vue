@@ -9,14 +9,19 @@
     <div class="copyright">
       Copyright
       <a-icon type="copyright"/>
-      2020 <span>{{window._CONFIG['brandName']}}</span>
+      2020 <span>{{brandName}}</span>
     </div>
   </div>
 </template>
 
 <script>
   export default {
-    name: "LayoutFooter"
+    name: "LayoutFooter",
+    data() {
+      return {
+        brandName:window._CONFIG['brandName']
+      }
+    },
   }
 </script>
 

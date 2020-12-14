@@ -23,11 +23,9 @@
       <a-form :form="form">
 
         <a-form-item label="身份" :labelCol="labelCol" :wrapperCol="wrapperCol">
-          <a-radio-group
-            v-model="identity"
-            @change="identityChange">
-            <a-radio value="1">学生</a-radio>
-            <a-radio value="2">上级</a-radio>
+          <a-radio-group v-model="userIdentity" @change="identityChange">
+            <a-radio :value="'1'">学生</a-radio>
+            <a-radio :value="'2'">上级</a-radio>
           </a-radio-group>
         </a-form-item>
 
@@ -258,7 +256,7 @@
           userId:"/sys/user/generateUserId", // 引入生成添加用户情况下的url
           syncUserByUserName:"/process/extActProcess/doSyncUserByUserName",//同步用户到工作流
         },
-        identity:"1",
+        userIdentity: '1',
         fileList:[],
       }
     },
@@ -337,15 +335,15 @@
           that.form.setFieldsValue(pick(this.model,'username','sex','realname','email','phone','activitiSync','workNo','telephone','post'))
         });
         //身份为上级显示负责部门，否则不显示
-        this.changeIdentity(this.model.identity)
+        this.changeIdentity(this.model.userIdentity)
         
         // 调用查询用户对应的部门信息的方法
         that.checkedDepartKeys = [];
         that.loadCheckedDeparts();
       },
-      changeIdentity(identity){
-        if(this.model.userIdentity=="2"){
-            this.identity="2";
+      changeIdentity(userIdentity){
+        if(userIdentity=="2"){
+            this.userIdentity="2";
             this.isShow = {
               departId:true,
               workNo:true,
@@ -353,7 +351,7 @@
             }
             this.selectedRole = []
         }else{
-            this.identity="1";
+            this.userIdentity="1";
             this.isShow = {
               departId:false,
               workNo:false,
@@ -417,7 +415,7 @@
         this.resultDepartOptions=[];
         this.departIds=[];
         this.changeIdentity("1")
-        this.identity="1";
+        this.userIdentity="1";
         this.fileList=[];
       },
       moment,
@@ -441,9 +439,9 @@
             }
             formData.selectedroles = this.selectedRole.length>0?this.selectedRole.join(","):'';
             formData.selecteddeparts = this.userDepartModel.departIdList.length>0?this.userDepartModel.departIdList.join(","):'';
-            formData.userIdentity=this.identity;
+            formData.userIdentity=this.userIdentity;
             //如果是上级择传入departIds,否则为空
-            if(this.identity==="2"){
+            if(this.userIdentity==="2"){
               formData.departIds=this.departIds.join(",");
             }else{
               formData.departIds="";
