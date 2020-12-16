@@ -1,0 +1,158 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+  <meta charset=utf-8>
+  <meta name=viewport content="width=device-width,initial-scale=1">
+  <title>teaching-python</title>
+  <script src="../js/jquery.min.js"></script>
+  <script src="../js/jquery.cokie.min.js"></script>
+  <script src="../js/jquery.qrcode.min.js"></script>
+  <script src="../js/qiniu.min.js"></script>
+  <script src="../js/common.js"></script>
+  <script>
+    var uploadParam = {}
+    var workName = ''
+    var workId = urlParams('workId')
+    var unitId = urlParams('unitId')
+    var access_token = getUserToken()
+    var userInfo = getUserInfo();
+    var qn_token = getQiniuToken();
+    setInterval(function () {
+      qn_token = getQiniuToken();
+    }, 600 * 1000)
+    // twl mine create course
+    var scene = urlParams("scene")
+
+    var observer = {
+      next(res) { },
+      error(err) {
+        console.log(1, err)
+      },
+      complete(res) {
+        uploadParam.projectKey = uploadFile(res.key, '学生作业-python', res.key)
+        uploadWork(uploadParam.projectKey, uploadParam.projectTitle)
+      }
+    }
+
+
+    if (workId) {
+      getWorkInfo(workId, function (info) {
+        var myEvent = new CustomEvent('loadPorject', {
+          detail: {
+            projectName: info.workName,
+            url: info.workFileUrl
+          }
+        });
+        setTimeout(()=>{
+          window.document.dispatchEvent(myEvent);
+        }, 500)
+      })
+    }
+
+    window.submitCode = function (projectName, code) {
+      console.log(code);
+      var uuid = window.uuid()
+      uploadParam.projectTitle = projectName
+      upload2Qiniu(code, 'python/' + uuid + '.py', projectName, observer)
+    }
+
+    //上传作业
+    function uploadWork(projectKey, projectTitle) {
+      $.ajax({
+        url: '/api/teaching/teachingWork/submit',
+        type: 'POST',
+        dataType: 'json',
+        contentType: 'application/json',
+        beforeSend: function (request) {
+          request.setRequestHeader('X-Access-Token', access_token)
+        },
+        data: JSON.stringify({
+          courseId: unitId,
+          workCover: "",
+          workFile: projectKey,
+          workName: projectTitle,
+          id: workId,
+          workType: 4
+        }),
+        success: function (res) {
+          if (res.code == 200) {
+            alert("提交成功")
+            var shareUrl =
+              window.location.protocol +
+              '//' +
+              window.location.hostname +
+              (window.location.port ? ':' + window.location.port : '') +
+              '/scratch3/scratch-mobile.html?workId=' +
+              res.result.id
+            // createCode('qrcode', shareUrl)
+          } else {
+          }
+        },
+        error: function () {
+        },
+        complete: function () {
+        }
+      })
+    }
+
+    //上传文件
+    function uploadFile(fileName, fileTag, filePath) {
+      var id = null;
+      $.ajax({
+        url: '/api/system/sysFile/add',
+        type: 'POST',
+        dataType: 'json',
+        contentType: 'application/json',
+        async: false,
+        beforeSend: function (request) {
+          request.setRequestHeader('X-Access-Token', access_token)
+        },
+        data: JSON.stringify({
+          fileType: 2,
+          fileName: fileName,
+          filePath: filePath,
+          fileLocation: 2,
+          fileTag: fileTag
+        }),
+        success: function (res) {
+          if (res.success) {
+            id = res.result.id
+          }
+        },
+        error: function () {
+        },
+        complete: function () {
+        }
+      })
+      return id;
+    }
+
+    function upload2Qiniu(zip, key, fileName, observer) {
+      var config = {
+        useCdnDomain: true,
+        region: qiniu.region[JSON.parse(localStorage.getItem("CONFIG")).qn_area],
+        disableStatisticsReport: true
+      }
+      var putExtra = {
+        fname: fileName, //文件原名
+        params: {},
+        mimeType: null
+      }
+      var observable = qiniu.upload(zip, key, qn_token, putExtra, config)
+      var subscription = observable.subscribe(observer)
+    }
+  </script>
+  <link href=./static/css/appPlayer.css rel=stylesheet>
+  <link href=./static/css/app.css rel=stylesheet>
+</head>
+
+<body>
+  <div id=app></div>
+  <script type=text/javascript src=./static/js/manifest.js></script>
+  <script type=text/javascript src=./static/js/vendor.js></script>
+  <script type=text/javascript src=./static/js/appPlayer.js></script>
+  <script type=text/javascript src=./static/js/app.js></script>
+</body>
+
+</html>

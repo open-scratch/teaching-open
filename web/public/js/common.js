@@ -65,7 +65,7 @@ window.getQiniuToken = function() {
     error: function(e) {
       if (e.responseJSON.status == 500) {
         //alert(e.responseJSON.message);
-        // location.href = '/'
+        location.href = '/'
       }
       console.log(e)
     }
