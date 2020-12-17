@@ -250,6 +250,10 @@
         columns:
           [
             {
+              title: '角色ID',
+              dataIndex: 'id'
+            },
+            {
               title: '角色编码',
               align: 'center',
               dataIndex: 'roleCode'

@@ -4,6 +4,12 @@
       <a-form-item
         :labelCol="labelCol"
         :wrapperCol="wrapperCol"
+        label="机构ID">
+        <a-input style="border:0px;" placeholder="" v-model="model.id" readOnly="true"/>
+      </a-form-item>
+      <a-form-item
+        :labelCol="labelCol"
+        :wrapperCol="wrapperCol"
         label="机构名称">
         <a-input style="border:0px;" placeholder="" v-decorator="['departName', {}]"/>
       </a-form-item>

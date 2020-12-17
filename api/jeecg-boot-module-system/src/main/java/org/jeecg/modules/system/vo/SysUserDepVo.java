@@ -12,4 +12,5 @@ import lombok.Data;
 public class SysUserDepVo {
     private String userId;
     private String departName;
+    private String roleName;
 }

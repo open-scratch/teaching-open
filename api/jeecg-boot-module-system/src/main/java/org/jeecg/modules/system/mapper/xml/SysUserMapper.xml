@@ -219,4 +219,11 @@
 			and username != #{username}
 		</if>
 	</select>
-</mapper>
+
+	<!-- 查询用户的角色名称信息 -->
+	<select id="getRoleNamesByUserIds" resultType="org.jeecg.modules.system.vo.SysUserDepVo">
+		select distinct(r.id), r.role_name,ur.user_id from sys_user_role ur,sys_role r where r.id = ur.role_id and ur.user_id in
+		<foreach collection="userIds" index="index" item="id" open="(" separator="," close=")">
+			#{id}
+		</foreach>
+	</select></mapper>

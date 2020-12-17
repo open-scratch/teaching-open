@@ -444,4 +444,19 @@ public class SysUserServiceImpl extends ServiceImpl<SysUserMapper, SysUser> impl
 		return userMapper.queryByDepIds(departIds,username);
 	}
 
+	@Override
+	public Map<String, String> getRoleNamesByUserIds(List<String> userIds) {
+		List<SysUserDepVo> list = this.baseMapper.getRoleNamesByUserIds(userIds);
+		Map<String, String> res = new HashMap<String, String>();
+		list.forEach(item -> {
+					if (res.get(item.getUserId()) == null) {
+						res.put(item.getUserId(), item.getRoleName());
+					} else {
+						res.put(item.getUserId(), res.get(item.getUserId()) + "," + item.getRoleName());
+					}
+				}
+		);
+		return res;
+	}
+
 }
