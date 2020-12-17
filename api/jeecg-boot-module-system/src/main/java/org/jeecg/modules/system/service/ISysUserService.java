@@ -235,4 +235,11 @@ public interface ISysUserService extends IService<SysUser> {
 	 * @return
 	 */
 	List<SysUser> queryByDepIds(List<String> departIds, String username);
+
+	/**
+	 * 根据 userIds查询，查询用户角色的名称（多个部门名逗号隔开）
+	 * @param
+	 * @return
+	 */
+	Map<String, String> getRoleNamesByUserIds(List<String> userIds);
 }

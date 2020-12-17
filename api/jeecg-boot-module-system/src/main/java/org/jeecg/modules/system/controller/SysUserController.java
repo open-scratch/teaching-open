@@ -124,17 +124,16 @@ public class SysUserController {
 
 //		IPage<SysUserModel> pageList = sysUserService.page(page, queryWrapper);
 
-		//批量查询用户的所属部门
+        //批量查询用户的所属部门
         //step.1 先拿到全部的 useids
         //step.2 通过 useids，一次性查询用户的所属部门名字
-//        List<String> userIds = pageList.getRecords().stream().map(SysUser::getId).collect(Collectors.toList());
-//        if(userIds!=null && userIds.size()>0){
-//            Map<String,String>  useDepNames = sysUserService.getDepNamesByUserIds(userIds);
-//            pageList.getRecords().forEach(item->{
-//                //TODO 临时借用这个字段用于页面展示
-//                item.setOrgCode(useDepNames.get(item.getId()));
-//            });
-//        }
+        List<String> userIds = pageList.getRecords().stream().map(SysUser::getId).collect(Collectors.toList());
+        if(userIds!=null && userIds.size()>0){
+            Map<String,String>  roleNames = sysUserService.getRoleNamesByUserIds(userIds);
+            pageList.getRecords().forEach(item->{
+                item.setRoleTxt(roleNames.get(item.getId()));
+            });
+        }
 		result.setSuccess(true);
 		result.setResult(pageList);
 		log.info(pageList.toString());
@@ -404,30 +403,73 @@ public class SysUserController {
      * 导出excel
      *
      * @param request
-     * @param response
      */
     @RequestMapping(value = "/exportXls")
-    public ModelAndView exportXls(SysUser sysUser,HttpServletRequest request) {
+    public ModelAndView exportXls(SysUserModel sysUser,HttpServletRequest request) {
         // Step.1 组装查询条件
-        QueryWrapper<SysUser> queryWrapper = QueryGenerator.initQueryWrapper(sysUser, request.getParameterMap());
+        Map<String, String[]> param = request.getParameterMap();
+        log.info("param:{}", param);
+        String roleId = param.containsKey("roleId")?param.get("roleId")[0]:null;
+        String departId = param.containsKey("departId")?param.get("departId")[0]:null;
+        String userSex = param.containsKey("userSex")?param.get("userSex")[0]:null;
+        String status = param.containsKey("userStatus")?param.get("userStatus")[0]:null;
+
+        QueryWrapper<SysUserModel> queryWrapper = new QueryWrapper<>();
+//        queryWrapper.eq(org.apache.commons.lang3.StringUtils.isNotEmpty(provinceId), "sys_user.province", provinceId);
+//        queryWrapper.eq(org.apache.commons.lang3.StringUtils.isNotEmpty(cityId),"sys_user.city", cityId);
+        queryWrapper.eq(org.apache.commons.lang3.StringUtils.isNotEmpty(roleId), "role_id", roleId);
+        queryWrapper.eq(org.apache.commons.lang3.StringUtils.isNotEmpty(userSex), "sys_user.sex", userSex);
+        queryWrapper.eq(org.apache.commons.lang3.StringUtils.isNotEmpty(status), "sys_user.status", status);
+        if(StringUtils.isNotEmpty(departId)){
+            queryWrapper.in("sys_depart.id", Arrays.asList(departId.split(",")));
+        }
+        //TODO 外部模拟登陆临时账号，列表不显示
+        queryWrapper.ne("username","_reserve_user_external");
+        queryWrapper.eq("sys_user.del_flag", 0);
+        queryWrapper.groupBy("sys_user.id");
+
+        //选中数据
+        String selections = request.getParameter("selections");
+        if(!oConvertUtils.isEmpty(selections)){
+            queryWrapper.in("sys_user.id",selections.split(","));
+        }
+
+        QueryGenerator.installMplus(queryWrapper, sysUser, request.getParameterMap());
+        Page<SysUserModel> page = new Page<SysUserModel>(1, 999);
+        IPage<SysUserModel> pageList = sysUserService.getUserList(page, queryWrapper);
+
+        //批量查询用户的所属部门
+        //step.1 先拿到全部的 useids
+        //step.2 通过 useids，一次性查询用户的所属部门名字
+        List<String> userIds = pageList.getRecords().stream().map(SysUser::getId).collect(Collectors.toList());
+        if(userIds!=null && userIds.size()>0){
+            Map<String,String>  useDepNames = sysUserService.getDepNamesByUserIds(userIds);
+            pageList.getRecords().forEach(item->{
+                item.setOrgCodeTxt(useDepNames.get(item.getId()));
+            });
+
+            Map<String,String>  roleNames = sysUserService.getRoleNamesByUserIds(userIds);
+            pageList.getRecords().forEach(item->{
+                item.setRoleTxt(roleNames.get(item.getId()));
+            });
+        }
+
+//        QueryWrapper<SysUser> queryWrapper = QueryGenerator.initQueryWrapper(sysUser, request.getParameterMap());
         //Step.2 AutoPoi 导出Excel
         ModelAndView mv = new ModelAndView(new JeecgEntityExcelView());
         //update-begin--Author:kangxiaolin  Date:20180825 for：[03]用户导出，如果选择数据则只导出相关数据--------------------
-        String selections = request.getParameter("selections");
-       if(!oConvertUtils.isEmpty(selections)){
-           queryWrapper.in("id",selections.split(","));
-       }
+
         //update-end--Author:kangxiaolin  Date:20180825 for：[03]用户导出，如果选择数据则只导出相关数据----------------------
-        List<SysUser> pageList = sysUserService.list(queryWrapper);
+//        List<SysUser> pageList = sysUserService.list(queryWrapper);
 
         //导出文件名称
         mv.addObject(NormalExcelConstants.FILE_NAME, "用户列表");
-        mv.addObject(NormalExcelConstants.CLASS, SysUser.class);
-		LoginUser user = (LoginUser) SecurityUtils.getSubject().getPrincipal();
+        mv.addObject(NormalExcelConstants.CLASS, SysUserModel.class);
+        LoginUser user = (LoginUser) SecurityUtils.getSubject().getPrincipal();
         ExportParams exportParams = new ExportParams("用户列表数据", "导出人:"+user.getRealname(), "导出信息");
         exportParams.setImageBasePath(upLoadPath);
         mv.addObject(NormalExcelConstants.PARAMS, exportParams);
-        mv.addObject(NormalExcelConstants.DATA_LIST, pageList);
+        mv.addObject(NormalExcelConstants.DATA_LIST, pageList.getRecords());
         return mv;
     }
 
@@ -453,9 +495,9 @@ public class SysUserController {
             params.setHeadRows(1);
             params.setNeedSave(true);
             try {
-                List<SysUser> listSysUsers = ExcelImportUtil.importExcel(file.getInputStream(), SysUser.class, params);
+                List<SysUserModel> listSysUsers = ExcelImportUtil.importExcel(file.getInputStream(), SysUser.class, params);
                 for (int i = 0; i < listSysUsers.size(); i++) {
-                    SysUser sysUserExcel = listSysUsers.get(i);
+                    SysUserModel sysUserExcel = listSysUsers.get(i);
                     if (StringUtils.isBlank(sysUserExcel.getPassword())) {
                         // 密码默认为 “123456”
                         sysUserExcel.setPassword("123456");
@@ -486,8 +528,8 @@ public class SysUserController {
                             log.error(e.getMessage(), e);
                         }
                     }
-                    // 批量将部门和用户信息建立关联关系
-                    String departIds = sysUserExcel.getDepartIds();
+                    // 批量将负责部门和用户信息建立关联关系
+                    String departIds = sysUserExcel.getOrgCodeTxt();
                     if (StringUtils.isNotBlank(departIds)) {
                         String userId = sysUserExcel.getId();
                         String[] departIdArray = departIds.split(",");
@@ -496,6 +538,18 @@ public class SysUserController {
                             userDepartList.add(new SysUserDepart(userId, departId));
                         }
                         sysUserDepartService.saveBatch(userDepartList);
+                    }
+
+                    // 批量将角色和用户信息建立关联关系
+                    String roleIds = sysUserExcel.getRoleTxt();
+                    if (StringUtils.isNotBlank(roleIds)) {
+                        String userId = sysUserExcel.getId();
+                        String[] roleIdArray = roleIds.split(",");
+                        List<SysUserRole> userRoleList = new ArrayList<>(roleIdArray.length);
+                        for (String roleId : roleIdArray) {
+                            userRoleList.add(new SysUserRole(userId, roleId));
+                        }
+                        sysUserRoleService.saveBatch(userRoleList);
                     }
 
                 }

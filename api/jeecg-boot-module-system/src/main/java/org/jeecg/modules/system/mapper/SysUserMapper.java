@@ -142,4 +142,11 @@ public interface SysUserMapper extends BaseMapper<SysUser> {
 	 * @return
 	 */
 	List<SysUser> queryByDepIds(@Param("departIds")List<String> departIds,@Param("username") String username);
+
+	/**
+	 *  根据用户Ids,查询用户角色名称信息
+	 * @param userIds
+	 * @return
+	 */
+	List<SysUserDepVo> getRoleNamesByUserIds(@Param("userIds")List<String> userIds);
 }
