@@ -130,7 +130,7 @@ public class ShiroConfig {
 		filterChainDefinitionMap.put("/big/screen/**", "anon");
 
 		//公共接口
-		filterChainDefinitionMap.put("/common/**", "anon");
+//		filterChainDefinitionMap.put("/common/**", "anon");
 
 		//微信接口
 		filterChainDefinitionMap.put("/wechatAuth/**", "anon");
