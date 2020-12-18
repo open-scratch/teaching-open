@@ -495,7 +495,7 @@ public class SysUserController {
             params.setHeadRows(1);
             params.setNeedSave(true);
             try {
-                List<SysUserModel> listSysUsers = ExcelImportUtil.importExcel(file.getInputStream(), SysUser.class, params);
+                List<SysUserModel> listSysUsers = ExcelImportUtil.importExcel(file.getInputStream(), SysUserModel.class, params);
                 for (int i = 0; i < listSysUsers.size(); i++) {
                     SysUserModel sysUserExcel = listSysUsers.get(i);
                     if (StringUtils.isBlank(sysUserExcel.getPassword())) {
