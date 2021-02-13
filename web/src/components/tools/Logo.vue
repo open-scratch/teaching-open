@@ -5,7 +5,7 @@
       <img v-if="navTheme === 'dark'" src="~@/assets/logo-white.png" alt="logo">
       <img v-else src="~@/assets/logo.png" alt="logo">
       <!-- update-begin- author:sunjianlei --- date:20190814 --- for: logo颜色根据主题颜色变化 -->
-      <h1 v-if="showTitle">{{ title }}</h1>
+      <h1 v-if="showTitle">{{ brandName }}</h1>
     </router-link>
   </div>
 </template>
@@ -17,17 +17,17 @@
     name: 'Logo',
     mixins: [mixin],
     props: {
-      title: {
-        type: String,
-        default: 'Teaching',
-        required: false
-      },
       showTitle: {
         type: Boolean,
         default: true,
         required: false
       }
-    }
+    },
+     data () {
+      return {
+         brandName: window._CONFIG['brandName']
+      }
+    },
   }
 </script>
 <style lang="less" scoped>
