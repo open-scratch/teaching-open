@@ -102,6 +102,9 @@ public class LoginController {
 		userInfo(sysUser, result);
 		sysBaseAPI.addLog("用户名: " + username + ",登录成功！", CommonConstant.LOG_TYPE_1, null);
 
+		List<String> roleCodes = sysUserService.getRole(sysUser.getUsername());
+		result.getResult().put("role", roleCodes);
+
 		return result;
 	}
 	
