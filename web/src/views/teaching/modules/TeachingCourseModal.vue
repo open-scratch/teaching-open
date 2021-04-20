@@ -21,8 +21,8 @@
         </a-form-item>
         <a-form-item label="展示形式" :labelCol="labelCol" :wrapperCol="wrapperCol">
           <a-select placeholder="请选择展示形式" v-decorator="['showType', validatorRules.showType, {initialValue:'1'}]" @change="onShowTypeSelected">
-            <a-select-option value="1">地图</a-select-option>
-            <a-select-option value="2">卡片</a-select-option>
+            <a-select-option :value="1">地图</a-select-option>
+            <a-select-option :value="2">卡片</a-select-option>
           </a-select>
         </a-form-item>
         <a-form-item label="课程封面" :labelCol="labelCol" :wrapperCol="wrapperCol">

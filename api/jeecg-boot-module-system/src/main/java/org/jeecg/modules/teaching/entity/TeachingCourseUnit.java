@@ -82,6 +82,10 @@ public class TeachingCourseUnit implements Serializable {
 	@Excel(name = "课程视频", width = 15)
     @ApiModelProperty(value = "课程视频")
     private java.lang.String courseVideo;
+    /**课程案例*/
+    @Excel(name = "课程案例", width = 15)
+    @ApiModelProperty(value = "课程案例")
+    private java.lang.String courseCase;
 	/**课件PPT*/
 	@Excel(name = "课件PPT", width = 15)
     @ApiModelProperty(value = "课件PPT")
