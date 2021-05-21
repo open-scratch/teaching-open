@@ -127,7 +127,7 @@ spring:
         connectionProperties: druid.stat.mergeSql\=true;druid.stat.slowSqlMillis\=5000
       datasource:
         master:
-          url: jdbc:mysql://tzz.213.name:3306/teachingopen?characterEncoding=UTF-8&useUnicode=true&useSSL=false&tinyInt1isBit=false
+          url: jdbc:mysql://127.0.0.1:3306/teachingopen?characterEncoding=UTF-8&useUnicode=true&useSSL=false&tinyInt1isBit=false
           username: teachingopen
           password: teachingopen
           driver-class-name: com.mysql.jdbc.Driver
@@ -192,8 +192,8 @@ jeecg :
     staticDomain: ??
   #七牛云存储配置
   qiniu:
-    accessKey: 7r03dL3CsbQtW1DeV2xEic4DjRBIuMgCBHrkGjKo
-    secretKey: OQ3jE8SjeTpl34PfSq3C10tYVuE9KFfYujZwzUtJ
+    accessKey: ??
+    secretKey: ??
     bucketName: teaching-open
     staticDomain: //open.qn.teaching.vip
     
