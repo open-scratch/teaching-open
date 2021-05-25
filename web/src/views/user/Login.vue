@@ -83,7 +83,7 @@
         </a-tab-pane>
       </a-tabs>
 
-      <a-form-item v-show="false">
+      <a-form-item>
         <a-checkbox v-decorator="['rememberMe', {initialValue: true, valuePropName: 'checked'}]" >自动登陆</a-checkbox>
         <router-link :to="{ name: 'alteration'}" class="forge-password" style="float: right;">
           忘记密码

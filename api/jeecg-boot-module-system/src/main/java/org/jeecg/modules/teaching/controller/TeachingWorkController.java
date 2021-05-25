@@ -165,6 +165,14 @@ public class TeachingWorkController extends BaseController {
 		return Result.ok(pageList);
 	}
 
+	@GetMapping("greatWork")
+	public Result<?> greatWorkList(@RequestParam(name="pageNo", defaultValue="1") Integer pageNo,
+								   @RequestParam(name="pageSize", defaultValue="10") Integer pageSize){
+		IPage<StudentWorkModel> pageList = teachingWorkService.listWorkModel(new Page<>(pageNo, pageSize), new QueryWrapper<StudentWorkModel>()
+				.eq("teaching_work.work_status", 2));
+		return Result.ok(pageList);
+	}
+
 	 @AutoLog(value = "学生作业详情")
 	 @ApiOperation(value = "")
 	 @GetMapping("/studentWorkInfo")

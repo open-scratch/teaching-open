@@ -1,6 +1,8 @@
 package org.jeecg.modules.teaching.vo;
 
 import java.util.List;
+
+import org.jeecg.common.aspect.annotation.Dict;
 import org.jeecg.modules.teaching.entity.TeachingWork;
 import org.jeecg.modules.teaching.entity.TeachingWorkCorrect;
 import org.jeecg.modules.teaching.entity.TeachingWorkComment;
@@ -67,6 +69,11 @@ public class TeachingWorkPage {
 	@Excel(name = "作业类型", width = 15)
 	@ApiModelProperty(value = "作业类型")
 	private java.lang.String workType;
+	/**作业状态*/
+	@Excel(name = "作业状态", width = 15, dicCode = "work_status")
+	@Dict(dicCode = "work_status")
+	@ApiModelProperty(value = "作业状态")
+	private java.lang.String workStatus;
 	/**作文文件*/
 	@Excel(name = "作文文件", width = 15)
 	@ApiModelProperty(value = "作文文件")

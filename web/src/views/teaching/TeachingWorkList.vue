@@ -97,7 +97,7 @@
         </template>
 
         <span slot="action" slot-scope="text, record">
-          <a @click="handleEdit(record)">编辑</a>
+          <a @click="handleEdit(record)">批改</a>
           <a-divider type="vertical" v-if="record.workType==1||record.workType==2"/>
           <a @click="handlePreview(record)" v-if="record.workType==1||record.workType==2">预览</a>
           <a-divider type="vertical" />
@@ -192,6 +192,11 @@
             title:'作业类型',
             align:"center",
             dataIndex: 'workType_dictText'
+          },
+          {
+            title:'作业状态',
+            align:"center",
+            dataIndex: 'workStatus_dictText'
           },
           {
             title:'查看次数',

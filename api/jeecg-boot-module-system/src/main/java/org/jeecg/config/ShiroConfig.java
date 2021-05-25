@@ -141,6 +141,7 @@ public class ShiroConfig {
 		filterChainDefinitionMap.put("/teaching/teachingOrder/createOrder", "anon");
 		// 作业
 		filterChainDefinitionMap.put("/teaching/teachingWork/studentWorkInfo", "anon");
+		filterChainDefinitionMap.put("/teaching/teachingWork/greatWork", "anon");
 
 
 		//学生
