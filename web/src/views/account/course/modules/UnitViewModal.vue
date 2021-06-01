@@ -12,7 +12,7 @@
       <div class="video-area">
         <a-tabs>
           <a-tab-pane key="video" tab="视频">
-            <video :src="getQiniuFile(unit.courseVideo)" controls="true"></video>
+            <video oncontextmenu="return false;" :src="getQiniuFile(unit.courseVideo)" controls="true"></video>
           </a-tab-pane>
           <a-tab-pane key="scratch" tab="案例" v-if="unit.courseCase">
             <iframe id="player" :src="'/scratch3/player.html?workUrl=' + getQiniuFile(unit.courseCase)"></iframe>
