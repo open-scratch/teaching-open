@@ -40,7 +40,11 @@
           uploadParam.projectKey = uploadFile(res.key, '学生作业-sb3', res.key)
         }
         if (uploadParam.projectKey && uploadParam.coverKey) {
-          uploadWork(uploadParam.projectKey, uploadParam.coverKey, uploadParam.projectTitle)
+          if(confirm("是否公开作品？")){
+            uploadWork(uploadParam.projectKey, uploadParam.coverKey, uploadParam.projectTitle, 1)
+          }else{
+            uploadWork(uploadParam.projectKey, uploadParam.coverKey, uploadParam.projectTitle, 0)
+          }
         }
       }
     }
@@ -214,7 +218,7 @@
     }
 
     //上传作业
-    function uploadWork(projectKey, coverKey, projectTitle) {
+    function uploadWork(projectKey, coverKey, projectTitle, workStatus) {
       $.ajax({
         url: '/api/teaching/teachingWork/submit',
         type: 'POST',
@@ -229,7 +233,8 @@
           workFile: projectKey,
           workName: projectTitle,
           id: workId,
-          workType: 2
+          workType: 2,
+          workStatus: workStatus
         }),
         success: function (res) {
           canShare = true
