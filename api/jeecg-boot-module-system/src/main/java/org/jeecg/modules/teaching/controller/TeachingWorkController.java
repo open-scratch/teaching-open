@@ -214,7 +214,7 @@ public class TeachingWorkController extends BaseController {
 									  HttpServletRequest request) {
 		 QueryWrapper<StudentWorkModel> queryWrapper = new QueryWrapper<StudentWorkModel>();
 		 queryWrapper.orderByDesc("teaching_work.star_num");
-		 queryWrapper.eq("teaching_work.work_status", 1);
+		 queryWrapper.ge("teaching_work.work_status", 1);
 		 IPage<StudentWorkModel> pageList = teachingWorkService.listWorkModel(new Page<>(pageNo, pageSize), queryWrapper);
 		 return Result.ok(pageList);
 	 }
