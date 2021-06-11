@@ -58,7 +58,7 @@
         <mybatis-plus.version>3.1.2</mybatis-plus.version>
         <druid.version>1.1.17</druid.version>
         <jwt.version>0.9.1</jwt.version>
-        <commons.version>2.6</commons.version>
+        <commons.version>2.7</commons.version>
         <aliyun-java-sdk-core.version>3.2.3</aliyun-java-sdk-core.version>
 		<aliyun-java-sdk-dysmsapi.version>1.0.0</aliyun-java-sdk-dysmsapi.version>
 		<aliyun.oss.version>3.6.0</aliyun.oss.version>
