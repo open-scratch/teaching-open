@@ -20,7 +20,9 @@ import org.jeecg.modules.system.model.TreeSelectModel;
  */
 public interface ISysDictService extends IService<SysDict> {
 
-    public List<DictModel> queryDictItemsByCode(String code);
+	public DictModel queryDictItemByCode(String code, String key);
+
+	public List<DictModel> queryDictItemsByCode(String code);
 
     public Map<String,List<DictModel>> queryAllDictItems();
 

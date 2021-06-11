@@ -42,6 +42,13 @@ public class SysDictServiceImpl extends ServiceImpl<SysDictMapper, SysDict> impl
     @Autowired
     private SysDictItemMapper sysDictItemMapper;
 
+	@Override
+	@Cacheable(value = CacheConstant.SYS_DICT_CACHE,key = "#code+#key")
+	public DictModel queryDictItemByCode(String code, String key) {
+		log.debug("无缓存dictCache的时候调用这里！");
+		return sysDictMapper.queryDictItemByCode(code, key);
+	}
+
 	/**
 	 * 通过查询指定code 获取字典
 	 * @param code

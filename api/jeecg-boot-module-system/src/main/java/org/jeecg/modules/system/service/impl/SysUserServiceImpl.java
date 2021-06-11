@@ -118,7 +118,7 @@ public class SysUserServiceImpl extends ServiceImpl<SysUserMapper, SysUser> impl
 	@Override
 	@Transactional
 	public void addUserWithRole(SysUser user, String roles) {
-		this.save(user);
+//		this.save(user);
 		if(oConvertUtils.isNotEmpty(roles)) {
 			String[] arr = roles.split(",");
 			for (String roleId : arr) {

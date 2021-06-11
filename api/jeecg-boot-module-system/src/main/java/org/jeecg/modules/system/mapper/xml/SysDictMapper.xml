@@ -105,5 +105,11 @@
 			and ${query.code} = #{query.codeValue}
 		</if>
 	</select>
+    <select id="queryDictItemByCode" resultType="org.jeecg.common.system.vo.DictModel">
+		select s.item_value as "value",s.item_text as "text" from sys_dict_item s
+		where dict_id = (select id from sys_dict where dict_code = #{code})
+		  and s.item_text = #{key}
+		limit 1
+	</select>
 
 </mapper>

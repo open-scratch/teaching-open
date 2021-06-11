@@ -9,7 +9,10 @@ import java.util.stream.Collectors;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import org.apache.commons.lang.StringUtils;
 import org.jeecg.common.aspect.annotation.PermissionData;
+import org.jeecg.common.util.IPUtils;
+import org.jeecg.common.util.RedisUtil;
 import org.jeecg.modules.common.controller.BaseController;
 import org.jeecg.modules.teaching.model.StudentWorkModel;
 import org.jeecg.modules.teaching.vo.StudentWorkSendVO;
@@ -62,6 +65,8 @@ public class TeachingWorkController extends BaseController {
 	private ITeachingWorkCorrectService teachingWorkCorrectService;
 	@Autowired
 	private ITeachingWorkCommentService teachingWorkCommentService;
+	@Autowired
+	private RedisUtil redisUtil;
 
 	 /**
 	  * 我的作业分页列表查询
@@ -72,7 +77,6 @@ public class TeachingWorkController extends BaseController {
 	  * @param req
 	  * @return
 	  */
-	 @AutoLog(value = "我的作业-分页列表查询")
 	 @ApiOperation(value = "我的作业-分页列表查询", notes = "我的作业-分页列表查询")
 	 @GetMapping(value = "/mine")
 	 public Result<?> mine(StudentWorkModel teachingWork,
@@ -165,8 +169,56 @@ public class TeachingWorkController extends BaseController {
 		return Result.ok(pageList);
 	}
 
-	 @AutoLog(value = "学生作业详情")
-	 @ApiOperation(value = "")
+	@GetMapping("greatWork")
+	public Result<?> greatWorkList(@RequestParam(name="pageNo", defaultValue="1") Integer pageNo,
+								   @RequestParam(name="pageSize", defaultValue="10") Integer pageSize){
+		IPage<StudentWorkModel> pageList = teachingWorkService.listWorkModel(new Page<>(pageNo, pageSize), new QueryWrapper<StudentWorkModel>()
+				.eq("teaching_work.work_status", 2));
+		return Result.ok(pageList);
+	}
+
+	 @ApiOperation(value = "点赞作品")
+	 @GetMapping("/starWork")
+	 public Result starWork(@RequestParam(name = "workId") String workId, HttpServletRequest request) {
+		 Result<TeachingWork> result = new Result<TeachingWork>();
+		 LoginUser sysUser = (LoginUser) SecurityUtils.getSubject().getPrincipal();
+		 String userId = sysUser == null ? null : sysUser.getId();
+		 TeachingWork teachingWork = teachingWorkService.getById(workId);
+		 if (teachingWork == null) {
+			 result.error500("未找到对作业");
+		 } else {
+			 String ip = IPUtils.getIpAddr(request);
+			 if (redisUtil.get("starWork-" + workId + userId + ip) == null) {
+				 if (Objects.nonNull(teachingWork.getStarNum())) {
+					 teachingWork.setStarNum(teachingWork.getStarNum() + 1);
+				 } else {
+					 teachingWork.setStarNum(1);
+				 }
+				 teachingWorkService.updateById(teachingWork);
+				 redisUtil.set("starWork-" + workId + userId + ip, "1");
+				 result.setMessage("点赞成功");
+				 result.setSuccess(true);
+			 } else {
+				 result.setMessage("已经点赞过了");
+				 result.setSuccess(true);
+			 }
+		 }
+		 return result;
+	 }
+
+	 //劲作排行榜(本周作品,年度作品) TODO 缓存1
+	 @ApiOperation(value = "劲作排行榜")
+	 @GetMapping(value = "/leaderboard")
+	 public Result<?> listLeaderboard(@RequestParam(name = "pageNo", defaultValue = "1") Integer pageNo,
+									  @RequestParam(name = "pageSize", defaultValue = "10") Integer pageSize,
+									  HttpServletRequest request) {
+		 QueryWrapper<StudentWorkModel> queryWrapper = new QueryWrapper<StudentWorkModel>();
+		 queryWrapper.orderByDesc("teaching_work.star_num");
+		 queryWrapper.ge("teaching_work.work_status", 1);
+		 IPage<StudentWorkModel> pageList = teachingWorkService.listWorkModel(new Page<>(pageNo, pageSize), queryWrapper);
+		 return Result.ok(pageList);
+	 }
+
 	 @GetMapping("/studentWorkInfo")
 	 public Result<StudentWorkModel> studentWorkInfo(@RequestParam(name = "workId") String workId){
 		 Result<StudentWorkModel> result = new Result<StudentWorkModel>();
@@ -174,6 +226,10 @@ public class TeachingWorkController extends BaseController {
 		 if (teachingWork == null) {
 			 result.error500("未找到对作业");
 		 } else {
+		 	TeachingWork work = new TeachingWork();
+		 	work.setId(teachingWork.getId());
+		 	work.setViewNum(teachingWork.getViewNum() + 1);
+		 	teachingWorkService.updateById(work);
 			 result.setResult(teachingWork);
 			 result.setSuccess(true);
 		 }

@@ -115,4 +115,6 @@ public interface SysDictMapper extends BaseMapper<SysDict> {
 	 */
 	@Deprecated
 	public Page<DictModel> queryDictTablePageList(Page page, @Param("query") DictQuery query);
+
+	public DictModel queryDictItemByCode(@Param("code") String code, @Param("key") String key);
 }
