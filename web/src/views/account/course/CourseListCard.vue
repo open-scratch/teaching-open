@@ -3,25 +3,38 @@
     <a-list :grid="{ gutter: 24, lg: 3, md: 1, sm: 1, xs: 1 }" :dataSource="dataSource">
       <a-list-item slot="renderItem" slot-scope="item, index">
         <a-card :hoverable="true">
-
           <!-- <template class="ant-card-extra" slot="extra">
             <span class="create-time">{{item.createTime}}</span>
           </template> -->
-
           <a-card-meta>
             <div style="margin-bottom: 3px" slot="title">{{ item.courseName }}</div>
             <div class="meta-cardInfo" slot="description">
-               <router-link v-if="item.showType==1" :to="{ name: 'teaching-mineCourse-courseUnitMap',  query: {id:item.id}}">
-                 <img :src="getQiniuFile(item.courseCover)" height="25px" alt="图片不存在" style="width:100%;height:100%;"/>
+              <router-link
+                v-if="item.showType == 1"
+                :to="{ name: 'teaching-mineCourse-courseUnitMap', query: { id: item.id } }"
+              >
+                <img
+                  :src="getQiniuFile(item.courseCover)"
+                  height="25px"
+                  alt="封面不存在"
+                  style="width: 100%; height: 100%"
+                />
               </router-link>
-               <router-link v-if="item.showType==2" :to="{ name: 'teaching-mineCourse-courseUnitCard',  query: {id:item.id}}">
-                 <img :src="getQiniuFile(item.courseCover)" height="25px" alt="图片不存在" style="width:100%;height:100%;"/>
+              <router-link
+                v-if="item.showType == 2"
+                :to="{ name: 'teaching-mineCourse-courseUnitCard', query: { id: item.id } }"
+              >
+                <img
+                  :src="getQiniuFile(item.courseCover)"
+                  height="25px"
+                  alt="封面不存在"
+                  style="width: 100%; height: 100%"
+                />
               </router-link>
             </div>
           </a-card-meta>
-          <br>
+          <br />
           <span v-html="item.courseDesc" class="article-content"></span>
-
         </a-card>
       </a-list-item>
     </a-list>
@@ -34,15 +47,15 @@ export default {
   components: {},
   data() {
     return {
-      dataSource: []
+      dataSource: [],
     }
   },
   mounted() {
     this.getCourseList()
   },
   methods: {
-    getCourseList: function() {
-      getAction('/teaching/teachingCourse/mineCourse', {}).then(res => {
+    getCourseList: function () {
+      getAction('/teaching/teachingCourse/mineCourse', {}).then((res) => {
         if (res.success) {
           this.dataSource = res.result
         }
@@ -52,17 +65,17 @@ export default {
         this.loading = false
       })
     },
-    getQiniuFile(text){
-          if(!text){
-            // this.$message.warning("未知的文件")
-            return;
-          }
-          if(text.indexOf(",")>0){
-            text = text.substring(0,text.indexOf(","))
-          }
-          return window._CONFIG['qn_base'] + text;
+    getQiniuFile(text) {
+      if (!text) {
+        // this.$message.warning("未知的文件")
+        return
       }
-  }
+      if (text.indexOf(',') > 0) {
+        text = text.substring(0, text.indexOf(','))
+      }
+      return window._CONFIG['qn_base'] + text
+    },
+  },
 }
 </script>
 
@@ -71,8 +84,8 @@ export default {
   .meta-cardInfo {
     zoom: 1;
     margin-top: 16px;
-    .title{
-        margin-right:20px;
+    .title {
+      margin-right: 20px;
     }
     img {
       width: 100%;

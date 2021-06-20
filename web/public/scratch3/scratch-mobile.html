@@ -14,6 +14,7 @@
   <script src="../js/common.js"></script>
   <script>
     var workId = urlParams('workId')
+    var workUrl = urlParams('workUrl')
 
     window.scratchConfig = {
       stageArea: {
@@ -48,10 +49,10 @@
         window.vm = vm
         console.log(vm);
         console.log("VM初始化完毕")
-
+      },
+      handleDefaultProjectLoaded: () => {
         if (workId) {
           getWorkInfo(workId, function (info) {
-            console.log(info)
             window.scratch.loadProject(info.workFileUrl, () => {
               document.title = info.realname + ' 编程作品'
               vm.runtime.start()
@@ -60,7 +61,8 @@
             })
           })
         }
-      }
+      },
+      defaultProjectURL: "./static/blank.sb3"
     }
   </script>
 </head>

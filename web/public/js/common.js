@@ -27,6 +27,15 @@ window.getUserInfo = function() {
   }
 }
 
+window.getUserRole = function(){
+  userRole = localStorage.getItem('pro__Login_UserRole')
+  if(userRole){
+    userRole = JSON.parse(userRole).value
+    console.log(userRole)
+    return userRole
+  }
+}
+
 window.getUserToken = function() {
   var token = JSON.parse(localStorage.getItem("pro__Access-Token"))
   return token==null?null:token.value
@@ -65,7 +74,7 @@ window.getQiniuToken = function() {
     error: function(e) {
       if (e.responseJSON.status == 500) {
         //alert(e.responseJSON.message);
-        // location.href = '/'
+        location.href = '/'
       }
       console.log(e)
     }

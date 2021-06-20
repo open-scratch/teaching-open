@@ -11,6 +11,7 @@
   <script src="../js/common.js"></script>
   <script>
     var workId = urlParams('workId')
+    var workUrl = urlParams('workUrl')
     window.scratchConfig = {
               stageArea: {
         scale: 1,
@@ -44,11 +45,18 @@
         window.vm = vm
       },
       handleDefaultProjectLoaded: () => {
-        getWorkInfo(workId, function (info) {
-          window.scratch.loadProject(info.workFileUrl, () => {
+        if(workUrl){
+          window.scratch.loadProject(workUrl, () => {
             vm.runtime.start()
           })
-        })
+        }
+        if(workId){
+          getWorkInfo(workId, function (info) {
+            window.scratch.loadProject(info.workFileUrl, () => {
+              vm.runtime.start()
+            })
+          })
+        }
       }
     }
   </script>

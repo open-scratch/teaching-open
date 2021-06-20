@@ -6,7 +6,7 @@
           <a-form-item label="真实姓名" :labelCol="labelCol" :wrapperCol="wrapperCol">
             <a-input placeholder="请输入真实姓名" v-decorator="[ 'realname', validatorRules.realname]" />
           </a-form-item>
-          <a-form-item v-if="false" label="头像" :labelCol="labelCol" :wrapperCol="wrapperCol">
+          <a-form-item label="头像" :labelCol="labelCol" :wrapperCol="wrapperCol">
             <a-upload
               listType="picture-card"
               class="avatar-uploader"
@@ -73,6 +73,8 @@
 </template>
 
 <script>
+import Vue from 'vue'
+ import { ACCESS_TOKEN } from "@/store/mutation-types"
 import AvatarModal from './AvatarModal'
 import moment from 'moment'
 import pick from 'lodash.pick'
@@ -131,7 +133,8 @@ export default {
         fileUpload: window._CONFIG['domianURL'] + '/sys/common/upload',
         userInfo: "/teaching/user/info",
         userHonor: "/teaching/teachingUserHonor/userHonor",
-        editUser: "/teaching/user/edit"
+        editUser: "/teaching/user/edit",
+        imgerver: window._CONFIG['domianURL'] + '/sys/common/static'
       }
     }
   },
@@ -143,6 +146,8 @@ export default {
     
   created() {
     this.getUserInfo()
+    const token = Vue.ls.get(ACCESS_TOKEN);
+    this.headers = {"X-Access-Token":token}
   },
   methods: {
     moment,
@@ -152,8 +157,9 @@ export default {
         if (res.success) {
           that.userInfo = res.result
           that.$nextTick(() => {
-            that.form.setFieldsValue(pick(that.userInfo, 'username', 'sex', 'realname', 'email', 'phone'))
+            that.form.setFieldsValue(pick(that.userInfo, 'username', 'sex', 'realname', 'email', 'phone', 'avatar'))
           })
+          that.picUrl = this.getAvatarView()
           //that.loadUserHonor(that.userInfo.id)
         }
       })
@@ -276,7 +282,7 @@ export default {
         this.uploadLoading = false
         console.log(response)
         if (response.success) {
-          this.model.avatar = response.message
+          this.userInfo.avatar = response.message
           this.picUrl = 'Has no pic url yet'
         } else {
           this.$message.warning(response.message)
@@ -284,7 +290,7 @@ export default {
       }
     },
     getAvatarView() {
-      return this.url.imgerver + '/' + this.model.avatar
+      return this.url.imgerver + '/' + this.userInfo.avatar
     }
   }
 }

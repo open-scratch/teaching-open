@@ -97,7 +97,7 @@
         </template>
 
         <span slot="action" slot-scope="text, record">
-          <a @click="handleEdit(record)">编辑</a>
+          <a @click="handleEdit(record)">批改</a>
           <a-divider type="vertical" v-if="record.workType==1||record.workType==2"/>
           <a @click="handlePreview(record)" v-if="record.workType==1||record.workType==2">预览</a>
           <a-divider type="vertical" />
@@ -194,6 +194,11 @@
             dataIndex: 'workType_dictText'
           },
           {
+            title:'作业状态',
+            align:"center",
+            dataIndex: 'workStatus_dictText'
+          },
+          {
             title:'查看次数',
             align:"center",
             dataIndex: 'viewNum'
@@ -272,6 +277,9 @@
           case '3':
             return window.open('/scratchjr/editor.html?mode=edit&filepath=' + record.workFileUrl)
             break;
+          case '4':
+            return window.open('/python/index.html?workId='+record.id)
+            break
           default:
             return window.open(record.workFileUrl)
         }

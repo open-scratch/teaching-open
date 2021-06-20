@@ -29,7 +29,12 @@
           </a-col>
           <a-col :span="12">
             <a-form-item label="作业类型" :labelCol="labelCol" :wrapperCol="wrapperCol">
-              <j-dict-select-tag type="list" v-decorator="['workType', validatorRules.workType]" :trigger-change="true" dictCode="work_type" placeholder="请选择作业类型"/>
+              <j-dict-select-tag disabled type="list" v-decorator="['workType', validatorRules.workType]" :trigger-change="true" dictCode="work_type" placeholder="请选择作业类型"/>
+            </a-form-item>
+          </a-col>
+          <a-col :span="12">
+            <a-form-item label="作业状态" :labelCol="labelCol" :wrapperCol="wrapperCol">
+              <j-dict-select-tag type="list" v-decorator="['workStatus', validatorRules.workStatus]" :trigger-change="true" dictCode="work_status" placeholder="请选择作业状态"/>
             </a-form-item>
           </a-col>
           <a-col :span="12" v-show="false">
@@ -118,6 +123,9 @@
           workType: {rules: [
             {required: true, message: '请输入作业类型!'},
           ]},
+          workStatus: {rules: [
+            {required: true, message: '请输入作业状态!'},
+          ]},
           workFile: {rules: [
             {required: true, message: '请输入作文文件!'},
           ]},
@@ -202,7 +210,7 @@
       },
       /** 调用完edit()方法之后会自动调用此方法 */
       editAfter() {
-        let fieldval = pick(this.model,'userId','courseId','workName','workType','workFile','workCover','viewNum','starNum','collectNum')
+        let fieldval = pick(this.model,'userId','courseId','workName','workStatus','workType','workFile','workCover','viewNum','starNum','collectNum')
         this.$nextTick(() => {
           this.form.setFieldsValue(fieldval)
           this.$refs.teachingWorkCorrectForm.initFormData(this.url.teachingWorkCorrect.list,this.model.id)
@@ -227,7 +235,7 @@
         this.$message.error(msg)
       },
      popupCallback(row){
-       this.form.setFieldsValue(pick(row,'userId','courseId','workName','workType','workFile','workCover','viewNum','starNum','collectNum'))
+       this.form.setFieldsValue(pick(row,'userId','courseId','workName','workStatus','workType','workFile','workCover','viewNum','starNum','collectNum'))
      },
 
     }

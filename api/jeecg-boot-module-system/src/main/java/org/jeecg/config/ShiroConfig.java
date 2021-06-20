@@ -130,7 +130,7 @@ public class ShiroConfig {
 		filterChainDefinitionMap.put("/big/screen/**", "anon");
 
 		//公共接口
-		filterChainDefinitionMap.put("/common/**", "anon");
+//		filterChainDefinitionMap.put("/common/**", "anon");
 
 		//微信接口
 		filterChainDefinitionMap.put("/wechatAuth/**", "anon");
@@ -139,8 +139,12 @@ public class ShiroConfig {
 
 		//支付
 		filterChainDefinitionMap.put("/teaching/teachingOrder/createOrder", "anon");
+
 		// 作业
 		filterChainDefinitionMap.put("/teaching/teachingWork/studentWorkInfo", "anon");
+		filterChainDefinitionMap.put("/teaching/teachingWork/greatWork", "anon");
+		filterChainDefinitionMap.put("/teaching/teachingWork/starWork", "anon");
+		filterChainDefinitionMap.put("/teaching/teachingWork/leaderboard", "anon");
 
 
 		//学生

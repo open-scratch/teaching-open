@@ -27,6 +27,15 @@ public class StudentWorkModel extends TeachingWork {
 
     private String sysOrgCode;
 
+    private String avatar;
+
+    public String getAvatarUrl(){
+        if (this.avatar == null){
+            return null;
+        }
+        return this.avatar;
+    }
+
 
     public String getCoverFileUrl(){
         if (this.coverFileUrl == null){

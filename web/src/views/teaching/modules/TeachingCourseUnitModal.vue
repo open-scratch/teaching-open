@@ -25,7 +25,10 @@
         <a-form-item label="课程视频" :labelCol="labelCol" :wrapperCol="wrapperCol">
           <j-upload v-decorator="['courseVideo', validatorRules.courseVideo]" :uploadTarget="'qiniu'" :maxFile="1" :trigger-change="true"></j-upload>
         </a-form-item>
-        <a-form-item label="课件PPT" :labelCol="labelCol" :wrapperCol="wrapperCol">
+        <a-form-item label="课程案例" :labelCol="labelCol" :wrapperCol="wrapperCol">
+          <j-upload v-decorator="['courseCase', validatorRules.courseCase]" :uploadTarget="'qiniu'" :maxFile="1" :trigger-change="true"></j-upload>
+        </a-form-item>
+        <a-form-item label="课件资料" :labelCol="labelCol" :wrapperCol="wrapperCol">
           <j-upload v-decorator="['coursePpt', validatorRules.coursePpt]" :uploadTarget="'qiniu'" :maxFile="1" :trigger-change="true"></j-upload>
         </a-form-item>
         <a-form-item label="作业类型" :labelCol="labelCol" :wrapperCol="wrapperCol">
@@ -42,7 +45,9 @@
         </a-form-item>
       </a-form>
     </a-spin>
-    <a-button type="primary" @click="handleOk">确定</a-button>
+    <div class="drawer-footer">
+      <a-button type="primary" @click="handleOk">确定</a-button>
+    </div>
   </a-drawer>
 </template>
 
@@ -87,6 +92,8 @@
             {required: true, message: '请选择所属课程!'},
           ]},
           courseVideo: {rules: [
+          ]},
+          courseCase: {rules: [
           ]},
           coursePpt: {rules: [
           ]},
@@ -186,3 +193,22 @@
     }
   }
 </script>
+
+<style lang="less" scoped>
+.drawer-footer {
+  position: absolute;
+  bottom: -8px;
+  width: 100%;
+  border-top: 1px solid #e8e8e8;
+  padding: 10px 16px;
+  text-align: right;
+  left: 0;
+  background: #fff;
+  border-radius: 0 0 2px 2px;
+  .ant-btn {
+    margin-left: 30px;
+    margin-bottom: 30px;
+    float: right;
+  }
+}
+</style>

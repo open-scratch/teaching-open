@@ -17,7 +17,8 @@
             <div class="meta-cardInfo" slot="description">
               <div slot="title">{{item.workName}}</div>
               <a :href="getEditorHref(item)" target="_blank">
-                <img :src="item.coverFileUrl" />
+                <img v-if="item.coverFileUrl" :src="item.coverFileUrl" />
+                <img v-if="item.workType==4" src="@/assets/python.png" alt="">
               </a>
             </div>
           </a-card-meta>
@@ -112,6 +113,8 @@ export default {
         case '3':
           return '/scratchjr/editor.html?mode=edit&filepath=' + item.workFileUrl
           break;
+        case '4':
+        return '/python/index.html?workId=' + item.id
         default:
           return item.workFileUrl
       }
@@ -130,6 +133,7 @@ export default {
     margin-top: 16px;
     img {
       width: 100%;
+      height: ;
     }
     > div {
       position: relative;

@@ -1,6 +1,6 @@
 import Vue from 'vue'
 import { login, logout, phoneLogin, thirdLogin } from "@/api/login"
-import { ACCESS_TOKEN, USER_NAME,USER_INFO,USER_AUTH,SYS_BUTTON_AUTH,UI_CACHE_DB_DICT_DATA } from "@/store/mutation-types"
+import { ACCESS_TOKEN, USER_NAME,USER_INFO, USER_ROLE, USER_AUTH,SYS_BUTTON_AUTH,UI_CACHE_DB_DICT_DATA } from "@/store/mutation-types"
 import { welcome } from "@/utils/util"
 import { queryPermissionsByUser } from '@/api/api'
 import { getAction } from '@/api/manage'
@@ -13,7 +13,8 @@ const user = {
     welcome: '',
     avatar: '',
     permissionList: [],
-    info: {}
+    info: {},
+    userRole: [],
   },
 
   mutations: {
@@ -33,6 +34,9 @@ const user = {
     },
     SET_INFO: (state, info) => {
       state.info = info
+    },
+    SET_USER_ROLE: (state, info) => {
+      state.userRole = info
     },
   },
 
@@ -68,12 +72,16 @@ const user = {
           if(response.code =='200'){
             const result = response.result
             const userInfo = result.userInfo
-            Vue.ls.set(ACCESS_TOKEN, result.token, 7 * 24 * 60 * 60 * 1000)
-            Vue.ls.set(USER_NAME, userInfo.username, 7 * 24 * 60 * 60 * 1000)
-            Vue.ls.set(USER_INFO, userInfo, 7 * 24 * 60 * 60 * 1000)
-            Vue.ls.set(UI_CACHE_DB_DICT_DATA, result.sysAllDictItems, 7 * 24 * 60 * 60 * 1000)
+            const userRole = result.role
+            const expire = 7 * 24 * 60 * 60 * 1000
+            Vue.ls.set(ACCESS_TOKEN, result.token, expire)
+            Vue.ls.set(USER_NAME, userInfo.username, expire)
+            Vue.ls.set(USER_INFO, userInfo, expire)
+            Vue.ls.set(USER_ROLE, userRole, expire)
+            Vue.ls.set(UI_CACHE_DB_DICT_DATA, result.sysAllDictItems, expire)
             commit('SET_TOKEN', result.token)
             commit('SET_INFO', userInfo)
+            commit('SET_USER_ROLE', userRole)
             commit('SET_NAME', { username: userInfo.username,realname: userInfo.realname, welcome: welcome() })
             commit('SET_AVATAR', userInfo.avatar)
             resolve(response)

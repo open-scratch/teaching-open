@@ -21,6 +21,7 @@ import org.jeecg.common.constant.CommonConstant;
 import org.jeecg.common.system.api.ISysBaseAPI;
 import org.jeecg.common.system.query.QueryGenerator;
 import org.jeecg.common.system.util.JwtUtil;
+import org.jeecg.common.system.vo.DictModel;
 import org.jeecg.common.system.vo.LoginUser;
 import org.jeecg.common.util.PasswordUtil;
 import org.jeecg.common.util.PmsUtil;
@@ -87,6 +88,9 @@ public class SysUserController {
 
     @Autowired
     private ISysDepartRoleService departRoleService;
+
+    @Autowired
+    private ISysDictService sysDictService;
 
 	@Autowired
 	private RedisUtil redisUtil;
@@ -155,6 +159,7 @@ public class SysUserController {
 			user.setPassword(passwordEncode);
 			user.setStatus(1);
 			user.setDelFlag(CommonConstant.DEL_FLAG_0);
+			sysUserService.save(user);
 			sysUserService.addUserWithRole(user, selectedRoles);
             sysUserService.addUserWithDepart(user, selectedDeparts);
 			result.success("添加成功！");
@@ -973,12 +978,13 @@ public class SysUserController {
                 return result;
             }
         }
-
-		if (!smscode.equals(code)) {
-			result.setMessage("手机验证码错误");
-			result.setSuccess(false);
-			return result;
-		}
+        if(oConvertUtils.isNotEmpty(phone)){
+            if (!smscode.equals(code)) {
+                result.setMessage("手机验证码错误");
+                result.setSuccess(false);
+                return result;
+            }
+        }
 
 		try {
 			user.setCreateTime(new Date());// 设置创建时间
@@ -993,8 +999,17 @@ public class SysUserController {
 			user.setStatus(CommonConstant.USER_UNFREEZE);
 			user.setDelFlag(CommonConstant.DEL_FLAG_0);
 			user.setActivitiSync(CommonConstant.ACT_SYNC_0);
-			sysUserService.addUserWithRole(user,"ee8626f80f7c2619917b6236f3a7f02b");//默认临时角色 test
-			result.success("注册成功");
+			sysUserService.save(user);
+            DictModel defaultRole = sysDictService.queryDictItemByCode("sys_config", "default_role");
+            if (defaultRole != null){
+//                sysUserService.addUserWithRole(user,"ee8626f80f7c2619917b6236f3a7f02b");//默认 test
+                sysUserService.addUserWithRole(user,defaultRole.getValue());
+            }
+            DictModel defaultDepart = sysDictService.queryDictItemByCode("sys_config", "default_depart");
+            if (defaultDepart != null){
+                sysUserService.addUserWithDepart(user, defaultDepart.getValue());
+            }
+            result.success("注册成功");
 		} catch (Exception e) {
 			result.error500("注册失败");
 		}
