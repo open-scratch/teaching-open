@@ -143,7 +143,7 @@
         this.model = Object.assign({}, record);
         this.visible = true;
         this.$nextTick(() => {
-          this.form.setFieldsValue(pick(this.model,'createBy','createTime','unitName','unitIntro','courseId','courseVideo','coursePpt','courseWorkType','courseWork','courseWorkAnswer','coursePlan','mapX','mapY'))
+          this.form.setFieldsValue(pick(this.model,'createBy','createTime','unitName','unitIntro','courseId','courseVideo','coursePpt','courseWorkType','courseWork','courseWorkAnswer','coursePlan','courseCase','mapX','mapY'))
         })
       },
       close () {
@@ -186,7 +186,7 @@
         this.close()
       },
       popupCallback(row){
-        this.form.setFieldsValue(pick(row,'createBy','createTime','unitName','unitIntro','courseId','courseVideo','coursePpt','courseWorkType','courseWork','courseWorkAnswer','coursePlan','mapX','mapY'))
+        this.form.setFieldsValue(pick(row,'createBy','createTime','unitName','unitIntro','courseId','courseVideo','coursePpt','courseWorkType','courseWork','courseWorkAnswer','coursePlan','courseCase','mapX','mapY'))
       },
 
       
