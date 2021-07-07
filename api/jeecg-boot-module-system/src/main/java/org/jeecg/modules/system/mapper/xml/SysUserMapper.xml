@@ -81,6 +81,9 @@
 		<if test="username!=null and username!=''">
 			and username = #{username}
 		</if>
+		<if test="realname!=null and realname!=''">
+			and realname like concat('%',#{realname},'%')
+		</if>
 	</select>
 
 	<!-- 根据角色Id查询 -->
