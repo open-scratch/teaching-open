@@ -120,7 +120,7 @@ public class SysUserController {
         queryWrapper.eq(org.apache.commons.lang3.StringUtils.isNotEmpty(cityId),"sys_user.city", cityId);
         queryWrapper.eq(org.apache.commons.lang3.StringUtils.isNotEmpty(roleId), "role_id", roleId);
         queryWrapper.eq(org.apache.commons.lang3.StringUtils.isNotEmpty(departName), "sys_depart.depart_name", departName);
-
+        queryWrapper.eq("sys_user.del_flag", 0);
         QueryGenerator.installMplus(queryWrapper, user, req.getParameterMap());
 
 		Page<SysUserModel> page = new Page<SysUserModel>(pageNo, pageSize);
@@ -727,6 +727,7 @@ public class SysUserController {
         Page<SysUser> page = new Page<SysUser>(pageNo, pageSize);
         String depId = req.getParameter("depId");
         String username = req.getParameter("username");
+        String realname = req.getParameter("realname");
         //根据部门ID查询,当前和下级所有的部门IDS
         List<String> subDepids = new ArrayList<>();
         //部门id为空时，查询我的部门下所有用户
@@ -740,7 +741,7 @@ public class SysUserController {
             subDepids = sysDepartService.getSubDepIdsByDepId(depId);
         }
         if(subDepids != null && subDepids.size()>0){
-            IPage<SysUser> pageList = sysUserService.getUserByDepIds(page,subDepids,username);
+            IPage<SysUser> pageList = sysUserService.getUserByDepIds(page,subDepids,username,realname);
             //批量查询用户的所属部门
             //step.1 先拿到全部的 useids
             //step.2 通过 useids，一次性查询用户的所属部门名字

@@ -228,8 +228,8 @@ public class SysUserServiceImpl extends ServiceImpl<SysUserMapper, SysUser> impl
 	}
 
 	@Override
-	public IPage<SysUser> getUserByDepIds(Page<SysUser> page, List<String> departIds, String username) {
-		return userMapper.getUserByDepIds(page, departIds,username);
+	public IPage<SysUser> getUserByDepIds(Page<SysUser> page, List<String> departIds, String username, String realname) {
+		return userMapper.getUserByDepIds(page, departIds,username, realname);
 	}
 
 	@Override
