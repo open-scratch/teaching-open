@@ -7,7 +7,7 @@
     @cancel="handleCancel"
     cancelText="关闭"
   >
-    <iframe id="player" :src="scratchFrameHref"></iframe>
+    <iframe id="player" :src="frameHref"></iframe>
   </a-modal>
 </template>
 <script>
@@ -19,14 +19,39 @@ export default {
     return {
       visible: false,
       record: {},
-      scratchFrameHref: ''
+      frameHref: '',
     }
   },
   created() {},
   methods: {
-    previewScratch(record) {
+    previewCode(record) {
       this.visible = true
-      this.scratchFrameHref = '/scratch3/player.html?workId=' + record.id
+      // this.frameHref = '/scratch3/player.html?workId=' + record.id
+      this.frameHref = ''
+      switch (record.workType) {
+        case '1':
+          this.frameHref = '/scratch3/player.html?workId=' + record.id
+          return
+        case '2':
+          this.frameHref = '/scratch3/player.html?workId=' + record.id
+          return
+        case '3':
+          this.frameHref = '/scratchjr/editor.html?mode=edit&filepath=' + record.workFileUrl
+          return
+        case '4':
+          this.frameHref = '/python/player.html?lang=turtle&url=' + record.workFileUrl
+          return
+      }
+    },
+    getQiniuFile(text) {
+      if (!text) {
+        this.$message.warning('未知的文件')
+        return
+      }
+      if (text.indexOf(',') > 0) {
+        text = text.substring(0, text.indexOf(','))
+      }
+      return window._CONFIG['qn_base'] + text
     },
     close() {
       this.$emit('close')
@@ -39,14 +64,14 @@ export default {
     },
     handleCancel() {
       this.close()
-    }
-  }
+    },
+  },
 }
 </script>
 <style scoped>
 iframe {
-    border: none;
-    width: 520px;
-    height: 500px;
+  border: none;
+  width: 520px;
+  height: 500px;
 }
 </style>

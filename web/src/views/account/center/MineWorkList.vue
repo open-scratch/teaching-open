@@ -72,6 +72,8 @@
 
         <span slot="action" slot-scope="text, record">
           <a @click="handleView(record)">查看</a>
+          <a-divider type="vertical"/>
+          <a @click="handlePreview(record)">预览</a>
           <a-divider type="vertical" v-if="record.workType==1||record.workType==2"/>
           <a-popover trigger="click" v-if="record.workType==1||record.workType==2">
             <template slot="content">
@@ -88,6 +90,8 @@
     </div>
     <!-- table区域-end -->
 
+    <teachingWorkPreview-modal ref="previewModal"></teachingWorkPreview-modal>
+
     <!-- 表单区域 -->
     <!-- <teachingWork-modal ref="modalForm" @ok="modalFormOk"></teachingWork-modal> -->
   </a-card>
@@ -98,12 +102,14 @@
 import { postAction, getAction } from '@/api/manage'
 import QrCode from '@/components/tools/QrCode'
 import { JeecgListMixin } from '@/mixins/JeecgListMixin'
+import TeachingWorkPreviewModal from '@/views/teaching/modules/TeachingWorkPreviewModal'
 
 export default {
   name: 'MineWorkList',
   mixins: [JeecgListMixin],
   components: {
-    qrcode: QrCode
+    qrcode: QrCode,
+    TeachingWorkPreviewModal
   },
   data() {
     return {
@@ -180,6 +186,9 @@ export default {
   },
   computed: {},
   methods: {
+    handlePreview(record){
+      this.$refs.previewModal.previewCode(record)
+    },
     handleView: function(record) {
       switch(record.workType){
         case '1':
