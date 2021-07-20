@@ -1,6 +1,9 @@
 spring:
   profiles:
     active: dev # dev开发测试环境  prod线上正式环境
+  http:
+    multipart:
+      location: /tmp
 swagger:
   production: false
   basic:
