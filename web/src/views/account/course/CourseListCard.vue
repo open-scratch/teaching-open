@@ -1,6 +1,6 @@
 <template>
   <div class="app-list">
-    <a-list :grid="{ gutter: 24, lg: 3, md: 1, sm: 1, xs: 1 }" :dataSource="dataSource">
+    <a-list :grid="{ gutter: 24, lg: 4, md: 3, sm: 2, xs: 1 }" :dataSource="dataSource">
       <a-list-item slot="renderItem" slot-scope="item, index">
         <a-card :hoverable="true">
           <!-- <template class="ant-card-extra" slot="extra">
