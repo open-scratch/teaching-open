@@ -107,7 +107,7 @@ export default {
           window.open('/scratchjr/editor.html?mode=edit&filepath=' + this.getQiniuFile(unit.courseWork))
           break
         case 4:
-          window.open('/python/index.html?lang=turtle&unitId='+unit.id)
+          window.open('/python/index.html?lang=turtle&unitId='+unit.id + "&url=" + this.getQiniuFile(unit.courseWork))
           break
         default:
           window.open(this.getQiniuFile(unit.mediaPath))

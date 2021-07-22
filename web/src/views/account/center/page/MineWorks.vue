@@ -125,15 +125,16 @@ export default {
 
 <style lang="less" scoped>
 .app-list {
-  .ant-card-extra{
+  /deep/.ant-card-extra{
     margin-left:0!important;
+    height: 55px;
   }
   .meta-cardInfo {
     zoom: 1;
     margin-top: 16px;
+    height: 200px;
     img {
       width: 100%;
-      height: ;
     }
     > div {
       position: relative;

@@ -1,9 +1,9 @@
 <template>
   <div class="main">
   <keep-alive>
-    <router-view v-if="keepAlive" />
+    <router-view v-if="keepAlive" :key="$route.name+($route.params.id||'')"/>
   </keep-alive>
-  <router-view v-if="!keepAlive" />
+  <router-view v-if="!keepAlive" :key="$route.name+($route.params.id||'')"/>
   </div>
 </template>
 
