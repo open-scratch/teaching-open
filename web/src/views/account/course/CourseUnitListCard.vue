@@ -97,6 +97,9 @@ export default {
 
 <style lang="less" scoped>
 .app-list {
+  .ant-card {
+    height: 300px;
+  }
   .meta-cardInfo {
     zoom: 1;
     margin-top: 16px;
@@ -105,6 +108,7 @@ export default {
     }
     img {
       width: 100%;
+      max-height: 200px;
     }
     > div {
       position: relative;
