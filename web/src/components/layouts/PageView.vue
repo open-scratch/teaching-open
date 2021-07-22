@@ -4,7 +4,7 @@
       <img :src="extraImage"/>
     </div>
     <!-- keep-alive  -->
-    <route-view ref="content"></route-view>
+    <route-view ref="content" :key="$route.name+($route.params.id||'')"></route-view>
   </page-layout>
 </template>
 
