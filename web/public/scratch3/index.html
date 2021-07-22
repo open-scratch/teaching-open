@@ -121,7 +121,7 @@
         }
       },
       shareButton: {
-        show: "mine,create,course".indexOf(scene)>=0,
+        show: true,
         buttonName: "提交",
         handleClick: () => {
           console.log('分享按钮')
@@ -138,7 +138,7 @@
         }
       },
       profileButton: {
-        show: "mine,create,course".indexOf(scene)>=0,
+        show: true,
         buttonName: "我的作品",
         handleClick: () => {
           window.open("/account/center");
