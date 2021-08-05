@@ -168,6 +168,8 @@ mybatis-plus:
     call-setters-on-nulls: true
 #jeecg专用配置
 jeecg :
+  # 是否允许多端登录
+  multiLogin: false
   # 站点域名
   domain: http://localhost
   # 本地：local\Minio：minio\阿里云：alioss
