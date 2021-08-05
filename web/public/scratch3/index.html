@@ -19,7 +19,6 @@
     var workName = ''
     var workId = urlParams('workId')
     var unitId = urlParams('unitId')
-    var access_token = getUserToken()
     var userInfo = getUserInfo();
     var qn_token = getQiniuToken();
     setInterval(function () {
@@ -121,7 +120,7 @@
         }
       },
       shareButton: {
-        show: "mine,create,course".indexOf(scene)>=0,
+        show: true,
         buttonName: "提交",
         handleClick: () => {
           console.log('分享按钮')
@@ -138,7 +137,7 @@
         }
       },
       profileButton: {
-        show: "mine,create,course".indexOf(scene)>=0,
+        show: true,
         buttonName: "我的作品",
         handleClick: () => {
           window.open("/account/center");
@@ -195,7 +194,7 @@
         contentType: 'application/json',
         async: false,
         beforeSend: function (request) {
-          request.setRequestHeader('X-Access-Token', access_token)
+          request.setRequestHeader('X-Access-Token', getUserToken())
         },
         data: JSON.stringify({
           fileType: 2,
@@ -225,7 +224,7 @@
         dataType: 'json',
         contentType: 'application/json',
         beforeSend: function (request) {
-          request.setRequestHeader('X-Access-Token', access_token)
+          request.setRequestHeader('X-Access-Token', getUserToken())
         },
         data: JSON.stringify({
           courseId: unitId,
@@ -270,7 +269,7 @@
             unitId: unitId
           },
           beforeSend: function(request) {
-            request.setRequestHeader('X-Access-Token', access_token)
+            request.setRequestHeader('X-Access-Token', getUserToken())
           },
           success: function(res) {
             console.log(res)

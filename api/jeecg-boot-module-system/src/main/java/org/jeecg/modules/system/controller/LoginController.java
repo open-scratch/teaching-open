@@ -26,6 +26,7 @@ import org.jeecg.modules.system.service.ISysLogService;
 import org.jeecg.modules.system.service.ISysUserService;
 import org.jeecg.modules.system.util.RandImageUtil;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.web.bind.annotation.*;
 
 import javax.servlet.http.HttpServletRequest;
@@ -53,6 +54,9 @@ public class LoginController {
     private ISysDepartService sysDepartService;
 	@Autowired
     private ISysDictService sysDictService;
+
+	@Value("${jeecg.multiLogin}")
+	private Boolean multiLogin;
 
 //	private static final String BASE_CHECK_CODES = "qwertyuiplkjhgfdsazxcvbnmQWERTYUPLKJHGFDSAZXCVBNM1234567890";
 	private static final String BASE_CHECK_CODES = "1234567890";
@@ -126,6 +130,7 @@ public class LoginController {
 	    if(sysUser!=null) {
 	    	sysBaseAPI.addLog("用户名: "+sysUser.getRealname()+",退出成功！", CommonConstant.LOG_TYPE_1, null);
 	    	log.info(" 用户名:  "+sysUser.getRealname()+",退出成功！ ");
+			redisUtil.del(CommonConstant.PREFIX_USER_TOKEN + username);
 	    	//清空用户登录Token缓存
 	    	redisUtil.del(CommonConstant.PREFIX_USER_TOKEN + token);
 	    	//清空用户登录Shiro权限缓存
@@ -340,11 +345,24 @@ public class LoginController {
 	private Result<JSONObject> userInfo(SysUser sysUser, Result<JSONObject> result) {
 		String syspassword = sysUser.getPassword();
 		String username = sysUser.getUsername();
+
+		//是否允许多端登录
+		if (!multiLogin){
+			String oldToken = String.valueOf(redisUtil.get(CommonConstant.PREFIX_USER_TOKEN + username));
+			if (oConvertUtils.isNotEmpty(oldToken)){
+				redisUtil.del(CommonConstant.PREFIX_USER_TOKEN + oldToken);
+			}
+		}
+
 		// 生成token
 		String token = JwtUtil.sign(username, syspassword);
         // 设置token缓存有效时间
 		redisUtil.set(CommonConstant.PREFIX_USER_TOKEN + token, token);
 		redisUtil.expire(CommonConstant.PREFIX_USER_TOKEN + token, JwtUtil.EXPIRE_TIME*2 / 1000);
+
+		//记录本次登录token
+		redisUtil.set(CommonConstant.PREFIX_USER_TOKEN + username, token);
+		redisUtil.expire(CommonConstant.PREFIX_USER_TOKEN + username, JwtUtil.EXPIRE_TIME*2 / 1000);
 
 		// 获取用户部门信息
 		JSONObject obj = new JSONObject();
