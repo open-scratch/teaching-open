@@ -168,7 +168,7 @@
   import { mapActions } from "vuex"
   import { timeFix } from "@/utils/util"
   import Vue from 'vue'
-  import { ACCESS_TOKEN ,ENCRYPTED_STRING} from "@/store/mutation-types"
+  import { ACCESS_TOKEN ,ENCRYPTED_STRING, INDEX_MAIN_PAGE_PATH} from "@/store/mutation-types"
   import { putAction,postAction,getAction } from '@/api/manage'
   import { encryption , getEncryptedString } from '@/utils/encryption/aesEncrypt'
   import store from '@/store/'
@@ -376,7 +376,7 @@
         // update-begin- author:sunjianlei --- date:20190812 --- for: 登录成功后不解除禁用按钮，防止多次点击
         // this.loginBtn = false
         // update-end- author:sunjianlei --- date:20190812 --- for: 登录成功后不解除禁用按钮，防止多次点击
-        this.$router.push({ path: "/dashboard/index" })
+        this.$router.push({ path: INDEX_MAIN_PAGE_PATH })
         this.$notification.success({
           message: '欢迎',
           description: `${timeFix()}，欢迎回来`,
