@@ -1,6 +1,7 @@
 import * as api from '@/api/api'
 import { isURL } from '@/utils/validate'
 import onlineCommons from '@jeecg/antd-online-beta220'
+import { INDEX_MAIN_PAGE_PATH} from "@/store/mutation-types"
 
 export function timeFix() {
   const time = new Date()
@@ -83,11 +84,11 @@ export function formatDate(value, fmt) {
 export function generateIndexRouter(data) {
 let indexRouter = [{
           path: '/',
-          name: 'dashboard',
+          name: 'index',
           //component: () => import('@/components/layouts/BasicLayout'),
           component: resolve => require(['@/components/layouts/TabLayout'], resolve),
           meta: { title: '首页' },
-          redirect: '/dashboard/index',
+          redirect: INDEX_MAIN_PAGE_PATH,
           children: [
             ...generateChildRouters(data)
           ]
