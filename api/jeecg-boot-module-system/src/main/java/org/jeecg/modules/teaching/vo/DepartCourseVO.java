@@ -17,15 +17,13 @@ public class DepartCourseVO implements Serializable{
 	/**对应的课程id集合*/
 	private List<String> courseIdList;
 
-	public DepartCourseVO(){
-		super();
-	}
+//	public DepartCourseVO(){
+//		super();
+//	}
 
-	public DepartCourseVO(String deptId, List<String> courseIdList) {
-		super();
-		this.deptId = deptId;
-		this.courseIdList = courseIdList;
-	}
-	
-	
+//	public DepartCourseVO(String deptId, List<String> courseIdList) {
+//		super();
+//		this.deptId = deptId;
+//		this.courseIdList = courseIdList;
+//	}
 }

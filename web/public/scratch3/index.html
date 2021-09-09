@@ -60,11 +60,6 @@
         }
       }, 
       stageArea: {
-        scale: 1,
-        width: 480,
-        height: 360,
-        showControl: true,
-        showLoading: false,
         fullscreenButton:{ //全屏按钮
           show: true,
           handleBeforeSetStageUnFull(){ //退出全屏前的操作
@@ -117,36 +112,68 @@
         //教程按钮
         helpButton:{
           show: true
-        }
+        },
+         //我的物品按钮
+         myStuff:{
+          show: true,
+          url: '/account/mineWork'
+        },
+        //用户头像按钮
+        userAvatar:{
+          show: true,
+          username: userInfo.realname || userInfo.username||'未登录',
+          avatar: getFileAccessHttpUrl(userInfo.avatar) || './static/avatar.png',
+          handleClick(){
+            //弹出登录框等操作
+            console.log("点击头像")
+            window.open("/student/center")
+          }
+        },
+        customButtons: [
+          {
+            show: true,
+            buttonName: '提交',
+            style:{
+              color: 'white',
+              background: 'hsla(30, 100%, 55%, 1)',
+            },
+            handleClick:()=>{
+              console.log('提交按钮')
+              $('.scratch-filter').show()
+              $('.uploading').show()
+              var uuid = window.uuid()
+              uploadParam.projectTitle = window.scratch.getProjectName()
+              window.scratch.getProjectCoverBlob(cover => {
+                upload2Qiniu(cover, 'project3/' + uuid + '.jpg', uploadParam.projectTitle, observer)
+              })
+              window.scratch.getProjectFile(file => {
+                upload2Qiniu(file, 'project3/' + uuid + '.sb3', uploadParam.projectTitle, observer)
+              })
+            }
+          },
+          {
+            show: false,
+            buttonName: '自定义按钮2',
+            style: {
+              color: 'white',
+              background: 'hsl(271deg 89% 70%)',
+            },
+            handleClick:()=>{
+              console.log("自定义按钮2");
+            }
+          },
+          //可继续新增按钮
+        ],
       },
-      shareButton: {
-        show: true,
-        buttonName: "提交",
-        handleClick: () => {
-          console.log('分享按钮')
-          $('.scratch-filter').show()
-          $('.uploading').show()
-          var uuid = window.uuid()
-          uploadParam.projectTitle = window.scratch.getProjectName()
-          window.scratch.getProjectCoverBlob(cover => {
-            upload2Qiniu(cover, 'project3/' + uuid + '.jpg', uploadParam.projectTitle, observer)
-          })
-          window.scratch.getProjectFile(file => {
-            upload2Qiniu(file, 'project3/' + uuid + '.sb3', uploadParam.projectTitle, observer)
-          })
-        }
-      },
-      profileButton: {
-        show: true,
-        buttonName: "我的作品",
-        handleClick: () => {
-          window.open("/account/center");
-        }
+      blocks:{
+        scale: 0.8, // 积木缩放比例
+        // 隐藏分类
+        hideCatagorys:[], 
+        hideBlocks:[],
       },
       handleVmInitialized: (vm) => {
         window.vm = vm
         console.log("VM初始化完毕")
-
       },
       handleProjectLoaded: () => {
         console.log("作品载入完毕")

@@ -13,8 +13,8 @@
     var workId = urlParams('workId')
     var workUrl = urlParams('workUrl')
     window.scratchConfig = {
-              stageArea: {
-        scale: 1,
+        stageArea: {
+        scale: window.innerWidth / 480, //全屏
         width: 480,
         height: 360,
         showControl: true,
