@@ -25,7 +25,7 @@
                 个性化
               </router-link>
             </a-menu-item>
-            <a-menu-item key="/account/settings/binding">
+            <a-menu-item v-if="false" key="/account/settings/binding">
               <router-link :to="{ name: 'account-settings-binding' }">
                 账户绑定
               </router-link>

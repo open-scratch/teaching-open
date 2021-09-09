@@ -100,6 +100,17 @@ function dataURLtoBlob(dataurl) {
   return new Blob([u8arr], { type: mime });
 }
 
+function getFileAccessHttpUrl(avatar,subStr) {
+  if(!subStr) subStr = 'http'
+  if(avatar && avatar.startsWith(subStr)){
+    return avatar;
+  }else{
+    if(avatar &&　avatar.length>0 && avatar.indexOf('[')==-1){
+      // return window._CONFIG['staticDomainURL'] + "/" + avatar;
+      return JSON.parse(localStorage.getItem("CONFIG")).staticDomainURL + "/" + avatar;
+    }
+  }
+}
 
 window.dataLayer = window.dataLayer || [];
 function gtag(){dataLayer.push(arguments);}
