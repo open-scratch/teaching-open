@@ -70,6 +70,7 @@ export default {
   },
   methods: {
     handleCancel(e) {
+      this.unit = {}
       this.visible = false
     },
     previewCourseCase(unit) {
