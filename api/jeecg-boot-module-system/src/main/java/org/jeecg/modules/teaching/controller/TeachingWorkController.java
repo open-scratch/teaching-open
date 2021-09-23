@@ -1,52 +1,48 @@
 package org.jeecg.modules.teaching.controller;
 
-import java.io.UnsupportedEncodingException;
-import java.io.IOException;
-import java.net.URLDecoder;
-import java.util.*;
-import java.util.stream.Collectors;
-
-import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpServletResponse;
-
-import org.apache.commons.lang.StringUtils;
+import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
+import com.baomidou.mybatisplus.core.metadata.IPage;
+import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
+import io.swagger.annotations.Api;
+import io.swagger.annotations.ApiOperation;
+import lombok.extern.slf4j.Slf4j;
+import org.apache.shiro.SecurityUtils;
+import org.jeecg.common.api.vo.Result;
+import org.jeecg.common.aspect.annotation.AutoLog;
 import org.jeecg.common.aspect.annotation.PermissionData;
+import org.jeecg.common.system.query.QueryGenerator;
+import org.jeecg.common.system.vo.LoginUser;
 import org.jeecg.common.util.IPUtils;
 import org.jeecg.common.util.RedisUtil;
+import org.jeecg.common.util.oConvertUtils;
 import org.jeecg.modules.common.controller.BaseController;
+import org.jeecg.modules.system.service.ISysFileService;
+import org.jeecg.modules.teaching.entity.TeachingWork;
+import org.jeecg.modules.teaching.entity.TeachingWorkComment;
+import org.jeecg.modules.teaching.entity.TeachingWorkCorrect;
 import org.jeecg.modules.teaching.model.StudentWorkModel;
+import org.jeecg.modules.teaching.service.ITeachingWorkCommentService;
+import org.jeecg.modules.teaching.service.ITeachingWorkCorrectService;
+import org.jeecg.modules.teaching.service.ITeachingWorkService;
 import org.jeecg.modules.teaching.vo.StudentWorkSendVO;
+import org.jeecg.modules.teaching.vo.TeachingWorkPage;
 import org.jeecgframework.poi.excel.ExcelImportUtil;
 import org.jeecgframework.poi.excel.def.NormalExcelConstants;
 import org.jeecgframework.poi.excel.entity.ExportParams;
 import org.jeecgframework.poi.excel.entity.ImportParams;
 import org.jeecgframework.poi.excel.view.JeecgEntityExcelView;
-import org.jeecg.common.system.vo.LoginUser;
-import org.apache.shiro.SecurityUtils;
-import org.jeecg.common.api.vo.Result;
-import org.jeecg.common.system.query.QueryGenerator;
-import org.jeecg.common.util.oConvertUtils;
-import org.jeecg.modules.teaching.entity.TeachingWorkCorrect;
-import org.jeecg.modules.teaching.entity.TeachingWorkComment;
-import org.jeecg.modules.teaching.entity.TeachingWork;
-import org.jeecg.modules.teaching.vo.TeachingWorkPage;
-import org.jeecg.modules.teaching.service.ITeachingWorkService;
-import org.jeecg.modules.teaching.service.ITeachingWorkCorrectService;
-import org.jeecg.modules.teaching.service.ITeachingWorkCommentService;
 import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
-import org.springframework.web.servlet.ModelAndView;
 import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.multipart.MultipartHttpServletRequest;
-import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
-import com.baomidou.mybatisplus.core.metadata.IPage;
-import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
-import lombok.extern.slf4j.Slf4j;
-import com.alibaba.fastjson.JSON;
-import io.swagger.annotations.Api;
-import io.swagger.annotations.ApiOperation;
-import org.jeecg.common.aspect.annotation.AutoLog;
+import org.springframework.web.servlet.ModelAndView;
+
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
+import java.io.IOException;
+import java.util.*;
+import java.util.stream.Collectors;
 
  /**
  * @Description: 作业列表
@@ -67,6 +63,8 @@ public class TeachingWorkController extends BaseController {
 	private ITeachingWorkCommentService teachingWorkCommentService;
 	@Autowired
 	private RedisUtil redisUtil;
+	 @Autowired
+	 private ISysFileService sysFileService;
 
 	 /**
 	  * 我的作业分页列表查询
@@ -282,7 +280,12 @@ public class TeachingWorkController extends BaseController {
 	@ApiOperation(value="作业列表-通过id删除", notes="作业列表-通过id删除")
 	@DeleteMapping(value = "/delete")
 	public Result<?> delete(@RequestParam(name="id",required=true) String id) {
-		teachingWorkService.delMain(id);
+		TeachingWork work = this.teachingWorkService.getById(id);
+		if (work != null){
+			sysFileService.deleteWithFile(work.getWorkFile());
+			sysFileService.deleteWithFile(work.getWorkCover());
+			teachingWorkService.delMain(id);
+		}
 		return Result.ok("删除成功!");
 	}
 	
@@ -296,7 +299,13 @@ public class TeachingWorkController extends BaseController {
 	@ApiOperation(value="作业列表-批量删除", notes="作业列表-批量删除")
 	@DeleteMapping(value = "/deleteBatch")
 	public Result<?> deleteBatch(@RequestParam(name="ids",required=true) String ids) {
-		this.teachingWorkService.delBatchMain(Arrays.asList(ids.split(",")));
+		List<String> idList = Arrays.asList(ids.split(","));
+		List<TeachingWork> workList = this.teachingWorkService.list(new QueryWrapper<TeachingWork>().in("id", idList));
+		for (TeachingWork work: workList){
+			sysFileService.deleteWithFile(work.getWorkFile());
+			sysFileService.deleteWithFile(work.getWorkCover());
+		}
+		this.teachingWorkService.delBatchMain(idList);
 		return Result.ok("批量删除成功！");
 	}
 	

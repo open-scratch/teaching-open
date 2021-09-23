@@ -4,6 +4,7 @@ import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
 import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import org.jeecg.modules.system.entity.SysUser;
 import org.jeecg.modules.system.mapper.SysUserMapper;
+import org.jeecg.modules.system.service.ISysFileService;
 import org.jeecg.modules.teaching.entity.TeachingWork;
 import org.jeecg.modules.teaching.entity.TeachingWorkCorrect;
 import org.jeecg.modules.teaching.entity.TeachingWorkComment;
@@ -37,7 +38,10 @@ public class TeachingWorkServiceImpl extends ServiceImpl<TeachingWorkMapper, Tea
 	private TeachingWorkCorrectMapper teachingWorkCorrectMapper;
 	@Autowired
 	private TeachingWorkCommentMapper teachingWorkCommentMapper;
-	
+	@Autowired
+	private ISysFileService sysFileService;
+
+
 	@Override
 	@Transactional
 	public void saveMain(TeachingWork teachingWork, List<TeachingWorkCorrect> teachingWorkCorrectList,List<TeachingWorkComment> teachingWorkCommentList) {
@@ -87,8 +91,15 @@ public class TeachingWorkServiceImpl extends ServiceImpl<TeachingWorkMapper, Tea
 	@Override
 	@Transactional
 	public void delMain(String id) {
+		TeachingWork work = this.getById(id);
+		if (work == null){
+			return;
+		}
 		teachingWorkCorrectMapper.deleteByMainId(id);
 		teachingWorkCommentMapper.deleteByMainId(id);
+		//删除文件
+		sysFileService.deleteWithFile(work.getWorkCover());
+		sysFileService.deleteWithFile(work.getWorkFile());
 		teachingWorkMapper.deleteById(id);
 	}
 
@@ -96,9 +107,7 @@ public class TeachingWorkServiceImpl extends ServiceImpl<TeachingWorkMapper, Tea
 	@Transactional
 	public void delBatchMain(Collection<? extends Serializable> idList) {
 		for(Serializable id:idList) {
-			teachingWorkCorrectMapper.deleteByMainId(id.toString());
-			teachingWorkCommentMapper.deleteByMainId(id.toString());
-			teachingWorkMapper.deleteById(id);
+			this.delMain((String) id);
 		}
 	}
 

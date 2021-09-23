@@ -14,6 +14,7 @@ import org.jeecg.common.aspect.annotation.PermissionData;
 import org.jeecg.common.system.query.QueryGenerator;
 import org.jeecg.common.system.vo.LoginUser;
 import org.jeecg.common.util.oConvertUtils;
+import org.jeecg.modules.system.service.ISysFileService;
 import org.jeecg.modules.teaching.entity.TeachingCourseUnit;
 import org.jeecg.modules.teaching.model.CourseUnitModel;
 import org.jeecg.modules.teaching.model.CourseUnitWorkModel;
@@ -53,6 +54,8 @@ import org.jeecg.common.aspect.annotation.AutoLog;
 public class TeachingCourseUnitController extends JeecgController<TeachingCourseUnit, ITeachingCourseUnitService> {
 	@Autowired
 	private ITeachingCourseUnitService teachingCourseUnitService;
+	 @Autowired
+	 private ISysFileService sysFileService;
 	
 	/**
 	 * 分页列表查询
@@ -132,7 +135,17 @@ public class TeachingCourseUnitController extends JeecgController<TeachingCourse
 	@ApiOperation(value="课程单元-通过id删除", notes="课程单元-通过id删除")
 	@DeleteMapping(value = "/delete")
 	public Result<?> delete(@RequestParam(name="id",required=true) String id) {
-		teachingCourseUnitService.removeById(id);
+		TeachingCourseUnit unit = teachingCourseUnitService.getById(id);
+		if (unit != null){
+			sysFileService.deleteWithFile(unit.getCoursePpt());
+			sysFileService.deleteWithFile(unit.getUnitCover());
+			sysFileService.deleteWithFile(unit.getCourseVideo());
+			sysFileService.deleteWithFile(unit.getCourseWork());
+			sysFileService.deleteWithFile(unit.getCourseWorkAnswer());
+			sysFileService.deleteWithFile(unit.getCourseCase());
+			sysFileService.deleteWithFile(unit.getCoursePlan());
+			teachingCourseUnitService.removeById(id);
+		}
 		return Result.ok("删除成功!");
 	}
 	
@@ -146,7 +159,18 @@ public class TeachingCourseUnitController extends JeecgController<TeachingCourse
 	@ApiOperation(value="课程单元-批量删除", notes="课程单元-批量删除")
 	@DeleteMapping(value = "/deleteBatch")
 	public Result<?> deleteBatch(@RequestParam(name="ids",required=true) String ids) {
-		this.teachingCourseUnitService.removeByIds(Arrays.asList(ids.split(",")));
+		List<String> idList = Arrays.asList(ids.split(","));
+		List<TeachingCourseUnit> unitList = teachingCourseUnitService.list(new QueryWrapper<TeachingCourseUnit>().in("id", idList));
+		for(TeachingCourseUnit unit: unitList){
+			sysFileService.deleteWithFile(unit.getCoursePpt());
+			sysFileService.deleteWithFile(unit.getUnitCover());
+			sysFileService.deleteWithFile(unit.getCourseVideo());
+			sysFileService.deleteWithFile(unit.getCourseWork());
+			sysFileService.deleteWithFile(unit.getCourseWorkAnswer());
+			sysFileService.deleteWithFile(unit.getCourseCase());
+			sysFileService.deleteWithFile(unit.getCoursePlan());
+		}
+		this.teachingCourseUnitService.removeByIds(idList);
 		return Result.ok("批量删除成功!");
 	}
 	
