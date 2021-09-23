@@ -1981,6 +1981,7 @@ CREATE TABLE `teaching_course` (
   `course_cover` varchar(256) DEFAULT NULL COMMENT '科目封面',
   `show_type` int(11) DEFAULT NULL COMMENT '展示类型',
   `course_map` varchar(256) DEFAULT NULL COMMENT '课程地图',
+  `is_shared` tinyint DEFAULT 0 COMMENT '是否共享课程',
   PRIMARY KEY (`id`),
   KEY `courseName` (`course_name`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;

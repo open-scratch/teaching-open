@@ -25,6 +25,9 @@
             <a-select-option :value="2">卡片</a-select-option>
           </a-select>
         </a-form-item>
+        <a-form-item label="是否共享" :labelCol="labelCol" :wrapperCol="wrapperCol">
+          <a-switch v-model="model.isShared" checkedChildren="是" unCheckedChildren="否"/>
+        </a-form-item>
         <a-form-item label="课程封面" :labelCol="labelCol" :wrapperCol="wrapperCol">
           <j-upload v-decorator="['courseCover', validatorRules.courseCover]" :uploadTarget="'qiniu'" :maxFile="1" :trigger-change="true"></j-upload>
         </a-form-item>
@@ -97,7 +100,7 @@
         this.model = Object.assign({}, record);
         this.visible = true;
         this.$nextTick(() => {
-          this.form.setFieldsValue(pick(this.model,'createBy','createTime','courseName','courseDesc','courseIcon','courseCover','showType', 'courseMap'))
+          this.form.setFieldsValue(pick(this.model,'createBy','createTime','courseName','courseDesc','courseIcon','courseCover','showType','isShared', 'courseMap'))
         })
       },
       close () {

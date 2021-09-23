@@ -5,7 +5,7 @@
         :labelCol="labelCol"
         :wrapperCol="wrapperCol"
         label="机构ID">
-        <a-input style="border:0px;" placeholder="" v-model="model.id" readOnly="true"/>
+        <a-input style="border:0px;" placeholder="" v-model="model.id" :readOnly="true"/>
       </a-form-item>
       <a-form-item
         :labelCol="labelCol"

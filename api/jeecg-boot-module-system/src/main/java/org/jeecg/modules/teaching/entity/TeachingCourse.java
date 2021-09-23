@@ -63,6 +63,11 @@ public class TeachingCourse implements Serializable {
 	@Excel(name = "删除标志", width = 15)
     @ApiModelProperty(value = "删除标志")
     private java.lang.Integer delFlag;
+	/**是否共享*/
+	@Excel(name = "是否共享", width = 15)
+	@ApiModelProperty(value = "是否共享")
+	@Dict(dicCode = "yn")
+	private java.lang.Boolean isShared;
 	/**课程名*/
 	@Excel(name = "课程名", width = 15)
     @ApiModelProperty(value = "课程名")

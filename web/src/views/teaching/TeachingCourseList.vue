@@ -135,9 +135,12 @@
             dataIndex: 'courseName'
           },
           {
-            title:'课程介绍',
+            title:'是否共享',
             align:"center",
-            dataIndex: 'courseDesc'
+            dataIndex: 'isShared',
+            customRender(v){
+              return v?"是":"否"
+            }
           },
           {
             title:'课程图标',
