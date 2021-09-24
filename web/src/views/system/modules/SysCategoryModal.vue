@@ -25,7 +25,14 @@
         <a-form-item label="分类名称" :labelCol="labelCol" :wrapperCol="wrapperCol">
           <a-input v-decorator="[ 'name', validatorRules.name]" placeholder="请输入分类名称"></a-input>
         </a-form-item>
-          
+
+        <a-form-item label="自定义值" :labelCol="labelCol" :wrapperCol="wrapperCol">
+          <a-input v-decorator="[ 'value', validatorRules.value]" placeholder="自定义值"></a-input>
+        </a-form-item>
+
+        <a-form-item label="备注" :labelCol="labelCol" :wrapperCol="wrapperCol">
+          <a-input v-decorator="[ 'comment']" placeholder="备注"></a-input>
+        </a-form-item>
         <!--<a-form-item label="类型编码" :labelCol="labelCol" :wrapperCol="wrapperCol">
           <a-input v-decorator="[ 'code', validatorRules.code]" placeholder="请输入类型编码"></a-input>
         </a-form-item>-->
@@ -80,6 +87,7 @@
             }]
           },
           pid:{},
+          value:{},
           name:{rules: [{ required: true, message: '请输入类型名称!' }]}
         },
         url: {
@@ -104,7 +112,7 @@
         this.model = Object.assign({}, record);
         this.visible = true;
         this.$nextTick(() => {
-          this.form.setFieldsValue(pick(this.model,'pid','name','code'))
+          this.form.setFieldsValue(pick(this.model,'pid','name','code','value','comment'))
         })
       },
       close () {

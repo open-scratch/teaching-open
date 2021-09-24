@@ -12,6 +12,7 @@ import javax.servlet.http.HttpServletResponse;
 
 import com.alibaba.fastjson.JSON;
 import com.baomidou.mybatisplus.core.conditions.query.LambdaQueryWrapper;
+import org.apache.commons.lang.StringUtils;
 import org.apache.shiro.SecurityUtils;
 import org.jeecg.common.api.vo.Result;
 import org.jeecg.common.system.query.QueryGenerator;
@@ -403,21 +404,37 @@ public class SysCategoryController {
 	  * @return
 	  */
 	 @RequestMapping(value = "/loadDictItem", method = RequestMethod.GET)
-	 public Result<List<String>> loadDictItem(@RequestParam(name="ids") String ids) {
-		 Result<List<String>> result = new Result<>();
-		 LambdaQueryWrapper<SysCategory> query = new LambdaQueryWrapper<SysCategory>().in(SysCategory::getId,ids);
-		 List<SysCategory> list = this.sysCategoryService.list(query);
-		 List<String> textList = new ArrayList<String>();
-		 for (String id : ids.split(",")) {
-			 for (SysCategory c : list) {
-				if(id.equals(c.getId())){
-					textList.add(c.getName());
-					break;
-				}
-			 }
+	 public Result<List<SysCategory>> loadDictItem(@RequestParam(name = "ids") String ids, @RequestParam String pcode) {
+		 Result<List<SysCategory>> result = new Result<>();
+		 // 非空判断
+		 if (StringUtils.isBlank(ids)) {
+			 result.setSuccess(false);
+			 result.setMessage("ids 不能为空");
+			 return result;
 		 }
+		 String[] idArray = ids.split(",");
+		 String pid;
+		 if(ISysCategoryService.ROOT_PID_VALUE.equals(pcode)){
+			 pid = ISysCategoryService.ROOT_PID_VALUE;
+		 }else{
+			 pid = this.sysCategoryService.queryIdByCode(pcode);
+		 }
+		 if(oConvertUtils.isEmpty(pid)){
+			 result.setSuccess(false);
+			 result.setMessage("加载分类字典树参数有误.[code]!");
+			 return result;
+		 }
+		 LambdaQueryWrapper<SysCategory> query = new LambdaQueryWrapper<>();
+		 query.in(SysCategory::getId, Arrays.asList(idArray));
+		 query.or();
+		 query.in(SysCategory::getValue, Arrays.asList(idArray));
+		 query.eq(SysCategory::getPid, pid);
+		 // 查询数据
+		 List<SysCategory> list = this.sysCategoryService.list(query);
+		 // 取出name并返回
+//		 List<String> textList = list.stream().map(SysCategory::getName).collect(Collectors.toList());
 		 result.setSuccess(true);
-		 result.setResult(textList);
+		 result.setResult(list);
 		 return result;
 	 }
 

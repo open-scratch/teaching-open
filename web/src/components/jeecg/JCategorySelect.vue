@@ -3,7 +3,7 @@
     allowClear
     labelInValue
     style="width: 100%"
-    :disabled="disabled"
+    :readOnly="disabled"
     :dropdownStyle="{ maxHeight: '400px', overflow: 'auto' }"
     :placeholder="placeholder"
     :loadData="asyncLoadTreeData"
@@ -23,6 +23,12 @@
       value:{
         type: String,
         required: false
+      },
+      //返回值还是ID
+      returnValue: {
+        type: Boolean,
+        default: false,
+        require: false,
       },
       placeholder:{
         type: String,
@@ -70,7 +76,7 @@
         treeValue:"",
         treeData:[],
         url:"/sys/category/loadTreeData",
-        view:'/sys/category/loadDictItem/',
+        view:'/sys/category/loadDictItem',
         tableName:"",
         text:"",
         code:"",
@@ -102,7 +108,7 @@
         getAction(this.url,param).then(res=>{
           if(res.success && res.result){
             for(let i of res.result){
-              i.value = i.key
+              i.value =this.returnValue?i.value:i.key
               if(i.leaf==false){
                 i.isLeaf=false
               }else if(i.leaf==true){
@@ -118,26 +124,34 @@
 
       /** 数据回显*/
       loadItemByCode(){
+        console.log(this.value);
+        
         if(!this.value || this.value=="0"){
           this.treeValue = []
         }else{
-          getAction(this.view,{ids:this.value}).then(res=>{
+          let param = {
+            ids:this.value,
+            pcode:!this.pcode?'0':this.pcode,
+          }
+          getAction(this.view,param).then(res=>{
+            console.log(res.result);
             if(res.success){
               let values = this.value.split(',')
               this.treeValue = res.result.map((item, index) => ({
                 key: values[index],
                 value: values[index],
-                label: item
+                label: item.name
               }))
+              console.log(this.treeValue);
               this.onLoadTriggleChange(res.result[0]);
             }
           })
         }
       },
-      onLoadTriggleChange(text){
+      onLoadTriggleChange(item){
         //只有单选才会触发
         if(!this.multiple && this.loadTriggleChange){
-          this.backValue(this.value,text)
+          this.backValue(this.value, item.name)
         }
       },
       backValue(value,label){
@@ -161,7 +175,7 @@
           getAction(this.url,param).then(res=>{
             if(res.success){
               for(let i of res.result){
-                i.value = i.key
+                i.value = this.returnValue?i.value:i.key
                 if(i.leaf==false){
                   i.isLeaf=false
                 }else if(i.leaf==true){
@@ -196,9 +210,14 @@
         if(!value){
           this.$emit('change', '');
           this.treeValue = ''
-        } else if (value instanceof Array) {
-          //this.$emit('change', value.map(item => item.value).join(','))
-          //this.treeValue = value
+        } else if (Array.isArray(value)) {
+          let labels = []
+          let values = value.map(item => {
+            labels.push(item.label)
+            return item.value
+          })
+          this.backValue(values.join(','), labels.join(','))
+          this.treeValue = value
         } else {
           this.backValue(value.value,value.label)
           this.treeValue = value

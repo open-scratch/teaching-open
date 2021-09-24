@@ -82,6 +82,11 @@
             dataIndex: 'code'
           },
           {
+            title:'自定义值',
+            align:"left",
+            dataIndex: 'value'
+          },
+          {
             title: '操作',
             dataIndex: 'action',
             align:"center",
