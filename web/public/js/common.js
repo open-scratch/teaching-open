@@ -55,6 +55,26 @@ window.getWorkInfo = function(workId, cb) {
   })
 }
 
+//获取Scratch素材库  1背景 2声音 3造型 4角色
+window.getScratchAssets = function(assetType, cb){
+  let data;
+  $.ajax({
+    url: '/api/teaching/teachingScratchAssets/getScratchAssets?assetType='+assetType,
+    beforeSend: function (request) {
+      request.setRequestHeader('X-Access-Token', getUserToken())
+    },
+    async: cb!=undefined,
+    success: function (res) {
+      if(cb){
+        cb(res)
+      }else{
+        data = res
+      }
+    },
+  });
+  return data
+}
+
 window.getQiniuToken = function() {
   var qn_token;
   $.ajax({

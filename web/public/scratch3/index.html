@@ -205,10 +205,50 @@
           })
         }
       },
-      //若使用官方素材库请删除本配置项,也可将素材上传至云存储
-      assetCDN: './static',
       //默认项目地址
       defaultProjectURL: "./static/project.sb3",
+      //素材库配置
+      assets:{
+        //素材库地址，默认为/static下的素材库
+        assetHost: JSON.parse(localStorage.getItem("CONFIG")).qn_base,
+        //素材库索引地址
+        defaultIndex:{
+          sprites: "./static/json_index/sprites.json",
+          costumes: "./static/json_index/costumes.json",
+          backdrops: "./static/json_index/backdrops.json",
+          sounds: "./static/json_index/sounds.json"
+        },
+        //拦截角色库打开
+        handleBeforeSpriteLibraryOpen(){
+          console.log("角色库打开")
+          //追加素材库
+          window.getScratchAssets(4,data=>{
+            window.scratch.pushSpriteLibrary(data)
+          })
+          return false;
+        },
+        //拦截造型库打开
+        handleBeforeCostumesLibraryOpen(){
+          window.getScratchAssets(3,data=>{
+            window.scratch.pushCostumesLibrary(data)
+          })
+          return true;
+        },
+        //拦截背景库打开
+        handleBeforeBackdropsLibraryOpen(){
+          window.getScratchAssets(1,data=>{
+            window.scratch.pushBackdropsLibrary(data)
+          })
+          return true;
+        },
+        //拦截声音库打开
+        handleBeforeSoundLibraryOpen(){
+          window.getScratchAssets(2,data=>{
+            window.scratch.pushSoundsLibrary(data)
+          })
+          return true;
+        }
+      }
     }
 
     //上传文件
