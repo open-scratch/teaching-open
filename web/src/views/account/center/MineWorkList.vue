@@ -175,12 +175,6 @@ export default {
         delete: '/teaching/teachingWork/delete',
         deleteBatch: '/teaching/teachingWork/deleteBatch',
         shareUrl: window._CONFIG['webURL'] + "/scratch3/scratch-mobile.html?workId=",
-        detailUrl:
-          window.location.protocol +
-          '//' +
-          window.location.hostname +
-          (window.location.port ? ':' + window.location.port : '') +
-          '/scratch3-h5/detail.html?workId='
       }
     }
   },
