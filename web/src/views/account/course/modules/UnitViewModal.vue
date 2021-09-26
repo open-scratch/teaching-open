@@ -12,10 +12,10 @@
       <div class="video-area">
         <a-tabs>
           <a-tab-pane key="video" tab="视频">
-            <video oncontextmenu="return false;" :src="getQiniuFile(unit.courseVideo)" controls="true"></video>
+            <video oncontextmenu="return false;" :src="getFileAccessHttpUrl(unit.courseVideo)" controls="true"></video>
           </a-tab-pane>
           <a-tab-pane key="scratch" tab="案例" v-if="unit.courseCase">
-            <!-- <iframe id="player" :src="'/scratch3/player.html?workUrl=' + getQiniuFile(unit.courseCase)"></iframe> -->
+            <!-- <iframe id="player" :src="'/scratch3/player.html?workUrl=' + getFileAccessHttpUrl(unit.courseCase)"></iframe> -->
             <iframe id="player" :src="previewCourseCase(unit)"></iframe>
           </a-tab-pane>
         </a-tabs>
@@ -46,7 +46,7 @@
                 >
               </a-collapse-panel>
               <a-collapse-panel v-if="unit.coursePpt" :header="'课程资料'" :style="customStyle">
-                <a target="_blank" :href="getQiniuFile(unit.coursePpt)"
+                <a target="_blank" :href="getFileAccessHttpUrl(unit.coursePpt)"
                   ><a-icon type="edit" />{{ unit.unitName }} 查看资料</a
                 >
               </a-collapse-panel>
@@ -58,6 +58,8 @@
   </div>
 </template>
 <script>
+
+import { getFileAccessHttpUrl } from '@/api/manage'
 export default {
   name: 'UnitViewModal',
   data() {
@@ -69,12 +71,13 @@ export default {
     }
   },
   methods: {
+    getFileAccessHttpUrl,
     handleCancel(e) {
       this.unit = {}
       this.visible = false
     },
     previewCourseCase(unit) {
-      let url = this.getQiniuFile(unit.courseCase)
+      let url = this.getFileAccessHttpUrl(unit.courseCase)
       switch(unit.courseWorkType){
         case 1:
           return '/scratch3/player.html?workUrl=' + url
@@ -86,16 +89,6 @@ export default {
           return '/python/player.html?lang=turtle&url='+ url
       }
     },
-    getQiniuFile(text) {
-      if (!text) {
-        // this.$message.warning("未知的文件")
-        return
-      }
-      if (text.indexOf(',') > 0) {
-        text = text.substring(0, text.indexOf(','))
-      }
-      return window._CONFIG['qn_base'] + text
-    },
     handleViewCode (unit) {
       switch (unit.courseWorkType) {
         case 1:
@@ -105,13 +98,13 @@ export default {
           window.open('/scratch3/index.html?scene=course&unitId='+unit.id)
           break
         case 3:
-          window.open('/scratchjr/editor.html?mode=edit&filepath=' + this.getQiniuFile(unit.courseWork))
+          window.open('/scratchjr/editor.html?mode=edit&filepath=' + this.getFileAccessHttpUrl(unit.courseWork))
           break
         case 4:
-          window.open('/python/index.html?lang=turtle&unitId='+unit.id + "&url=" + this.getQiniuFile(unit.courseWork))
+          window.open('/python/index.html?lang=turtle&unitId='+unit.id + "&url=" + this.getFileAccessHttpUrl(unit.courseWork))
           break
         default:
-          window.open(this.getQiniuFile(unit.mediaPath))
+          window.open(this.getFileAccessHttpUrl(unit.mediaPath))
       }
   },
   },

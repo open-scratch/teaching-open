@@ -15,9 +15,10 @@
             
             <!-- <a-avatar class="card-avatar" slot="avatar" :src="item.avatar" size="small" /> -->
             <div class="meta-cardInfo" slot="description">
-              <div slot="title">{{item.workName}}</div>
               <a :href="getEditorHref(item)" target="_blank">
-                <img v-if="item.coverFileUrl" :src="item.coverFileUrl" />
+                <div slot="title">{{item.workName}}</div>
+            
+                <img v-if="item.coverFileKey" :src="getFileAccessHttpUrl(item.coverFileKey)" />
                 <img v-if="item.workType==4" src="@/assets/python.png" alt="">
               </a>
             </div>
@@ -59,7 +60,7 @@
 </template>
 
 <script>
-import { deleteAction, getAction, downFile } from '@/api/manage'
+import { deleteAction, getAction, downFile,getFileAccessHttpUrl } from '@/api/manage'
 
 export default {
   name: 'MineWorksCard',
@@ -78,6 +79,7 @@ export default {
     this.getWorkList()
   },
   methods: {
+    getFileAccessHttpUrl,
     getWorkList: function() {
       var that = this;
       getAction(that.url.list, null).then(res => {

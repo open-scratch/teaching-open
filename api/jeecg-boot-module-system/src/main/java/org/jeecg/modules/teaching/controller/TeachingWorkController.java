@@ -7,6 +7,7 @@ import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
 import lombok.extern.slf4j.Slf4j;
 import org.apache.shiro.SecurityUtils;
+import org.jeecg.common.api.vo.DictResult;
 import org.jeecg.common.api.vo.Result;
 import org.jeecg.common.aspect.annotation.AutoLog;
 import org.jeecg.common.aspect.annotation.PermissionData;
@@ -218,8 +219,8 @@ public class TeachingWorkController extends BaseController {
 	 }
 
 	 @GetMapping("/studentWorkInfo")
-	 public Result<StudentWorkModel> studentWorkInfo(@RequestParam(name = "workId") String workId){
-		 Result<StudentWorkModel> result = new Result<StudentWorkModel>();
+	 public DictResult<StudentWorkModel> studentWorkInfo(@RequestParam(name = "workId") String workId){
+		 DictResult<StudentWorkModel> result = new DictResult<StudentWorkModel>();
 		 StudentWorkModel teachingWork = teachingWorkService.studentWorkInfo(workId);
 		 if (teachingWork == null) {
 			 result.error500("未找到对作业");

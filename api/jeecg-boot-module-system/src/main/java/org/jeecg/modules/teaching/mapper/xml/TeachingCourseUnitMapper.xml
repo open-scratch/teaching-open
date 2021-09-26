@@ -56,10 +56,9 @@
     <select id="getCourseWorkUnit" resultType="org.jeecg.modules.teaching.model.CourseUnitWorkModel">
         select unit.*,
        teaching_course.course_name,
-       mw.work_file mine_work_url, mw.id mine_work_id, mw.work_name mine_work_name, mw.work_type mine_work_type
+       (select id from teaching_work w where w.course_id=#{unitId} and w.user_id = #{userId} limit 1) mine_work_id
         from teaching_course_unit unit
         left join teaching_course on teaching_course.id = unit.course_id
-        left join teaching_work mw on mw.course_id=unit.id and mw.user_id = #{userId}
         where unit.id = #{unitId}
         limit 1
     </select>

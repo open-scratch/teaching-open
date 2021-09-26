@@ -1,6 +1,5 @@
 <!DOCTYPE html>
 <html>
-
 <head>
   <title>图形化编程作品展示</title>
   <meta charset="utf-8" />
@@ -47,13 +46,15 @@
       },
       handleVmInitialized: (vm) => {
         window.vm = vm
-        console.log(vm);
-        console.log("VM初始化完毕")
       },
       handleDefaultProjectLoaded: () => {
-        if (workId) {
+        if(workUrl){
+          window.scratch.loadProject(workUrl, () => {
+            vm.runtime.start()
+          })
+        }else if (workId) {
           getWorkInfo(workId, function (info) {
-            window.scratch.loadProject(info.workFileUrl, () => {
+            window.scratch.loadProject(info.workFileKey_url, () => {
               document.title = info.realname + ' 编程作品'
               vm.runtime.start()
               $(".mask-loading").hide()
@@ -61,9 +62,8 @@
             })
           })
         }
-      },
-      defaultProjectURL: "./static/blank.sb3"
-    }
+      }  
+  }
   </script>
 </head>
 
@@ -196,9 +196,9 @@
   })
 
   //stage自适应
-  var scale = window.innerWidth / 480
-  $(".stage_stage-wrapper_eRRuk").css("transform", "scale(" + scale + ")")
-  $(".player").css("height", scale * 360)
+  // var scale = window.innerWidth / 480
+  // $(".stage_stage-wrapper_eRRuk").css("transform", "scale(" + scale + ")")
+  // $(".player").css("height", scale * 360)
 
 </script>
 

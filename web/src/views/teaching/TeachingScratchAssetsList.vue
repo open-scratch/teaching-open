@@ -63,11 +63,11 @@
 
         <template slot="assetSlot" slot-scope="text,record">
           <span v-if="record.assetType==2" style="font-size: 12px;font-style: italic;">
-            <audio :src="getQiniuUrl(text)" controls="controls">不支持audio标签</audio>
+            <audio :src="getFileAccessHttpUrl(text)" controls="controls">不支持audio标签</audio>
           </span>
-          <img v-if="record.assetType==1 || record.assetType==3" :src="getQiniuUrl(text)" height="25px" alt="" style="max-width:80px;font-size: 12px;font-style: italic;"/>
+          <img v-if="record.assetType==1 || record.assetType==3" :src="getFileAccessHttpUrl(text)" height="25px" alt="" style="max-width:80px;font-size: 12px;font-style: italic;"/>
           <span v-if="record.assetType==4" style="font-size: 12px;font-style: italic;">
-              <img v-for="(v,i) in text.split(',')" :key="i" :src="getQiniuUrl(v)" height="25px" alt="" style="display:inline-block;max-width:80px;font-size: 12px;font-style: italic;margin-right:5px;"/>
+              <img v-for="(v,i) in text.split(',')" :key="i" :src="getFileAccessHttpUrl(v)" height="25px" alt="" style="display:inline-block;max-width:80px;font-size: 12px;font-style: italic;margin-right:5px;"/>
           </span>
         </template>
         <template slot="fileSlot" slot-scope="text">

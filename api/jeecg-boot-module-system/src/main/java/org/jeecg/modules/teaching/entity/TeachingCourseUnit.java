@@ -1,14 +1,13 @@
 package org.jeecg.modules.teaching.entity;
 
 import java.io.Serializable;
-import java.io.UnsupportedEncodingException;
-import java.util.Date;
-import java.math.BigDecimal;
+
 import com.baomidou.mybatisplus.annotation.IdType;
 import com.baomidou.mybatisplus.annotation.TableId;
 import com.baomidou.mybatisplus.annotation.TableName;
 import lombok.Data;
 import com.fasterxml.jackson.annotation.JsonFormat;
+import org.jeecg.modules.system.aspect.FileUrl;
 import org.springframework.format.annotation.DateTimeFormat;
 import org.jeecgframework.poi.excel.annotation.Excel;
 import org.jeecg.common.aspect.annotation.Dict;
@@ -73,6 +72,7 @@ public class TeachingCourseUnit implements Serializable {
     private java.lang.String unitIntro;
     @Excel(name = "单元封面", width = 15)
     @ApiModelProperty(value = "单元封面")
+    @FileUrl
     private java.lang.String unitCover;
 	/**课程外键ID*/
 	@Excel(name = "课程外键ID", width = 15)
@@ -81,14 +81,17 @@ public class TeachingCourseUnit implements Serializable {
 	/**课程视频*/
 	@Excel(name = "课程视频", width = 15)
     @ApiModelProperty(value = "课程视频")
+    @FileUrl
     private java.lang.String courseVideo;
     /**课程案例*/
     @Excel(name = "课程案例", width = 15)
     @ApiModelProperty(value = "课程案例")
+    @FileUrl
     private java.lang.String courseCase;
 	/**课件PPT*/
 	@Excel(name = "课件PPT", width = 15)
     @ApiModelProperty(value = "课件PPT")
+    @FileUrl
     private java.lang.String coursePpt;
 	/**作业类型*/
 	@Excel(name = "作业类型", width = 15, dicCode = "work_type")
@@ -98,14 +101,17 @@ public class TeachingCourseUnit implements Serializable {
 	/**课程作业*/
 	@Excel(name = "课程作业", width = 15)
     @ApiModelProperty(value = "课程作业")
+    @FileUrl
     private java.lang.String courseWork;
 	/**课程作业答案*/
 	@Excel(name = "课程作业答案", width = 15)
     @ApiModelProperty(value = "课程作业答案")
+    @FileUrl
     private java.lang.String courseWorkAnswer;
 	/**教案*/
 	@Excel(name = "教案", width = 15)
     @ApiModelProperty(value = "教案")
+    @FileUrl
     private java.lang.String coursePlan;
 	/**地图X坐标*/
 	@Excel(name = "地图X坐标", width = 15)

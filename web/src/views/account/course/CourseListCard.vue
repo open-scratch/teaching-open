@@ -14,7 +14,7 @@
                 :to="{ name: 'teaching-mineCourse-courseUnitMap', query: { id: item.id } }"
               >
                 <img
-                  :src="getQiniuFile(item.courseCover)"
+                  :src="getFileAccessHttpUrl(item.courseCover)"
                   height="25px"
                   alt="封面不存在"
                   style="width: 100%; height: 100%"
@@ -25,7 +25,7 @@
                 :to="{ name: 'teaching-mineCourse-courseUnitCard', query: { id: item.id } }"
               >
                 <img
-                  :src="getQiniuFile(item.courseCover)"
+                  :src="getFileAccessHttpUrl(item.courseCover)"
                   height="25px"
                   alt="封面不存在"
                   style="width: 100%; height: 100%"
@@ -41,7 +41,8 @@
   </div>
 </template>
 <script>
-import { getAction } from '@/api/manage'
+import { getAction,getFileAccessHttpUrl } from '@/api/manage'
+import {JeecgListMixin} from '@/mixins/JeecgListMixin'
 export default {
   name: 'MineCourseList',
   components: {},
@@ -54,6 +55,7 @@ export default {
     this.getCourseList()
   },
   methods: {
+    getFileAccessHttpUrl,
     getCourseList: function () {
       getAction('/teaching/teachingCourse/mineCourse', {}).then((res) => {
         if (res.success) {
@@ -64,16 +66,6 @@ export default {
         }
         this.loading = false
       })
-    },
-    getQiniuFile(text) {
-      if (!text) {
-        // this.$message.warning("未知的文件")
-        return
-      }
-      if (text.indexOf(',') > 0) {
-        text = text.substring(0, text.indexOf(','))
-      }
-      return window._CONFIG['qn_base'] + text
     },
   },
 }

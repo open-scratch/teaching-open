@@ -308,15 +308,8 @@ export const JeecgListMixin = {
       let url = getFileAccessHttpUrl(text)
       window.open(url);
     },
-    getQiniuUrl(text){
-      if(!text){
-        // this.$message.warning("未知的文件")
-        return;
-      }
-      if(text.indexOf(",")>0){
-        text = text.substring(0,text.indexOf(","))
-      }
-      return window._CONFIG['qn_base'] + text;
+    getFileAccessHttpUrl(text){
+      return getFileAccessHttpUrl(text)
     }
   }
 

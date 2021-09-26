@@ -1,12 +1,13 @@
 package org.jeecg.modules.teaching.entity;
 
 import java.io.Serializable;
-import java.util.Date;
+
 import com.baomidou.mybatisplus.annotation.IdType;
 import com.baomidou.mybatisplus.annotation.TableId;
 import com.baomidou.mybatisplus.annotation.TableName;
 import lombok.Data;
 import com.fasterxml.jackson.annotation.JsonFormat;
+import org.jeecg.modules.system.aspect.FileUrl;
 import org.springframework.format.annotation.DateTimeFormat;
 import org.jeecgframework.poi.excel.annotation.Excel;
 import org.jeecg.common.aspect.annotation.Dict;
@@ -80,10 +81,12 @@ public class TeachingWork implements Serializable {
 	/**作文文件*/
 	@Excel(name = "作文文件", width = 15)
     @ApiModelProperty(value = "作文文件")
+    @FileUrl
     private java.lang.String workFile;
 	/**作业封面*/
 	@Excel(name = "作业封面", width = 15)
     @ApiModelProperty(value = "作业封面")
+    @FileUrl
     private java.lang.String workCover;
 	/**查看次数*/
 	@Excel(name = "查看次数", width = 15)

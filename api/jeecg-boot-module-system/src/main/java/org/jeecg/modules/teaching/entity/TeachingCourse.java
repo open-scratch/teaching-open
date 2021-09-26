@@ -1,14 +1,13 @@
 package org.jeecg.modules.teaching.entity;
 
 import java.io.Serializable;
-import java.io.UnsupportedEncodingException;
-import java.util.Date;
-import java.math.BigDecimal;
+
 import com.baomidou.mybatisplus.annotation.IdType;
 import com.baomidou.mybatisplus.annotation.TableId;
 import com.baomidou.mybatisplus.annotation.TableName;
 import lombok.Data;
 import com.fasterxml.jackson.annotation.JsonFormat;
+import org.jeecg.modules.system.aspect.FileUrl;
 import org.springframework.format.annotation.DateTimeFormat;
 import org.jeecgframework.poi.excel.annotation.Excel;
 import org.jeecg.common.aspect.annotation.Dict;
@@ -79,10 +78,12 @@ public class TeachingCourse implements Serializable {
 	/**课程图标*/
 	@Excel(name = "课程图标", width = 15)
     @ApiModelProperty(value = "课程图标")
+	@FileUrl
     private java.lang.String courseIcon;
 	/**课程封面*/
 	@Excel(name = "课程封面", width = 15)
     @ApiModelProperty(value = "课程封面")
+	@FileUrl
     private java.lang.String courseCover;
 
 	/**展示类型*/
@@ -90,5 +91,6 @@ public class TeachingCourse implements Serializable {
 	/**课程地图*/
 	@Excel(name = "课程地图", width = 15)
     @ApiModelProperty(value = "课程地图")
+	@FileUrl
     private java.lang.String courseMap;
 }

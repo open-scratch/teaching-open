@@ -84,7 +84,7 @@
       return {
         urlDownload: "",
         downloadUrl:{
-          local: window._CONFIG['domianURL'] + "/sys/common/download/",
+          local: window._CONFIG['domianURL'] + "/sys/common/static/",
           qiniu: window._CONFIG['qn_base']
         },
         uploadAction:{
@@ -144,11 +144,11 @@
         required: false,
         default: 1000
       },
-      // 文件上传目标， 默认本地
+      // 文件上传目标
       uploadTarget:{
         type: String,
         required: false,
-        default:UPLOAD_TARGET_LOCAL
+        default:window._CONFIG['defaultUploadType'] || UPLOAD_TARGET_LOCAL
       },
       /*这个属性用于控制文件上传的业务路径*/
       bizPath:{
@@ -230,12 +230,14 @@
     created(){
       const token = Vue.ls.get(ACCESS_TOKEN);
       this.headers = {"X-Access-Token":token}
+      console.log(this.uploadTarget);
+      
       switch(this.uploadTarget){
           case UPLOAD_TARGET_QINIU:
             this.getQiniuToken();
             break;
           default:
-        }
+      }
       //---------------------------- begin 图片左右换位置 -------------------------------------
       this.containerId = 'container-ty-'+new Date().getTime();
       //---------------------------- end 图片左右换位置 -------------------------------------
@@ -430,10 +432,12 @@
             case UPLOAD_TARGET_LOCAL:
               if(info.file.response.success){
                 fileList = fileList.map((file) => {
+                  console.log(file);
+                  
                   if (file.response && file.response.message) {
                     // file.url = getFileAccessHttpUrl(reUrl);
                     file.url = this.getDownloadUrl(file.response.message)
-                    this.saveToDB(file.name,file.response.key,1,"后台上传")
+                    this.saveToDB(file.name,file.response.message,1,"后台上传")
                   }
                   return file;
                 });

@@ -27,7 +27,7 @@
                   v-if="model.assetType != 4"
                   v-decorator="['md5Ext', validatorRules.md5Ext]"
                   @selected="selectedAsset"
-                  :uploadTarget="'qiniu'"
+                  
                   :uploadPath="assetPrefix"
                   :fileType="fileType"
                   :number="1"
@@ -39,7 +39,7 @@
                       v-model="costumFile"
                       @selected="selectedCostume"
                       @delete="onCostumeDelete"
-                      :uploadTarget="'qiniu'"
+                      
                       :uploadPath="assetPrefix"
                       fileType="image"
                       :number="99"
@@ -51,7 +51,7 @@
                       v-model="soundFile"
                       @selected="selectedSound"
                       @delete="onSoundDelete"
-                      :uploadTarget="'qiniu'"
+                      
                       :uploadPath="assetPrefix"
                       :number="99"
                       :trigger-change="true"

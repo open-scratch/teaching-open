@@ -33,19 +33,29 @@
       },
       complete(res) {
         console.log(res)
-        if (res.key.includes('jpg')) {
+        if (res.key.endsWith('.jpg')) {
           uploadParam.coverKey = uploadFile(res.key, '学生作业-封面', res.key)
         } else {
           uploadParam.projectKey = uploadFile(res.key, '学生作业-sb3', res.key)
         }
-        if (uploadParam.projectKey && uploadParam.coverKey) {
-          if(confirm("是否公开作品？")){
-            uploadWork(uploadParam.projectKey, uploadParam.coverKey, uploadParam.projectTitle, 1)
-          }else{
-            uploadWork(uploadParam.projectKey, uploadParam.coverKey, uploadParam.projectTitle, 0)
-          }
-        }
+        uploadWork()
       }
+    }
+
+    function handleFileUploaded(res){
+      console.log(res);
+      if(res.success){
+        var key = res.message
+        if(key.endsWith('.jpg')){
+          uploadParam.coverKey = uploadFile(key, '学生作业-封面', key)
+        }else{
+          uploadParam.projectKey = uploadFile(key, '学生作业-sb3', key)
+        }
+        uploadWork()
+      }else{
+        alert("上传失败：" + res.message)
+      }
+      
     }
 
     // twl mine create course
@@ -143,11 +153,20 @@
               $('.uploading').show()
               var uuid = window.uuid()
               uploadParam.projectTitle = window.scratch.getProjectName()
+              var defaultUploadType = JSON.parse(localStorage.getItem("CONFIG")).defaultUploadType
               window.scratch.getProjectCoverBlob(cover => {
-                upload2Qiniu(cover, 'project3/' + uuid + '.jpg', uploadParam.projectTitle, observer)
+                if(defaultUploadType == 'qiniu'){
+                  upload2Qiniu(cover, 'project3/' + uuid + '.jpg', uploadParam.projectTitle, observer)
+                }else{
+                  update2Local(cover,uploadParam.projectTitle + ".jpg", 'project3', handleFileUploaded)
+                }
               })
               window.scratch.getProjectFile(file => {
-                upload2Qiniu(file, 'project3/' + uuid + '.sb3', uploadParam.projectTitle, observer)
+                if(defaultUploadType == 'qiniu'){
+                  upload2Qiniu(file, 'project3/' + uuid + '.sb3', uploadParam.projectTitle, observer)
+                }else{
+                  update2Local(file, uploadParam.projectTitle + '.sb3', 'project3', handleFileUploaded)
+                }
               })
             }
           },
@@ -183,7 +202,7 @@
         window.scratch.setProjectName("默认项目")
         if (workId) {
           getWorkInfo(workId, function (info) {
-            window.scratch.loadProject(info.workFileUrl, () => {
+            window.scratch.loadProject(info.workFileKey_url, () => {
               $('.loading').hide()
               $('.scratch-filter').hide()
               window.scratch.setProjectName(info.workName)
@@ -251,40 +270,15 @@
       }
     }
 
-    //上传文件
-    function uploadFile(fileName, fileTag, filePath) {
-      var id = null;
-      $.ajax({
-        url: '/api/system/sysFile/add',
-        type: 'POST',
-        dataType: 'json',
-        contentType: 'application/json',
-        async: false,
-        beforeSend: function (request) {
-          request.setRequestHeader('X-Access-Token', getUserToken())
-        },
-        data: JSON.stringify({
-          fileType: 2,
-          fileName: fileName,
-          filePath: filePath,
-          fileLocation: 2,
-          fileTag: fileTag
-        }),
-        success: function (res) {
-          if (res.success) {
-            id = res.result.id
-          }
-        },
-        error: function () {
-        },
-        complete: function () {
-        }
-      })
-      return id;
-    }
-
     //上传作业
-    function uploadWork(projectKey, coverKey, projectTitle, workStatus) {
+    function uploadWork() {
+      var workStatus = 0
+      if (!uploadParam.projectKey || !uploadParam.coverKey) {
+        return
+      }
+      if(confirm("是否公开作品？")){
+        workStatus = 1
+      }
       $.ajax({
         url: '/api/teaching/teachingWork/submit',
         type: 'POST',
@@ -295,9 +289,9 @@
         },
         data: JSON.stringify({
           courseId: unitId,
-          workCover: coverKey,
-          workFile: projectKey,
-          workName: projectTitle,
+          workCover: uploadParam.coverKey,
+          workFile: uploadParam.projectKey,
+          workName: uploadParam.projectTitle,
           id: workId,
           workType: 2,
           workStatus: workStatus
@@ -327,44 +321,6 @@
           $('.uploading').hide()
         }
       })
-    }
-
-     function getUnitInfo(unitId, cb){
-        $.ajax({
-          url: '/api/teaching/teachingCourseUnit/getUnitWorkInfo',
-          data: {
-            unitId: unitId
-          },
-          beforeSend: function(request) {
-            request.setRequestHeader('X-Access-Token', getUserToken())
-          },
-          success: function(res) {
-            console.log(res)
-            if (res.success) {
-              cb(res.result)
-            } else {
-              alert("老师还没有上传作业文件")
-            }
-          },
-          error: function(e) {
-            if (e.responseJSON.status == 500) {}
-          }
-        })
-      }
-
-    function upload2Qiniu(zip, key, fileName, observer) {
-      var config = {
-        useCdnDomain: true,
-        region: qiniu.region[JSON.parse(localStorage.getItem("CONFIG")).qn_area],
-        disableStatisticsReport: true
-      }
-      var putExtra = {
-        fname: fileName, //文件原名
-        params: {},
-        mimeType: null
-      }
-      var observable = qiniu.upload(zip, key, qn_token, putExtra, config)
-      var subscription = observable.subscribe(observer)
     }
 
   </script>

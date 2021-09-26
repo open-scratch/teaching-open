@@ -13,7 +13,7 @@
     var workId = urlParams('workId')
     var workUrl = urlParams('workUrl')
     window.scratchConfig = {
-        stageArea: {
+      stageArea: {
         scale: window.innerWidth / 480, //自适应屏幕大小
         width: 480,
         height: 360,
@@ -49,10 +49,9 @@
           window.scratch.loadProject(workUrl, () => {
             vm.runtime.start()
           })
-        }
-        if(workId){
+        }else if(workId){
           getWorkInfo(workId, function (info) {
-            window.scratch.loadProject(info.workFileUrl, () => {
+            window.scratch.loadProject(info.workFileKey_url, () => {
               vm.runtime.start()
             })
           })

@@ -1,14 +1,13 @@
 package org.jeecg.modules.teaching.entity;
 
 import java.io.Serializable;
-import java.io.UnsupportedEncodingException;
-import java.util.Date;
-import java.math.BigDecimal;
+
 import com.baomidou.mybatisplus.annotation.IdType;
 import com.baomidou.mybatisplus.annotation.TableId;
 import com.baomidou.mybatisplus.annotation.TableName;
 import lombok.Data;
 import com.fasterxml.jackson.annotation.JsonFormat;
+import org.jeecg.modules.system.aspect.FileUrl;
 import org.springframework.format.annotation.DateTimeFormat;
 import org.jeecgframework.poi.excel.annotation.Excel;
 import org.jeecg.common.aspect.annotation.Dict;
@@ -75,5 +74,6 @@ public class TeachingCourseMedia implements Serializable {
 	/**资源地址*/
 	@Excel(name = "资源地址", width = 15)
     @ApiModelProperty(value = "资源地址")
+    @FileUrl
     private java.lang.String mediaPath;
 }

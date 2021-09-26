@@ -10,12 +10,17 @@ import org.aspectj.lang.ProceedingJoinPoint;
 import org.aspectj.lang.annotation.Around;
 import org.aspectj.lang.annotation.Aspect;
 import org.aspectj.lang.annotation.Pointcut;
+import org.jeecg.common.api.vo.DictResult;
 import org.jeecg.common.api.vo.Result;
 import org.jeecg.common.aspect.annotation.Dict;
 import org.jeecg.common.constant.CommonConstant;
 import org.jeecg.common.util.oConvertUtils;
+import org.jeecg.config.QiniuConfig;
+import org.jeecg.modules.system.entity.SysFile;
 import org.jeecg.modules.system.service.ISysDictService;
+import org.jeecg.modules.system.service.ISysFileService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Component;
 import org.springframework.util.StringUtils;
 
@@ -84,44 +89,90 @@ public class DictAspect {
             if (((Result) result).getResult() instanceof IPage) {
                 List<JSONObject> items = new ArrayList<>();
                 for (Object record : ((IPage) ((Result) result).getResult()).getRecords()) {
-                    ObjectMapper mapper = new ObjectMapper();
-                    String json="{}";
-                    try {
-                        //解决@JsonFormat注解解析不了的问题详见SysAnnouncement类的@JsonFormat
-                         json = mapper.writeValueAsString(record);
-                    } catch (JsonProcessingException e) {
-                        log.error("json解析失败"+e.getMessage(),e);
-                    }
-                    JSONObject item = JSONObject.parseObject(json);
-                    //update-begin--Author:scott -- Date:20190603 ----for：解决继承实体字段无法翻译问题------
-                    //for (Field field : record.getClass().getDeclaredFields()) {
-                    for (Field field : oConvertUtils.getAllFields(record)) {
-                    //update-end--Author:scott  -- Date:20190603 ----for：解决继承实体字段无法翻译问题------
-                        if (field.getAnnotation(Dict.class) != null) {
-                            String code = field.getAnnotation(Dict.class).dicCode();
-                            String text = field.getAnnotation(Dict.class).dicText();
-                            String table = field.getAnnotation(Dict.class).dictTable();
-                            String key = String.valueOf(item.get(field.getName()));
 
-                            //翻译字典值对应的txt
-                            String textValue = translateDictValue(code, text, table, key);
-
-                            log.debug(" 字典Val : "+ textValue);
-                            log.debug(" __翻译字典字段__ "+field.getName() + CommonConstant.DICT_TEXT_SUFFIX+"： "+ textValue);
-                            item.put(field.getName() + CommonConstant.DICT_TEXT_SUFFIX, textValue);
-                        }
-                        //date类型默认转换string格式化日期
-                        if (field.getType().getName().equals("java.util.Date")&&field.getAnnotation(JsonFormat.class)==null&&item.get(field.getName())!=null){
-                            SimpleDateFormat aDate=new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
-                            item.put(field.getName(), aDate.format(new Date((Long) item.get(field.getName()))));
-                        }
-                    }
-                    items.add(item);
+                    items.add(parseRecord(record));
                 }
                 ((IPage) ((Result) result).getResult()).setRecords(items);
             }
-
+        }else if (result instanceof DictResult){
+            Object record = ((DictResult) result).getResult();
+            if(record == null){
+                return;
+            }
+            if (record instanceof List){
+                List<JSONObject> items = new ArrayList<>();
+                for (Object r: (List) record){
+                    items.add(parseRecord(r));
+                }
+                ((DictResult) result).setResult(items);
+            }else{
+                ((DictResult) result).setResult(parseRecord(record));
+            }
         }
+    }
+
+    private JSONObject parseRecord(Object record){
+        ObjectMapper mapper = new ObjectMapper();
+        String json="{}";
+        try {
+            //解决@JsonFormat注解解析不了的问题详见SysAnnouncement类的@JsonFormat
+            json = mapper.writeValueAsString(record);
+        } catch (JsonProcessingException e) {
+            log.error("json解析失败"+e.getMessage(),e);
+        }
+        JSONObject item = JSONObject.parseObject(json);
+        //update-begin--Author:scott -- Date:20190603 ----for：解决继承实体字段无法翻译问题------
+        //for (Field field : record.getClass().getDeclaredFields()) {
+        for (Field field : oConvertUtils.getAllFields(record)) {
+            //update-end--Author:scott  -- Date:20190603 ----for：解决继承实体字段无法翻译问题------
+            if (field.getAnnotation(Dict.class) != null) {
+                String code = field.getAnnotation(Dict.class).dicCode();
+                String text = field.getAnnotation(Dict.class).dicText();
+                String table = field.getAnnotation(Dict.class).dictTable();
+                String key = String.valueOf(item.get(field.getName()));
+
+                //翻译字典值对应的txt
+                String textValue = translateDictValue(code, text, table, key);
+
+                log.debug(" 字典Val : "+ textValue);
+                log.debug(" __翻译字典字段__ "+field.getName() + CommonConstant.DICT_TEXT_SUFFIX+"： "+ textValue);
+                item.put(field.getName() + CommonConstant.DICT_TEXT_SUFFIX, textValue);
+            }
+            if (field.getAnnotation(FileUrl.class) != null) {
+                String key = String.valueOf(item.get(field.getName()));
+                item.put(field.getName() + "_url", getFileUrl(key));
+            }
+            //date类型默认转换string格式化日期
+            if (field.getType().getName().equals("java.util.Date")&&field.getAnnotation(JsonFormat.class)==null&&item.get(field.getName())!=null){
+                SimpleDateFormat aDate=new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+                item.put(field.getName(), aDate.format(new Date((Long) item.get(field.getName()))));
+            }
+        }
+        return item;
+    }
+
+    @Value(value="${jeecg.uploadType}")
+    private String uploadType;
+    @Value(value="${jeecg.path.staticDomain}")
+    private String staticDomain;
+    /**
+     * 获取文件访问地址
+     * @param fileKey
+     * @return
+     */
+    private String getFileUrl(String fileKey){
+        //TODO 应该从文件表中获取文件存储位置。
+        if (StringUtils.isEmpty(fileKey)){
+            return "";
+        }
+        //粗略判断一下fileKey是实际文件还是sysFile的id
+        if (CommonConstant.UPLOAD_TYPE_QINIU.equals(uploadType)){
+            return QiniuConfig.domain + "/" + fileKey;
+        }
+        if (CommonConstant.UPLOAD_TYPE_LOCAL.equals(uploadType)){
+            return staticDomain + "/" + fileKey;
+        }
+        return "";
     }
 
     /**

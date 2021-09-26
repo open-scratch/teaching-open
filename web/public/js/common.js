@@ -102,6 +102,108 @@ window.getQiniuToken = function() {
   return qn_token;
 }
 
+
+  //上传文件
+  function uploadFile(fileName, fileTag, filePath) {
+    var id = null;
+    $.ajax({
+      url: '/api/system/sysFile/add',
+      type: 'POST',
+      dataType: 'json',
+      contentType: 'application/json',
+      async: false,
+      beforeSend: function (request) {
+        request.setRequestHeader('X-Access-Token', getUserToken())
+      },
+      data: JSON.stringify({
+        fileType: 2,
+        fileName: fileName,
+        filePath: filePath,
+        fileLocation: 2,
+        fileTag: fileTag
+      }),
+      success: function (res) {
+        if (res.success) {
+          id = res.result.id
+        }
+      },
+      error: function () {
+      },
+      complete: function () {
+      }
+    })
+    return id;
+  }
+
+  function getUnitInfo(unitId, cb){
+    $.ajax({
+      url: '/api/teaching/teachingCourseUnit/getUnitWorkInfo',
+      data: {
+        unitId: unitId
+      },
+      beforeSend: function(request) {
+        request.setRequestHeader('X-Access-Token', getUserToken())
+      },
+      success: function(res) {
+        console.log(res)
+        if (res.success) {
+          cb(res.result)
+        } else {
+          alert("老师还没有上传作业文件")
+        }
+      },
+      error: function(e) {
+        if (e.responseJSON.status == 500) {}
+      }
+    })
+  }
+
+  
+  function upload2Qiniu(file, key, fileName, observer) {
+    var config = {
+      useCdnDomain: true,
+      region: qiniu.region[JSON.parse(localStorage.getItem("CONFIG")).qn_area],
+      disableStatisticsReport: true
+    }
+    var putExtra = {
+      fname: fileName, //文件原名
+      params: {},
+      mimeType: null
+    }
+    var observable = qiniu.upload(file, key, qn_token, putExtra, config)
+    var subscription = observable.subscribe(observer)
+  }
+
+  function update2Local(file,filename,bizPath, cb){
+    let uploadApi = JSON.parse(localStorage.getItem("CONFIG")).domianURL+"/sys/common/upload"
+
+    var formData = new FormData();
+    formData.append("file",file, filename);
+    formData.append("bizPath",bizPath);
+
+    $.ajax({
+      url: uploadApi,
+      type: 'POST',
+      cache: false,
+      data: formData,
+      processData: false,
+      contentType: false,
+      beforeSend: function(request) {
+        request.setRequestHeader('X-Access-Token', getUserToken())
+      },
+      success: function (result) {
+        if(cb){
+          cb(result)
+        }
+      },
+      error: function (err) {
+        console.log(err);
+        alert("文件上传失败")
+      }
+    })
+
+  }
+
 function createCode(id, src) {
   $('#' + id).html('')
   var qrcode = new QRCode(document.getElementById(id), {
@@ -126,8 +228,11 @@ function getFileAccessHttpUrl(avatar,subStr) {
     return avatar;
   }else{
     if(avatar &&　avatar.length>0 && avatar.indexOf('[')==-1){
-      // return window._CONFIG['staticDomainURL'] + "/" + avatar;
-      return JSON.parse(localStorage.getItem("CONFIG")).staticDomainURL + "/" + avatar;
+      if(JSON.parse(localStorage.getItem("CONFIG")).defaultUploadType == "qiniu"){
+        return JSON.parse(localStorage.getItem("CONFIG")).qn_base + avatar;
+      }else{
+        return JSON.parse(localStorage.getItem("CONFIG")).staticDomainURL + avatar;
+      }
     }
   }
 }

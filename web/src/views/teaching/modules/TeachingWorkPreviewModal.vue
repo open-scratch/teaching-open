@@ -7,11 +7,11 @@
     @cancel="handleCancel"
     cancelText="关闭"
   >
-    <iframe id="player" :src="frameHref"></iframe>
+    <iframe id="player" scrolling="no" :src="frameHref"></iframe>
   </a-modal>
 </template>
 <script>
-import { getAction } from '@/api/manage'
+import { getAction,getFileAccessHttpUrl } from '@/api/manage'
 export default {
   name: 'TeachingWorkPreviewModal',
   components: {},
@@ -43,16 +43,6 @@ export default {
           return
       }
     },
-    getQiniuFile(text) {
-      if (!text) {
-        this.$message.warning('未知的文件')
-        return
-      }
-      if (text.indexOf(',') > 0) {
-        text = text.substring(0, text.indexOf(','))
-      }
-      return window._CONFIG['qn_base'] + text
-    },
     close() {
       this.$emit('close')
       this.visible = false
@@ -70,6 +60,7 @@ export default {
 </script>
 <style scoped>
 iframe {
+  overflow: hidden;
   border: none;
   width: 520px;
   height: 500px;

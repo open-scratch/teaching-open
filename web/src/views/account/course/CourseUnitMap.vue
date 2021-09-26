@@ -1,6 +1,6 @@
 <template>
   <div class="account-settings-info-view">
-      <div :style="{background: 'url(' + getQiniuFile(courseInfo.courseMap) + ') no-repeat', backgroundSize:'auto', height: '1000px'}">
+      <div :style="{background: 'url(' + getFileAccessHttpUrl(courseInfo.courseMap) + ') no-repeat', backgroundSize:'auto', height: '1000px'}">
         <div v-for="unit in unitList" :key="unit.id" class="unit" 
           :style="{left: unit.mapX-25+'px', top: unit.mapY-25+'px'}"
           @click="viewUnit(unit)">
@@ -14,9 +14,8 @@
 
 <script>
 
- import { getAction } from '@/api/manage'
+ import { getAction,getFileAccessHttpUrl } from '@/api/manage'
  import UnitViewModal from './modules/UnitViewModal'
-
   export default {
     components: {
         UnitViewModal
@@ -59,13 +58,14 @@
         }
     },
     methods: {
+        getFileAccessHttpUrl,
         getCourseInfo(courseId){
             getAction(this.url.courseInfo, {id: courseId}).then(res=>{
                 console.log(res)
                 if(res.success){
                     this.courseInfo = res.result
                     this.$route.meta.title = "我的课程-" + this.courseInfo.courseName
-                    this.courseInfo.map = this.getQiniuFile(this.courseInfo.map)
+                    this.courseInfo.map = this.getFileAccessHttpUrl(this.courseInfo.map)
                 }else{
 
                 }
@@ -86,16 +86,6 @@
           
           this.$refs.unitViewModal.visible = true;
           this.$refs.unitViewModal.unit = unit
-        },
-        getQiniuFile(text){
-          if(!text){
-            // this.$message.warning("未知的文件")
-            return;
-          }
-          if(text.indexOf(",")>0){
-            text = text.substring(0,text.indexOf(","))
-          }
-          return window._CONFIG['qn_base'] +text;
         },
     }
   }

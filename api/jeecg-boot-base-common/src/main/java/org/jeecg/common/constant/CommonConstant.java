@@ -198,9 +198,10 @@ public interface CommonConstant {
     public static final String ONLINE_PARAM_VAL_IS_FALSE = "N";
 
     /**
-     * 文件上传类型（本地：local，Minio：minio，阿里云：alioss）
+     * 文件上传类型（本地：local，Minio：minio，阿里云：alioss 七牛云：qiniu）
      */
     public static final String UPLOAD_TYPE_LOCAL = "local";
+    public static final String UPLOAD_TYPE_QINIU = "qiniu";
     public static final String UPLOAD_TYPE_MINIO = "minio";
     public static final String UPLOAD_TYPE_OSS = "alioss";
 
