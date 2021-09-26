@@ -281,7 +281,8 @@
               loginParams.checkKey = that.currdatetime
               console.log("登录参数",loginParams)
               that.Login(loginParams).then((res) => {
-                this.departConfirm(res)
+                // this.departConfirm(res)
+                this.loginSuccess()
               }).catch((err) => {
                 that.requestFailed(err);
               });
@@ -300,7 +301,8 @@
               loginParams.remember_me = values.rememberMe
               that.PhoneLogin(loginParams).then((res) => {
                 console.log(res.result);
-                this.departConfirm(res)
+                // this.departConfirm(res)
+                this.loginSuccess()
               }).catch((err) => {
                 that.requestFailed(err);
               })
