@@ -35,9 +35,22 @@
         } else {
           uploadParam.projectKey = uploadFile(res.key, '学生作业-sjr', res.key)
         }
-        if (uploadParam.projectKey && uploadParam.coverKey) {
-          uploadWork(uploadParam.projectKey, uploadParam.coverKey, uploadParam.projectTitle)
+        uploadWork()
+      }
+    }
+
+    function handleFileUploaded(res){
+      console.log(res);
+      if(res.success){
+        var key = res.message
+        if(key.endsWith('.png')){
+          uploadParam.coverKey = uploadFile(key, '学生作业-封面', key)
+        }else{
+          uploadParam.projectKey = uploadFile(key, '学生作业-sb3', key)
         }
+        uploadWork()
+      }else{
+        alert("上传失败：" + res.message)
       }
     }
 
@@ -49,49 +62,30 @@
             console.log(name);
             var uuid = window.uuid()
             uploadParam.projectTitle = name
-            upload2Qiniu(contents, 'scratchjr/' + uuid + '.sjr', name, observer)
+            var defaultUploadType = JSON.parse(localStorage.getItem("CONFIG")).defaultUploadType
+            if(defaultUploadType == 'qiniu'){
+              upload2Qiniu(contents, 'scratchjr/' + uuid + '.sjr', name, observer)
+            }else{
+              update2Local(contents,name + ".sjr", 'scratchjr', handleFileUploaded)
+            }
+            
             window.ScratchJr.getProjectCover((r)=>{
                 blob = dataURLtoBlob(r)
-                upload2Qiniu(blob, 'scratchjr/' + uuid + '.png', name, observer)
+                if(defaultUploadType == 'qiniu'){
+                  upload2Qiniu(blob, 'scratchjr/' + uuid + '.png', name, observer)
+                }else{
+                  update2Local(blob,name + ".png", 'scratchjr', handleFileUploaded)
+                }
             })
             
         }
     }
 
-    //上传文件
-    function uploadFile(fileName, fileTag, filePath) {
-      var id = null;
-      $.ajax({
-        url: '/api/system/sysFile/add',
-        type: 'POST',
-        dataType: 'json',
-        contentType: 'application/json',
-        async: false,
-        beforeSend: function (request) {
-          request.setRequestHeader('X-Access-Token', access_token)
-        },
-        data: JSON.stringify({
-          fileType: 2,
-          fileName: fileName,
-          filePath: filePath,
-          fileLocation: 2,
-          fileTag: fileTag
-        }),
-        success: function (res) {
-          if (res.success) {
-            id = res.result.id
-          }
-        },
-        error: function () {
-        },
-        complete: function () {
-        }
-      })
-      return id;
-    }
-
     //上传作业
-    function uploadWork(projectKey, coverKey, projectTitle) {
+    function uploadWork() {
+      if (!uploadParam.projectKey || !uploadParam.coverKey) {
+        return
+      }
       $.ajax({
         url: '/api/teaching/teachingWork/submit',
         type: 'POST',
@@ -102,9 +96,9 @@
         },
         data: JSON.stringify({
           courseId: unitId,
-          workCover: coverKey,
-          workFile: projectKey,
-          workName: projectTitle,
+          workCover: uploadParam.coverKey,
+          workFile: uploadParam.projectKey,
+          workName: uploadParam.projectTitle,
           id: workId,
           workType: 3
         }),
@@ -121,21 +115,6 @@
         complete: function () {
         }
       })
-    }
-
-    function upload2Qiniu(zip, key, fileName, observer) {
-      var config = {
-        useCdnDomain: true,
-        region: qiniu.region[JSON.parse(localStorage.getItem("CONFIG")).qn_area],
-        disableStatisticsReport: true
-      }
-      var putExtra = {
-        fname: fileName, //文件原名
-        params: {},
-        mimeType: null
-      }
-      var observable = qiniu.upload(zip, key, qn_token, putExtra, config)
-      var subscription = observable.subscribe(observer)
     }
 
 </script>

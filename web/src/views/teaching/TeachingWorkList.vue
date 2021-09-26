@@ -127,7 +127,7 @@
                 <a @click="handleSend(record.id)">克隆至其他账号</a>
               </a-menu-item>
               <a-menu-item>
-                <a @click="download(record.workFileUrl)">下载作业文件</a>
+                <a @click="download(record.workFileKey_url)">下载作业文件</a>
               </a-menu-item>
               <a-menu-item>
                 <a-popconfirm title="确定删除吗?" @confirm="() => handleDelete(record.id)">
@@ -289,13 +289,13 @@ export default {
           return window.open('/scratch3/index.html?workId=' + record.id)
           break
         case '3':
-          return window.open('/scratchjr/editor.html?mode=edit&filepath=' + record.workFileUrl)
+          return window.open('/scratchjr/editor.html?mode=edit&filepath=' + record.workFileKey_url)
           break
         case '4':
           return window.open('/python/index.html?workId=' + record.id)
           break
         default:
-          return window.open(record.workFileUrl)
+          return window.open(record.workFileKey_url)
       }
     },
   },

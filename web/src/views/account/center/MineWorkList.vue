@@ -192,12 +192,12 @@ export default {
           return window.open('/scratch3/index.html?workId='+record.id)
           break;
         case '3':
-          return window.open('/scratchjr/editor.html?mode=edit&filepath=' + record.workFileUrl)
+          return window.open('/scratchjr/editor.html?mode=edit&filepath=' + record.workFileKey_url)
           break;
         case '4':
           return window.open('/python/index.html?workId=' + record.id)
         default:
-          return window.open(record.workFileUrl)
+          return window.open(record.workFileKey_url)
       }
     }
   }
