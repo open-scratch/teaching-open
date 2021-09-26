@@ -24,6 +24,11 @@ create table teaching_scratch_assets
     del_flag tinyint default 0 not null comment '删除状态'
 );
 
+alter table sys_file modify file_type tinyint null comment '文件类型';
+
+alter table sys_file modify file_location tinyint not null comment '存储位置';
+
+
 create index assetNameIndex
     on teaching_scratch_assets (asset_name);
 

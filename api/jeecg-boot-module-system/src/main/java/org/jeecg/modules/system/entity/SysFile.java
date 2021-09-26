@@ -76,7 +76,7 @@ public class SysFile implements Serializable {
 	@Excel(name = "存储位置", width = 15, dicCode = "file_location")
 	@Dict(dicCode = "file_location")
     @ApiModelProperty(value = "存储位置")
-    private java.lang.String fileLocation;
+    private java.lang.Integer fileLocation;
 	/**文件标签*/
 	@Excel(name = "文件标签", width = 15)
     @ApiModelProperty(value = "文件标签")

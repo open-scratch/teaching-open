@@ -104,7 +104,7 @@ window.getQiniuToken = function() {
 
 
   //上传文件
-  function uploadFile(fileName, fileTag, filePath) {
+  function uploadFile(fileName, fileTag, filePath, fileLocation) {
     var id = null;
     $.ajax({
       url: '/api/system/sysFile/add',
@@ -119,7 +119,7 @@ window.getQiniuToken = function() {
         fileType: 2,
         fileName: fileName,
         filePath: filePath,
-        fileLocation: 2,
+        fileLocation: fileLocation,
         fileTag: fileTag
       }),
       success: function (res) {

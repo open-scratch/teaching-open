@@ -31,9 +31,9 @@
       complete(res) {
         console.log(res)
         if (res.key.includes('png')) {
-          uploadParam.coverKey = uploadFile(res.key, '学生作业-封面', res.key)
+          uploadParam.coverKey = uploadFile(res.key, '学生作业-封面', res.key,2)
         } else {
-          uploadParam.projectKey = uploadFile(res.key, '学生作业-sjr', res.key)
+          uploadParam.projectKey = uploadFile(res.key, '学生作业-sjr', res.key,2)
         }
         uploadWork()
       }
@@ -44,9 +44,9 @@
       if(res.success){
         var key = res.message
         if(key.endsWith('.png')){
-          uploadParam.coverKey = uploadFile(key, '学生作业-封面', key)
+          uploadParam.coverKey = uploadFile(key, '学生作业-封面', key,1)
         }else{
-          uploadParam.projectKey = uploadFile(key, '学生作业-sb3', key)
+          uploadParam.projectKey = uploadFile(key, '学生作业-sb3', key,1)
         }
         uploadWork()
       }else{

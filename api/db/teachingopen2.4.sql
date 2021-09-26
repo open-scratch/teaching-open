@@ -796,7 +796,7 @@ CREATE TABLE `qrtz_job_details` (
 
 LOCK TABLES `qrtz_job_details` WRITE;
 /*!40000 ALTER TABLE `qrtz_job_details` DISABLE KEYS */;
-INSERT INTO `qrtz_job_details` VALUES ('quartzScheduler','org.jeecg.modules.wechat.job.ProcessWechatPayJob','DEFAULT',NULL,'org.jeecg.modules.wechat.job.ProcessWechatPayJob','0','0','0','0','��\0sr\0org.quartz.JobDataMap���迩��\0\0xr\0&org.quartz.utils.StringKeyDirtyFlagMap�����](\0Z\0allowsTransientDataxr\0org.quartz.utils.DirtyFlagMap�.�(v\n�\0Z\0dirtyL\0mapt\0Ljava/util/Map;xpsr\0java.util.HashMap���`�\0F\0\nloadFactorI\0	thresholdxp?@\0\0\0\0\0w\0\0\0\0\0\0t\0	parameterpx\0');
+INSERT INTO `qrtz_job_details` VALUES ('quartzScheduler','org.jeecg.modules.wechat.job.ProcessWechatPayJob','DEFAULT',NULL,'org.jeecg.modules.wechat.job.ProcessWechatPayJob','0','0','0','0','��\0sr\0org.quartz.JobDataMap���迩��\0\0xr\0&org.quartz.utils.StringKeyDirtyFlagMap�����](\0Z\0allowsTransientDataxr\0org.quartz.utils.DirtyFlagMap�.�(v\n�\0Z\0dirtyL\0mapt\0Ljava/util/Map;xpsr\0java.util.HashMap���`�\0F\0\nloadFactorI\0	thresholdxp?@\0\0\0\0\0w\0\0\0\0\0\0t\0	parameterpx\0');
 /*!40000 ALTER TABLE `qrtz_job_details` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -1428,10 +1428,10 @@ CREATE TABLE `sys_file` (
   `create_by` varchar(50) DEFAULT NULL COMMENT '创建人',
   `update_time` datetime DEFAULT NULL COMMENT '更新日期',
   `sys_org_code` varchar(64) DEFAULT NULL COMMENT '所属部门',
-  `file_type` int(2) DEFAULT NULL COMMENT '文件类型',
+  `file_type` tinyint DEFAULT NULL COMMENT '文件类型',
   `file_name` varchar(128) DEFAULT NULL COMMENT '文件名',
   `file_path` varchar(1024) NOT NULL COMMENT '文件路径',
-  `file_location` varchar(32) NOT NULL COMMENT '存储位置',
+  `file_location` tinyint NOT NULL COMMENT '存储位置',
   `file_tag` varchar(32) DEFAULT NULL COMMENT '文件标签',
   `del_flag` int(1) NOT NULL DEFAULT '0' COMMENT '是否删除',
   PRIMARY KEY (`id`),
