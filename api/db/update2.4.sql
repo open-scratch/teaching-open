@@ -16,30 +16,21 @@ create table teaching_scratch_assets
     asset_name varchar(100) null comment '冗余 素材名',
     asset_data longtext null comment '素材json数据',
     md5_ext varchar(5000) null comment '冗余 素材md5',
-    asset_role int not null comment '权限分类 0默认 1 系统 2机构 3用户',
     tags varchar(1000) null comment '标签',
     create_by varchar(40) null comment '创建人',
     create_time datetime null comment '创建时间',
     update_by varchar(40) null comment '修改人',
     udpate_time datetime null comment '修改时间',
-    del_flag tinyint default 0 not null comment '删除状态',
-    user_id varchar(40) null comment '所属用户',
-    depart_id varchar(40) null comment '所属部门'
+    del_flag tinyint default 0 not null comment '删除状态'
 );
 
 create index assetNameIndex
     on teaching_scratch_assets (asset_name);
 
-create index departIdIndex
-    on teaching_scratch_assets (depart_id);
-
 create index md5extindex
     on teaching_scratch_assets (md5_ext);
 
-create index useridIndex
-    on teaching_scratch_assets (user_id);
-
-INSERT INTO `sys_permission`(`id`, `parent_id`, `name`, `url`, `component`, `component_name`, `redirect`, `menu_type`, `perms`, `perms_type`, `sort_no`, `always_show`, `icon`, `is_route`, `is_leaf`, `keep_alive`, `hidden`, `description`, `create_by`, `create_time`, `update_by`, `update_time`, `del_flag`, `rule_flag`, `status`, `internal_or_external`) VALUES ('1439107239277322241', '1294825417530494978', 'Scratch素材库', '/scratch/assets', 'teaching/TeachingScratchAssetsList', NULL, NULL, 1, NULL, '1', 10.00, 0, NULL, 1, 1, 0, 0, NULL, 'admin', '2021-09-18 01:01:17', 'admin', '2021-09-24 05:08:59', 0, 0, '1', 0);
+INSERT INTO `sys_permission`(`id`, `parent_id`, `name`, `url`, `component`, `component_name`, `redirect`, `menu_type`, `perms`, `perms_type`, `sort_no`, `always_show`, `icon`, `is_route`, `is_leaf`, `keep_alive`, `hidden`, `description`, `create_by`, `create_time`, `update_by`, `update_time`, `del_flag`, `rule_flag`, `status`, `internal_or_external`) VALUES ('1439107239277322241', 'd7d6e2e4e2934f2c9385a623fd98c6f3', 'Scratch素材库', '/scratch/assets', 'teaching/TeachingScratchAssetsList', NULL, NULL, 1, NULL, '1', 10.00, 0, NULL, 1, 1, 0, 0, NULL, 'admin', '2021-09-18 01:01:17', 'admin', '2021-09-24 05:08:59', 0, 0, '1', 0);
 INSERT INTO `sys_role_permission`(`id`, `role_id`, `permission_id`, `data_rule_ids`) VALUES ('1439108051370074113', 'f6817f48af4fb3af11b9e8bf182f618b', '1439107239277322241', NULL);
 
 INSERT INTO `sys_dict`(`id`, `dict_name`, `dict_code`, `description`, `del_flag`, `create_by`, `create_time`, `update_by`, `update_time`, `type`) VALUES ('1439110468358717442', 'Scratch素材类型', 'scratch_asset_type', 'scratch素材库的素材类型', 0, 'admin', '2021-09-18 01:14:07', NULL, NULL, 0);

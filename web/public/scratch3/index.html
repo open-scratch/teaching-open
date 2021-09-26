@@ -209,7 +209,7 @@
       defaultProjectURL: "./static/project.sb3",
       //素材库配置
       assets:{
-        //素材库地址，默认为/static下的素材库
+        //素材库地址
         assetHost: JSON.parse(localStorage.getItem("CONFIG")).qn_base,
         //素材库索引地址
         defaultIndex:{
@@ -225,7 +225,7 @@
           window.getScratchAssets(4,data=>{
             window.scratch.pushSpriteLibrary(data)
           })
-          return false;
+          return true;
         },
         //拦截造型库打开
         handleBeforeCostumesLibraryOpen(){

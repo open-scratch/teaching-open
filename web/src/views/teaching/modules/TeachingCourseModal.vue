@@ -26,7 +26,9 @@
           </a-select>
         </a-form-item>
         <a-form-item label="是否共享" :labelCol="labelCol" :wrapperCol="wrapperCol">
+          <a-tooltip placement="top" title="共享后所有学生都可以上本课程">
           <a-switch v-model="model.isShared" checkedChildren="是" unCheckedChildren="否"/>
+          </a-tooltip>
         </a-form-item>
         <a-form-item label="课程封面" :labelCol="labelCol" :wrapperCol="wrapperCol">
           <j-upload v-decorator="['courseCover', validatorRules.courseCover]" :uploadTarget="'qiniu'" :maxFile="1" :trigger-change="true"></j-upload>

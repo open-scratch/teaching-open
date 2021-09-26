@@ -290,16 +290,21 @@ export default {
     },
     //当选择文件
     selectedAsset(key, file) {
-      console.log(key)
-      console.log(file)
+      let fileInfo = {}
+      fileInfo['name'] = file.name.split('.')[0]
+      fileInfo['md5ext'] = key.replace(this.assetPrefix, '')
+      fileInfo['assetId'] = fileInfo['md5ext'].split('.')[0]
+      fileInfo['dataFormat'] = fileInfo['md5ext'].split('.')[1]
       let type = file.type
       if (type.startsWith('image')) {
         this.getImageInfo(file).then(info => {
           this.assetData = Object.assign(this.assetData, fileInfo, info)
+          this.generateJsonData()
         })
       } else if (type.startsWith('audio')) {
         this.getSoundInfo(file).then(info => {
           this.assetData = Object.assign(this.assetData, fileInfo, info)
+          this.generateJsonData()
         })
       } else {
         this.$message.info('不支持的文件类型')
