@@ -209,7 +209,7 @@
           })
         } else if(unitId){
           getUnitInfo(unitId, function(info){
-            window.scratch.loadProject(info.courseWork, () => {
+            window.scratch.loadProject(info.courseWork_url, () => {
               $('.loading').hide()
               $('.scratch-filter').hide()
               window.scratch.setProjectName(info.unitName)

@@ -9,6 +9,8 @@ import java.io.UnsupportedEncodingException;
 import java.net.URLDecoder;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+
+import org.jeecg.common.api.vo.DictResult;
 import org.jeecg.common.api.vo.Result;
 import org.jeecg.common.aspect.annotation.PermissionData;
 import org.jeecg.common.system.query.QueryGenerator;
@@ -81,8 +83,8 @@ public class TeachingCourseUnitController extends JeecgController<TeachingCourse
 	}
 
 	 @GetMapping("getUnitWorkInfo")
-	 public Result<CourseUnitWorkModel> getUnitWorkInfo(@RequestParam String unitId) {
-		 Result<CourseUnitWorkModel> result = new Result<CourseUnitWorkModel>();
+	 public DictResult<CourseUnitWorkModel> getUnitWorkInfo(@RequestParam String unitId) {
+		 DictResult<CourseUnitWorkModel> result = new DictResult<CourseUnitWorkModel>();
 		 LoginUser user = getCurrentUser();
 		 if (user == null){
 			 //未登录
