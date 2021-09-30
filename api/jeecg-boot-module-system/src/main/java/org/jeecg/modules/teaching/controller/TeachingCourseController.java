@@ -108,9 +108,9 @@ public class TeachingCourseController extends JeecgController<TeachingCourse, IT
 	public Result<?> delete(@RequestParam(name="id",required=true) String id) {
 		TeachingCourse course = this.teachingCourseService.getById(id);
 		if (course != null){
-			sysFileService.deleteWithFile(course.getCourseIcon());
-			sysFileService.deleteWithFile(course.getCourseCover());
-			sysFileService.deleteWithFile(course.getCourseMap());
+			sysFileService.deleteByKeyWithFile(course.getCourseIcon());
+			sysFileService.deleteByKeyWithFile(course.getCourseCover());
+			sysFileService.deleteByKeyWithFile(course.getCourseMap());
 			teachingCourseService.removeById(id);
 		}
 		return Result.ok("删除成功!");
@@ -129,9 +129,9 @@ public class TeachingCourseController extends JeecgController<TeachingCourse, IT
 		List<String> idList = Arrays.asList(ids.split(","));
 		List<TeachingCourse> courseList = this.teachingCourseService.list(new QueryWrapper<TeachingCourse>().in("id", idList));
 		for (TeachingCourse course: courseList){
-			sysFileService.deleteWithFile(course.getCourseIcon());
-			sysFileService.deleteWithFile(course.getCourseCover());
-			sysFileService.deleteWithFile(course.getCourseMap());
+			sysFileService.deleteByKeyWithFile(course.getCourseIcon());
+			sysFileService.deleteByKeyWithFile(course.getCourseCover());
+			sysFileService.deleteByKeyWithFile(course.getCourseMap());
 		}
 		this.teachingCourseService.removeByIds(idList);
 		return Result.ok("批量删除成功!");

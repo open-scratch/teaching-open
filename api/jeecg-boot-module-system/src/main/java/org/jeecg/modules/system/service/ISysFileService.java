@@ -12,4 +12,6 @@ import com.baomidou.mybatisplus.extension.service.IService;
 public interface ISysFileService extends IService<SysFile> {
     //同时删除文件
     boolean deleteWithFile(String id);
+    //通过文件key删除文件
+    boolean deleteByKeyWithFile(String key);
 }

@@ -51,8 +51,6 @@ import org.jeecg.common.aspect.annotation.AutoLog;
 public class SysFileController extends JeecgController<SysFile, ISysFileService> {
 	@Autowired
 	private ISysFileService sysFileService;
-	@Autowired
-	private QiniuUtil qiniuUtil;
 
 	/**
 	 * 分页列表查询
@@ -114,9 +112,7 @@ public class SysFileController extends JeecgController<SysFile, ISysFileService>
 	@ApiOperation(value="文件管理-通过id删除", notes="文件管理-通过id删除")
 	@DeleteMapping(value = "/delete")
 	public Result<?> delete(@RequestParam(name="id",required=true) String id) {
-		SysFile sysFile = sysFileService.getById(id);
-		qiniuUtil.deleteFileByKey(sysFile.getFilePath());
-		sysFileService.removeById(id);
+		sysFileService.deleteWithFile(id);
 		return Result.ok("删除成功!");
 	}
 
@@ -130,10 +126,10 @@ public class SysFileController extends JeecgController<SysFile, ISysFileService>
 	 @ApiOperation(value="文件管理-通过filePath删除", notes="文件管理-通过filePath删除")
 	 @DeleteMapping(value = "/deleteByPath")
 	 public Result<?> deleteByPath(@RequestParam(name="filePath",required=true) String filePath) {
-		 qiniuUtil.deleteFileByKey(filePath);
-		 sysFileService.removeByMap(new HashMap<String,Object>(){{
-		 	put("file_path", filePath);
-		 }});
+		 SysFile sysFile = sysFileService.getOne(new QueryWrapper<SysFile>().eq("file_path", filePath));
+		 if (sysFile != null){
+			 sysFileService.deleteWithFile(sysFile.getId());
+		 }
 		 return Result.ok("删除成功!");
 	 }
 	
@@ -148,11 +144,9 @@ public class SysFileController extends JeecgController<SysFile, ISysFileService>
 	@DeleteMapping(value = "/deleteBatch")
 	public Result<?> deleteBatch(@RequestParam(name="ids",required=true) String ids) {
 		List<String> idList = Arrays.asList(ids.split(","));
-		List<SysFile> files = this.sysFileService.list(new QueryWrapper<SysFile>().in("id", idList));
-		for (SysFile f: files){
-			qiniuUtil.deleteFileByKey(f.getFilePath());
+		for (String id: idList){
+			sysFileService.deleteWithFile(id);
 		}
-		this.sysFileService.removeByIds(idList);
 		return Result.ok("批量删除成功!");
 	}
 	

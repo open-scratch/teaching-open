@@ -119,7 +119,7 @@ public class TeachingScratchAssetsController extends JeecgController<TeachingScr
            if (assets.getAssetType() == 4){
                //TODO 删除角色
            }else{
-               sysFileService.deleteWithFile(assets.getMd5Ext());
+               sysFileService.deleteByKeyWithFile(assets.getMd5Ext());
            }
            teachingScratchAssetsService.removeById(id);
        }
@@ -142,7 +142,7 @@ public class TeachingScratchAssetsController extends JeecgController<TeachingScr
            if (assets.getAssetType() == 4){
                //TODO 删除角色
            }else{
-               sysFileService.deleteWithFile(assets.getMd5Ext());
+               sysFileService.deleteByKeyWithFile(assets.getMd5Ext());
            }
        }
        teachingScratchAssetsService.removeByIds(idList);

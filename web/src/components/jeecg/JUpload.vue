@@ -99,6 +99,7 @@
         headers:{},
         fileList: [],
         uploadToken: '',
+        uploadKey: '',
         newFileList: [],
         uploadGoOn:true,
         previewVisible: false,
@@ -144,7 +145,7 @@
         required: false,
         default: 1000
       },
-      // 文件上传目标
+      // 文件上传目标， 默认本地
       uploadTarget:{
         type: String,
         required: false,
@@ -167,12 +168,6 @@
         required:false,
         default: false
       },
-      //此属性被废弃了
-      triggerChange:{
-        type: Boolean,
-        required: false,
-        default: false
-      },
       //是否支持文件多选
       multiple:{
         type: Boolean,
@@ -189,11 +184,17 @@
         required:false,
         default: true
       },
-      //最大文件数量
+      //最大文件数量，0不限
       number:{
         type:Number,
         required:false,
         default: 0
+      },
+      //是否自动删除文件
+      autoDelete:{
+        type:Boolean,
+        required:false,
+        default: true
       },
       //上传按钮是否显示
       buttonVisible:{
@@ -230,14 +231,12 @@
     created(){
       const token = Vue.ls.get(ACCESS_TOKEN);
       this.headers = {"X-Access-Token":token}
-      console.log(this.uploadTarget);
-      
-      switch(this.uploadTarget){
-          case UPLOAD_TARGET_QINIU:
-            this.getQiniuToken();
-            break;
-          default:
-      }
+      // switch(this.uploadTarget){
+      //     case UPLOAD_TARGET_QINIU:
+      //       this.getQiniuToken();
+      //       break;
+      //     default:
+      //   }
       //---------------------------- begin 图片左右换位置 -------------------------------------
       this.containerId = 'container-ty-'+new Date().getTime();
       //---------------------------- end 图片左右换位置 -------------------------------------
@@ -276,19 +275,12 @@
       },
       //获取要上传数据
       getUploadData(file){
-        var suffix = file.name.split(".")
-        if(suffix.length>1){
-          suffix = suffix.pop()
-        }else{
-          suffix = ""
-        }
-        let key = this.getFileFullName(suffix)
-        this.$emit("selected", key, file);
+        console.log("getUploadData");
         switch(this.uploadTarget){
           case UPLOAD_TARGET_LOCAL:
             return {'isup':1,'bizPath':this.bizPath};
           case UPLOAD_TARGET_QINIU:
-            return {'token': this.uploadToken, 'key': key};
+            return {'token': this.uploadToken, 'key': this.uploadKey};
           case UPLOAD_TARGET_OSS:
             return {};
           case UPLOAD_TARGET_COS:
@@ -299,19 +291,25 @@
       },
       //获取七牛TOKEN
       getQiniuToken(){
-        getAction(this.tokenAction.qiniu, {}).then(res => {
-          if(res.success){
-            this.uploadToken = res.result
-          }else{
-            this.$message.error(res.message)
-          }
-        })
+        return new Promise((resolve, reject) => {
+          getAction(this.tokenAction.qiniu, {}).then(res => {
+            if(res.success){
+              this.uploadToken = res.result
+              resolve()
+              return;
+            }else{
+              this.$message.error(res.message)
+              reject()
+            }
+          })
+        });
       },
       //获取文件key
       getFileFullName(suffix){
         return this.uploadPath + 
         (this.fileName ? this.fileName : uuidGenerator()) + '.' + suffix
       },
+      //保存文件记录
       saveToDB: function(fileName, filePath, fileLocation, fileTag){
           return postAction("/system/sysFile/add", {
             fileName: fileName,
@@ -320,6 +318,7 @@
             fileTag: fileTag
           })
       },
+      //删除文件记录
       delFromBD(filePath){
           return deleteAction("/system/sysFile/deleteByPath", {
             filePath: filePath
@@ -413,8 +412,19 @@
           this.$message.warning("文件超过"+this.maxFileSize+"MB")
           return false
         }
-        
-        return true
+        //获取文件key
+        let suffix = file.name.split(".")
+        if(suffix.length>1){suffix = suffix.pop()}else{suffix = ""}
+        this.uploadKey = this.getFileFullName(suffix)
+        this.$emit("selected", this.uploadKey, file);
+
+        //获取上传token
+        switch(this.uploadTarget){
+          case UPLOAD_TARGET_QINIU:
+            return this.getQiniuToken();
+          default:
+            return true
+        }
       },
       //上传完毕后文件列表发送变化
       handleChange(info) {
@@ -424,7 +434,9 @@
         let fileList = info.fileList
         console.log("--文件列表改变--")
         console.log(info)
-        if(this.number>0){
+        if(this.number>0 && fileList.length>this.number){
+          //删除超出部分文件
+          this.handleDelete(fileList[0])
           fileList = fileList.slice(-this.number);
         }
         if(info.file.status==='done'){
@@ -432,10 +444,7 @@
             case UPLOAD_TARGET_LOCAL:
               if(info.file.response.success){
                 fileList = fileList.map((file) => {
-                  console.log(file);
-                  
                   if (file.response && file.response.message) {
-                    // file.url = getFileAccessHttpUrl(reUrl);
                     file.url = this.getDownloadUrl(file.response.message)
                     this.saveToDB(file.name,file.response.message,1,"后台上传")
                   }
@@ -443,7 +452,7 @@
                 });
               }
             case UPLOAD_TARGET_QINIU:
-              if(info.file.response.key){
+              if(info.file.response.key){ //当上传成功后才会有key
                 fileList = fileList.map((file) => {
                   if (file.response && file.response.key) {
                     file.response.message = file.response.key
@@ -490,7 +499,10 @@
         console.log("--文件列表改变结束--")
       },
       handleDelete(file){
-        this.delFromBD(file.response.message)
+        console.log("删除文件");
+        if(this.autoDelete){
+          this.delFromBD(file.response.message)
+        }
         this.$emit('delete', file.response.message)
         console.log(file)
       },
