@@ -307,6 +307,15 @@
               '/scratch3/scratch-mobile.html?workId=' +
               res.result.id
             createCode('qrcode', shareUrl)
+		    var img = document.createElement('img');
+            img.id = 'qrCodeIco';
+            img.src = '/logo.png';
+            img.style.position = 'absolute';
+            img.style.width = '50px';
+            img.style.height = '50px';
+            img.style.verticalAlign = 'middle;';
+            img.style.zIndex = 2;
+            qrDiv.appendChild(img);
             $('.scratch-filter').show()
             $('.release-success').show()
           } else {
@@ -351,7 +360,7 @@
           <img src="../images/rights.png" alt="rights" />
         </p> -->
         <p class="ercode-img">
-          <span id="qrcode"></span>
+		   <span id="qrcode" style="align-items: center;display: flex; justify-content: center;"></span>
         </p>
         <div class="watch-works">
           <span>请微信扫描二维码</span>
