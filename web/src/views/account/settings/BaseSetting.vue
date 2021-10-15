@@ -7,27 +7,13 @@
             <a-input placeholder="请输入真实姓名" v-decorator="[ 'realname', validatorRules.realname]" />
           </a-form-item>
           <a-form-item label="头像" :labelCol="labelCol" :wrapperCol="wrapperCol">
-            <a-upload
-              listType="picture-card"
-              class="avatar-uploader"
-              :showUploadList="false"
-              :action="uploadAction"
-              :data="{'isup':1}"
-              :headers="headers"
-              :beforeUpload="beforeUpload"
-              @change="handleChange"
-            >
-              <img
-                v-if="picUrl"
-                :src="getAvatarView()"
-                alt="头像"
-                style="height:104px;max-width:300px"
-              />
-              <div v-else>
-                <a-icon :type="uploadLoading ? 'loading' : 'plus'" />
-                <div class="ant-upload-text">上传</div>
-              </div>
-            </a-upload>
+            <j-upload
+              v-decorator="['avatar']"
+              :uploadTarget="'qiniu'"
+              :fileType="'image'"
+              :number="1"
+              :trigger-change="true"
+            ></j-upload>
           </a-form-item>
 
           <a-form-item label="生日" :labelCol="labelCol" :wrapperCol="wrapperCol">
@@ -57,15 +43,6 @@
           </a-form-item>
         </a-form>
       </a-col>
-      <a-col v-if="false" :md="24" :lg="8" :style="{ minHeight: '180px' }">
-        <div class="ant-upload-preview" @click="$refs.modal.edit(1)">
-          <a-icon type="cloud-upload-o" class="upload-icon" />
-          <div class="mask">
-            <a-icon type="plus" />
-          </div>
-          <img :src="option.img" />
-        </div>
-      </a-col>
     </a-row>
 
     <avatar-modal ref="modal"></avatar-modal>
@@ -74,35 +51,20 @@
 
 <script>
 import Vue from 'vue'
- import { ACCESS_TOKEN } from "@/store/mutation-types"
 import AvatarModal from './AvatarModal'
+import JUpload from '@/components/jeecg/JUpload'
 import moment from 'moment'
 import pick from 'lodash.pick'
 import { getAction,putAction } from '@/api/manage'
 
 export default {
   components: {
-    AvatarModal
+    AvatarModal,
+    JUpload
   },
   data() {
     return {
-      // cropper
       preview: {},
-      option: {
-        img: '/avatar2.jpg',
-        info: true,
-        size: 1,
-        outputType: 'jpeg',
-        canScale: false,
-        autoCrop: true,
-        // 只有自动截图开启 宽度高度才生效
-        autoCropWidth: 180,
-        autoCropHeight: 180,
-        fixedBox: true,
-        // 开启宽度和高度比例
-        fixed: true,
-        fixedNumber: [1, 1]
-      },
       dateFormat:"YYYY-MM-DD",
       labelCol: {
         xs: { span: 24 },
@@ -116,7 +78,6 @@ export default {
       confirmLoading: false,
       headers:{},
       form:this.$form.createForm(this),
-      picUrl: "",
       validatorRules: {
         realname: { rules: [{ required: true, message: '请输入用户名称!' }] },
         phone: { rules: [{ validator: this.validatePhone }] },
@@ -138,16 +99,8 @@ export default {
       }
     }
   },
-  computed:{
-      uploadAction:function () {
-        return this.url.fileUpload;
-      }
-    },
-    
   created() {
     this.getUserInfo()
-    const token = Vue.ls.get(ACCESS_TOKEN);
-    this.headers = {"X-Access-Token":token}
   },
   methods: {
     moment,
@@ -159,7 +112,6 @@ export default {
           that.$nextTick(() => {
             that.form.setFieldsValue(pick(that.userInfo, 'username', 'sex', 'realname', 'email', 'phone', 'avatar'))
           })
-          that.picUrl = this.getAvatarView()
           //that.loadUserHonor(that.userInfo.id)
         }
       })
@@ -182,14 +134,14 @@ export default {
           var values = that.form.getFieldsValue();
           console.log(values)
           that.confirmLoading = true
-          let avatar = that.userInfo.avatar
+          // let avatar = that.userInfo.avatar
           if (!values.birthday) {
             values.birthday = ''
           } else {
             values.birthday = values.birthday.format(this.dateFormat)
           }
           let formData = Object.assign(this.userInfo, values)
-          formData.avatar = avatar
+          // formData.avatar = avatar
           // that.addDepartsToUser(that,formData); // 调用根据当前用户添加部门信息的方法
           let obj = putAction(that.url.editUser, formData).then(res => {
               if (res.success) {
@@ -263,35 +215,6 @@ export default {
       }
       return e && e.fileList
     },
-    beforeUpload: function(file) {
-      var fileType = file.type
-      if (fileType.indexOf('image') < 0) {
-        this.$message.warning('请上传图片')
-        return false
-      }
-      //TODO 验证文件大小
-    },
-    handleChange(info) {
-      this.picUrl = ''
-      if (info.file.status === 'uploading') {
-        this.uploadLoading = true
-        return
-      }
-      if (info.file.status === 'done') {
-        var response = info.file.response
-        this.uploadLoading = false
-        console.log(response)
-        if (response.success) {
-          this.userInfo.avatar = response.message
-          this.picUrl = 'Has no pic url yet'
-        } else {
-          this.$message.warning(response.message)
-        }
-      }
-    },
-    getAvatarView() {
-      return this.url.imgerver + '/' + this.userInfo.avatar
-    }
   }
 }
 </script>

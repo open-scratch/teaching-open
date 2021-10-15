@@ -205,15 +205,28 @@ public class TeachingWorkController extends BaseController {
 		 return result;
 	 }
 
-	 //劲作排行榜(本周作品,年度作品) TODO 缓存1
+	 //劲作排行 TODO 缓存1
 	 @ApiOperation(value = "劲作排行榜")
 	 @GetMapping(value = "/leaderboard")
 	 public Result<?> listLeaderboard(@RequestParam(name = "pageNo", defaultValue = "1") Integer pageNo,
 									  @RequestParam(name = "pageSize", defaultValue = "10") Integer pageSize,
+									  @RequestParam(required = false, defaultValue = "view") String orderBy, //排序
 									  HttpServletRequest request) {
 		 QueryWrapper<StudentWorkModel> queryWrapper = new QueryWrapper<StudentWorkModel>();
 		 queryWrapper.orderByDesc("teaching_work.star_num");
 		 queryWrapper.ge("teaching_work.work_status", 1);
+		 switch (orderBy){
+			 case "view":
+				 queryWrapper.orderByDesc("teaching_work.view_num");
+			 	break;
+			 case "time":
+				queryWrapper.orderByDesc("teaching_work.create_time");
+				break;
+			 case "star":
+				 queryWrapper.orderByDesc("teaching_work.star_num");
+				 break;
+		 }
+
 		 IPage<StudentWorkModel> pageList = teachingWorkService.listWorkModel(new Page<>(pageNo, pageSize), queryWrapper);
 		 return Result.ok(pageList);
 	 }
