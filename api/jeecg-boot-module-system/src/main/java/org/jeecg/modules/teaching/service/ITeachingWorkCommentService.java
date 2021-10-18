@@ -2,6 +2,8 @@ package org.jeecg.modules.teaching.service;
 
 import org.jeecg.modules.teaching.entity.TeachingWorkComment;
 import com.baomidou.mybatisplus.extension.service.IService;
+import org.jeecg.modules.teaching.model.WorkCommentModel;
+
 import java.util.List;
 
 /**
@@ -12,5 +14,7 @@ import java.util.List;
  */
 public interface ITeachingWorkCommentService extends IService<TeachingWorkComment> {
 
-	public List<TeachingWorkComment> selectByMainId(String mainId);
+	public List<TeachingWorkComment> selectByMainId(String workId);
+
+	public List<WorkCommentModel> getWorkComments(String workId, Integer page, Integer pageSize);
 }

@@ -7,10 +7,21 @@
 		FROM  teaching_work_comment 
 		WHERE
 			 work_id = #{mainId} 	</delete>
-	
+
 	<select id="selectByMainId" parameterType="java.lang.String" resultType="org.jeecg.modules.teaching.entity.TeachingWorkComment">
-		SELECT * 
-		FROM  teaching_work_comment
+		SELECT *
+		FROM  teaching_work_comment c
 		WHERE
-			 work_id = #{mainId} 	</select>
+			work_id = #{workId}
+	</select>
+	
+	<select id="getWorkComments" resultType="org.jeecg.modules.teaching.model.WorkCommentModel">
+		SELECT c.*, u.username, u.realname, u.avatar
+		FROM  teaching_work_comment c
+		left join sys_user u on u.id = c.user_id
+		WHERE
+			 work_id = #{workId}
+		order by c.create_time desc
+		limit #{offset},#{pageSize}
+	</select>
 </mapper>

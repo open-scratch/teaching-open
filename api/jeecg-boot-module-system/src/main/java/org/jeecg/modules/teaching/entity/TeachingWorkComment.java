@@ -55,10 +55,10 @@ public class TeachingWorkComment implements Serializable {
 	/**作业ID*/
 	@ApiModelProperty(value = "作业ID")
 	private java.lang.String workId;
-	/**用户昵称*/
-	@Excel(name = "用户昵称", width = 15)
-	@ApiModelProperty(value = "用户昵称")
-	private java.lang.String nickname;
+	/**用户ID*/
+	@Excel(name = "用户ID", width = 15)
+	@ApiModelProperty(value = "用户ID")
+	private java.lang.String userId;
 	/**评论内容*/
 	@Excel(name = "评论内容", width = 15)
 	@ApiModelProperty(value = "评论内容")

@@ -145,6 +145,7 @@ public class ShiroConfig {
 		filterChainDefinitionMap.put("/teaching/teachingWork/greatWork", "anon");
 		filterChainDefinitionMap.put("/teaching/teachingWork/starWork", "anon");
 		filterChainDefinitionMap.put("/teaching/teachingWork/leaderboard", "anon");
+		filterChainDefinitionMap.put("/teaching/teachingWork/getWorkComments", "anon");
 
 
 		//学生

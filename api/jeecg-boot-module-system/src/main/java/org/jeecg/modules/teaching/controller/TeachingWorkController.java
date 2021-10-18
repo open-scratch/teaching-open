@@ -6,6 +6,8 @@ import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
 import lombok.extern.slf4j.Slf4j;
+import org.apache.commons.lang.StringUtils;
+import org.apache.poi.ss.formula.functions.T;
 import org.apache.shiro.SecurityUtils;
 import org.jeecg.common.api.vo.DictResult;
 import org.jeecg.common.api.vo.Result;
@@ -18,10 +20,12 @@ import org.jeecg.common.util.RedisUtil;
 import org.jeecg.common.util.oConvertUtils;
 import org.jeecg.modules.common.controller.BaseController;
 import org.jeecg.modules.system.service.ISysFileService;
+import org.jeecg.modules.system.service.ISysUserService;
 import org.jeecg.modules.teaching.entity.TeachingWork;
 import org.jeecg.modules.teaching.entity.TeachingWorkComment;
 import org.jeecg.modules.teaching.entity.TeachingWorkCorrect;
 import org.jeecg.modules.teaching.model.StudentWorkModel;
+import org.jeecg.modules.teaching.model.WorkCommentModel;
 import org.jeecg.modules.teaching.service.ITeachingWorkCommentService;
 import org.jeecg.modules.teaching.service.ITeachingWorkCorrectService;
 import org.jeecg.modules.teaching.service.ITeachingWorkService;
@@ -62,6 +66,8 @@ public class TeachingWorkController extends BaseController {
 	private ITeachingWorkCorrectService teachingWorkCorrectService;
 	@Autowired
 	private ITeachingWorkCommentService teachingWorkCommentService;
+	@Autowired
+	private ISysUserService sysUserService;
 	@Autowired
 	private RedisUtil redisUtil;
 	 @Autowired
@@ -246,6 +252,35 @@ public class TeachingWorkController extends BaseController {
 			 result.setSuccess(true);
 		 }
 		 return result;
+	 }
+
+	 /**
+	  * 获取作品评论
+	  * @param workId
+	  * @param page
+	  * @param pageSize
+	  * @return
+	  */
+	 @GetMapping("getWorkComments")
+	 public DictResult<?> getWorkComment(@RequestParam String workId,
+									 @RequestParam(defaultValue = "1") Integer page,
+									 @RequestParam(defaultValue = "10") Integer pageSize){
+		 DictResult<List<WorkCommentModel>> result = new DictResult<>();
+		 List<WorkCommentModel> comments = teachingWorkCommentService.getWorkComments(workId, page, pageSize);
+		 result.setResult(comments);
+		 return result;
+	 }
+
+	 @PostMapping(value = "/saveComment")
+	 public Result saveComment(@RequestBody TeachingWorkComment comment, HttpServletRequest request) {
+		 String ip = IPUtils.getIpAddr(request);
+		 String userId = getCurrentUser().getId();
+		 TeachingWorkComment c = new TeachingWorkComment();
+		 c.setWorkId(comment.getWorkId());
+		 c.setComment(comment.getComment());
+		 c.setUserId(userId);
+		 teachingWorkCommentService.save(c);
+		 return Result.ok("评论成功");
 	 }
 	
 	/**

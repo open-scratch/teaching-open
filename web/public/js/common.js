@@ -237,6 +237,38 @@ function getFileAccessHttpUrl(avatar,subStr) {
   }
 }
 
+//请求全屏
+window.launchIntoFullscreen = function(element) {
+  if (element.requestFullscreen) {
+    element.requestFullscreen();
+  } else if (element.mozRequestFullScreen) {
+    element.mozRequestFullScreen();
+  } else if (element.webkitRequestFullscreen) {
+    element.webkitRequestFullscreen();
+  } else if (element.msRequestFullscreen) {
+    element.msRequestFullscreen();
+  }
+}
+
+//退出全屏
+window.exitFullscreen = function() {
+  if (window.document.exitFullscreen) {
+    window.document.exitFullscreen();
+  } else if (document.mozCancelFullScreen) {
+    window.document.mozCancelFullScreen();
+  } else if (document.webkitExitFullscreen) {
+    window.document.webkitExitFullscreen();
+  }
+}
+
+//是否全屏
+window.isFullscreen = function(){
+  return document.fullscreenElement    ||
+         document.msFullscreenElement  ||
+         document.mozFullScreenElement ||
+         document.webkitFullscreenElement || false;
+}
+
 window.dataLayer = window.dataLayer || [];
 function gtag(){dataLayer.push(arguments);}
 gtag('js', new Date());

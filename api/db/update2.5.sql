@@ -1,0 +1,1 @@
+alter table teaching_work_comment change nickname user_id varchar(32) null comment '用户ID';

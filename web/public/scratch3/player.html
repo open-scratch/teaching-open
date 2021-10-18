@@ -22,10 +22,17 @@
         fullscreenButton:{ //全屏按钮
           show: true,
           handleBeforeSetStageUnFull(){ //退出全屏前的操作
+            var event = new CustomEvent('scratchUnFullScreen');
+            window.parent.document.dispatchEvent(event);
             return true
           },
           handleBeforeSetStageFull(){ //全屏前的操作
-            return true
+            var event = new CustomEvent('scratchFullScreen');
+            window.parent.document.dispatchEvent(event);
+            setTimeout(()=>{
+              window.scratch.setFullScreen(true)
+            },100)
+            return false
           }
         },
         startButton:{ //开始按钮
