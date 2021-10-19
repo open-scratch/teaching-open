@@ -210,8 +210,8 @@ export default {
       getAction('/teaching/teachingWork/getWorkComments', { workId: this.workId, page: this.commentsPage }).then(
         (res) => {
           this.loadingMore = false
-          if (res.result.length == 0) {
-            this.$message.info('已加载完啦！')
+          if (res.result.length == 0 && this.commentsPage>1) {
+              this.$message.info('已加载完啦！')
           } else {
             this.comments = this.comments.concat(res.result)
           }

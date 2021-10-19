@@ -160,7 +160,7 @@ export default {
       this.page.newWork += 1
       getAction('/teaching/teachingWork/leaderboard', { orderBy: 'time', pageSize:3, pageNo: this.page.newWork }).then((res) => {
         if (res.success) {
-          this.newWork = this.newWork.concat(res.result.records)
+          this.newWork = this.newWork.concat(res.result.records && this.page.newWork>1)
           if(res.result.records.length==0){
               this.$message.info("已加载完啦！")
           }
@@ -172,7 +172,7 @@ export default {
       getAction('/teaching/teachingWork/leaderboard', { orderBy: 'star', pageSize:3, pageNo: this.page.greatWork }).then((res) => {
         if (res.success) {
           this.greatWork = this.greatWork.concat(res.result.records)
-          if(res.result.records.length==0){
+          if(res.result.records.length==0 && this.page.greatWork>1){
               this.$message.info("已加载完啦！")
           }
         }
@@ -183,7 +183,7 @@ export default {
       getAction('/teaching/teachingWork/leaderboard', { orderBy: 'view', pageSize:3, pageNo: this.page.hotWork }).then((res) => {
         if (res.success) {
           this.hotWork = this.hotWork.concat(res.result.records)
-          if(res.result.records.length==0){
+          if(res.result.records.length==0 && this.page.hotWork>1){
               this.$message.info("已加载完啦！")
           }
         }
