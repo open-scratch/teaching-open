@@ -2323,15 +2323,6 @@ CREATE TABLE `test_person` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 ROW_FORMAT=DYNAMIC;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
---
--- Dumping data for table `test_person`
---
-
-LOCK TABLES `test_person` WRITE;
-/*!40000 ALTER TABLE `test_person` DISABLE KEYS */;
-INSERT INTO `test_person` VALUES ('8ca668defdae47df8649a5477ae08b05','admin','2019-04-12 09:51:37',NULL,NULL,'1','zhangdaiscott','dsdsd','2019-04-12 00:00:00',2);
-/*!40000 ALTER TABLE `test_person` ENABLE KEYS */;
-UNLOCK TABLES;
 
 --
 -- Table structure for table `wechat_user`
@@ -2368,16 +2359,6 @@ CREATE TABLE `wechat_user` (
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
--- Dumping data for table `wechat_user`
---
-
-LOCK TABLES `wechat_user` WRITE;
-/*!40000 ALTER TABLE `wechat_user` DISABLE KEYS */;
-INSERT INTO `wechat_user` VALUES ('1236921740769107969',NULL,'oJgzvv5A0yUkNGprRqd7l4OhVJLg','ooKi0v9gOeFDqMA7e3hRi-7Mee9o','创客*赵文栋',NULL,'','','','http://thirdwx.qlogo.cn/mmopen/vi_32/LbPiaLiaWH3Zx4xXOicj9LLfviasiaHcj8Jj27ibbFCNmTbnAcPceA2IvecgbxIC0yD26wLxyDzj9EtiaZNicqnpfZ8iaNg/132',NULL,NULL,NULL,NULL,'2020-03-09 15:48:18',NULL,'2020-03-09 22:33:17',NULL,'wx2154aa8b958db927'),('1236926173020168194',NULL,'oJgzvv2z2Ern6UccZy007CwPj7JU','ooKi0vweMEO8vi_4W3mvzDo8Vn8E','Evil Lord',NULL,'菏泽','山东','菏泽','http://thirdwx.qlogo.cn/mmopen/vi_32/Q0j4TwGTfTKGKnRsqeCd7Seuqt6vWKOicbQCkdGXSiaLYpPrm4pZwKWibTZdibpPia7hic7k3DQTjAlxIEX36lCicqD3g/132',NULL,NULL,NULL,NULL,'2020-03-09 16:05:55','admin','2020-03-09 18:01:30',NULL,'wx2154aa8b958db927'),('1236943560297684994','1236947419388825601','oJgzvv7Q58w_l7KSLSFz8xIlv_cM','ooKi0v9p1LOLeW1CDlex1i1Wvi6M','程宇',NULL,'金山','上海','金山','http://thirdwx.qlogo.cn/mmopen/vi_32/Q0j4TwGTfTLUNenNGYxS1TIj3XDBTaIxk3UWQ78CiadVFvplFkeT1WqUNxZ5FZibfy3iaPGIpqXIibXNlXibcMIcUSw/132',NULL,NULL,NULL,NULL,'2020-03-09 17:15:00',NULL,'2020-03-09 17:30:20',NULL,'wx2154aa8b958db927'),('1236951423414030338',NULL,'oJgzvv9UJ2T7e6a-pLR17ol3D0i8','ooKi0v5b01XJgrmCtAKCa0vsNiXU','请假',NULL,'徐汇','上海','徐汇','http://thirdwx.qlogo.cn/mmopen/vi_32/Q0j4TwGTfTKQNUgjtVPmh2SjWGHghzSSPl0ONy26LfDfbWsSrNdecQXibv5A1YVjhgoTL8ON0WdDabcoibS0LdJw/132',NULL,NULL,NULL,NULL,'2020-03-09 17:46:15',NULL,'2020-03-09 17:46:56',NULL,'wx2154aa8b958db927'),('1237023690286288897',NULL,'oJgzvv7XGJkPwZ1onrZ8vEFo5cfo','ooKi0v5qdNUy024SN4JBuDmg46Hw','毓',NULL,'','','','http://thirdwx.qlogo.cn/mmopen/vi_32/DYAIOgq83erFX7Vn1goXrtxOjJEx0VyUmRJ5DicicRaXoibBCNqibwvUFSicoFFA9reZXjWuiapoeicp1pOsGkuYicSUXg/132',NULL,NULL,NULL,NULL,'2020-03-09 22:33:25',NULL,NULL,NULL,'wx2154aa8b958db927');
-/*!40000 ALTER TABLE `wechat_user` ENABLE KEYS */;
-UNLOCK TABLES;
-
---
 -- Dumping events for database 'teachingopendev'
 --
 
@@ -2395,3 +2376,5 @@ UNLOCK TABLES;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
 -- Dump completed on 2021-09-26 18:50:16
+
+alter table teaching_work_comment change nickname user_id varchar(32) null comment '用户ID';
