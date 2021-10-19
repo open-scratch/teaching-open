@@ -1,6 +1,8 @@
 <template>
   <div class="header">
-    <img class="logo" src="/logo.png" alt="" />
+    <router-link :to="{path:'/home'}">
+      <img class="logo" src="/logo.png" alt="" />
+    </router-link>
     <div class="brand">
       <p class="brand-title">{{ brandName }}</p>
       <p class="brand-desc">{{ brandDesc }}</p>
@@ -20,7 +22,7 @@ export default {
 
 <style scoped>
 .header{
-    margin-top: 30px;
+    margin-top: 25px;
     line-height: 30px;
 }
 .logo {
@@ -31,12 +33,13 @@ export default {
 }
 .brand{
     display: inline-block;
+    vertical-align: middle;
 }
 .brand-title {
   color: white;
   font-size: 30px;
   text-shadow: 0 0 5px #282828;
-  margin-bottom: 0px;
+  margin-bottom: 10px;
 }
 .brand-desc {
   color: white;
