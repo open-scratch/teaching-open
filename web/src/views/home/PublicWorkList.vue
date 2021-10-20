@@ -15,7 +15,7 @@
               <a-col v-for="(item, index) in greatWork" :key="index" :span="7">
                 <a-card class="work-card">
                   <a @click="toDetail(item.id)" target="_blank">
-                    <img class="work-cover" v-if="item.coverFileKey" :src="getFileAccessHttpUrl(item.coverFileKey)" />
+                    <img class="work-cover" v-if="item.coverFileKey" :src="item.coverFileKey_url" />
                     <img v-if="item.workType == 4" src="@/assets/python.png" alt="" />
                   </a>
                   <a-row type="flex" justify="end">
@@ -50,7 +50,7 @@
               <a-col v-for="(item, index) in hotWork" :key="index" :span="7">
                 <a-card class="work-card">
                   <a @click="toDetail(item.id)" target="_blank">
-                    <img class="work-cover" v-if="item.coverFileKey" :src="getFileAccessHttpUrl(item.coverFileKey)" />
+                    <img class="work-cover" v-if="item.coverFileKey" :src="item.coverFileKey_url" />
                     <img v-if="item.workType == 4" src="@/assets/python.png" alt="" />
                   </a>
                   <a-row type="flex" justify="end">
@@ -85,7 +85,7 @@
               <a-col v-for="(item, index) in newWork" :key="index" :span="7">
                 <a-card class="work-card">
                   <a @click="toDetail(item.id)" target="_blank">
-                    <img class="work-cover" v-if="item.coverFileKey" :src="getFileAccessHttpUrl(item.coverFileKey)" />
+                    <img class="work-cover" v-if="item.coverFileKey" :src="item.coverFileKey_url" />
                     <img v-if="item.workType == 4" src="@/assets/python.png" alt="" />
                   </a>
                   <a-row type="flex" justify="end">
@@ -130,6 +130,7 @@ import UserEnter from './modules/UserEnter'
 import QrCode from '@/components/tools/QrCode'
 
 export default {
+  name: "PublicWorkList",
   components: {
     qrcode: QrCode,
     Header,
@@ -160,8 +161,9 @@ export default {
       this.page.newWork += 1
       getAction('/teaching/teachingWork/leaderboard', { orderBy: 'time', pageSize:3, pageNo: this.page.newWork }).then((res) => {
         if (res.success) {
-          this.newWork = this.newWork.concat(res.result.records && this.page.newWork>1)
-          if(res.result.records.length==0){
+          this.newWork = this.newWork.concat(res.result.records)
+          console.log(this.newWork);
+          if(res.result.records.length==0 && this.page.newWork>1){
               this.$message.info("已加载完啦！")
           }
         }
@@ -190,7 +192,7 @@ export default {
       })
     },
     toDetail(id) {
-      this.$router.push('/home/workDetail?id='+id)
+      this.$router.push('/work-detail?id='+id)
     },
   },
 }

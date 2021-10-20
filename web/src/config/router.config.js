@@ -5,16 +5,15 @@ import { UserLayout, TabLayout, RouteView, BlankLayout, PageView } from '@/compo
  * @type {[null,null]}
  */
 export const asyncRouterMap = [
-
-  {
-    path: '/',
-    name: 'dashboard',
-    component: TabLayout,
-    meta: { title: '首页' },
-    redirect: '/dashboard/analysis',
-    children: [
-    ]
-  },
+  // {
+  //   path: '/',
+  //   name: 'dashboard',
+  //   component: TabLayout,
+  //   meta: { title: '首页' },
+  //   redirect: '/dashboard/analysis',
+  //   children: [
+  //   ]
+  // },
   {
     path: '*', redirect: '/404', hidden: true
   }
@@ -61,14 +60,14 @@ export const constantRouterMap = [
     redirect: '/home',
     children: [
       {
-        path: '/home',
+        path: 'home',
         name: 'publicWork',
-        component: () => import('@/views/home/PublicWorkList')
+        component: () => import(/* webpackChunkName: "home" */ '@/views/home/PublicWorkList')
       },
       {
-        path: '/home/workDetail',
-        name: 'publicWorkDetail',
-        component: () => import('@/views/home/WorkDetail')
+        path: 'work-detail',
+        name: 'workDetail',
+        component: () => import(/* webpackChunkName: "home" */ '@/views/home/WorkDetail')
       },
     ]
   },

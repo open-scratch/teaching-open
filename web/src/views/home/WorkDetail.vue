@@ -69,12 +69,12 @@
                       v-model="commentContent"
                       :rows="5"
                       :maxLength="500"
-                      placeholder="*说说这个作品怎么样吧"
+                      placeholder="说说这个作品怎么样吧"
                     ></a-textarea>
                   </a-col>
                   <a-col :span="4">
                     <div class="comment-btn">
-                      <a-button :disabled="!token" type="dashed" @click="comment" :loading="false">发表评论</a-button>
+                      <a-button :disabled="!token" type="dashed" @click="comment">发表评论</a-button>
                     </div>
                   </a-col>
                 </a-row>
@@ -138,6 +138,7 @@ import UserEnter from './modules/UserEnter'
 import moment from 'moment'
 import { postAction } from '../../api/manage'
 export default {
+  name:"WorkDetail",
   components: {
     qrcode: QrCode,
     Header,
@@ -160,6 +161,8 @@ export default {
     this.workId = this.$route.query.id
     this.getWorkInfo(this.workId)
     this.token = Vue.ls.get(ACCESS_TOKEN)
+    console.log(this.getFileAccessHttpUrl(this.avatar()));
+    console.log(this.nickname());
   },
   mounted() {
     var that = this
@@ -180,9 +183,9 @@ export default {
     })
   },
   methods: {
+    ...mapGetters(['nickname', 'avatar', 'userInfo']),
     moment,
     getFileAccessHttpUrl,
-    ...mapGetters(['nickname', 'avatar', 'userInfo']),
     getWorkInfo(workId) {
       getAction('/teaching/teachingWork/studentWorkInfo?workId=' + workId).then((res) => {
         if (res.success) {
@@ -203,8 +206,7 @@ export default {
         }
       })
     },
-    workComments(page) {
-      console.log(page)
+    workComments() {
       this.commentsPage += 1
       this.loadingMore = true
       getAction('/teaching/teachingWork/getWorkComments', { workId: this.workId, page: this.commentsPage }).then(
