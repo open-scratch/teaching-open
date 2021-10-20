@@ -39,7 +39,7 @@
       console.log(res);
       if(res.success){
         var key = res.message
-        uploadParam.projectKey = uploadFile(key, '学生作业-sb3', key, 1)
+        uploadParam.projectKey = uploadFile(key, '学生作业-python', key, 1)
         uploadWork()
       }else{
         alert("上传失败：" + res.message)
