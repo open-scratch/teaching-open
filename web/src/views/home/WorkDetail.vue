@@ -12,7 +12,7 @@
             <div class="scratch-player">
               <iframe
                 :src="
-                  workInfo.workFile ? '/scratch3/player.html?projectURL=' + workInfo.workFileKey_url : 'about:blank'
+                  workInfo.workFile ? '/scratch3/player.html?workUrl=' + workInfo.workFileKey_url : 'about:blank'
                 "
                 id="player"
                 frameborder="0"
