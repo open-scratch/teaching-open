@@ -19,6 +19,15 @@
             <iframe id="player" :src="previewCourseCase(unit)"></iframe>
           </a-tab-pane>
         </a-tabs>
+        <template v-else>
+          <div key="video" tab="视频" v-if="unit.courseVideo">
+            <voeideo oncontextmenu="return false;" :src="getFileAccessHttpUrl(unit.courseVideo)" controls="true"></video>
+          </div>
+          <div key="scratch" tab="案例" v-if="unit.courseCase">
+            <!-- <iframe id="player" :src="'/scratch3/player.html?workUrl=' + getFileAccessHttpUrl(unit.courseCase)"></iframe> -->
+            <iframe id="player" :src="previewCourseCase(unit)"></iframe>
+          </div>
+        </template>
       </div>
       <a-divider>本节课资料</a-divider>
       <div>
