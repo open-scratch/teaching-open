@@ -127,16 +127,6 @@ export default {
             return parseInt(index) + 1
           }
         },
-        // {
-        //   title: '观看数量',
-        //   align: 'center',
-        //   dataIndex: 'viewNum'
-        // },
-        // {
-        //   title: '点赞数量',
-        //   align: 'center',
-        //   dataIndex: 'starNum'
-        // },
         {
           title: '作品名',
           align: 'center',
@@ -145,14 +135,24 @@ export default {
         {
           title: '截图',
           align: 'center',
-          dataIndex: 'coverFileUrl',
+          dataIndex: 'coverFileKey_url',
           scopedSlots: { customRender: 'imgSlot' }
         },
-        // {
-        //   title: '作品状态',
-        //   align: 'center',
-        //   dataIndex: 'workStatus_dictText'
-        // },
+        {
+          title: '观看数量',
+          align: 'center',
+          dataIndex: 'viewNum'
+        },
+        {
+          title: '点赞数量',
+          align: 'center',
+          dataIndex: 'starNum'
+        },
+        {
+          title: '作品状态',
+          align: 'center',
+          dataIndex: 'workStatus_dictText'
+        },
         {
           title: '作品类型',
           align: 'center',

@@ -6,6 +6,8 @@ import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
 import lombok.extern.slf4j.Slf4j;
+import org.apache.commons.lang.StringUtils;
+import org.apache.poi.ss.formula.functions.T;
 import org.apache.shiro.SecurityUtils;
 import org.jeecg.common.api.vo.DictResult;
 import org.jeecg.common.api.vo.Result;
@@ -18,10 +20,12 @@ import org.jeecg.common.util.RedisUtil;
 import org.jeecg.common.util.oConvertUtils;
 import org.jeecg.modules.common.controller.BaseController;
 import org.jeecg.modules.system.service.ISysFileService;
+import org.jeecg.modules.system.service.ISysUserService;
 import org.jeecg.modules.teaching.entity.TeachingWork;
 import org.jeecg.modules.teaching.entity.TeachingWorkComment;
 import org.jeecg.modules.teaching.entity.TeachingWorkCorrect;
 import org.jeecg.modules.teaching.model.StudentWorkModel;
+import org.jeecg.modules.teaching.model.WorkCommentModel;
 import org.jeecg.modules.teaching.service.ITeachingWorkCommentService;
 import org.jeecg.modules.teaching.service.ITeachingWorkCorrectService;
 import org.jeecg.modules.teaching.service.ITeachingWorkService;
@@ -62,6 +66,8 @@ public class TeachingWorkController extends BaseController {
 	private ITeachingWorkCorrectService teachingWorkCorrectService;
 	@Autowired
 	private ITeachingWorkCommentService teachingWorkCommentService;
+	@Autowired
+	private ISysUserService sysUserService;
 	@Autowired
 	private RedisUtil redisUtil;
 	 @Autowired
@@ -205,15 +211,28 @@ public class TeachingWorkController extends BaseController {
 		 return result;
 	 }
 
-	 //劲作排行榜(本周作品,年度作品) TODO 缓存1
+	 //劲作排行 TODO 缓存1
 	 @ApiOperation(value = "劲作排行榜")
 	 @GetMapping(value = "/leaderboard")
 	 public Result<?> listLeaderboard(@RequestParam(name = "pageNo", defaultValue = "1") Integer pageNo,
 									  @RequestParam(name = "pageSize", defaultValue = "10") Integer pageSize,
+									  @RequestParam(required = false, defaultValue = "view") String orderBy, //排序
 									  HttpServletRequest request) {
 		 QueryWrapper<StudentWorkModel> queryWrapper = new QueryWrapper<StudentWorkModel>();
 		 queryWrapper.orderByDesc("teaching_work.star_num");
 		 queryWrapper.ge("teaching_work.work_status", 1);
+		 switch (orderBy){
+			 case "view":
+				 queryWrapper.orderByDesc("teaching_work.view_num");
+			 	break;
+			 case "time":
+				queryWrapper.orderByDesc("teaching_work.create_time");
+				break;
+			 case "star":
+				 queryWrapper.orderByDesc("teaching_work.star_num");
+				 break;
+		 }
+
 		 IPage<StudentWorkModel> pageList = teachingWorkService.listWorkModel(new Page<>(pageNo, pageSize), queryWrapper);
 		 return Result.ok(pageList);
 	 }
@@ -233,6 +252,35 @@ public class TeachingWorkController extends BaseController {
 			 result.setSuccess(true);
 		 }
 		 return result;
+	 }
+
+	 /**
+	  * 获取作品评论
+	  * @param workId
+	  * @param page
+	  * @param pageSize
+	  * @return
+	  */
+	 @GetMapping("getWorkComments")
+	 public DictResult<?> getWorkComment(@RequestParam String workId,
+									 @RequestParam(defaultValue = "1") Integer page,
+									 @RequestParam(defaultValue = "10") Integer pageSize){
+		 DictResult<List<WorkCommentModel>> result = new DictResult<>();
+		 List<WorkCommentModel> comments = teachingWorkCommentService.getWorkComments(workId, page, pageSize);
+		 result.setResult(comments);
+		 return result;
+	 }
+
+	 @PostMapping(value = "/saveComment")
+	 public Result saveComment(@RequestBody TeachingWorkComment comment, HttpServletRequest request) {
+		 String ip = IPUtils.getIpAddr(request);
+		 String userId = getCurrentUser().getId();
+		 TeachingWorkComment c = new TeachingWorkComment();
+		 c.setWorkId(comment.getWorkId());
+		 c.setComment(comment.getComment());
+		 c.setUserId(userId);
+		 teachingWorkCommentService.save(c);
+		 return Result.ok("评论成功");
 	 }
 	
 	/**

@@ -140,7 +140,7 @@ spring:
   #redis 配置
   redis:
     database: 1
-    host: localhost
+    host: 127.0.0.1
     lettuce:
       pool:
         max-active: 8   #最大连接数据库连接数,设 0 为没有限制

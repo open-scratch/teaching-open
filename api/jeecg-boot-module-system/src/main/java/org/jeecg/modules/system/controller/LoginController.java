@@ -6,6 +6,7 @@ import com.aliyuncs.exceptions.ClientException;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
 import lombok.extern.slf4j.Slf4j;
+import net.dongliu.requests.Requests;
 import org.apache.shiro.SecurityUtils;
 import org.apache.shiro.subject.Subject;
 import org.jeecg.common.api.vo.Result;
@@ -60,6 +61,15 @@ public class LoginController {
 
 //	private static final String BASE_CHECK_CODES = "qwertyuiplkjhgfdsazxcvbnmQWERTYUPLKJHGFDSAZXCVBNM1234567890";
 	private static final String BASE_CHECK_CODES = "1234567890";
+
+	@ApiOperation("注册或登录用户")
+	@GetMapping("ssoLogin")
+	public Result<?> ssoLogin(@RequestParam String thirdToken){
+		Requests.get("").send();
+		//TODO 通过Token获取用户信息
+		//TODO 注册或登录
+		return Result.ok();
+	}
 
 	@ApiOperation("登录接口")
 	@RequestMapping(value = "/login", method = RequestMethod.POST)
