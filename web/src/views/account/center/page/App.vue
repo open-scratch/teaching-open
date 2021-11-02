@@ -7,7 +7,7 @@
         <a-card :hoverable="true">
           <a-card-meta>
             <div style="margin-bottom: 3px" slot="title">{{ item.title }}</div>
-            <a-avatar class="card-avatar" slot="avatar" :src="item.avatar" size="small"/>
+            <a-avatar class="card-avatar" slot="avatar" :src="item.avatar" size="small" icon="user"/>
             <div class="meta-cardInfo" slot="description">
               <div>
                 <p>活跃用户</p>
