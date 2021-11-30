@@ -23,7 +23,17 @@
           <j-upload v-decorator="['unitCover', validatorRules.unitCover]"  :maxFile="1" :trigger-change="true"></j-upload>
         </a-form-item>
         <a-form-item label="课程视频" :labelCol="labelCol" :wrapperCol="wrapperCol">
-          <j-upload v-decorator="['courseVideo', validatorRules.courseVideo]"  :maxFile="1" :trigger-change="true"></j-upload>
+          <a-card>
+            <a-radio-group name="courseVideoSource" :defaultValue='1' v-model="model.courseVideoSource" @change="onCourseVideoSourceChange">
+              <a-radio :value='1'>上传</a-radio>
+              <a-radio :value='2'>链接</a-radio>
+              <a-radio :value='3'>外部</a-radio>
+            </a-radio-group>
+            <a-divider></a-divider>
+            <j-upload v-if="model.courseVideoSource==1" v-decorator="['courseVideo', validatorRules.courseVideo]" :uploadTarget="'qiniu'" :maxFile="1" :trigger-change="true"></j-upload>
+            <a-input v-if="model.courseVideoSource==2" v-decorator="[ 'courseVideo', validatorRules.courseVideo]" placeholder="请输入视频地址"></a-input>
+            <a-textarea v-if="model.courseVideoSource==3" v-decorator="['courseVideo']" placeholder="请输入外部播放器代码"></a-textarea>
+          </a-card>
         </a-form-item>
         <a-form-item label="课程案例" :labelCol="labelCol" :wrapperCol="wrapperCol">
           <j-upload v-decorator="['courseCase', validatorRules.courseCase]"  :maxFile="1" :trigger-change="true"></j-upload>
@@ -118,7 +128,7 @@
           add: "/teaching/teachingCourseUnit/add",
           edit: "/teaching/teachingCourseUnit/edit",
           courseList: "/teaching/teachingCourse/list",
-        }
+        },
       }
     },
     created () {
@@ -143,7 +153,7 @@
         this.model = Object.assign({}, record);
         this.visible = true;
         this.$nextTick(() => {
-          this.form.setFieldsValue(pick(this.model,'createBy','createTime','unitName','unitIntro','courseId','courseVideo','coursePpt','courseWorkType','courseWork','courseWorkAnswer','coursePlan','courseCase','mapX','mapY'))
+          this.form.setFieldsValue(pick(this.model,'createBy','createTime','unitName','unitIntro','courseId','courseVideo','courseVideoSource','coursePpt','courseWorkType','courseWork','courseWorkAnswer','coursePlan','courseCase','mapX','mapY'))
         })
       },
       close () {
@@ -185,11 +195,15 @@
       handleCancel () {
         this.close()
       },
+      onCourseVideoSourceChange(v){
+        this.form.setFieldsValue({courseVideo:'', courseVideoExtern: ''})
+        this.model.courseVideoExtern = ''
+        this.model.courseVideo = ''
+        this.model.courseVideoSource = v.target.value
+      },
       popupCallback(row){
         this.form.setFieldsValue(pick(row,'createBy','createTime','unitName','unitIntro','courseId','courseVideo','coursePpt','courseWorkType','courseWork','courseWorkAnswer','coursePlan','courseCase','mapX','mapY'))
       },
-
-      
     }
   }
 </script>

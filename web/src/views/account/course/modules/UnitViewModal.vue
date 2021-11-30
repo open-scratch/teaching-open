@@ -12,10 +12,11 @@
       <div class="video-area">
         <a-tabs v-if="unit.courseVideo&&unit.courseCase">
           <a-tab-pane key="video" tab="视频" v-if="unit.courseVideo">
-            <video oncontextmenu="return false;" :src="getFileAccessHttpUrl(unit.courseVideo)" controls="true"></video>
+            <video v-if="unit.courseVideoSource==1" :src="getQiniuFile(unit.courseVideo)" controls="true"></video>
+            <video v-if="unit.courseVideoSource==2" :src="unit.courseVideo" controls="true"></video>
+            <div v-if="unit.courseVideoSource==3" v-html="unit.courseVideo"></div>
           </a-tab-pane>
           <a-tab-pane key="scratch" tab="案例" v-if="unit.courseCase">
-            <!-- <iframe id="player" :src="'/scratch3/player.html?workUrl=' + getFileAccessHttpUrl(unit.courseCase)"></iframe> -->
             <iframe id="player" :src="previewCourseCase(unit)"></iframe>
           </a-tab-pane>
         </a-tabs>
@@ -34,11 +35,6 @@
                 <a-icon type="caret-right" :rotate="props.isActive ? 90 : 0" />
               </template>
               <a-collapse-panel :header="'课后作业'" :style="customStyle">
-                <!-- <a
-                  target="_blank"
-                  :href="'/scratch' + (unit.courseWorkType === 1 ? '2' : '3') + '/index.html?unitId=' + unit.id"
-                  ><a-icon type="edit" />{{ unit.unitName }} 去做作业</a
-                > -->
                 <a
                   target="_blank"
                   @click="handleViewCode(unit)"

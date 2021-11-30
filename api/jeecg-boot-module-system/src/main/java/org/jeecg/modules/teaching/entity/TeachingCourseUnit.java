@@ -83,6 +83,8 @@ public class TeachingCourseUnit implements Serializable {
     @ApiModelProperty(value = "课程视频")
     @FileUrl
     private java.lang.String courseVideo;
+    //视频源
+    private java.lang.Integer courseVideoSource;
     /**课程案例*/
     @Excel(name = "课程案例", width = 15)
     @ApiModelProperty(value = "课程案例")
