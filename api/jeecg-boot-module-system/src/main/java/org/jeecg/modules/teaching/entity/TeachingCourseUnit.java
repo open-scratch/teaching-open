@@ -123,4 +123,7 @@ public class TeachingCourseUnit implements Serializable {
 	@Excel(name = "地图Y坐标", width = 15)
     @ApiModelProperty(value = "地图Y坐标")
     private java.lang.Integer mapY;
+
+    /**排序*/
+    private java.lang.Integer orderNum;
 }

@@ -77,6 +77,7 @@ public class TeachingCourseUnitController extends JeecgController<TeachingCourse
 								   @RequestParam(name="pageSize", defaultValue="10") Integer pageSize,
 								   HttpServletRequest req) {
 		QueryWrapper<CourseUnitModel> queryWrapper = QueryGenerator.initQueryWrapper(teachingCourseUnit, req.getParameterMap());
+		queryWrapper.orderByAsc("order_num");
 		Page<CourseUnitModel> page = new Page<CourseUnitModel>(pageNo, pageSize);
 		IPage<CourseUnitModel> pageList = teachingCourseUnitService.getCourseUnitList(page, queryWrapper);
 		return Result.ok(pageList);

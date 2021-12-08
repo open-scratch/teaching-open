@@ -9,5 +9,6 @@
             select course_id from teaching_course_dept
             inner join sys_user_depart on sys_user_depart.dep_id = teaching_course_dept.dept_id and sys_user_depart.user_id = #{userId}
         )
+        order by order_num asc
     </select>
 </mapper>

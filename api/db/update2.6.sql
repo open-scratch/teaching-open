@@ -3,3 +3,8 @@ alter table teaching_course_unit
 
 alter table teaching_course_unit modify course_video text null comment '课程视频';
 
+alter table teaching_course
+    add order_num int default 1 not null comment '排序';
+
+alter table teaching_course_unit
+    add order_num int default 1 not null comment '排序';

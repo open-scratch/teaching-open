@@ -9,7 +9,9 @@
     cancelText="关闭">
     <a-spin :spinning="confirmLoading">
       <a-form :form="form">
-
+        <a-form-item label="展示排序" :labelCol="labelCol" :wrapperCol="wrapperCol">
+          <a-input-number v-decorator="[ 'orderNum']" placeholder="请输入排序"></a-input-number>
+        </a-form-item>
         <a-form-item label="课程名" :labelCol="labelCol" :wrapperCol="wrapperCol">
           <a-input v-decorator="[ 'courseName', validatorRules.courseName]" placeholder="请输入课程名"></a-input>
         </a-form-item>
@@ -36,7 +38,7 @@
         <a-form-item v-show="model.showType == 1" label="课程地图" :labelCol="labelCol" :wrapperCol="wrapperCol">
           <j-upload v-decorator="['courseMap', validatorRules.courseMap]"  :maxFile="1" :trigger-change="true"></j-upload>
         </a-form-item>
-
+        
       </a-form>
     </a-spin>
   </a-modal>
@@ -102,7 +104,7 @@
         this.model = Object.assign({}, record);
         this.visible = true;
         this.$nextTick(() => {
-          this.form.setFieldsValue(pick(this.model,'createBy','createTime','courseName','courseDesc','courseIcon','courseCover','showType','isShared', 'courseMap'))
+          this.form.setFieldsValue(pick(this.model,'createBy','createTime','courseName','courseDesc','courseIcon','courseCover','showType','isShared', 'courseMap', 'orderNum'))
         })
       },
       close () {

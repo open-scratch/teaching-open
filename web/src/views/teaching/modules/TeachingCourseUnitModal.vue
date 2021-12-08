@@ -8,6 +8,9 @@
     :visible="visible">
     <a-spin :spinning="confirmLoading">
       <a-form :form="form">
+        <a-form-item label="展示排序" :labelCol="labelCol" :wrapperCol="wrapperCol">
+          <a-input-number v-decorator="[ 'orderNum']" placeholder="请输入排序"></a-input-number>
+        </a-form-item>
         <a-form-item label="所属课程" :labelCol="labelCol" :wrapperCol="wrapperCol">
           <a-select v-decorator="['courseId', validatorRules.courseId]" rows="4">
             <a-select-option v-for="(course,index) in courseList" :key="index.toString()" :value="course.id">{{course.courseName}}</a-select-option>
@@ -153,7 +156,7 @@
         this.model = Object.assign({}, record);
         this.visible = true;
         this.$nextTick(() => {
-          this.form.setFieldsValue(pick(this.model,'createBy','createTime','unitName','unitIntro','courseId','courseVideo','courseVideoSource','coursePpt','courseWorkType','courseWork','courseWorkAnswer','coursePlan','courseCase','mapX','mapY'))
+          this.form.setFieldsValue(pick(this.model,'createBy','createTime','unitName','unitIntro','courseId','courseVideo','courseVideoSource','coursePpt','courseWorkType','courseWork','courseWorkAnswer','coursePlan','courseCase','mapX','mapY', 'orderNum'))
         })
       },
       close () {

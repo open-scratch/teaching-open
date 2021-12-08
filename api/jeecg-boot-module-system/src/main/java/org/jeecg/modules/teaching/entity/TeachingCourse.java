@@ -93,4 +93,7 @@ public class TeachingCourse implements Serializable {
     @ApiModelProperty(value = "课程地图")
 	@FileUrl
     private java.lang.String courseMap;
+
+	/**排序*/
+	private java.lang.Integer orderNum;
 }

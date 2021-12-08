@@ -164,6 +164,12 @@
             dataIndex: 'createTime'
           },
           {
+            title:'排序',
+            align:"center",
+            dataIndex: 'orderNum',
+            sorter: true,
+          },
+          {
             title: '操作',
             dataIndex: 'action',
             align:"center",
