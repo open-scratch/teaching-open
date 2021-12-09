@@ -269,6 +269,8 @@ window.isFullscreen = function(){
          document.webkitFullscreenElement || false;
 }
 
+console.log("Teacing Open v2.6");
+
 window.dataLayer = window.dataLayer || [];
 function gtag(){dataLayer.push(arguments);}
 gtag('js', new Date());
