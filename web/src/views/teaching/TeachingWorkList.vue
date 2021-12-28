@@ -229,6 +229,11 @@ export default {
           dataIndex: 'collectNum',
         },
         {
+          title: '提交时间',
+          align: 'center',
+          dataIndex: 'createTime',
+        },
+        {
           title: '操作',
           dataIndex: 'action',
           align: 'center',

@@ -8,3 +8,6 @@ alter table teaching_course
 
 alter table teaching_course_unit
     add order_num int default 1 not null comment '排序';
+
+
+ALTER TABLE teaching_scratch_assets CONVERT TO CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci;
