@@ -52,4 +52,10 @@ public interface SysDepartMapper extends BaseMapper<SysDepart> {
 	 */
 	List<String> getSubDepIdsByOrgCodes(@org.apache.ibatis.annotations.Param("orgCodes") String[] orgCodes);
 
+	/**
+	 * 获取学生班级
+	 * @param userId
+	 * @return
+	 */
+	public List<SysDepart> queryUserClassroom(@Param("userId") String userId);
 }

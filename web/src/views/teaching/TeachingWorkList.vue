@@ -5,17 +5,6 @@
       <a-form layout="inline" @keyup.enter.native="searchQuery">
         <a-row :gutter="24">
           <a-col :xl="6" :lg="7" :md="8" :sm="24">
-            <a-form-item label="用户ID">
-              <a-input placeholder="请输入用户ID" v-model="queryParam.userId"></a-input>
-            </a-form-item>
-          </a-col>
-          <a-col :xl="6" :lg="7" :md="8" :sm="24">
-            <a-form-item label="课程ID">
-              <a-input placeholder="请输入课程ID" v-model="queryParam.courseId"></a-input>
-            </a-form-item>
-          </a-col>
-          <template v-if="toggleSearchStatus">
-            <a-col :xl="6" :lg="7" :md="8" :sm="24">
               <a-form-item label="作业名">
                 <a-input placeholder="请输入作业名" v-model="queryParam.workName"></a-input>
               </a-form-item>
@@ -25,6 +14,22 @@
                 <j-dict-select-tag placeholder="请选择作业类型" v-model="queryParam.workType" dictCode="work_type" />
               </a-form-item>
             </a-col>
+          <template v-if="toggleSearchStatus">
+            <a-col :xl="6" :lg="7" :md="8" :sm="24">
+            <a-form-item label="用户ID">
+              <a-input placeholder="请输入用户ID" v-model="queryParam.userId"></a-input>
+            </a-form-item>
+          </a-col>
+          <a-col :xl="6" :lg="7" :md="8" :sm="24">
+            <a-form-item label="课程ID">
+              <a-input placeholder="请输入课程ID" v-model="queryParam.courseId"></a-input>
+            </a-form-item>
+          </a-col>
+          <a-col :xl="6" :lg="7" :md="8" :sm="24">
+            <a-form-item label="班级作业ID">
+              <a-input placeholder="请输入班级作业ID" v-model="queryParam.additionalId"></a-input>
+            </a-form-item>
+          </a-col>
           </template>
           <a-col :xl="6" :lg="7" :md="8" :sm="24">
             <span style="float: left; overflow: hidden" class="table-page-search-submitButtons">
@@ -190,13 +195,12 @@ export default {
           title: '课程单元',
           align: 'center',
           dataIndex: 'courseId_dictText',
-          customRender(v) {
-            if (v) {
-              return v
-            } else {
-              return '自由创作'
-            }
-          },
+        },
+        {
+          title: '班级作业',
+          align: 'center',
+          dataIndex: 'additionalId_dictText',
+
         },
         {
           title: '作业名',
@@ -222,11 +226,6 @@ export default {
           title: '点赞次数',
           align: 'center',
           dataIndex: 'starNum',
-        },
-        {
-          title: '收藏次数',
-          align: 'center',
-          dataIndex: 'collectNum',
         },
         {
           title: '提交时间',

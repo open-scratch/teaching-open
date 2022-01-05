@@ -2,7 +2,9 @@ package org.jeecg.modules.teaching.service.impl;
 
 import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
 import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
+import org.jeecg.modules.system.entity.SysDepart;
 import org.jeecg.modules.system.entity.SysUser;
+import org.jeecg.modules.system.mapper.SysDepartMapper;
 import org.jeecg.modules.system.mapper.SysUserMapper;
 import org.jeecg.modules.system.service.ISysFileService;
 import org.jeecg.modules.teaching.entity.TeachingWork;
@@ -11,6 +13,7 @@ import org.jeecg.modules.teaching.entity.TeachingWorkComment;
 import org.jeecg.modules.teaching.mapper.TeachingWorkCorrectMapper;
 import org.jeecg.modules.teaching.mapper.TeachingWorkCommentMapper;
 import org.jeecg.modules.teaching.mapper.TeachingWorkMapper;
+import org.jeecg.modules.teaching.model.AdditionalWorkModel;
 import org.jeecg.modules.teaching.model.StudentWorkModel;
 import org.jeecg.modules.teaching.service.ITeachingWorkService;
 import org.jeecg.modules.teaching.vo.StudentWorkSendVO;
@@ -19,8 +22,11 @@ import org.springframework.stereotype.Service;
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.transaction.annotation.Transactional;
+import org.springframework.util.StringUtils;
+
 import java.io.Serializable;
 import java.util.*;
+import java.util.stream.Collectors;
 
 /**
  * @Description: 作业列表
@@ -32,6 +38,8 @@ import java.util.*;
 public class TeachingWorkServiceImpl extends ServiceImpl<TeachingWorkMapper, TeachingWork> implements ITeachingWorkService {
 	@Autowired
 	SysUserMapper sysUserMapper;
+	@Autowired
+	private SysDepartMapper sysDepartMapper;
 	@Autowired
 	private TeachingWorkMapper teachingWorkMapper;
 	@Autowired
@@ -164,6 +172,34 @@ public class TeachingWorkServiceImpl extends ServiceImpl<TeachingWorkMapper, Tea
 			}
 		}
 		return count;
+	}
+
+	@Override
+	public List<AdditionalWorkModel> userAdditionalWork(String userId, String departId, Boolean submit, Integer status) {
+		//有2个问题：
+		// 1.如果学生班级有相同课程，那么学生提交的作业无法区分班级
+		// 2.如果布置的作业同时在学生的两个班级，那么班级名无法区分
+
+		List<SysDepart> mineClassrooms = new ArrayList<>();
+		mineClassrooms = sysDepartMapper.queryUserClassroom(userId);
+		if (!StringUtils.isEmpty(departId)){
+			mineClassrooms.stream().filter(sysDepart -> sysDepart.getId().equals(departId));
+		}
+		if(mineClassrooms == null || mineClassrooms.size()==0){
+			return new ArrayList<>();
+		}
+		List departIds = mineClassrooms.stream().map(SysDepart::getId).collect(Collectors.toList());
+		List<AdditionalWorkModel> additionalWorkModels = this.baseMapper.userAdditionalWork(userId, departIds, submit, status);
+		//step 封装班级信息
+		for (AdditionalWorkModel workModel: additionalWorkModels){
+			for (SysDepart depart: mineClassrooms){
+				if (workModel.getWorkDept().contains(depart.getId())){
+					workModel.setDepartId(depart.getId());
+					workModel.setDepartName(depart.getDepartName());
+				}
+			}
+		}
+		return additionalWorkModels;
 	}
 
 }

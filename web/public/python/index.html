@@ -89,7 +89,9 @@
           workFile: uploadParam.projectKey,
           workName: uploadParam.projectTitle,
           id: workId,
-          workType: 4
+          workType: 4,
+          departId: departId,
+          additionalId: additionalId,
         }),
         success: function (res) {
           if (res.code == 200) {

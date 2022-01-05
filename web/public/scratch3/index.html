@@ -19,6 +19,10 @@
     var workName = ''
     var workId = urlParams('workId')
     var unitId = urlParams('unitId')
+    var workFileUrl = urlParams('workFile') //SB3路径
+    var workName = urlParams('workName') //作业名
+    var departId = urlParams('departId') //班级ID
+    var additionalId = urlParams('additionalId') //附加作业ID
     var userInfo = getUserInfo();
     var qn_token = getQiniuToken();
     setInterval(function () {
@@ -198,8 +202,13 @@
       },
       handleDefaultProjectLoaded: () => {
         //默认作品加载完毕
-        window.scratch.setProjectName("默认项目")
-        if (workId) {
+        if(workFileUrl){
+          window.scratch.loadProject(workFileUrl, () => {
+            $('.loading').hide()
+            $('.scratch-filter').hide()
+            window.scratch.setProjectName(workName)
+          })
+        }else if (workId) {
           getWorkInfo(workId, function (info) {
             window.scratch.loadProject(info.workFileKey_url, () => {
               $('.loading').hide()
@@ -293,7 +302,9 @@
           workName: uploadParam.projectTitle,
           id: workId,
           workType: 2,
-          workStatus: workStatus
+          workStatus: workStatus,
+          departId: departId,
+          additionalId: additionalId,
         }),
         success: function (res) {
           canShare = true

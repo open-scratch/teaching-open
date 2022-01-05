@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="org.jeecg.modules.teaching.mapper.TeachingAdditionalWorkMapper">
+
+    <select id="getByDeptId" resultType="org.jeecg.modules.teaching.model.MineAdditionalWorkModel">
+        select teaching_additional_work.*,
+        (select id from teaching_work where additional_id = teaching_additional_work.id and user_id=#{userId} limit 1) mineWorkId,
+        (select work_status from teaching_work where additional_id = teaching_additional_work.id and user_id=#{userId} limit 1) mineWorkStatus
+        from teaching_additional_work
+        where work_dept like CONCAT('%',#{deptId},'%')
+    </select>
+    <select id="getWorkInfo" resultType="org.jeecg.modules.teaching.model.MineAdditionalWorkModel">
+        select * from teaching_additional_work
+        where id = #{id}
+    </select>
+</mapper>

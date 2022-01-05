@@ -34,4 +34,8 @@
         </foreach>
 	</select>
 
+    <select id="queryUserClassroom" resultType="org.jeecg.modules.system.entity.SysDepart">
+        select * from sys_depart where id IN ( select dep_id from sys_user_depart where user_id = #{userId} ) and org_category=3
+    </select>
+
 </mapper>

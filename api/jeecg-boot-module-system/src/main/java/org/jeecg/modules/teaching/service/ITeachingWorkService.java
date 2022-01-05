@@ -6,6 +6,7 @@ import org.jeecg.modules.teaching.entity.TeachingWorkCorrect;
 import org.jeecg.modules.teaching.entity.TeachingWorkComment;
 import org.jeecg.modules.teaching.entity.TeachingWork;
 import com.baomidou.mybatisplus.extension.service.IService;
+import org.jeecg.modules.teaching.model.AdditionalWorkModel;
 import org.jeecg.modules.teaching.model.StudentWorkModel;
 import org.jeecg.modules.teaching.vo.StudentWorkSendVO;
 
@@ -48,4 +49,13 @@ public interface ITeachingWorkService extends IService<TeachingWork> {
 	Page<StudentWorkModel> listWorkModel(Page<StudentWorkModel> page, QueryWrapper<StudentWorkModel> queryWrapper);
 
     int sendWork(StudentWorkSendVO studentWorkSendVO);
-}
+
+	/**
+	 * 获取用户附加作业
+	 * @param userId
+	 * @param departId
+	 * @param submit
+	 * @param status
+	 * @return
+	 */
+	List<AdditionalWorkModel> userAdditionalWork(String userId, String departId, Boolean submit, Integer status);}

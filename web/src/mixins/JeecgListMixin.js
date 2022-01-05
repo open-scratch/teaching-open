@@ -310,6 +310,26 @@ export const JeecgListMixin = {
     },
     getFileAccessHttpUrl(text){
       return getFileAccessHttpUrl(text)
+    },
+    getQiniuUrl(text){
+      if(!text){
+        // this.$message.warning("未知的文件")
+        return;
+      }
+      if(text.indexOf(",")>0){
+        text = text.substring(0,text.indexOf(","))
+      }
+      return window._CONFIG['qn_base'] + text;
+    },
+    getQiniuFile(text){
+      if(!text){
+        this.$message.warning("未知的文件")
+        return;
+      }
+      if(text.indexOf(",")>0){
+        text = text.substring(0,text.indexOf(","))
+      }
+      window.open(window._CONFIG['qn_base'] + text);
     }
   }
 

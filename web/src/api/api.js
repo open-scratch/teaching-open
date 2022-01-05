@@ -74,7 +74,37 @@ function getDictItemsFromCache(dictCode) {
     return dictItems;
   }
 }
-
+//添加字典项缓存
+function addDictItemsCache(dictCode, dictValue, dictText, dictTitle, dictDesc){
+  let allDict = Vue.ls.get(UI_CACHE_DB_DICT_DATA)
+  if (allDict && allDict[dictCode]) {
+    allDict[dictCode].push({
+      value: dictValue,
+      text: dictText,
+      title: dictTitle,
+      description: dictDesc
+    })
+    Vue.ls.set(UI_CACHE_DB_DICT_DATA, allDict)
+  }
+}
+//删除字典缓存项
+function deleteDictItemsCache(dictCode, itemText) {
+  let allDict = Vue.ls.get(UI_CACHE_DB_DICT_DATA)
+  if (allDict && allDict[dictCode]) {
+    let dict = allDict[dictCode]
+    dict = dict.filter(d=>{
+      if(d.text != itemText){
+        return d
+      }
+    })
+    allDict[dictCode] = dict
+    Vue.ls.set(UI_CACHE_DB_DICT_DATA, allDict)
+  }
+}
+//删除字典项
+function deleteDictItems(dictCode, itemText) {
+  return deleteAction("/sys/dict/deleteItemByText",{dictCode, itemText})
+}
 //系统通告
 const doReleaseData = (params)=>getAction("/sys/annountCement/doReleaseData",params);
 const doReovkeData = (params)=>getAction("/sys/annountCement/doReovkeData",params);
@@ -146,7 +176,10 @@ export {
   saveDeptRolePermission,
   queryMyDepartTreeList,
   getUserNoticeInfo,
-  getDictItemsFromCache
+  getDictItemsFromCache,
+  addDictItemsCache,
+  deleteDictItems,
+  deleteDictItemsCache
 }
 
 

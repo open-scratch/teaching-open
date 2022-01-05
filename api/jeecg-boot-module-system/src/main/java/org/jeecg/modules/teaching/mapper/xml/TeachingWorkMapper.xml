@@ -19,4 +19,28 @@
         left join sys_user on teaching_work.user_id = sys_user.id
         ${ew.customSqlSegment}
     </select>
+
+    <select id="userAdditionalWork" resultType="org.jeecg.modules.teaching.model.AdditionalWorkModel">
+        select a.*, a.id additionalWorkId,
+        w.id mineWorkId, w.work_name mineWorkName, w.work_status mineWorkStatus,
+        (select file_path from sys_file where sys_file.id=w.work_file) mineWorkUrl,
+        (select file_path from sys_file where sys_file.id = w.work_cover) mineWorkCover
+        from teaching_additional_work a
+        left join teaching_work w on w.additional_id = a.id and w.user_id = #{userId}
+        where
+        a.status=1 and
+        <foreach collection="departIds" index="index" item="id" open="(" separator=" or " close=")">
+            a.work_dept like CONCAT('%',#{id},'%')
+        </foreach>
+        <if test="submit==true">
+            and w.id is not null
+        </if>
+        <if test="submit==false">
+            and w.id is null
+        </if>
+        <if test="submit==true and status != null">
+            and w.work_status = #{status}
+        </if>
+    </select>
+
 </mapper>

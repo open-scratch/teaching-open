@@ -9,10 +9,10 @@
           </template>
           <a-card-meta>
             <div class="meta-cardInfo" slot="description">
-              <p>{{item.workName}}</p>
               <a :href="getEditorHref(item)" target="_blank">
+                <p>{{item.workName}}</p>
                 <img v-if="item.coverFileKey" :src="getFileAccessHttpUrl(item.coverFileKey)" />
-                <img v-if="item.workType==4" src="@/assets/python.png" alt="">
+                <img v-else src="@/assets/python.png" alt="">
               </a>
             </div>
           </a-card-meta>

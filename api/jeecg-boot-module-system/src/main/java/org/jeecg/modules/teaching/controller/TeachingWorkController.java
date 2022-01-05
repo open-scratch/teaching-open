@@ -24,6 +24,7 @@ import org.jeecg.modules.system.service.ISysUserService;
 import org.jeecg.modules.teaching.entity.TeachingWork;
 import org.jeecg.modules.teaching.entity.TeachingWorkComment;
 import org.jeecg.modules.teaching.entity.TeachingWorkCorrect;
+import org.jeecg.modules.teaching.model.AdditionalWorkModel;
 import org.jeecg.modules.teaching.model.StudentWorkModel;
 import org.jeecg.modules.teaching.model.WorkCommentModel;
 import org.jeecg.modules.teaching.service.ITeachingWorkCommentService;
@@ -49,7 +50,9 @@ import java.io.IOException;
 import java.util.*;
 import java.util.stream.Collectors;
 
- /**
+import static org.jeecg.common.util.oConvertUtils.isNotEmpty;
+
+/**
  * @Description: 作业列表
  * @Author: jeecg-boot
  * @Date:   2020-04-12
@@ -97,6 +100,26 @@ public class TeachingWorkController extends BaseController {
 	 }
 
 	 /**
+	  * 我的附加作业
+	  * @param departId
+	  * @param submit
+	  * @param status
+	  * @return
+	  */
+	 @ApiOperation(value = "我的附加作业", notes = "获取我的附加作业")
+	 @GetMapping("mineAdditionalWork")
+	 public DictResult<List<AdditionalWorkModel>> mineAdditionalWork(
+			 @RequestParam(required = false) String departId,
+			 @RequestParam(required = false) Boolean submit,
+			 @RequestParam(required = false) Integer status) {
+		 DictResult<List<AdditionalWorkModel>> result = new DictResult<>();
+		 String userId = getCurrentUser().getId();
+		 List<AdditionalWorkModel> list = teachingWorkService.userAdditionalWork(userId, departId, submit, status);
+		 result.setResult(list);
+		 return result;
+	 }
+
+	 /**
 	  * 提交作业
 	  * @param teachingWork
 	  * @return
@@ -106,13 +129,26 @@ public class TeachingWorkController extends BaseController {
 		 teachingWork.setUserId(getCurrentUser().getId());
 		 Result<TeachingWork> result = new Result<TeachingWork>();
 		 try {
-			 List<TeachingWork> oldWork = teachingWorkService.getBaseMapper().selectByMap(new HashMap<String, Object>(){{
-				 put("work_name", teachingWork.getWorkName());
-				 put("user_id", teachingWork.getUserId());
-				 put("work_type", teachingWork.getWorkType());
-			 }});
-			 if (oldWork.size() > 0){
-				 teachingWork.setId(oldWork.get(0).getId());
+			 List<TeachingWork> oldWorks = new ArrayList<>();
+			 if (isNotEmpty(teachingWork.getAdditionalId())) {
+				 oldWorks = teachingWorkService.getBaseMapper().selectByMap(new HashMap<String, Object>() {{
+					 put("user_id", getCurrentUser().getId());
+					 put("additional_id", teachingWork.getAdditionalId());
+				 }});
+			 }else if(isNotEmpty(teachingWork.getCourseId())){
+				 oldWorks = teachingWorkService.getBaseMapper().selectByMap(new HashMap<String, Object>() {{
+					 put("user_id", getCurrentUser().getId());
+					 put("course_id", teachingWork.getCourseId());
+				 }});
+			 }else{
+				 oldWorks = teachingWorkService.getBaseMapper().selectByMap(new HashMap<String, Object>(){{
+					 put("work_name", teachingWork.getWorkName());
+					 put("user_id", teachingWork.getUserId());
+					 put("work_type", teachingWork.getWorkType());
+				 }});
+			 }
+			 if (oldWorks.size() > 0){
+				 teachingWork.setId(oldWorks.get(0).getId());
 				 teachingWork.setCreateTime(new Date());
 				 teachingWork.setUpdateTime(new Date());
 				 result.setResult(teachingWork);
