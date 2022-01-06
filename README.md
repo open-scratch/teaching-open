@@ -118,7 +118,7 @@ qiniu:
   bucketName: 您的七牛bucketName
   staticDomain: 您的七牛域名
 ```
-配置文件可以编译后修改，进入jar包编辑或者将yml文件放到jar包同级目录也是可以的。
+配置文件可以编译后修改，推荐将.yml配置文件放到jar包同级目录，java将优先使用同级目录的配置，这样方便后续升级。
 
 - 编译项目
 
@@ -229,34 +229,35 @@ server
 ### 验证码出不来的问题
 只有两种可能：
 1. api未启动，尝试访问http://ip地址:8080看是否有内容输出
-2. 反向代理配置错误，特征是接口报502或504错误
+2. nginx反向代理配置错误，特征是接口报502或504错误
 
 ### Scratch素材库不显示
 素材库默认是使用的你配置的文件上传地址（七牛云）
 
 方案1：将素材库上传至七牛云，素材库位置在scratch3/static/internalapi，需要原来的保持目录结构，选择internalapi目录上传。
+
 方案2：将素材库地址改为本地
-```
+```js
 assets:{
   assetHost: "./static",
 }
 ```
 
 ### Scratch提交作品卡住
-1.七牛云配置错误，此时系统内其他上传也会失败
-2.页面停留时间过长导致登录失效，可以将Scratch文件保存到本地，刷新页面后再次提交
-3.网络问题
+1. 七牛云配置错误，此时系统内其他上传也会失败
+2. 页面停留时间过长导致登录失效，可以将Scratch文件保存到本地，刷新页面后再次提交
+3. 网络问题
 
 ### 切换为本地存储
 建议是使用云存储的，极大减少服务器的宽带压力。但是有些朋友不想用七牛云存储，或者局域网部署，则可以使用本地存储模式。
 
-1.修改public/index.html
+1. 修改public/index.html
 ```js
 window._CONFIG['defaultUploadType'] = 'local'
 window._CONFIG['qn_base'] = '/api/sys/common/static/'
 ```
 
-2.修改application-prod.yml
+2. 修改application-prod.yml
 ```yml
 jeecg:
   uploadType: local
@@ -269,3 +270,30 @@ jeecg:
 
 切换云存储后，之前上传的文件请自行迁移。
 
+### 升级系统的步骤
+
+0. 准备编译好的api和web项目，可自行编译，也可下载编译好的
+
+1. 执行升级sql
+
+文件在api/db。如当前版本为2.4，需要依次执行update2.5.sql、update2.6.sql
+
+2. 上传最新版jar包
+
+如果yml配置文件放在jar包外，一般情况无需修改api配置。如果配置文件使用的是jar包内的，需要替换jar包内的配置文件。
+
+3. 停掉原来的api程序
+
+如果您的系统内没有其他正在运行的java程序，那么只需执行`pkill java`即可停止
+
+4. 重启新版api
+
+参考命令：
+
+`nohup java -jar teaching-open-xxx.jar &`  
+
+注意xxx是版本号，不要照抄！！
+
+5. 上传覆盖前端文件
+
+注意覆盖之前备份index.html中的配置、scratch3/index.html的配置、logo文件
