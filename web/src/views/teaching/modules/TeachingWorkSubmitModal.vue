@@ -56,16 +56,11 @@ export default {
     },
     handleOk() {
       if (this.workInfo.workFile) {
-        postAction('/teaching/teachingWork/submit', {
-          workName: this.workInfo.workName,
-          workFile: this.workInfo.workFile,
-          departId: this.workInfo.departId,
-          codeType: 0,
-          workType: 0,
-        }).then((res) => {
+        postAction('/teaching/teachingWork/submit', this.workInfo).then((res) => {
           if (res.success) {
             this.$message.success('上传成功')
             this.visible = false
+            this.workInfo = {}
             this.$emit('ok')
           }
         })

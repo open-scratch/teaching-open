@@ -163,7 +163,8 @@ export default {
           this.$refs.submitModal.open({
             workName:item.workName,
             additionalId: item.additionalWorkId,
-            departId: item.departId
+            departId: item.departId,
+            workType:0
            })
           return
       }
