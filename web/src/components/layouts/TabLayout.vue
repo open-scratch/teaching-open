@@ -302,8 +302,12 @@
           this.$store.dispatch(ToggleMultipage,true)
           this.reloadFlag = true
         })
-      }
+      },
       //update-end-author:taoyan date:20191008 for:路由刷新
+      //新增一个返回方法
+      excuteCallback(callback){
+        callback()
+      },
     }
   }
 </script>

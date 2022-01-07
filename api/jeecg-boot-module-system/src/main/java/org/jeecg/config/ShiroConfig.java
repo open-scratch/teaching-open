@@ -139,6 +139,8 @@ public class ShiroConfig {
 
 		//支付
 		filterChainDefinitionMap.put("/teaching/teachingOrder/createOrder", "anon");
+		//配置
+		filterChainDefinitionMap.put("/sys/config/getCurrentConfig", "anon");
 
 		// 作业
 		filterChainDefinitionMap.put("/teaching/teachingWork/studentWorkInfo", "anon");

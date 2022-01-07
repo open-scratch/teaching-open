@@ -45,7 +45,7 @@
       //默认选项
       defaultDictOptions:{
         type: Array,
-        default: []
+        default: ()=>[]
       } 
     },
     data() {

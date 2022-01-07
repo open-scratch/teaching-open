@@ -179,3 +179,10 @@ export function getFileAccessHttpUrl(avatar,subStr) {
     }
   }
 }
+
+//获取当前配置
+export function getSysConfig(){
+  return axios({
+      url: "/sys/config/getCurrentConfig"
+  })
+}

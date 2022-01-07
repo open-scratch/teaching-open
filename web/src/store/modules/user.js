@@ -1,6 +1,6 @@
 import Vue from 'vue'
 import { login, logout, phoneLogin, thirdLogin } from "@/api/login"
-import { ACCESS_TOKEN, USER_NAME,USER_INFO, USER_ROLE, USER_AUTH,SYS_BUTTON_AUTH,UI_CACHE_DB_DICT_DATA } from "@/store/mutation-types"
+import { ACCESS_TOKEN, USER_NAME,USER_INFO, USER_ROLE, USER_AUTH,SYS_BUTTON_AUTH,UI_CACHE_DB_DICT_DATA,SYS_CONFIG } from "@/store/mutation-types"
 import { welcome } from "@/utils/util"
 import { queryPermissionsByUser } from '@/api/api'
 import { getAction } from '@/api/manage'
@@ -15,6 +15,7 @@ const user = {
     permissionList: [],
     info: {},
     userRole: [],
+    sysConfig:{}
   },
 
   mutations: {
@@ -38,6 +39,9 @@ const user = {
     SET_USER_ROLE: (state, info) => {
       state.userRole = info
     },
+    SET_SYS_CONFIG(state, configInfo){
+      state.sysConfig = configInfo;
+    }
   },
 
   actions: {
@@ -196,7 +200,16 @@ const user = {
         })
       })
     },
-
+    GetSysConfig({ commit }) {
+      let sysConfig = Vue.ls.get(SYS_CONFIG);
+      if(sysConfig){
+        commit('SET_SYS_CONFIG', sysConfig)
+        if(sysConfig.brandName){
+          window.document.title = sysConfig.brandName
+        }
+        return;
+      }
+    },
   }
 }
 
