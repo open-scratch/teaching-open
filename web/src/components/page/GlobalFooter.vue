@@ -1,16 +1,18 @@
 <template>
   <div class="footer">
-    <div class="links">
-      <a href="http://teaching.vip" target="_blank">首页</a>
-      <a href="https://github.com/open-scratch/teaching" target="_blank">
-        <a-icon type="github"/>
-      </a>
-    </div>
     <div class="copyright">
       Copyright
       <a-icon type="copyright"/>
-      2020 <span>{{brandName}}</span>
+      2020 
+      <span>{{brandName}}</span>
+      <a-divider type="vertical"></a-divider>
+      <div class="links">
+        <a href="https://github.com/open-scratch/teaching" target="_blank">
+        <a-icon type="github"/>
+      </a>
     </div>
+    </div>
+    
   </div>
 </template>
 
@@ -19,7 +21,7 @@
     name: "LayoutFooter",
     data() {
       return {
-        brandName:window._CONFIG['brandName']
+        brandName: this.$store.getters.sysConfig.brandName
       }
     },
   }
@@ -33,7 +35,7 @@
 
     .links {
       margin-bottom: 8px;
-
+      display: inline;
       a {
         color: rgba(0, 0, 0, .45);
 

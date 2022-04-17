@@ -37,7 +37,7 @@
     mixins: [mixinDevice],
     data () {
       return {
-         brandName: window._CONFIG['brandName']
+         brandName: this.$store.getters.sysConfig.brandName
       }
     },
     mounted () {

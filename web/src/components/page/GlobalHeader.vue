@@ -97,7 +97,7 @@
           headerIndexRight: {},
           topSmenuStyle: {}
         },
-        brandName: window._CONFIG['brandName']
+        brandName: this.$store.getters.sysConfig.brandName
       }
     },
     watch: {

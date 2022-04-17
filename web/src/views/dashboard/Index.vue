@@ -1,6 +1,6 @@
 <template>
   <div>
-    <h1>欢迎使用{{brandName}}教学系统</h1>
+    <h1>欢迎使用{{brandName}}</h1>
   </div>
 </template>
 
@@ -14,7 +14,7 @@
     },
     data() {
       return {
-         brandName: window._CONFIG['brandName']
+         brandName: this.$store.getters.sysConfig.brandName
       }
     },
     created() {
