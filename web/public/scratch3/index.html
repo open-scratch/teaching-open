@@ -8,7 +8,7 @@
   <link rel="shortcut icon" href="static/favicon.ico" />
   <link rel="stylesheet" href="../css/scratch.css" />
   <title>在线图形化编程</title>
-  <script async src="https://center.paas.plus/js/errlog.js"></script>
+  <script async src="//api.paas.plus/js/errlog.js"></script>
   <script src="../js/jquery.min.js"></script>
   <script src="../js/jquery.cokie.min.js"></script>
   <script src="../js/jquery.qrcode.min.js"></script>
@@ -26,6 +26,7 @@
     var additionalId = urlParams('additionalId') //附加作业ID
     var userInfo = getUserInfo();
     var qn_token = getQiniuToken();
+    var workStatus = 0
     setInterval(function () {
       qn_token = getQiniuToken();
     }, 600 * 1000)
@@ -125,64 +126,46 @@
         },
         //教程按钮
         helpButton:{
-          show: true
+          show: true,
+          handleBefore: ()=>{return true}
         },
          //我的物品按钮
          myStuff:{
           show: true,
-          url: '/account/mineWork'
+          url: '/account/center'
         },
         //用户头像按钮
         userAvatar:{
           show: true,
-          username: userInfo.realname || userInfo.username||'未登录',
-          avatar: getFileAccessHttpUrl(userInfo.avatar) || './static/avatar.png',
+          username: (userInfo && userInfo.realname) || '未登录',
+          avatar: (userInfo && getFileAccessHttpUrl(userInfo.avatar)) || './static/avatar.png',
           handleClick(){
             //弹出登录框等操作
             console.log("点击头像")
-            window.open("/student/center")
+            window.open("/account/settings/BaseSetting")
           }
         },
         customButtons: [
           {
-            show: true,
+            show: qn_token,
             buttonName: '提交',
             style:{
               color: 'white',
               background: 'hsla(30, 100%, 55%, 1)',
             },
             handleClick:()=>{
-              console.log('提交按钮')
-              $('.scratch-filter').show()
-              $('.uploading').show()
-              var uuid = window.uuid()
-              uploadParam.projectTitle = window.scratch.getProjectName()
-              var defaultUploadType = JSON.parse(localStorage.getItem("CONFIG")).defaultUploadType
-              window.scratch.getProjectCoverBlob(cover => {
-                if(defaultUploadType == 'qiniu'){
-                  upload2Qiniu(cover, 'project3/' + uuid + '.jpg', uploadParam.projectTitle, observer)
-                }else{
-                  update2Local(cover,uploadParam.projectTitle + ".jpg", 'project3', handleFileUploaded)
-                }
-              })
-              window.scratch.getProjectFile(file => {
-                if(defaultUploadType == 'qiniu'){
-                  upload2Qiniu(file, 'project3/' + uuid + '.sb3', uploadParam.projectTitle, observer)
-                }else{
-                  update2Local(file, uploadParam.projectTitle + '.sb3', 'project3', handleFileUploaded)
-                }
-              })
+              requestUpload(1)
             }
           },
           {
-            show: false,
-            buttonName: '自定义按钮2',
+            show: qn_token,
+            buttonName: '保存',
             style: {
               color: 'white',
               background: 'hsl(271deg 89% 70%)',
             },
             handleClick:()=>{
-              console.log("自定义按钮2");
+              requestUpload(0)
             }
           },
           //可继续新增按钮
@@ -227,7 +210,7 @@
           })
         } else {
           window.scratch.loadProject('/project/project.sb3', () => {
-            window.scratch.setProjectName(userInfo.realname + '作品')
+            window.scratch.setProjectName(userInfo?userInfo.realname + '作品' : 'Scratch作品')
             $('.loading').hide()
             $('.scratch-filter').hide()
           })
@@ -279,14 +262,34 @@
       }
     }
 
+    //请求提交作业
+    function requestUpload(status){
+      workStatus = status
+      $('.scratch-filter').show()
+      $('.uploading').show()
+      var uuid = window.uuid()
+      uploadParam.projectTitle = window.scratch.getProjectName()
+      var defaultUploadType = JSON.parse(localStorage.getItem("CONFIG")).defaultUploadType
+      window.scratch.getProjectCoverBlob(cover => {
+        if(defaultUploadType == 'qiniu'){
+          upload2Qiniu(cover, 'project3/' + uuid + '.jpg', uploadParam.projectTitle, observer)
+        }else{
+          update2Local(cover,uploadParam.projectTitle + ".jpg", 'project3', handleFileUploaded)
+        }
+      })
+      window.scratch.getProjectFile(file => {
+        if(defaultUploadType == 'qiniu'){
+          upload2Qiniu(file, 'project3/' + uuid + '.sb3', uploadParam.projectTitle, observer)
+        }else{
+          update2Local(file, uploadParam.projectTitle + '.sb3', 'project3', handleFileUploaded)
+        }
+      })
+    }
+
     //上传作业
     function uploadWork() {
-      var workStatus = 0
       if (!uploadParam.projectKey || !uploadParam.coverKey) {
         return
-      }
-      if(confirm("是否公开作品？")){
-        workStatus = 1
       }
       $.ajax({
         url: '/api/teaching/teachingWork/submit',
@@ -319,14 +322,9 @@
               '/scratch3/scratch-mobile.html?workId=' +
               res.result.id
             createCode('qrcode', shareUrl)
-		    var img = document.createElement('img');
+		        var img = document.createElement('img');
             img.id = 'qrCodeIco';
             img.src = '/logo.png';
-            img.style.position = 'absolute';
-            img.style.width = '50px';
-            img.style.height = '50px';
-            img.style.verticalAlign = 'middle;';
-            img.style.zIndex = 2;
             qrcode.appendChild(img);
             $('.scratch-filter').show()
             $('.release-success').show()
@@ -368,14 +366,11 @@
     <div class="release-success">
       <div class="con-box">
         <h4><span id="projectTitle"></span> 提交成功</h4>
-        <!-- <p class="rights-img">
-          <img src="../images/rights.png" alt="rights" />
-        </p> -->
         <p class="ercode-img">
-		   <span id="qrcode" style="align-items: center;display: flex; justify-content: center;"></span>
+		      <span id="qrcode" style="align-items: center;display: flex; justify-content: center;"></span>
         </p>
         <div class="watch-works">
-          <span>请微信扫描二维码</span>
+          <span>微信扫描二维码使用手机体验</span>
         </div>
       </div>
       <div class="fault-code">
@@ -409,7 +404,6 @@
   $('.fault-code').on('click', function () {
     uploadParam = {}
     $('.scratch-filter').hide()
-    $('.scratch-middle').hide()
     $('.release-success').hide()
     $('.release-false').hide()
   })

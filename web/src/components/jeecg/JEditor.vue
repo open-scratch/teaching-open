@@ -9,6 +9,7 @@ import Vue from 'vue'
 import { ACCESS_TOKEN } from '@/store/mutation-types'
 import tinymce from 'tinymce/tinymce'
 import Editor from '@tinymce/tinymce-vue'
+import Prism from 'prismjs'
 import 'tinymce/themes/silver/theme'
 import 'tinymce/plugins/image'
 import 'tinymce/plugins/link'
@@ -20,6 +21,10 @@ import 'tinymce/plugins/wordcount'
 import 'tinymce/plugins/colorpicker'
 import 'tinymce/plugins/textcolor'
 import 'tinymce/plugins/fullscreen'
+import 'tinymce/plugins/codesample'
+import 'tinymce/plugins/code'
+import 'tinymce/plugins/preview'
+import 'tinymce/plugins/hr'
 import 'tinymce/icons/default'
 import { uploadAction, getFileAccessHttpUrl } from '@/api/manage'
 import { getVmParentByName } from '@/utils/util'
@@ -63,12 +68,12 @@ export default {
     },
     plugins: {
       type: [String, Array],
-      default: 'lists image link media table textcolor wordcount contextmenu fullscreen',
+      default: 'lists image link media table textcolor wordcount contextmenu fullscreen code codesample hr preview',
     },
     toolbar: {
       type: [String, Array],
       default:
-        'undo redo |  formatselect| bold italic | alignleft aligncenter alignright alignjustify | bullist numlist outdent indent | lists link unlink image media table | removeformat | fullscreen',
+        'undo redo | formatselect | forecolor backcolor bold italic | alignleft aligncenter alignright alignjustify hr | bullist numlist outdent indent | lists link unlink image media table codesample | removeformat code | preview fullscreen',
       branding: false,
     },
     uploadTarget: {
@@ -91,7 +96,20 @@ export default {
         toolbar: this.toolbar,
         branding: false,
         menubar: false,
+        inline: false, //内联模式
         toolbar_drawer: false,
+        codesample_languages: [
+              { text: 'HTML/XML', value: 'markup' },
+              { text: 'JavaScript', value: 'javascript' },
+              { text: 'CSS', value: 'css' },
+              { text: 'PHP', value: 'php' },
+              { text: 'Ruby', value: 'ruby' },
+              { text: 'Python', value: 'python' },
+              { text: 'Java', value: 'java' },
+              { text: 'C', value: 'c' },
+              { text: 'C#', value: 'csharp' },
+              { text: 'C++', value: 'cpp' }
+        ],
         file_picker_types: 'media',
         init_instance_callback : function(editor){
           that.editor = editor

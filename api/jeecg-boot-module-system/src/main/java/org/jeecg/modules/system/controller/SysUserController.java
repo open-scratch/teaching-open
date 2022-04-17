@@ -92,6 +92,9 @@ public class SysUserController {
     @Autowired
     private ISysDictService sysDictService;
 
+    @Autowired
+    private ISysConfigService sysConfigService;
+
 	@Autowired
 	private RedisUtil redisUtil;
 
@@ -529,8 +532,7 @@ public class SysUserController {
                         } else if (message.contains(CommonConstant.SQL_INDEX_UNIQ_SYS_USER_EMAIL)) {
                             errorMessage.add("第 " + lineNumber + " 行：电子邮件已经存在，忽略导入。");
                         } else {
-                            errorMessage.add("第 " + lineNumber + " 行：未知错误，忽略导入");
-                            log.error(e.getMessage(), e);
+                            errorMessage.add("第 " + lineNumber + " 行：未知错误，忽略导入:" + e.getMessage());
                         }
                     }
                     // 批量将负责部门和用户信息建立关联关系
@@ -948,6 +950,7 @@ public class SysUserController {
 		String smscode = jsonObject.getString("smscode");
 		Object code = redisUtil.get(phone);
 		String username = jsonObject.getString("username");
+		String realname = jsonObject.getString("realname");
 		//未设置用户名，则用手机号作为用户名
 		if(oConvertUtils.isEmpty(username)){
             username = phone;
@@ -987,13 +990,22 @@ public class SysUserController {
             }
         }
 
+        String allowReg = sysConfigService.getConfigItem("allowReg");
+        if (!"1".equals(allowReg)){
+            result.setSuccess(false);
+            result.setMessage("未开放注册");
+            return result;
+        }
+        String defaultRole = sysConfigService.getConfigItem("_defaultRole");
+        String defaultDepart = sysConfigService.getConfigItem("_defaultDepart");
+
 		try {
 			user.setCreateTime(new Date());// 设置创建时间
 			String salt = oConvertUtils.randomGen(8);
 			String passwordEncode = PasswordUtil.encrypt(username, password, salt);
 			user.setSalt(salt);
 			user.setUsername(username);
-			user.setRealname(username);
+			user.setRealname(realname);
 			user.setPassword(passwordEncode);
 			user.setEmail(email);
 			user.setPhone(phone);
@@ -1001,14 +1013,11 @@ public class SysUserController {
 			user.setDelFlag(CommonConstant.DEL_FLAG_0);
 			user.setActivitiSync(CommonConstant.ACT_SYNC_0);
 			sysUserService.save(user);
-            DictModel defaultRole = sysDictService.queryDictItemByCode("sys_config", "default_role");
             if (defaultRole != null){
-//                sysUserService.addUserWithRole(user,"ee8626f80f7c2619917b6236f3a7f02b");//默认 test
-                sysUserService.addUserWithRole(user,defaultRole.getValue());
+                sysUserService.addUserWithRole(user,defaultRole);
             }
-            DictModel defaultDepart = sysDictService.queryDictItemByCode("sys_config", "default_depart");
             if (defaultDepart != null){
-                sysUserService.addUserWithDepart(user, defaultDepart.getValue());
+                sysUserService.addUserWithDepart(user, defaultDepart);
             }
             result.success("注册成功");
 		} catch (Exception e) {

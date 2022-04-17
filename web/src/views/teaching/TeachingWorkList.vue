@@ -287,17 +287,15 @@ export default {
     handleView: function (record) {
       switch (record.workType) {
         case '1':
-          window.open('/scratch3/index.html?workId=' + record.id)
-          break
+          return window.open('/scratch3/index.html?workId=' + record.id)
         case '2':
           return window.open('/scratch3/index.html?workId=' + record.id)
-          break
         case '3':
           return window.open('/scratchjr/editor.html?mode=edit&filepath=' + record.workFileKey_url)
-          break
         case '4':
           return window.open('/python/index.html?workId=' + record.id)
-          break
+         case '10':
+            return window.open('/blockly/index.html?workId=' + record.id)
         default:
           return window.open(record.workFileKey_url)
       }

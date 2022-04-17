@@ -222,21 +222,19 @@ public class TeachingWorkController extends BaseController {
 	 @GetMapping("/starWork")
 	 public Result starWork(@RequestParam(name = "workId") String workId, HttpServletRequest request) {
 		 Result<TeachingWork> result = new Result<TeachingWork>();
-		 LoginUser sysUser = (LoginUser) SecurityUtils.getSubject().getPrincipal();
-		 String userId = sysUser == null ? null : sysUser.getId();
 		 TeachingWork teachingWork = teachingWorkService.getById(workId);
 		 if (teachingWork == null) {
 			 result.error500("未找到对作业");
 		 } else {
 			 String ip = IPUtils.getIpAddr(request);
-			 if (redisUtil.get("starWork-" + workId + userId + ip) == null) {
+			 if (redisUtil.get("starWork:" + workId + ip) == null) {
 				 if (Objects.nonNull(teachingWork.getStarNum())) {
 					 teachingWork.setStarNum(teachingWork.getStarNum() + 1);
 				 } else {
 					 teachingWork.setStarNum(1);
 				 }
 				 teachingWorkService.updateById(teachingWork);
-				 redisUtil.set("starWork-" + workId + userId + ip, "1");
+				 redisUtil.set("starWork:" + workId + ip, "1", 3600*24);
 				 result.setMessage("点赞成功");
 				 result.setSuccess(true);
 			 } else {
@@ -256,7 +254,7 @@ public class TeachingWorkController extends BaseController {
 									  HttpServletRequest request) {
 		 QueryWrapper<StudentWorkModel> queryWrapper = new QueryWrapper<StudentWorkModel>();
 		 queryWrapper.orderByDesc("teaching_work.star_num");
-		 queryWrapper.ge("teaching_work.work_status", 1);
+		 queryWrapper.ge("teaching_work.work_status", 3);
 		 switch (orderBy){
 			 case "view":
 				 queryWrapper.orderByDesc("teaching_work.view_num");

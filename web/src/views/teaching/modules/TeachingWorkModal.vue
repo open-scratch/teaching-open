@@ -34,7 +34,7 @@
           </a-col>
           <a-col :span="12">
             <a-form-item label="作业状态" :labelCol="labelCol" :wrapperCol="wrapperCol">
-              <j-dict-select-tag type="list" v-decorator="['workStatus', validatorRules.workStatus]" :trigger-change="true" dictCode="work_status" placeholder="请选择作业状态"/>
+              <j-dict-select-tag type="radioButton" v-decorator="['workStatus', validatorRules.workStatus]" :trigger-change="true" dictCode="work_status" placeholder="请选择作业状态"/>
             </a-form-item>
           </a-col>
           <a-col :span="12" v-show="false">

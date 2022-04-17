@@ -9,7 +9,7 @@
   <link rel="icon" href="<%= BASE_URL %>logo.png">
   <script src="/js/polyfill.js"></script>
   <script async src="https://www.googletagmanager.com/gtag/js?id=UA-155190299-2"></script>
-  <script async src="https://center.paas.plus/js/errlog.js"></script>
+  <script async src="//api.paas.plus/js/errlog.js"></script>
 
   <script src="/js/common.js"></script>
   <style>
@@ -216,7 +216,7 @@
     window._CONFIG['staticDomainURL'] = window._CONFIG['domianURL'] + '/sys/common/static/';
     window._CONFIG['pdfDomainURL'] = window._CONFIG['domianURL'] + '/sys/common/pdf/pdfPreviewIframe';
     window._CONFIG['defaultUploadType'] = 'qiniu' //local本地 qiniu七牛
-    window._CONFIG['qn_base'] = "//open.qn.teaching.vip/" //七牛云存储地址
+    window._CONFIG['qn_base'] = "http://open.qn.teaching.vip/" //七牛云存储地址
     window._CONFIG['qn_area'] = 'z0' //七牛区域 z0：华东 z1：华北 z2：华南 na0：北美 as0：东南亚 cn-east-2：华东-浙江2
     window._CONFIG['brandName'] = "Teaching" //品牌名
     window._CONFIG['brandDesc'] = "Teaching开源Steam教学平台" //品牌介绍

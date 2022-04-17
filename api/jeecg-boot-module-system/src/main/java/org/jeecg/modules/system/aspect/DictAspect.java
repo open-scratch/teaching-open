@@ -140,7 +140,16 @@ public class DictAspect {
             }
             if (field.getAnnotation(FileUrl.class) != null) {
                 String key = String.valueOf(item.get(field.getName()));
-                item.put(field.getName() + "_url", getFileUrl(key));
+
+                if (key.contains(",")){
+                    List<String> sl = new ArrayList<>();
+                    for (String v: key.split(",")){
+                        sl.add(getFileUrl(v));
+                    }
+                    item.put(field.getName() + "_url", org.apache.commons.lang.StringUtils.join(sl, ","));
+                }else{
+                    item.put(field.getName() + "_url", getFileUrl(key));
+                }
             }
             //date类型默认转换string格式化日期
             if (field.getType().getName().equals("java.util.Date")&&field.getAnnotation(JsonFormat.class)==null&&item.get(field.getName())!=null){
@@ -162,7 +171,7 @@ public class DictAspect {
      */
     private String getFileUrl(String fileKey){
         //TODO 应该从文件表中获取文件存储位置。
-        if (StringUtils.isEmpty(fileKey)){
+        if (StringUtils.isEmpty(fileKey) || "null".equals(fileKey)){
             return "";
         }
         //粗略判断一下fileKey是实际文件还是sysFile的id

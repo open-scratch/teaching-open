@@ -257,9 +257,4 @@ export default {
   max-width: 300px !important;
   width: 300px !important;
 }
-.ant-layout-footer {
-  height: 50px;
-  bottom: 0;
-  width: 100%;
-}
 </style>

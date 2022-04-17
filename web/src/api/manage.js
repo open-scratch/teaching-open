@@ -186,3 +186,9 @@ export function getSysConfig(){
       url: "/sys/config/getCurrentConfig"
   })
 }
+//获取菜单
+export function getMenu(){
+  return axios({
+      url: "/teaching/menu/getUserMenu"
+  })
+}

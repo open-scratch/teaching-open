@@ -7,7 +7,6 @@ import org.jeecg.config.QiniuConfig;
 import org.jeecg.modules.system.entity.SysConfig;
 import org.jeecg.modules.system.service.ISysConfigService;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.beans.factory.annotation.Value;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -16,8 +15,6 @@ import java.util.Map;
 @RestController
 @RequestMapping("/sys/config")
 public class SysConfigController {
-    @Value("${version:-}")
-    String version;
     @Autowired
     private ISysConfigService sysConfigService;
 
@@ -56,7 +53,6 @@ public class SysConfigController {
         Result<Map<String, Object>> result = new Result();
         Map<String, Object> tenantConfig = sysConfigService.getConfigMap();
         tenantConfig.put("qiniuDomain", QiniuConfig.domain);
-        tenantConfig.put("version", version);
         result.setResult(tenantConfig);
         return result;
     }

@@ -21,6 +21,9 @@ public interface CacheConstant {
 	 */
     public static final String SYS_DATA_PERMISSIONS_CACHE = "sys:cache:permission:datarules";
 
+    //菜单缓存
+    public static final String TEACHING_MENU_CACHE = "sys:cache:teaching:menu";
+
 	/**
 	 * 缓存用户信息
 	 */

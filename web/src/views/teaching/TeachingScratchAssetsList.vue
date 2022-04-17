@@ -149,7 +149,15 @@
           {
             title:'素材类型',
             align:"center",
-            dataIndex: 'assetType_dictText'
+            dataIndex: 'assetType',
+            customRender(v){
+              switch(v){
+                case 1: return "背景";
+                case 2: return "声音";
+                case 3: return "造型";
+                case 4: return "角色";
+              }
+            }
           },
           {
             title:'素材名',

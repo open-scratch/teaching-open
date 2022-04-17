@@ -75,21 +75,21 @@ public class JeecgBootExceptionHandler {
 	public Result<?> handleException(HttpServletRequest req, Exception e){
 		log.error(e.getMessage(), e);
 		if (ueip == true){
-			Map<String, Object> logData = new HashMap<String, Object>(){{
-				put("v", "TO" + version);
-				put("u", req.getRequestURL());
-				put("e", e.toString());
-				put("d", domain);
-			}};
 			StringWriter sw = new StringWriter();
 			PrintWriter pw = new PrintWriter(sw);
 			e.printStackTrace(pw);
-			logData.put("ed", sw.toString());
-			try {logData.put("i",InetAddress.getLocalHost().getHostAddress());
+			Map<String, Object> logData = new HashMap<String, Object>(){{
+				put("v", "TO" + version);
+				put("d", domain);
+				put("u", req.getRequestURL());
+				put("e", e.toString());
+				put("ed", sw.toString());
+				put("uip", IPUtils.getIpAddr(req));
+			}};
+			try {logData.put("hip",InetAddress.getLocalHost().getHostAddress());
 			} catch (UnknownHostException ignored) {}
-			logData.put("ip", IPUtils.getIpAddr(req));
 			new Thread(()->{
-				try{ Requests.post("http://center.teaching.vip/api/log/error").body(logData).send(); }catch (Exception ignored){}
+				try{ Requests.post("http://api.paas.plus/api/log/error").body(logData).send(); }catch (Exception ignored){}
 			}).start();
 		}
 		return Result.error("操作失败，"+e.getMessage());

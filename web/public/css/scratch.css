@@ -3,120 +3,13 @@
 body{
 	font-family: "Microsoft yahei",Arival;
 }
-.step{
-	display: none;
-}
-.dialog{
-	position: absolute;
-	width: 700px;
-	height: 520px;
-	top: 50%;
-	left: 50%;
-	margin: -260px auto auto -350px;
-	display: none;
-}
-.close-content{
-	width: 190px;
-	height: 200px;
-	position: absolute;
-	top: 0;
-	right: 0;
-	background: url(../images/circle.png) no-repeat;
-	background-size: 100% 100%;
-}
-#close{
-	width: 30px;
-	height: 30px;
-	position: absolute;
-	top: 45px;
-	right: 75px;
-	background: url(../images/close.png) no-repeat;
-	background-size: 100% 100%;
-	cursor: pointer;
-}
-.dialog-content{
-	width: 637px;
-	height: 428px;
-	position: absolute;
-	bottom: 0;
-	left: 0;
-	background: url(../images/dialog-bg.png) no-repeat;
-	background-size: 100% 100%;
-}
-.dialog-content.on{
-	background: url(../images/dialog-bg2.png) no-repeat;
-	background-size: 100% 100%;
-}
-.step1{
-	display: block;
-}
-.step h2 {
-	font-size: 28px;
-	line-height: 30px;
-	letter-spacing: 3px;
-	color: #ffffff;
-	margin-top: 90px;
-	font-weight: normal;
-}
-.step1 p{
-	margin-top: 40px;
-	text-align: center;
-	font-size: 18px;
-	line-height: 20px;
-	letter-spacing: 2px;
-	color: #ffffff;
-}
-.step1 span {
-	display: inline-block;
-	width: 20px;
-	height: 20px;
-	background: url(../images/c.png) no-repeat center;
-	background-size: 14px 12px;
-	background-color: #fff;
-	border-radius: 2px;
-	margin-right: 4px;
-	vertical-align: top;
-}
-.step1 span.on{
-	background-image: none;
-}
-.step .btn{
-	width: 226px;
-	height: 56px;
-	position: absolute;
-	bottom: 75px;
-	left: 50%;
-	margin-left: -113px;	
-	cursor: pointer;
-}
-.step1 .next{
-	background: url(../images/next.png) no-repeat;
-	background-size: 100% 100%;
-}
-.step2 .confirm{
-	background: url(../images/confirm.png) no-repeat;
-	background-size: 100% 100%;
-}
-#workname,#userName{
-	width: 305px;
-	height: 46px;
-	background: url(../images/input.png);
-	border:none;
-	background-color: none;
-	color: #9983ff;
-	font-size: 28px;
-	line-height: 46px;
-	text-align: center;
-	margin-top: 35px;
-}
+
 #qcode{
 	margin-top: 30px;
     display: inline-block;
     border: 5px solid #fff;
 }
-.step3 table{
-	margin: 0 auto;
-}
+
 .error{
 	display: none;
 }
@@ -196,26 +89,6 @@ body{
 	text-align: center;
 }
 
-.works-name label{
-	font-family: SourceHanSansCN-Regular;
-	font-size: 18px;
-	font-weight: normal;
-	font-stretch: normal;
-	line-height: 50px;
-	letter-spacing: 0px;
-	color: #333333;
-}
-.works-name input{
-	width: 297px;
-	height: 40px;
-	background-color: #ffffff;
-	box-shadow: inset 0px 3px 6px 0px
-	rgba(199, 198, 198, 0.35);
-	border-radius: 3px;
-	border: solid 1px #e9e8e8;
-	margin-left: 30px;
-	padding: 0 10px 0 10px;
-}
 .works-explain{
 	position: relative;
 }
@@ -338,21 +211,7 @@ body{
 	margin-left: 53px;
 	border: 0;
 }
-/*.two-button .cancel-release:hover{*/
-/*width: 122px;*/
-/*height: 45px;*/
-/*background-color: #7865f7;*/
-/*box-shadow: 0px 1px 11px 1px*/
-/*rgba(164, 162, 162, 0.36);*/
-/*border-radius: 22px;*/
-/*font-family: SourceHanSansCN-Regular;*/
-/*font-size: 18px;*/
-/*font-weight: normal;*/
-/*font-stretch: normal;*/
-/*letter-spacing: 0px;*/
-/*color: #fff;*/
-/*border: 0;*/
-/*}*/
+
 .scratch-middle-right{
 	/*width: 342px;*/
 	/*height: 273px;*/
@@ -490,84 +349,11 @@ body{
 	color: #666666;
 }
 
-
-/*作业提醒*/
-.task-dialog{
-	display: none;
-	position: fixed;
-	width: 100%;
-	height: 100%;
-	top: 0;
-	left: 0;
-	right: 0;
-	bottom: 0;
-	background: rgba(17, 17, 17, 0.68);
-	z-index: 444;
-}
-.remind{
-	position: absolute;
-	left: 50%;
-	top: 50%;
-	transform: translate(-50%, -50%);
-	background-image: url("../images/big-square.png");
-	z-index: 999;
-	width: 707px;
-	height: 571px;
-	display: flex;
-	flex-direction: column;
-	justify-content: left;
-	align-items: left;
-}
-.remind .task{
-	margin-top: 143px;
-	width: 502px;
-	margin-left: 65px;
-	text-align: left;
-}
-.remind .task .task-title{
-	font-size: 18px;
-	color: #333;
-}
-.remind .task textarea{
-	width: 502px;
-	height: 204px;
-	margin-top: 18px;
-	outline: none;
-	resize: none;
-	border: none;
-	font-size: 16px;
-	color: rgb(102,102,102);
-}
-.remind .task textarea::-webkit-scrollbar-track {
-	background-color: rgba(0, 0, 0, 0.2)
-}
-
-.remind .task textarea::-webkit-scrollbar {
-	width: 4px;
-	background-color: rgba(0, 0, 0, 0.2);
-	border-radius: 2px;
-}
-
-.remind .task textarea::-webkit-scrollbar-thumb {
-	background-color: #e0dcdb;
-	border-radius: 5px;
-}
-.remind p{
-	width: 224px;
-	height: 52px;
-	margin-top: 62px;
-	margin-left: 210px;
-	cursor: pointer;
-}
-.remind p img{
-	width: 100%;
-	height: 100%;
-}
-.task-fault {
-	position: absolute;
-	top: 48px;
-	width: 30px;
-	height: 30px;
-	right: 72px;
-	cursor: pointer;
+#qrCodeIco{
+	background: #fff;
+    position: absolute;
+    width: 50px;
+    height: 50px;
+    z-index: 2;
+    border: solid;
 }

@@ -78,7 +78,7 @@ window.getScratchAssets = function(assetType, cb){
 window.getQiniuToken = function() {
   var qn_token;
   $.ajax({
-    url: '/api/common/qiniu/getToken',
+    url: '/api/common/qiniu/getToken?t=' + new Date().getTime(),
     beforeSend: function(request) {
       request.setRequestHeader('X-Access-Token', getUserToken())
     },
@@ -94,7 +94,7 @@ window.getQiniuToken = function() {
     error: function(e) {
       if (e.responseJSON.status == 500) {
         //alert(e.responseJSON.message);
-        location.href = '/'
+        // location.href = '/'
       }
       console.log(e)
     }
@@ -269,7 +269,7 @@ window.isFullscreen = function(){
          document.webkitFullscreenElement || false;
 }
 
-console.log("Teacing Open v2.6");
+console.log("Teaching Open v2.6");
 
 window.dataLayer = window.dataLayer || [];
 function gtag(){dataLayer.push(arguments);}

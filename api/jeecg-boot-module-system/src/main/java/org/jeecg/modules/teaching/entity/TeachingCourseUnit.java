@@ -90,9 +90,9 @@ public class TeachingCourseUnit implements Serializable {
     @ApiModelProperty(value = "课程案例")
     @FileUrl
     private java.lang.String courseCase;
-	/**课件PPT*/
-	@Excel(name = "课件PPT", width = 15)
-    @ApiModelProperty(value = "课件PPT")
+	/**课程资料，多个文件逗号分割*/
+	@Excel(name = "课程资料", width = 15)
+    @ApiModelProperty(value = "课程资料")
     @FileUrl
     private java.lang.String coursePpt;
 	/**作业类型*/

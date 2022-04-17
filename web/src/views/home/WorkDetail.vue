@@ -369,12 +369,4 @@ export default {
   width: 300px !important;
 }
 
-.ant-layout-footer {
-  height: 50px;
-  bottom: 0;
-  width: 100%;
-  .copyright {
-    text-align: center;
-  }
-}
 </style>

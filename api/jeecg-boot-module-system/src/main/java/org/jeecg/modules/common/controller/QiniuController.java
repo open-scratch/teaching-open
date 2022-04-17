@@ -18,7 +18,6 @@ import org.springframework.web.bind.annotation.RestController;
 @RestController
 @RequestMapping("/common/qiniu")
 public class QiniuController {
-    @AutoLog("获取七牛上传Token")
     @ApiOperation(value = "获取七牛上传Token", notes = "获取七牛上传token")
     @RequestMapping("/getToken")
     public Result getQiniuToken(){
@@ -29,7 +28,6 @@ public class QiniuController {
         return result;
     }
 
-    @AutoLog("获取七牛上传Token")
     @ApiOperation(value = "获取七牛覆盖Token", notes = "获取七牛覆盖token")
     @RequestMapping("/getTokenByKey")
     public Result getQiniuTokenByKey(@RequestParam String key){

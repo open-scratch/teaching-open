@@ -18,7 +18,7 @@
         </a-form-item>
         <a-form-item label="文件路径" :labelCol="labelCol" :wrapperCol="wrapperCol">
           <a-input v-if="false" v-decorator="[ 'filePath', validatorRules.filePath]" placeholder="请输入文件路径"></a-input>
-          <j-upload v-decorator="[ 'filePath', validatorRules.filePath]" :maxFile="1" :trigger-change="true"></j-upload>
+          <j-upload v-decorator="[ 'filePath', validatorRules.filePath]" :number="1" :trigger-change="true"></j-upload>
         </a-form-item>
         <a-form-item label="存储位置" :labelCol="labelCol" :wrapperCol="wrapperCol">
           <j-dict-select-tag :disabled="true" type="list" v-decorator="['fileLocation', validatorRules.fileLocation]" :trigger-change="true" dictCode="file_location" placeholder="请选择存储位置"/>

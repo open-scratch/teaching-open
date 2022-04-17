@@ -12,11 +12,14 @@
         and teaching_work.id = #{workId}
     </select>
     <select id="listWorkModel" resultType="org.jeecg.modules.teaching.model.StudentWorkModel">
-        select teaching_work.*, sys_user.username, sys_user.realname, sys_user.update_time user_update_time, sys_user.avatar,
+        select teaching_work.*,
+               c.comment teacherComment, c.score,
+               sys_user.username, sys_user.realname, sys_user.update_time user_update_time, sys_user.avatar,
         (select file_path from sys_file where sys_file.id = teaching_work.work_file) workFileKey,
         (select file_path from sys_file where sys_file.id = teaching_work.work_cover) coverFileKey
         from teaching_work
         left join sys_user on teaching_work.user_id = sys_user.id
+        left join teaching_work_correct c on c.work_id = teaching_work.id
         ${ew.customSqlSegment}
     </select>
 

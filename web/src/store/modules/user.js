@@ -13,6 +13,7 @@ const user = {
     welcome: '',
     avatar: '',
     permissionList: [],
+    menuList: [],
     info: {},
     userRole: [],
     sysConfig:{}
@@ -32,6 +33,9 @@ const user = {
     },
     SET_PERMISSIONLIST: (state, permissionList) => {
       state.permissionList = permissionList
+    },
+    SET_MENU: (state, menuList) => {
+      state.menuList = menuList
     },
     SET_INFO: (state, info) => {
       state.info = info
@@ -199,16 +203,6 @@ const user = {
           reject(error)
         })
       })
-    },
-    GetSysConfig({ commit }) {
-      let sysConfig = Vue.ls.get(SYS_CONFIG);
-      if(sysConfig){
-        commit('SET_SYS_CONFIG', sysConfig)
-        if(sysConfig.brandName){
-          window.document.title = sysConfig.brandName
-        }
-        return;
-      }
     },
   }
 }

@@ -16,38 +16,48 @@ Teaching针对机构、学校提供STEAM在线教育解决方案， 提供一个
 ## 开源版功能
 
 ```
+├─首页
 ├─社区
 ├─创作
 │  ├─Scratch
 │  ├─Python
 │  ├─ScratchJr
-├─个人中心
+│  ├─Blockly
+├─学生中心
 │  ├─我的作品
+│  ├─班级作业
 │  ├─个人设置
-├─我的课程
-│  ├─卡片形式
-│  ├─地图形式
+│   ├─我的课程
+│   │  ├─卡片形式
+│   │  ├─地图形式
 ├─作业管理
+│  ├─作品管理
+│  ├─布置班级作业
 ├─课程管理
 │  ├─课程管理
 │  ├─课程单元管理
 ├─系统管理
 │  ├─用户管理
 |  ├─角色管理
-│  ├─菜单管理
 │  ├─权限设置
 │  ├─班级管理
-│  └─字典管理
-│  └─我的班级
-│  └─通讯录
+│  ├─字典管理
+│  ├─后台菜单管理
+│  ├─前台菜单管理
+│  ├─网站配置
+│  ├─Scratch素材库
 ├─系统监控
 │  ├─ ……
 ```
 ## 教学工具对接
 
 - [Scratch2.0](https://github.com/open-scratch/scratch2) (已淘汰)
+
 - [Scratch3.0](https://github.com/open-scratch/scratch3)
+
 - [ScratchJr](https://github.com/open-scratch/scratchjr)
+
+- Blockly
 
   
 ## 技术架构
@@ -63,11 +73,14 @@ Teaching针对机构、学校提供STEAM在线教育解决方案， 提供一个
 ## 编译和部署教程
 
 ### 环境准备
-以CentOS服务器为例
+以CentOS服务器为例，其他系统操作流程基本一样。
 #### 安装mysql5.6
-- 设置数据库表名忽略大小写
-lower_case_table_names=1
-- 导入api/db文件夹的sql文件。如果是升级，需要以此按版本号执行升级sql。
+1. 略，（可使用宝塔面板一键安装）
+
+2. 设置数据库表名忽略大小写
+   lower_case_table_names=1
+
+3. 导入api/db文件夹的sql文件。如果是升级，需要以此按版本号执行升级sql。
 
 #### 安装 redis 6.0
 略，（可使用宝塔面板一键安装）
@@ -136,7 +149,7 @@ qiniu:
 ```
 
 在api目录执行
-  
+
 `mvn clean package`
 
 编译成功后得到jar文件：\target\teaching-open-xxx.jar
@@ -160,9 +173,8 @@ qiniu:
   ```js
     window._CONFIG['qn_base'] = "//qn.open.teaching.vip/" //七牛域名
     window._CONFIG['qn_area'] = 'z0' //七牛存储区域 z0华东 z1华北 z2华南 na0北美 as0东南亚
-    window._CONFIG['brandName'] = "Teaching" //品牌名
   ```
-
+  
 - 安装依赖
   `npm install` 或 `yarn install`
 
@@ -171,6 +183,7 @@ qiniu:
 
 - 部署
   
+
 将编译后的dist文件夹上传至服务器网站根目录
 
 - 配置Nginx
@@ -184,7 +197,7 @@ server
     server_name open.teaching.vip;
     location / {
       index index.html index.htm;
-     root /www/wwwroot/teaching-open;
+      root /www/wwwroot/teaching-open; # 改为你网站目录的路径
       if (!-e $request_filename) {
           rewrite ^(.*)$ /index.html?s=$1 last;
           break;
@@ -199,11 +212,7 @@ server
     
     location ^~ /api
     {
-        expires 12h;
-        if ($request_uri ~* "(php|jsp|cgi|asp|aspx)")
-        {
-            expires 0;
-        }
+        expires 0;
         proxy_pass              http://127.0.0.1:8080/api/;
         proxy_set_header        Host 127.0.0.1;
         proxy_set_header        X-Real-IP $remote_addr;
@@ -296,4 +305,4 @@ jeecg:
 
 5. 上传覆盖前端文件
 
-注意覆盖之前备份index.html中的配置、scratch3/index.html的配置、logo文件
+注意覆盖之前备份index.html中的配置、scratch3/index.html的配置

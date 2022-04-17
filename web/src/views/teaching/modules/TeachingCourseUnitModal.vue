@@ -23,7 +23,7 @@
           <a-textarea v-decorator="[ 'unitIntro', validatorRules.unitIntro]" placeholder="请输入单元简介"></a-textarea>
         </a-form-item>
         <a-form-item label="课程封面" :labelCol="labelCol" :wrapperCol="wrapperCol">
-          <j-upload v-decorator="['unitCover', validatorRules.unitCover]"  :maxFile="1" :trigger-change="true"></j-upload>
+          <j-upload v-decorator="['unitCover', validatorRules.unitCover]"  :number="1" :trigger-change="true"></j-upload>
         </a-form-item>
         <a-form-item label="课程视频" :labelCol="labelCol" :wrapperCol="wrapperCol">
           <a-card>
@@ -33,28 +33,26 @@
               <a-radio :value='3'>外部</a-radio>
             </a-radio-group>
             <a-divider></a-divider>
-            <j-upload v-if="model.courseVideoSource==1" v-decorator="['courseVideo', validatorRules.courseVideo]" :uploadTarget="'qiniu'" :maxFile="1" :trigger-change="true"></j-upload>
+            <j-upload v-if="model.courseVideoSource==1" v-decorator="['courseVideo', validatorRules.courseVideo]" :uploadTarget="'qiniu'" :number="1" :trigger-change="true"></j-upload>
             <a-input v-if="model.courseVideoSource==2" v-decorator="[ 'courseVideo', validatorRules.courseVideo]" placeholder="请输入视频地址"></a-input>
             <a-textarea v-if="model.courseVideoSource==3" v-decorator="['courseVideo']" placeholder="请输入外部播放器代码"></a-textarea>
           </a-card>
         </a-form-item>
         <a-form-item label="课程案例" :labelCol="labelCol" :wrapperCol="wrapperCol">
-          <j-upload v-decorator="['courseCase', validatorRules.courseCase]"  :maxFile="1" :trigger-change="true"></j-upload>
+          <j-upload v-decorator="['courseCase', validatorRules.courseCase]"  :number="1" :trigger-change="true"></j-upload>
         </a-form-item>
-        <a-form-item label="课件资料" :labelCol="labelCol" :wrapperCol="wrapperCol">
-          <j-upload v-decorator="['coursePpt', validatorRules.coursePpt]"  :maxFile="1" :trigger-change="true"></j-upload>
+        <a-form-item label="课程资料" :labelCol="labelCol" :wrapperCol="wrapperCol">
+          <j-upload v-decorator="['coursePpt', validatorRules.coursePpt]" :trigger-change="true"></j-upload>
         </a-form-item>
         <a-form-item label="作业类型" :labelCol="labelCol" :wrapperCol="wrapperCol">
           <j-dict-select-tag type="list" v-decorator="['courseWorkType', {initialValue: 2}, validatorRules.courseWorkType]" :trigger-change="true" dictCode="work_type" placeholder="请选择作业类型"/>
         </a-form-item>
         <a-form-item label="课程作业" :labelCol="labelCol" :wrapperCol="wrapperCol">
-          <j-upload v-decorator="['courseWork', validatorRules.courseWork]"  :maxFile="1" :trigger-change="true"></j-upload>
+          <j-upload v-decorator="['courseWork', validatorRules.courseWork]"  :number="1" :trigger-change="true"></j-upload>
         </a-form-item>
-        <a-form-item label="地图X坐标" :labelCol="labelCol" :wrapperCol="wrapperCol">
-          <a-input-number v-decorator="[ 'mapX', validatorRules.mapX]" placeholder="请输入地图X坐标" style="width: 100%"/>
-        </a-form-item>
-        <a-form-item label="地图Y坐标" :labelCol="labelCol" :wrapperCol="wrapperCol">
-          <a-input-number v-decorator="[ 'mapY', validatorRules.mapY]" placeholder="请输入地图Y坐标" style="width: 100%"/>
+        <a-form-item label="地图坐标" :labelCol="labelCol" :wrapperCol="wrapperCol">
+          <a-input-number v-decorator="[ 'mapX', validatorRules.mapX]" placeholder="请输入地图X坐标" style="width: 40%"/>
+          <a-input-number v-decorator="[ 'mapY', validatorRules.mapY]" placeholder="请输入地图Y坐标" style="width: 40%"/>
         </a-form-item>
       </a-form>
     </a-spin>

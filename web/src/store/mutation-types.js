@@ -19,6 +19,7 @@ export const ENHANCE_PRE = 'enhance_'
 export const UI_CACHE_DB_DICT_DATA = 'UI_CACHE_DB_DICT_DATA'
 export const INDEX_MAIN_PAGE_PATH =  "/account/center"
 export const SYS_CONFIG = 'SYS_CONFIG'
+export const MENU = 'MENU'
 
 export const CONTENT_WIDTH_TYPE = {
   Fluid: 'Fluid',

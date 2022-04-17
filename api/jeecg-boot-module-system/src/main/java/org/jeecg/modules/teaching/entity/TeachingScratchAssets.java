@@ -35,8 +35,7 @@ public class TeachingScratchAssets implements Serializable {
     @ApiModelProperty(value = "id")
     private String id;
 	/**素材类型 1背景 2声音 3造型 4角色*/
-	@Excel(name = "素材类型 1背景 2声音 3造型 4角色", width = 15, dicCode = "scratch_asset_type")
-	@Dict(dicCode = "scratch_asset_type")
+	@Excel(name = "素材类型 1背景 2声音 3造型 4角色", width = 15)
     @ApiModelProperty(value = "素材类型 1背景 2声音 3造型 4角色")
     private Integer assetType;
 	/**冗余 素材名*/

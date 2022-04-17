@@ -90,15 +90,14 @@ export default {
       switch(item.workType){
         case '1':
           return '/scratch3/index.html?workId='+item.id
-          break;
         case '2':
           return '/scratch3/index.html?workId='+item.id
-          break;
         case '3':
           return '/scratchjr/editor.html?mode=edit&filepath=' + item.workFileKey_url
-          break;
         case '4':
           return '/python/index.html?workId=' + item.id
+        case '10':
+          return '/blockly/index.html?workId=' + item.id
         default:
           return item.workFileKey_url
       }

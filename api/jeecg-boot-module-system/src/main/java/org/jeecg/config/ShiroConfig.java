@@ -139,6 +139,8 @@ public class ShiroConfig {
 
 		//支付
 		filterChainDefinitionMap.put("/teaching/teachingOrder/createOrder", "anon");
+		//菜单
+		filterChainDefinitionMap.put("/teaching/menu/getUserMenu", "anon");
 		//配置
 		filterChainDefinitionMap.put("/sys/config/getCurrentConfig", "anon");
 
@@ -148,6 +150,10 @@ public class ShiroConfig {
 		filterChainDefinitionMap.put("/teaching/teachingWork/starWork", "anon");
 		filterChainDefinitionMap.put("/teaching/teachingWork/leaderboard", "anon");
 		filterChainDefinitionMap.put("/teaching/teachingWork/getWorkComments", "anon");
+
+
+		filterChainDefinitionMap.put("/teaching/teachingCms/list", "anon");
+		filterChainDefinitionMap.put("/teaching/teachingCms/queryById", "anon");
 
 
 		//学生

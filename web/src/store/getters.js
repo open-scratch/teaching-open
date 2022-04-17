@@ -1,5 +1,5 @@
 import Vue from 'vue'
-import { USER_INFO, ENHANCE_PRE } from "@/store/mutation-types"
+import { USER_INFO, ENHANCE_PRE, MENU, SYS_CONFIG } from "@/store/mutation-types"
 const getters = {
   device: state => state.app.device,
   theme: state => state.app.theme,
@@ -10,6 +10,8 @@ const getters = {
   nickname: state => {state.user.realname = Vue.ls.get(USER_INFO) && Vue.ls.get(USER_INFO).realname; return state.user.realname},
   welcome: state => state.user.welcome,
   permissionList: state => state.user.permissionList,
+  menuList: state => {state.user.menuList = Vue.ls.get(MENU); return state.user.menuList},
+  sysConfig: state => {state.user.sysConfig = Vue.ls.get(SYS_CONFIG); return state.user.sysConfig},
   userInfo: state => {state.user.info = Vue.ls.get(USER_INFO); return state.user.info},
   addRouters: state => state.permission.addRouters,
   enhanceJs:(state) => (code) => {

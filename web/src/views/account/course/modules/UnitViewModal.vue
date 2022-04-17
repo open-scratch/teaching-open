@@ -12,12 +12,12 @@
       <div class="video-area">
         <a-tabs v-if="unit.courseVideo || unit.courseCase">
           <a-tab-pane key="video" tab="视频" v-if="unit.courseVideo">
-            <video v-if="unit.courseVideoSource==1" :src="getQiniuFile(unit.courseVideo)" controls="true"></video>
-            <video v-if="unit.courseVideoSource==2" :src="unit.courseVideo" controls="true"></video>
+            <video v-if="unit.courseVideoSource==1" :src="getFileAccessHttpUrl(unit.courseVideo)" controls="true" controlsList='nodownload noremote footbar' oncontextmenu="return false;"></video>
+            <video v-if="unit.courseVideoSource==2" :src="unit.courseVideo" controls="true" controlsList='nodownload noremote footbar' oncontextmenu="return false;"></video>
             <div v-if="unit.courseVideoSource==3" v-html="unit.courseVideo"></div>
           </a-tab-pane>
           <a-tab-pane key="scratch" tab="案例" v-if="unit.courseCase">
-            <iframe id="player" :src="previewCourseCase(unit)"></iframe>
+            <iframe id="player" :src="previewCourseCase(unit)" scrolling="no"></iframe>
           </a-tab-pane>
         </a-tabs>
       </div>
@@ -38,13 +38,18 @@
                 <a
                   target="_blank"
                   @click="handleViewCode(unit)"
-                  ><a-icon type="edit" />{{ unit.unitName }} 去做作业</a
+                  ><a-icon type="edit" />去做作业</a
                 >
               </a-collapse-panel>
               <a-collapse-panel v-if="unit.coursePpt" :header="'课程资料'" :style="customStyle">
-                <a target="_blank" :href="getFileAccessHttpUrl(unit.coursePpt)"
-                  ><a-icon type="edit" />{{ unit.unitName }} 查看资料</a
-                >
+                <div v-for="(u,i) in unit.coursePpt_url.split(',')" :key="i">
+                  <a v-if="u.endsWith('sb3')" target="_blank" :href="'/scratch3/index.html?scene=create&workFile='+u"
+                    ><a-icon type="code" /> 查看代码 {{(i+1)}}</a
+                  >
+                  <a v-else target="_blank" :href="u"
+                    ><a-icon type="file" /> 查看资料 {{(i+1)}}</a
+                  >
+                </div>
               </a-collapse-panel>
             </a-collapse>
           </a-col>
@@ -65,6 +70,23 @@ export default {
       unit: {},
       scratchFrameHref: '',
     }
+  },
+  mounted(){
+    //scratch全屏
+    document.addEventListener('scratchFullScreen', function (e) {
+      window.launchIntoFullscreen(document.getElementById('player'))
+    })
+    //scratch退出全屏
+    document.addEventListener('scratchUnFullScreen', function (e) {
+      window.exitFullscreen()
+    })
+    document.addEventListener('scratchInit', function (e) {
+      var p = document.getElementById('player')
+      var s = p.contentDocument.getElementById('scratch')
+      s.addEventListener('click', () => {
+        p.focus()
+      })
+    })
   },
   methods: {
     getFileAccessHttpUrl,
@@ -115,8 +137,8 @@ export default {
 }
 #player {
   border: none;
-  width: 520px;
-  height: 400px;
+  width: 600px;
+  height: 500px;
   margin: auto;
   display: block;
 }

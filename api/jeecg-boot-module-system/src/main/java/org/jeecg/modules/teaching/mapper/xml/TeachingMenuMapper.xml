@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="org.jeecg.modules.teaching.mapper.TeachingMenuMapper">
+
+
+	<resultMap id="TreeModel" type="org.jeecg.modules.teaching.model.TreeModel" >
+		<result column="id" property="key" jdbcType="VARCHAR"/>
+		<result column="name" property="title" jdbcType="VARCHAR"/>
+		<result column="icon" property="icon" jdbcType="VARCHAR"/>
+		<result column="parent_id" property="parentId" jdbcType="VARCHAR"/>
+	</resultMap>
+	
+	<!-- 通过<resultMap>映射实体类属性名和表的字段名对应关系 -->
+	<resultMap id="SysPermission" type="org.jeecg.modules.teaching.entity.TeachingMenu">
+	   <!-- result属性映射非匹配字段 -->
+	    <result column="is_route" property="route"/>
+	    <result column="is_leaf" property="leaf"/>
+	</resultMap>
+
+	
+	<select id="queryListByParentId" parameterType="Object"  resultMap="TreeModel">
+		   SELECT   
+                   id
+                   ,parent_id
+                   ,name
+                   ,icon
+                   ,leaf_flag
+		   FROM   teaching_menu
+		   WHERE 1=1
+		    <choose>
+		   		<when test="parentId != null and parentId != ''">
+		   			AND parent_id =  #{parentId,jdbcType=VARCHAR}
+		   		</when>
+		   		<otherwise>
+		   			AND parent_id is null
+		   		</otherwise>
+		    </choose>
+	</select>
+</mapper>

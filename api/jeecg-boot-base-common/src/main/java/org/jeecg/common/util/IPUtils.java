@@ -45,12 +45,12 @@ public class IPUtils {
         	logger.error("IPUtils ERROR ", e);
         }
         
-//        //使用代理，则获取第一个IP地址
-//        if(StringUtils.isEmpty(ip) && ip.length() > 15) {
-//			if(ip.indexOf(",") > 0) {
-//				ip = ip.substring(0, ip.indexOf(","));
-//			}
-//		}
+        //使用代理，则获取第一个IP地址
+        if(StringUtils.isEmpty(ip) && ip.length() > 15) {
+			if(ip.indexOf(",") > 0) {
+				ip = ip.substring(0, ip.indexOf(","));
+			}
+		}
         
         return ip;
     }

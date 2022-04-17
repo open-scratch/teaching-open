@@ -32,7 +32,8 @@ import {
   DEFAULT_FIXED_SIDEMENU,
   DEFAULT_CONTENT_WIDTH_TYPE,
   DEFAULT_MULTI_PAGE,
-  SYS_CONFIG
+  SYS_CONFIG,
+  MENU
 } from "@/store/mutation-types"
 import config from '@/defaultSettings'
 
@@ -42,7 +43,7 @@ import vueBus from '@/utils/vueBus';
 import JeecgComponents from '@/components/jeecg/index'
 import '@/assets/less/JAreaLinkage.less'
 import VueAreaLinkage from 'vue-area-linkage'
-import {getSysConfig} from '@/api/manage'
+import { getSysConfig, getMenu} from '@/api/manage'
 
 Vue.config.productionTip = false
 Vue.use(Storage, config.storageOptions)
@@ -57,19 +58,29 @@ Vue.use(vueBus);
 Vue.use(JeecgComponents);
 Vue.use(VueAreaLinkage);
 
+let cacheTime = 600000 //缓存10分钟
 
 const start = async()=>{
-  let sysConfig = Vue.ls.get(SYS_CONFIG);
-  if (sysConfig) {
-    store.dispatch("GetSysConfig")
-  } else {
+  //获取配置
+  let sysConfig = store.getters.sysConfig;
+  if (!sysConfig) {
     await getSysConfig().then(res => {
       if (res.success) {
-        //一小时有效期
-        Vue.ls.set(SYS_CONFIG, res.result, 60 * 60 * 1000)
-        store.dispatch("GetSysConfig")
-      } else {
+        sysConfig = res.result
+        Vue.ls.set(SYS_CONFIG, sysConfig, cacheTime)
+        store.commit('SET_SYS_CONFIG', sysConfig)
       }
+    })
+  }
+  if(sysConfig.brandName){
+    window.document.title = sysConfig.brandName
+  }
+  //获取菜单
+  if (store.getters.menuList == null) {
+    await getMenu().then(res => {
+      const menuData = res.result;
+      Vue.ls.set(MENU, menuData, cacheTime)
+      store.commit('SET_MENU', menuData)
     })
   }
 

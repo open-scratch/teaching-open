@@ -1,11 +1,8 @@
 <template>
   <div class="app-list">
     <a-list :grid="{ gutter: 24, lg: 4, md: 3, sm: 2, xs: 1 }" :dataSource="dataSource">
-      <a-list-item slot="renderItem" slot-scope="item, index">
+      <a-list-item slot="renderItem" slot-scope="item">
         <a-card @click="viewUnit(item)">
-          <!-- <template class="ant-card-extra" slot="extra">
-            <span class="create-time">{{item.createTime}}</span>
-          </template> -->
           <a-card-meta>
               <div style="margin-bottom: 3px" slot="title">
                 <a-icon type="right-circle"/>&nbsp;&nbsp;
@@ -50,7 +47,6 @@ export default {
     }
   },
   mounted() {
-    // this.getWorkList()
   },
   methods: {
     getFileAccessHttpUrl,
@@ -78,7 +74,6 @@ export default {
     },
     viewUnit(unit){
       console.log(unit);
-      
       this.$refs.unitViewModal.visible = true;
       this.$refs.unitViewModal.unit = unit
     },

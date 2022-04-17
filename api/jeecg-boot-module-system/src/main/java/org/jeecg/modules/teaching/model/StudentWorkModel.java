@@ -15,10 +15,9 @@ public class StudentWorkModel extends TeachingWork {
     @TableId("realname")
     @ApiModelProperty("username")
     private String realname;
-//    @Getter(AccessLevel.NONE)
     @FileUrl
     private String workFileKey;
-//    @Getter(AccessLevel.NONE)
+
     @FileUrl
     private String coverFileKey;
 
@@ -28,27 +27,8 @@ public class StudentWorkModel extends TeachingWork {
 
     @FileUrl
     private String avatar;
-
-//    public String getAvatarUrl(){
-//        if (this.avatar == null){
-//            return null;
-//        }
-//        return this.avatar;
-//    }
-//
-//
-//    public String getCoverFileUrl(){
-//        if (this.coverFileUrl == null){
-//            return null;
-//        }
-//        return QiniuConfig.domain + "/" + this.coverFileUrl;
-//    }
-//
-//    public String getWorkFileUrl(){
-//        if (this.workFileUrl == null){
-//            return null;
-//        }
-//        return QiniuConfig.domain + "/" + this.workFileUrl;
-//    }
-
+    //老师评语
+    private String teacherComment;
+    //老师评分
+    private Integer score;
 }

@@ -6,13 +6,13 @@
         <a-button type="primary" slot="tabBarExtraContent" @click="saveCurrentConfig">保存</a-button>
         <a-tab-pane key="concat" tab="基本信息" forceRender>
           <a-row>
-            <a-col :span="12">
-              <a-form-item label="联系人" :labelCol="labelCol" :wrapperCol="wrapperCol">
+            <a-col :span="24">
+              <a-form-item label="联系人" :labelCol="labelCol2" :wrapperCol="wrapperCol2">
                 <a-input v-decorator="['_linkman']" placeholder="请输联系人"></a-input>
               </a-form-item>
             </a-col>
-            <a-col :span="12">
-              <a-form-item label="联系手机" :labelCol="labelCol" :wrapperCol="wrapperCol">
+            <a-col :span="24">
+              <a-form-item label="联系手机" :labelCol="labelCol2" :wrapperCol="wrapperCol2">
                 <a-input v-decorator="['_phone']" placeholder="请输入手机号"></a-input>
               </a-form-item>
             </a-col>
@@ -25,24 +25,18 @@
         </a-tab-pane>
         <a-tab-pane key="base" tab="网站配置" forceRender>
           <a-row type="flex" justify="space-between">
-            <a-col :span="12">
-              <a-form-item label="品牌名" :labelCol="labelCol" :wrapperCol="wrapperCol">
+            <a-col :span="24">
+              <a-form-item label="品牌名" :labelCol="labelCol2" :wrapperCol="wrapperCol2">
                 <a-input v-decorator="['brandName', validatorRules.brandName]" placeholder="请输入品牌名称"></a-input>
               </a-form-item>
             </a-col>
-            <a-col :span="12">
-              <a-form-item label="主题" :labelCol="labelCol" :wrapperCol="wrapperCol">
-                <a-radio-group name="theme" v-decorator="['theme', validatorRules.theme]">
-                  <a-radio value='default'>默认</a-radio>
-                  <!-- <a-radio value='xmw'>小码王</a-radio> -->
-                  <!-- <a-radio value='xinai'>芯一代</a-radio> -->
-                  <a-radio value='kexie'>科协</a-radio>
-                </a-radio-group>
+            <a-col :span="24">
+              <a-form-item label="品牌简介" :labelCol="labelCol2" :wrapperCol="wrapperCol2">
+                <a-textarea v-decorator="['brandDesc', validatorRules.brandDesc]" placeholder="请输入品牌简介"></a-textarea>
               </a-form-item>
             </a-col>
-
-            <a-col :span="12">
-              <a-form-item label="LOGO" :labelCol="labelCol" :wrapperCol="wrapperCol">
+            <a-col :span="24">
+              <a-form-item label="LOGO" :labelCol="labelCol2" :wrapperCol="wrapperCol2">
                 <j-upload
                   v-decorator="['logo', validatorRules.logo]"
                   :uploadTarget="'qiniu'"
@@ -52,7 +46,7 @@
                 ></j-upload>
               </a-form-item>
             </a-col>
-            <a-col :span="24">
+            <!-- <a-col :span="24">
               <a-form-item label="轮播图" :labelCol="labelCol2" :wrapperCol="wrapperCol2">
                 <j-upload
                   v-decorator="['banner']"
@@ -68,18 +62,7 @@
                   <a-textarea :auto-size="{ minRows: 2, maxRows: 10 }" v-decorator="['bannerLinks']"/>
                 </a-tooltip>
               </a-form-item>
-            </a-col>
-            <a-col :span="12">
-              <a-form-item label="登录注册页图片" :labelCol="labelCol" :wrapperCol="wrapperCol">
-                <j-upload
-                  v-decorator="['loginBg']"
-                  :uploadTarget="'qiniu'"
-                  :fileType="'image'"
-                  :number="1"
-                  :trigger-change="true"
-                ></j-upload>
-              </a-form-item>
-            </a-col>
+            </a-col> -->
             <a-col :span="24">
               <a-form-item label="底部文字" :labelCol="labelCol2" :wrapperCol="wrapperCol2">
                 <j-editor v-decorator="['footer']" :triggerChange="true" />
