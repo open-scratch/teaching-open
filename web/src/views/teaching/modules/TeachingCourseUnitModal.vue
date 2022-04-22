@@ -33,7 +33,7 @@
               <a-radio :value='3'>外部</a-radio>
             </a-radio-group>
             <a-divider></a-divider>
-            <j-upload v-if="model.courseVideoSource==1" v-decorator="['courseVideo', validatorRules.courseVideo]" :uploadTarget="'qiniu'" :number="1" :trigger-change="true"></j-upload>
+            <j-upload v-if="model.courseVideoSource==1" v-decorator="['courseVideo', validatorRules.courseVideo]" :number="1" :trigger-change="true"></j-upload>
             <a-input v-if="model.courseVideoSource==2" v-decorator="[ 'courseVideo', validatorRules.courseVideo]" placeholder="请输入视频地址"></a-input>
             <a-textarea v-if="model.courseVideoSource==3" v-decorator="['courseVideo']" placeholder="请输入外部播放器代码"></a-textarea>
           </a-card>

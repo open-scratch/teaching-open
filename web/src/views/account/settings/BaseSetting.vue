@@ -9,7 +9,6 @@
           <a-form-item label="头像" :labelCol="labelCol" :wrapperCol="wrapperCol">
             <j-upload
               v-decorator="['avatar']"
-              :uploadTarget="'qiniu'"
               :fileType="'image'"
               :number="1"
               :trigger-change="true"

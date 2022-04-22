@@ -39,7 +39,6 @@
               <a-form-item label="LOGO" :labelCol="labelCol2" :wrapperCol="wrapperCol2">
                 <j-upload
                   v-decorator="['logo', validatorRules.logo]"
-                  :uploadTarget="'qiniu'"
                   :fileType="'image'"
                   :number="1"
                   :trigger-change="true"
@@ -50,7 +49,6 @@
               <a-form-item label="轮播图" :labelCol="labelCol2" :wrapperCol="wrapperCol2">
                 <j-upload
                   v-decorator="['banner']"
-                  :uploadTarget="'qiniu'"
                   :fileType="'image'"
                   :number="10"
                   :multiple="true"

@@ -23,13 +23,13 @@
           <a-textarea v-decorator="['workDesc']" rows="4" placeholder="请输入作业描述"/>
         </a-form-item>
         <a-form-item label="作业封面" :labelCol="labelCol" :wrapperCol="wrapperCol">
-          <j-upload v-decorator="['workCover']" :uploadTarget="'qiniu'" :number="1" :fileType="'image'" :trigger-change="true"></j-upload>
+          <j-upload v-decorator="['workCover']" :number="1" :fileType="'image'" :trigger-change="true"></j-upload>
         </a-form-item>
         <a-form-item label="作业资料" :labelCol="labelCol" :wrapperCol="wrapperCol">
-          <j-upload v-decorator="['workDocumentUrl']" :uploadTarget="'qiniu'" :number="1" :trigger-change="true"></j-upload>
+          <j-upload v-decorator="['workDocumentUrl']" :number="1" :trigger-change="true"></j-upload>
         </a-form-item>
         <a-form-item label="作业文件" :labelCol="labelCol" :wrapperCol="wrapperCol">
-          <j-upload v-decorator="['workUrl']" :uploadTarget="'qiniu'" :number="1" :trigger-change="true"></j-upload>
+          <j-upload v-decorator="['workUrl']" :number="1" :trigger-change="true"></j-upload>
         </a-form-item>
         <a-form-item label="分配班级" :labelCol="labelCol" :wrapperCol="wrapperCol">
           <j-select-depart :onlyLeaf="true" :onlyCategory="3" :rootOpened="true" :multi="true" v-decorator="['workDept',{rules: [{required: true, message: '请选择班级!'}]}]"/>

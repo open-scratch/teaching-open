@@ -14,7 +14,7 @@
         <a-input v-model="workInfo.workName" placeholder="请输入作业名"></a-input>
       </a-form-item>
       <a-form-item label="作业文件" :labelCol="labelCol" :wrapperCol="wrapperCol">
-        <j-upload v-model="workInfo.workUrl" :uploadTarget="'qiniu'" :number="1" :maxFileSize="10" :trigger-change="true" @saved="saved"></j-upload>
+        <j-upload v-model="workInfo.workUrl" :number="1" :maxFileSize="10" :trigger-change="true" @saved="saved"></j-upload>
       </a-form-item>
     </a-form>
   </a-modal>
