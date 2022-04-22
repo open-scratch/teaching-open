@@ -1,4 +1,3 @@
-
 CREATE TABLE `teaching_menu`  (
                                   `id` varchar(32) CHARACTER SET utf8 COLLATE utf8_general_ci NOT NULL COMMENT '主键id',
                                   `parent_id` varchar(32) CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT NULL COMMENT '父id',
@@ -103,6 +102,12 @@ INSERT INTO `sys_dict_item`(`id`, `dict_id`, `item_text`, `item_value`, `descrip
 INSERT INTO `sys_dict_item`(`id`, `dict_id`, `item_text`, `item_value`, `description`, `sort_order`, `status`, `create_by`, `create_time`, `update_by`, `update_time`) VALUES ('1362359007336042498', '1362358951581159425', '已发布', '1', '', 1, 1, 'admin', '2021-02-18 05:11:13', NULL, NULL);
 INSERT INTO `sys_dict_item`(`id`, `dict_id`, `item_text`, `item_value`, `description`, `sort_order`, `status`, `create_by`, `create_time`, `update_by`, `update_time`) VALUES ('1472853906186854401', '1362358951581159425', '已结束', '2', '', 2, 1, 'admin', '2021-12-20 16:58:30', NULL, NULL);
 
+DELETE FROM `sys_dict_item` where dict_id = '1278612830199599105';
+INSERT INTO `sys_dict_item`(`id`, `dict_id`, `item_text`, `item_value`, `description`, `sort_order`, `status`, `create_by`, `create_time`, `update_by`, `update_time`) VALUES ('1278612880279588866', '1278612830199599105', '已保存', '0', '', 1, 1, 'admin', '2020-07-02 16:54:00', NULL, NULL);
+INSERT INTO `sys_dict_item`(`id`, `dict_id`, `item_text`, `item_value`, `description`, `sort_order`, `status`, `create_by`, `create_time`, `update_by`, `update_time`) VALUES ('1278612903998377985', '1278612830199599105', '待批改', '1', '', 1, 1, 'admin', '2020-07-02 16:54:06', 'admin', '2022-04-17 16:32:17');
+INSERT INTO `sys_dict_item`(`id`, `dict_id`, `item_text`, `item_value`, `description`, `sort_order`, `status`, `create_by`, `create_time`, `update_by`, `update_time`) VALUES ('1515609003021717505', '1278612830199599105', '已批改', '2', '', 3, 1, 'admin', '2022-04-17 16:31:59', NULL, NULL);
+INSERT INTO `sys_dict_item`(`id`, `dict_id`, `item_text`, `item_value`, `description`, `sort_order`, `status`, `create_by`, `create_time`, `update_by`, `update_time`) VALUES ('1515609292537745409', '1278612830199599105', '首页展示', '3', '', 4, 1, 'admin', '2022-04-17 16:33:08', NULL, NULL);
+
 
 INSERT INTO `sys_permission`(`id`, `parent_id`, `name`, `url`, `component`, `component_name`, `redirect`, `menu_type`, `perms`, `perms_type`, `sort_no`, `always_show`, `icon`, `is_route`, `is_leaf`, `keep_alive`, `hidden`, `description`, `create_by`, `create_time`, `update_by`, `update_time`, `del_flag`, `rule_flag`, `status`, `internal_or_external`) VALUES ('1478631237925072897', NULL, '作业管理', '/work', 'layouts/RouteView', NULL, NULL, 0, NULL, '1', 1.00, 0, 'form', 1, 0, 0, 0, NULL, 'admin', '2022-01-05 15:35:33', NULL, NULL, 0, 0, '1', 0);
 INSERT INTO `sys_permission`(`id`, `parent_id`, `name`, `url`, `component`, `component_name`, `redirect`, `menu_type`, `perms`, `perms_type`, `sort_no`, `always_show`, `icon`, `is_route`, `is_leaf`, `keep_alive`, `hidden`, `description`, `create_by`, `create_time`, `update_by`, `update_time`, `del_flag`, `rule_flag`, `status`, `internal_or_external`) VALUES ('1478631727777837058', '1478631237925072897', '布置班级作业', '/work/additionalWork', 'teaching/TeachingAdditionalWorkList', NULL, NULL, 1, NULL, '1', 2.00, 0, NULL, 1, 1, 0, 0, NULL, 'admin', '2022-01-05 15:37:30', NULL, NULL, 0, 0, '1', 0);
@@ -115,3 +120,10 @@ INSERT INTO `sys_dict_item`(`id`, `dict_id`, `item_text`, `item_value`, `descrip
 INSERT INTO sys_role_permission ( id, role_id, permission_id ) VALUES ( '1498944956328431618', 'f6817f48af4fb3af11b9e8bf182f618b', '1498944880717713410' );
 INSERT INTO sys_role_permission ( id, role_id, permission_id ) VALUES ( '1498944956328431618', '1252532277234982913', '1498944880717713410' );
 INSERT INTO sys_role_permission ( id, role_id, permission_id ) VALUES ( '1498944956328431618', '1252532323347161090', '1498944880717713410' );
+
+drop table test_demo;
+drop table test_order_main;
+drop table test_order_product;
+drop table test_person;
+drop table demo;
+drop table joa_demo;
