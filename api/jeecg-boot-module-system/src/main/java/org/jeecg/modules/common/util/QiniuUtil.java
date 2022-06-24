@@ -58,12 +58,12 @@ public class QiniuUtil {
             Response res = bucketManager.delete(QiniuConfig.bucket, key);
             return true;
         } catch (QiniuException ex) {
+            System.err.println(ex.error());
             //如果遇到异常，说明删除失败
-            if (ex.response.statusCode == 612){
-                //资源不存在，也视为删除成功
+            if (ex.code() == 612){
+                    //资源不存在，也视为删除成功
                 return true;
             }
-            System.err.println(ex.response.toString());
             return false;
         }
     }
