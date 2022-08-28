@@ -47,6 +47,12 @@ public class SysRole implements Serializable {
      */
     @Excel(name="角色编码",width=15)
     private String roleCode;
+
+    /**
+     * 角色等级
+     */
+    @Excel(name = "角色等级", width = 15)
+    private Integer roleLevel;
     
     /**
           * 描述

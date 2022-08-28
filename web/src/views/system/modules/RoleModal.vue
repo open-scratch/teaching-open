@@ -29,6 +29,16 @@
 
         <a-form-item
           :labelCol="labelCol"
+          :wrapperCol="wrapperCol">
+          <a-tooltip slot="label">
+            <span slot="title">等级越高权限越高。权限低的角色不可操作权限高的角色。</span>
+            <a-icon type="question-circle" /><span> 角色等级</span>
+          </a-tooltip>
+          <a-input-number placeholder="请输入角色等级" :min="0" :max="99" v-decorator.trim="[ 'roleLevel', validatorRules.roleLevel]" />
+        </a-form-item>
+
+        <a-form-item
+          :labelCol="labelCol"
           :wrapperCol="wrapperCol"
           label="描述">
           <a-textarea :rows="5" placeholder="..." v-decorator="[ 'description', validatorRules.description ]" />
@@ -73,6 +83,12 @@
               { min: 0, max: 64, message: '长度不超过 64 个字符', trigger: 'blur' },
               { validator: this.validateRoleCode}
             ]},
+          roleLevel:{
+          rules: [
+            { required: true, message: '请输入角色等级!' },
+          ],
+          initialValue: 0
+        },
           description:{
             rules: [
               { min: 0, max: 126, message: '长度不超过 126 个字符', trigger: 'blur' }
@@ -98,7 +114,7 @@
           this.roleDisabled = false;
         }
         this.$nextTick(() => {
-          this.form.setFieldsValue(pick(this.model,'roleName', 'description','roleCode'))
+          this.form.setFieldsValue(pick(this.model,'roleName','roleLevel', 'description','roleCode'))
         });
 
       },

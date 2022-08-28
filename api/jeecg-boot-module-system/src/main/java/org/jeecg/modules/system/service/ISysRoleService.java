@@ -40,4 +40,6 @@ public interface ISysRoleService extends IService<SysRole> {
      */
     public boolean deleteBatchRole(String[] roleids);
 
+    //根据角色code获取角色
+    SysRole getRoleByCode(String roleCode);
 }

@@ -22,4 +22,9 @@ public interface SysUserRoleMapper extends BaseMapper<SysUserRole> {
 	@Select("select id from sys_role where id in (select role_id from sys_user_role where user_id = (select id from sys_user where username=#{username}))")
 	List<String> getRoleIdByUserName(@Param("username") String username);
 
+	@Select("select max(role_level) from sys_role where id in (select role_id from sys_user_role where user_id = (select id from sys_user where username=#{username}))")
+	Integer getUserRoleLevelByUsername(@Param("username") String username);
+
+	@Select("select max(role_level) from sys_role where id in (select role_id from sys_user_role where user_id = #{userId})")
+	Integer getUserRoleLevel(@Param("userId") String userId);
 }

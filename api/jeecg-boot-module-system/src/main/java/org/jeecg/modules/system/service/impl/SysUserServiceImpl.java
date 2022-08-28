@@ -459,4 +459,24 @@ public class SysUserServiceImpl extends ServiceImpl<SysUserMapper, SysUser> impl
 		return res;
 	}
 
+	@Override
+	public int getUserRoleLevelByUsername(String username) {
+		Integer level = sysUserRoleMapper.getUserRoleLevelByUsername(username);
+		if (level == null){
+			return -1;
+		}else{
+			return level;
+		}
+	}
+
+    @Override
+    public int getUserRoleLevel(String username) {
+		Integer level = sysUserRoleMapper.getUserRoleLevel(username);
+		if (level == null){
+			return -1;
+		}else{
+			return level;
+		}
+    }
+
 }

@@ -27,6 +27,7 @@ import org.jeecg.common.util.PasswordUtil;
 import org.jeecg.common.util.PmsUtil;
 import org.jeecg.common.util.RedisUtil;
 import org.jeecg.common.util.oConvertUtils;
+import org.jeecg.modules.common.controller.BaseController;
 import org.jeecg.modules.system.entity.*;
 import org.jeecg.modules.system.model.DepartIdModel;
 import org.jeecg.modules.system.model.SysUserModel;
@@ -64,37 +65,25 @@ import java.util.stream.Collectors;
 @Slf4j
 @RestController
 @RequestMapping("/sys/user")
-public class SysUserController {
+public class SysUserController extends BaseController {
 	@Autowired
 	private ISysBaseAPI sysBaseAPI;
-	
 	@Autowired
 	private ISysUserService sysUserService;
-
     @Autowired
     private ISysDepartService sysDepartService;
-
 	@Autowired
 	private ISysUserRoleService sysUserRoleService;
-
 	@Autowired
 	private ISysUserDepartService sysUserDepartService;
-
 	@Autowired
-	private ISysUserRoleService userRoleService;
-
+	private ISysRoleService sysRoleService;
     @Autowired
     private ISysDepartRoleUserService departRoleUserService;
-
     @Autowired
     private ISysDepartRoleService departRoleService;
-
-    @Autowired
-    private ISysDictService sysDictService;
-
     @Autowired
     private ISysConfigService sysConfigService;
-
 	@Autowired
 	private RedisUtil redisUtil;
 
@@ -152,6 +141,23 @@ public class SysUserController {
 	public Result<SysUser> add(@RequestBody JSONObject jsonObject) {
 		Result<SysUser> result = new Result<SysUser>();
 		String selectedRoles = jsonObject.getString("selectedroles");
+        if (StringUtils.isNotBlank(selectedRoles)){
+            int currentRoleLevel = getUserRoleLevel();
+            for (String roleId: selectedRoles.split(",")){
+                SysRole role = sysRoleService.getById(roleId);
+                if (role.getRoleLevel() >= currentRoleLevel){
+                    result.error500("权限不足，无法分配所选角色");
+                    return result;
+                }
+            }
+        }else{
+            //默认学生角色
+            SysRole role = sysRoleService.getRoleByCode("student");
+            if (role!=null){
+                selectedRoles = role.getId();
+            }
+        }
+
 		String selectedDeparts = jsonObject.getString("selecteddeparts");
 		try {
 			SysUser user = JSON.parseObject(jsonObject.toJSONString(), SysUser.class);
@@ -184,6 +190,11 @@ public class SysUserController {
 			if(sysUser==null) {
 				result.error500("未找到对应实体");
 			}else {
+                if (lessThanUserRoleLevel(sysUser.getId())){
+                    result.error500("权限不足");
+                    return result;
+                }
+
 				SysUser user = JSON.parseObject(jsonObject.toJSONString(), SysUser.class);
 				user.setUpdateTime(new Date());
 				//String passwordEncode = PasswordUtil.encrypt(user.getUsername(), user.getPassword(), sysUser.getSalt());
@@ -209,6 +220,9 @@ public class SysUserController {
 	@RequestMapping(value = "/delete", method = RequestMethod.DELETE)
 	public Result<?> delete(@RequestParam(name="id",required=true) String id) {
 		sysBaseAPI.addLog("删除用户，id： " +id ,CommonConstant.LOG_TYPE_2, 3);
+        if (lessThanUserRoleLevel(id)){
+            return Result.error("权限不足");
+        }
 		this.sysUserService.deleteUser(id);
 		return Result.ok("删除用户成功");
 	}
@@ -220,7 +234,12 @@ public class SysUserController {
 	@RequestMapping(value = "/deleteBatch", method = RequestMethod.DELETE)
 	public Result<?> deleteBatch(@RequestParam(name="ids",required=true) String ids) {
 		sysBaseAPI.addLog("批量删除用户， ids： " +ids ,CommonConstant.LOG_TYPE_2, 3);
-		this.sysUserService.deleteBatchUsers(ids);
+		for (String id: ids.split(",")){
+            if (lessThanUserRoleLevel(id)){
+                return Result.error("权限不足");
+            }
+        }
+        this.sysUserService.deleteBatchUsers(ids);
 		return Result.ok("批量删除用户成功");
 	}
 
@@ -239,6 +258,10 @@ public class SysUserController {
 			String[] arr = ids.split(",");
 			for (String id : arr) {
 				if(oConvertUtils.isNotEmpty(id)) {
+                    if (lessThanUserRoleLevel(id)){
+                        result.error500("权限不足");
+                        return result;
+                    }
 					this.sysUserService.update(new SysUser().setStatus(Integer.parseInt(status)),
 							new UpdateWrapper<SysUser>().lambda().eq(SysUser::getId,id));
 				}
@@ -322,6 +345,9 @@ public class SysUserController {
         SysUser u = this.sysUserService.getOne(new LambdaQueryWrapper<SysUser>().eq(SysUser::getUsername, sysUser.getUsername()));
         if (u == null) {
             return Result.error("用户不存在！");
+        }
+        if (lessThanUserRoleLevel(u.getId())){
+            return Result.error("权限不足");
         }
         sysUser.setId(u.getId());
         return sysUserService.changePassword(sysUser);
@@ -653,6 +679,10 @@ public class SysUserController {
         try {
             String sysRoleId = sysUserRoleVO.getRoleId();
             for(String sysUserId:sysUserRoleVO.getUserIdList()) {
+                if (lessThanUserRoleLevel(sysUserId)){
+                    result.error500("权限不足");
+                    return result;
+                }
                 SysUserRole sysUserRole = new SysUserRole(sysUserId,sysRoleId);
                 QueryWrapper<SysUserRole> queryWrapper = new QueryWrapper<SysUserRole>();
                 queryWrapper.eq("role_id", sysRoleId).eq("user_id",sysUserId);
@@ -683,6 +713,10 @@ public class SysUserController {
                                                     @RequestParam(name="userId",required=true) String userId
     ) {
         Result<SysUserRole> result = new Result<SysUserRole>();
+        if (lessThanUserRoleLevel(userId)){
+            result.error500("权限不足");
+            return result;
+        }
         try {
             QueryWrapper<SysUserRole> queryWrapper = new QueryWrapper<SysUserRole>();
             queryWrapper.eq("role_id", roleId).eq("user_id",userId);
@@ -707,6 +741,12 @@ public class SysUserController {
             @RequestParam(name="roleId") String roleId,
             @RequestParam(name="userIds",required=true) String userIds) {
         Result<SysUserRole> result = new Result<SysUserRole>();
+        for (String id: userIds.split(",")){
+            if (lessThanUserRoleLevel(id)){
+                result.error500("权限不足");
+                return result;
+            }
+        }
         try {
             QueryWrapper<SysUserRole> queryWrapper = new QueryWrapper<SysUserRole>();
             queryWrapper.eq("role_id", roleId).in("user_id",Arrays.asList(userIds.split(",")));
@@ -864,6 +904,10 @@ public class SysUserController {
                                                     @RequestParam(name="userId",required=true) String userId
     ) {
         Result<SysUserDepart> result = new Result<SysUserDepart>();
+        if (lessThanUserRoleLevel(userId)){
+            result.error500("权限不足");
+            return result;
+        }
         try {
             QueryWrapper<SysUserDepart> queryWrapper = new QueryWrapper<SysUserDepart>();
             queryWrapper.eq("dep_id", depId).eq("user_id",userId);
@@ -896,6 +940,12 @@ public class SysUserController {
             @RequestParam(name="depId") String depId,
             @RequestParam(name="userIds",required=true) String userIds) {
         Result<SysUserDepart> result = new Result<SysUserDepart>();
+        for (String id: userIds.split(",")){
+            if (lessThanUserRoleLevel(id)){
+                result.error500("权限不足");
+                return result;
+            }
+        }
         try {
             QueryWrapper<SysUserDepart> queryWrapper = new QueryWrapper<SysUserDepart>();
             queryWrapper.eq("dep_id", depId).in("user_id",Arrays.asList(userIds.split(",")));

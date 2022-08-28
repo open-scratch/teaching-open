@@ -242,4 +242,8 @@ public interface ISysUserService extends IService<SysUser> {
 	 * @return
 	 */
 	Map<String, String> getRoleNamesByUserIds(List<String> userIds);
+
+	//获取角色的最高权限
+	int getUserRoleLevelByUsername(String username);
+	int getUserRoleLevel(String userId);
 }
