@@ -1,5 +1,4 @@
 #! /bin/bash
-
 PROJECT_JAR=`ls -l '.' | grep 'teaching' | awk '{print $9}' | sort -V | awk 'END{print $1}'`
 PIDS=`ps -ef | grep $PROJECT_JAR | grep java |awk '{print $2}'`
 if [ -z "$PIDS" ]; then

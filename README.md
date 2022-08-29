@@ -1,4 +1,4 @@
-# Teaching 在线教学平台
+# Teaching 在线教学平台 v2.7
 ===============
 
 ## 项目介绍
@@ -57,7 +57,7 @@ Teaching针对机构、学校提供STEAM在线教育解决方案， 提供一个
 
 - [ScratchJr](https://github.com/open-scratch/scratchjr)
 
-- Blockly
+- [Blockly](https://github.com/google/blockly)
 
   
 ## 技术架构
@@ -72,25 +72,29 @@ Teaching针对机构、学校提供STEAM在线教育解决方案， 提供一个
 
 ## 编译和部署教程
 
+### [点击查看宝塔面板部署教程](https://www.213.name/%e5%ae%9d%e5%a1%94%e9%9d%a2%e6%9d%bf%e5%bf%ab%e9%80%9f%e9%83%a8%e7%bd%b2teaching%e5%bc%80%e6%ba%90%e6%95%99%e5%ad%a6%e5%b9%b3%e5%8f%b0/)
+
 ### 环境准备
 以CentOS服务器为例，其他系统操作流程基本一样。
 #### 安装mysql5.6
-1. 略，（可使用宝塔面板一键安装）
+1. 略
 
-2. 设置数据库表名忽略大小写
+2. 设置数据库表名忽略大小写（重要）
+
    lower_case_table_names=1
 
-3. 导入api/db文件夹的sql文件。如果是升级，需要以此按版本号执行升级sql。
+3. 导入api/db文件夹的sql文件。如果是升级，需要依次按版本号执行升级sql。
 
 #### 安装 redis 6.0
-略，（可使用宝塔面板一键安装）
+略
 
 #### 安装Java
-centos可执行命令一键安装
+
+CentOS系统可执行命令一键安装
 `yum install -y java-1.8.0-openjdk`
 
 #### 安装Nginx
-略，（可使用宝塔面板一键安装）
+略
 
 #### 注册配置七牛云
 
@@ -133,7 +137,7 @@ qiniu:
 ```
 配置文件可以编译后修改，推荐将.yml配置文件放到jar包同级目录，java将优先使用同级目录的配置，这样方便后续升级。
 
-- 编译项目
+- 编译项目（若使用已编译好的jar文件，本步骤可以跳过）
 
 配置maven源
 
@@ -161,12 +165,18 @@ qiniu:
 
   `nohup java -jar teaching-open-xxx.jar &`
 
+  或者上传并接执行启动脚本
+  `bash start-teaching.sh`
 
-### 前端编译和部署
+
+### 前端编译
 
 - 安装nodejs版本v12
+  
+- 安装依赖
+  `npm install` 或 `yarn install`
 
-- 修改配置
+  - 修改配置
 
   public/index.html
 
@@ -174,21 +184,18 @@ qiniu:
     window._CONFIG['qn_base'] = "//qn.open.teaching.vip/" //七牛域名
     window._CONFIG['qn_area'] = 'z0' //七牛存储区域 z0华东 z1华北 z2华南 na0北美 as0东南亚
   ```
-  
-- 安装依赖
-  `npm install` 或 `yarn install`
 
 - 编译
   `npm run build` 或 `yarn run build`
 
-- 部署
+### 前端部署
   
 
 将编译后的dist文件夹上传至服务器网站根目录
 
 - 配置Nginx
 
-重点是要配置反向代理
+重点是要配置反向代理到API
 参考配置:
 ```
 server
@@ -241,7 +248,7 @@ server
 2. nginx反向代理配置错误，特征是接口报502或504错误
 
 ### Scratch素材库不显示
-素材库默认是使用的你配置的文件上传地址（七牛云）
+素材库默认是使用的你配置七牛云地址
 
 方案1：将素材库上传至七牛云，素材库位置在scratch3/static/internalapi，需要原来的保持目录结构，选择internalapi目录上传。
 

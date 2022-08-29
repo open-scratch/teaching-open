@@ -269,7 +269,7 @@ window.isFullscreen = function(){
          document.webkitFullscreenElement || false;
 }
 
-console.log("Teaching Open v2.6");
+console.log("Teaching Open v2.7");
 
 window.dataLayer = window.dataLayer || [];
 function gtag(){dataLayer.push(arguments);}
