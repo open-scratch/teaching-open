@@ -82,7 +82,8 @@ public interface ISysUserService extends IService<SysUser> {
 	 * @return
 	 */
 	public List<String> getRole(String username);
-	
+	public List<String> getRoleById(String userId);
+
 	/**
 	  * 查询用户信息包括 部门信息
 	 * @param username
@@ -145,6 +146,7 @@ public interface ISysUserService extends IService<SysUser> {
 	 * @return 角色集合
 	 */
 	Set<String> getUserRolesSet(String username);
+	Set<String> getUserIdRolesSet(String userId);
 
 	/**
 	 * 通过用户名获取用户权限集合

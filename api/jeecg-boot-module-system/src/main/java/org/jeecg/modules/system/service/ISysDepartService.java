@@ -102,5 +102,8 @@ public interface ISysDepartService extends IService<SysDepart>{
      * @return
      */
     List<String> getMySubDepIdsByDepId(String departIds);
+
+    //获取所有根机构
+    List<SysDepart> getRootDepart();
     
 }

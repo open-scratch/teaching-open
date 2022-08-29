@@ -2,6 +2,7 @@ package org.jeecg.modules.system.controller;
 
 import java.io.IOException;
 import java.util.*;
+import java.util.stream.Collectors;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -17,11 +18,13 @@ import org.jeecg.common.system.util.JwtUtil;
 import org.jeecg.common.system.vo.LoginUser;
 import org.jeecg.common.util.ImportExcelUtil;
 import org.jeecg.common.util.oConvertUtils;
+import org.jeecg.modules.common.controller.BaseController;
 import org.jeecg.modules.system.entity.SysDepart;
 import org.jeecg.modules.system.model.DepartIdModel;
 import org.jeecg.modules.system.model.SysDepartTreeModel;
 import org.jeecg.modules.system.service.ISysDepartService;
 import org.jeecg.modules.system.service.ISysPositionService;
+import org.jeecg.modules.system.service.ISysUserService;
 import org.jeecg.modules.system.util.FindsDepartsChildrenUtil;
 import org.jeecgframework.poi.excel.ExcelImportUtil;
 import org.jeecgframework.poi.excel.def.NormalExcelConstants;
@@ -52,7 +55,7 @@ import lombok.extern.slf4j.Slf4j;
 @RestController
 @RequestMapping("/sys/sysDepart")
 @Slf4j
-public class SysDepartController {
+public class SysDepartController extends BaseController {
 
 	@Autowired
 	private ISysDepartService sysDepartService;
@@ -67,8 +70,16 @@ public class SysDepartController {
 	public Result<List<SysDepartTreeModel>> queryMyDeptTreeList() {
 		Result<List<SysDepartTreeModel>> result = new Result<>();
 		LoginUser user = (LoginUser) SecurityUtils.getSubject().getPrincipal();
+
 		try {
 			if(oConvertUtils.isNotEmpty(user.getUserIdentity()) && user.getUserIdentity().equals( CommonConstant.USER_IDENTITY_2 )){
+				// 如果角色是admin和dev，展示所有部门
+				if(hasRole("admin") || hasRole("dev")){
+					List<SysDepart> departList = this.sysDepartService.getRootDepart();
+					String departIds = departList.stream().map(SysDepart::getId).collect(Collectors.joining(","));
+					user.setDepartIds(departIds); //全部顶级部门
+				}
+
 				List<SysDepartTreeModel> list = sysDepartService.queryMyDeptTreeList(user.getDepartIds());
 				result.setResult(list);
 				result.setMessage(CommonConstant.USER_IDENTITY_2.toString());

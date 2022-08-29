@@ -47,4 +47,10 @@ public class BaseController {
         return  sysUserService.getUserRoleLevel(currentUser.getId());
     }
 
+    //获取当前用户的角色code列表
+    public List<String> getCurrentRole(){
+        LoginUser currentUser = this.getCurrentUser();
+        return sysUserService.getRoleById(currentUser.getId());
+    }
+
 }

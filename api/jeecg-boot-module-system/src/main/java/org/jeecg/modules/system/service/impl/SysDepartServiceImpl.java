@@ -266,6 +266,11 @@ public class SysDepartServiceImpl extends ServiceImpl<SysDepartMapper, SysDepart
 		return this.baseMapper.getSubDepIdsByOrgCodes(codeArr);
 	}
 
+	@Override
+	public List<SysDepart> getRootDepart() {
+		return this.baseMapper.getRootDepart();
+	}
+
 	/**
 	 * <p>
 	 * 根据关键字搜索相关的部门数据

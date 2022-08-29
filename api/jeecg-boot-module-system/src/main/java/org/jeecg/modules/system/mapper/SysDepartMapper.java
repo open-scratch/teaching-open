@@ -3,8 +3,6 @@ package org.jeecg.modules.system.mapper;
 import com.baomidou.mybatisplus.core.mapper.BaseMapper;
 import org.apache.ibatis.annotations.Select;
 import org.jeecg.modules.system.entity.SysDepart;
-import org.jeecg.modules.system.model.SysDepartTreeModel;
-import org.jeecg.modules.system.model.TreeModel;
 import org.springframework.data.repository.query.Param;
 
 import java.util.List;
@@ -37,6 +35,10 @@ public interface SysDepartMapper extends BaseMapper<SysDepart> {
 
 	@Select("select id,parent_id from sys_depart where id=#{departId}")
 	public SysDepart getParentDepartId(@Param("departId") String departId);
+
+	//获取所有根机构
+	@Select("select * from sys_depart where parent_id=''")
+	public List<SysDepart> getRootDepart();
 
 	/**
 	 *  根据部门Id查询,当前和下级所有部门IDS

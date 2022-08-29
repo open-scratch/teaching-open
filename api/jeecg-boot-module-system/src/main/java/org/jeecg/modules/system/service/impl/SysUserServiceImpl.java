@@ -149,7 +149,12 @@ public class SysUserServiceImpl extends ServiceImpl<SysUserMapper, SysUser> impl
 	public List<String> getRole(String username) {
 		return sysUserRoleMapper.getRoleByUserName(username);
 	}
-	
+
+	@Override
+	public List<String> getRoleById(String userId) {
+		return sysUserRoleMapper.getRoleByUserId(userId);
+	}
+
 	/**
 	 * 通过用户名获取用户角色集合
 	 * @param username 用户名
@@ -162,6 +167,14 @@ public class SysUserServiceImpl extends ServiceImpl<SysUserMapper, SysUser> impl
 		log.info("-------通过数据库读取用户拥有的角色Rules------username： " + username + ",Roles size: " + (roles == null ? 0 : roles.size()));
 		return new HashSet<>(roles);
 	}
+
+	@Override
+	public Set<String> getUserIdRolesSet(String userId) {
+		List<String> roles = sysUserRoleMapper.getRoleIdByUserId(userId);
+		log.info("-------通过数据库读取用户拥有的角色Rules------userId： " + userId + ",Roles size: " + (roles == null ? 0 : roles.size()));
+		return new HashSet<>(roles);
+	}
+
 
 	/**
 	 * 通过用户名获取用户权限集合
