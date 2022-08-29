@@ -159,7 +159,7 @@ qiniu:
 编译成功后得到jar文件：\target\teaching-open-xxx.jar
 (xxx为版本号)
 
-- 上传到服务器
+- 上传jar文件到服务器，建议同时将yml配置文件也上传到jar同级目录
 
 - 启动后端api并放入后台执行
 
