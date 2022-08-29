@@ -115,8 +115,18 @@ public class SysUserController extends BaseController {
         queryWrapper.eq("sys_user.del_flag", 0);
         QueryGenerator.installMplus(queryWrapper, user, req.getParameterMap());
 
+        //非admin和dev角色，只显示自己管理的部门下的用户
+        List<String> myDeptIds = new ArrayList<>();
+        if(!hasRole("admin") && !hasRole("dev")){
+            myDeptIds = sysDepartService.getMySubDepIdsByDepId(getCurrentUser().getDepartIds());
+            if (myDeptIds==null || myDeptIds.isEmpty()){
+                result.error500("您没有负责的班级");
+                return result;
+            }
+        }
+
 		Page<SysUserModel> page = new Page<SysUserModel>(pageNo, pageSize);
-        IPage<SysUserModel> pageList = sysUserService.getUserList(page, queryWrapper);
+        IPage<SysUserModel> pageList = sysUserService.getUserList(page, queryWrapper, myDeptIds);
 
 //		IPage<SysUserModel> pageList = sysUserService.page(page, queryWrapper);
 
@@ -125,6 +135,10 @@ public class SysUserController extends BaseController {
         //step.2 通过 useids，一次性查询用户的所属部门名字
         List<String> userIds = pageList.getRecords().stream().map(SysUser::getId).collect(Collectors.toList());
         if(userIds!=null && userIds.size()>0){
+            Map<String,String>  useDepNames = sysUserService.getDepNamesByUserIds(userIds);
+            pageList.getRecords().forEach(item->{
+                item.setOrgCodeTxt(useDepNames.get(item.getId()));
+            });
             Map<String,String>  roleNames = sysUserService.getRoleNamesByUserIds(userIds);
             pageList.getRecords().forEach(item->{
                 item.setRoleTxt(roleNames.get(item.getId()));
@@ -201,6 +215,24 @@ public class SysUserController extends BaseController {
 				user.setPassword(sysUser.getPassword());
 				String roles = jsonObject.getString("selectedroles");
                 String departs = jsonObject.getString("selecteddeparts");
+
+                if (StringUtils.isNotBlank(roles)){
+                    int currentRoleLevel = getUserRoleLevel();
+                    for (String roleId: roles.split(",")){
+                        SysRole role = sysRoleService.getById(roleId);
+                        if (role.getRoleLevel() >= currentRoleLevel){
+                            result.error500("权限不足，无法分配所选角色");
+                            return result;
+                        }
+                    }
+                }else{
+                    //默认学生角色
+                    SysRole role = sysRoleService.getRoleByCode("student");
+                    if (role!=null){
+                        roles = role.getId();
+                    }
+                }
+
 				sysUserService.editUserWithRole(user, roles);
                 sysUserService.editUserWithDepart(user, departs);
                 sysUserService.updateNullPhoneEmail();
@@ -468,9 +500,18 @@ public class SysUserController extends BaseController {
             queryWrapper.in("sys_user.id",selections.split(","));
         }
 
+        //非admin和dev角色，只显示自己管理的部门下的用户
+        List<String> myDeptIds = new ArrayList<>();
+        if(!hasRole("admin") && !hasRole("dev")){
+            myDeptIds = sysDepartService.getMySubDepIdsByDepId(getCurrentUser().getDepartIds());
+            if (myDeptIds==null || myDeptIds.isEmpty()){
+                return null;
+            }
+        }
+
         QueryGenerator.installMplus(queryWrapper, sysUser, request.getParameterMap());
         Page<SysUserModel> page = new Page<SysUserModel>(1, 999);
-        IPage<SysUserModel> pageList = sysUserService.getUserList(page, queryWrapper);
+        IPage<SysUserModel> pageList = sysUserService.getUserList(page, queryWrapper, myDeptIds);
 
         //批量查询用户的所属部门
         //step.1 先拿到全部的 useids

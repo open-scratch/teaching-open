@@ -420,8 +420,8 @@ public class SysUserServiceImpl extends ServiceImpl<SysUserMapper, SysUser> impl
 	}
 
 	@Override
-	public Page<SysUserModel> getUserList(Page<SysUserModel> page, QueryWrapper<SysUserModel> queryWrapper) {
-		List<SysUserModel> list = userMapper.getUserList(page, queryWrapper);
+	public Page<SysUserModel> getUserList(Page<SysUserModel> page, QueryWrapper<SysUserModel> queryWrapper, List<String> deptIds) {
+		List<SysUserModel> list = userMapper.getUserList(page, queryWrapper, deptIds);
 		return page.setRecords(list);
 	}
 

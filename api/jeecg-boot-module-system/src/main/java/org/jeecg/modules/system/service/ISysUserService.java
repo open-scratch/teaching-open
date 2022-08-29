@@ -216,7 +216,7 @@ public interface ISysUserService extends IService<SysUser> {
 	 */
 	boolean removeLogicDeleted(List<String> userIds);
 
-    IPage<SysUserModel> getUserList(Page<SysUserModel> page, QueryWrapper<SysUserModel> queryWrapper);
+    IPage<SysUserModel> getUserList(Page<SysUserModel> page, QueryWrapper<SysUserModel> queryWrapper, List<String> deptIds);
 
     SysUser getUserByOpenId(String openId);
     /**

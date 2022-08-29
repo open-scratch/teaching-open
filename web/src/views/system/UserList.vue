@@ -283,20 +283,14 @@ export default {
         {
           title: '角色',
           align: 'center',
-          dataIndex: 'roleNames',
+          dataIndex: 'roleTxt',
           width: 180,
-          customRender: function (value) {
-            return value ? value.join() : '--'
-          },
         },
         {
           title: '部门',
           align: 'center',
-          dataIndex: 'departNames',
+          dataIndex: 'orgCodeTxt',
           width: 180,
-          customRender: function (value) {
-            return value ? value.join() : '--'
-          },
         },
         {
           title: '负责部门',
