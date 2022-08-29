@@ -153,7 +153,7 @@
 	</select>
 
 	<select id="getUserList" resultType="org.jeecg.modules.system.model.SysUserModel">
-		select sys_user.*,
+		select distinct (sys_user.id) userId, sys_user.*,
 		wu.nickname, wu.headimgurl
 		from sys_user
 		left join wechat_user wu on sys_user.id = wu.user_id
