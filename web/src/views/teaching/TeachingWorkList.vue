@@ -25,11 +25,11 @@
               <a-input placeholder="请输入课程ID" v-model="queryParam.courseId"></a-input>
             </a-form-item>
           </a-col>
-          <a-col :xl="6" :lg="7" :md="8" :sm="24">
+          <!-- <a-col :xl="6" :lg="7" :md="8" :sm="24">
             <a-form-item label="班级作业ID">
               <a-input placeholder="请输入班级作业ID" v-model="queryParam.additionalId"></a-input>
             </a-form-item>
-          </a-col>
+          </a-col> -->
           </template>
           <a-col :xl="6" :lg="7" :md="8" :sm="24">
             <span style="float: left; overflow: hidden" class="table-page-search-submitButtons">

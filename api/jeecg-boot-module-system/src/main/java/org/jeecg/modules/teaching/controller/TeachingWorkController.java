@@ -19,6 +19,7 @@ import org.jeecg.common.util.IPUtils;
 import org.jeecg.common.util.RedisUtil;
 import org.jeecg.common.util.oConvertUtils;
 import org.jeecg.modules.common.controller.BaseController;
+import org.jeecg.modules.system.service.ISysDepartService;
 import org.jeecg.modules.system.service.ISysFileService;
 import org.jeecg.modules.system.service.ISysUserService;
 import org.jeecg.modules.teaching.entity.TeachingWork;
@@ -72,6 +73,8 @@ public class TeachingWorkController extends BaseController {
 	@Autowired
 	private ISysUserService sysUserService;
 	@Autowired
+	private ISysDepartService sysDepartService;
+	@Autowired
 	private RedisUtil redisUtil;
 	 @Autowired
 	 private ISysFileService sysFileService;
@@ -95,7 +98,8 @@ public class TeachingWorkController extends BaseController {
 		 Result<IPage<StudentWorkModel>> result = new Result<IPage<StudentWorkModel>>();
 		 QueryWrapper<StudentWorkModel> queryWrapper = QueryGenerator.initQueryWrapper(teachingWork, req.getParameterMap());
 //		 Page<TeachingWork> page = new Page<TeachingWork>(pageNo, pageSize);
-		 IPage<StudentWorkModel> pageList = teachingWorkService.listWorkModel(new Page<>(pageNo, pageSize), queryWrapper);
+
+		 IPage<StudentWorkModel> pageList = teachingWorkService.listWorkModel(new Page<>(pageNo, pageSize), queryWrapper, null);
 		 return Result.ok(pageList);
 	 }
 
@@ -206,7 +210,15 @@ public class TeachingWorkController extends BaseController {
 		String updateTime_end = param.containsKey("teaching_work.updateTime_end")?param.get("teaching_work.updateTime_end")[0]:null;
 		queryWrapper.ge(null != updateTime_begin, "teaching_work.create_time", updateTime_begin).
 				le(null != updateTime_end, "teaching_work.create_time",updateTime_end);
-		IPage<StudentWorkModel> pageList = teachingWorkService.listWorkModel(new Page<>(pageNo, pageSize), queryWrapper);
+		//非admin和dev角色，只显示自己管理的部门下的用户的作品
+		List<String> myDeptIds = new ArrayList<>();
+		if(!hasRole("admin") && !hasRole("dev")){
+			myDeptIds = sysDepartService.getMySubDepIdsByDepId(getCurrentUser().getDepartIds());
+			if (myDeptIds==null || myDeptIds.isEmpty()){
+				return Result.error("您没有负责的班级");
+			}
+		}
+		IPage<StudentWorkModel> pageList = teachingWorkService.listWorkModel(new Page<>(pageNo, pageSize), queryWrapper,myDeptIds);
 		return Result.ok(pageList);
 	}
 
@@ -214,7 +226,7 @@ public class TeachingWorkController extends BaseController {
 	public Result<?> greatWorkList(@RequestParam(name="pageNo", defaultValue="1") Integer pageNo,
 								   @RequestParam(name="pageSize", defaultValue="10") Integer pageSize){
 		IPage<StudentWorkModel> pageList = teachingWorkService.listWorkModel(new Page<>(pageNo, pageSize), new QueryWrapper<StudentWorkModel>()
-				.eq("teaching_work.work_status", 2));
+				.eq("teaching_work.work_status", 2), null);
 		return Result.ok(pageList);
 	}
 
@@ -266,7 +278,7 @@ public class TeachingWorkController extends BaseController {
 				 break;
 		 }
 
-		 IPage<StudentWorkModel> pageList = teachingWorkService.listWorkModel(new Page<>(pageNo, pageSize), queryWrapper);
+		 IPage<StudentWorkModel> pageList = teachingWorkService.listWorkModel(new Page<>(pageNo, pageSize), queryWrapper, null);
 		 return Result.ok(pageList);
 	 }
 

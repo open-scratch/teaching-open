@@ -9,9 +9,11 @@ import org.jeecg.modules.demo.test.entity.JeecgDemo;
 import org.jeecg.modules.demo.test.mapper.JeecgDemoMapper;
 import org.jeecg.modules.demo.test.service.IJeecgDemoService;
 import org.jeecg.modules.system.service.ISysDataLogService;
+import org.jeecg.modules.system.service.ISysDepartService;
 import org.junit.Assert;
 import org.junit.Test;
 import org.junit.runner.RunWith;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.test.context.junit4.SpringRunner;
 
@@ -25,8 +27,16 @@ public class SampleTest {
 	private IJeecgDemoService jeecgDemoService;
 	@Resource
 	private ISysDataLogService sysDataLogService;
+	@Autowired
+	private ISysDepartService sysDepartService;
 	@Resource
 	private MockController mock;
+
+	@Test
+	public void departTest(){
+		List<String> list = sysDepartService.getMySubDepIdsByDepId("57197590443c44f083d42ae24ef26a2c,26c7f056a6b94ae78d736c67cd24baac");
+		System.out.println(list.toString());
+	}
 
 	@Test
 	public void testSelect() {

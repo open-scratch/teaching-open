@@ -20,7 +20,8 @@ public interface TeachingWorkMapper extends BaseMapper<TeachingWork> {
 
     StudentWorkModel studentWorkInfo(@Param("workId") String workId);
 
-    List<StudentWorkModel> listWorkModel(Page<StudentWorkModel> page, @Param("ew") QueryWrapper<StudentWorkModel> queryWrapper);
+    List<StudentWorkModel> listWorkModel(Page<StudentWorkModel> page, @Param("ew") QueryWrapper<StudentWorkModel> queryWrapper,
+                                         @Param("deptIds") List<String> deptIds);
 
     List<AdditionalWorkModel> userAdditionalWork(@Param("userId") String userId, @Param("departIds") List departIds,
                                                  @Param("submit") Boolean submit, @Param("status") Integer status);

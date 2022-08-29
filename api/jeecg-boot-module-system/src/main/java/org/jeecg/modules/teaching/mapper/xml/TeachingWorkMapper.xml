@@ -20,6 +20,12 @@
         from teaching_work
         left join sys_user on teaching_work.user_id = sys_user.id
         left join teaching_work_correct c on c.work_id = teaching_work.id
+        <if test="deptIds != null and deptIds.size()>0">
+            join sys_user_depart ud on sys_user.id = ud.user_id and dep_id in
+            <foreach collection="deptIds" index="index" item="id" open="(" separator="," close=")">
+                #{id}
+            </foreach>
+        </if>
         ${ew.customSqlSegment}
     </select>
 

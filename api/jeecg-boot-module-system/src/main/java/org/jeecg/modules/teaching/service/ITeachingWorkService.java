@@ -46,7 +46,7 @@ public interface ITeachingWorkService extends IService<TeachingWork> {
 
 	StudentWorkModel studentWorkInfo(String workId);
 
-	Page<StudentWorkModel> listWorkModel(Page<StudentWorkModel> page, QueryWrapper<StudentWorkModel> queryWrapper);
+	Page<StudentWorkModel> listWorkModel(Page<StudentWorkModel> page, QueryWrapper<StudentWorkModel> queryWrapper, List<String> deptIds);
 
     int sendWork(StudentWorkSendVO studentWorkSendVO);
 

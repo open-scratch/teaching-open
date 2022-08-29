@@ -125,8 +125,8 @@ public class TeachingWorkServiceImpl extends ServiceImpl<TeachingWorkMapper, Tea
 	}
 
 	@Override
-	public Page<StudentWorkModel> listWorkModel(Page<StudentWorkModel> page, QueryWrapper<StudentWorkModel> queryWrapper) {
-		return page.setRecords(this.baseMapper.listWorkModel(page, queryWrapper));
+	public Page<StudentWorkModel> listWorkModel(Page<StudentWorkModel> page, QueryWrapper<StudentWorkModel> queryWrapper,List<String> deptIds) {
+		return page.setRecords(this.baseMapper.listWorkModel(page, queryWrapper,deptIds));
 	}
 
 	@Override
