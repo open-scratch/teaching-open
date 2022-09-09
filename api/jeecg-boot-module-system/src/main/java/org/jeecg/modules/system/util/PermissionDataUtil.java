@@ -84,7 +84,7 @@ public class PermissionDataUtil {
 	public static boolean hasIndexPage(List<SysPermission> metaList){
 		boolean hasIndexMenu = false;
 		for (SysPermission sysPermission : metaList) {
-			if("首页".equals(sysPermission.getName())) {
+			if("dashboard/index".equals(sysPermission.getComponent())) {
 				hasIndexMenu = true;
 				break;
 			}
