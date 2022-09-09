@@ -2,35 +2,19 @@
   <div class="app-list">
     <a-list :grid="{ gutter: 24, xxl:4, xl:4, lg: 3, md: 2, sm: 1, xs: 1 }" :dataSource="dataSource">
       <a-list-item slot="renderItem" slot-scope="item, index">
-        <a-card :hoverable="true">
+        <a-card :hoverable="true" @click="toCourse(item.showType, item.id)">
           <!-- <template class="ant-card-extra" slot="extra">
             <span class="create-time">{{item.createTime}}</span>
           </template> -->
           <a-card-meta>
             <div style="margin-bottom: 3px" slot="title">{{ item.courseName }}</div>
             <div class="meta-cardInfo" slot="description">
-              <router-link
-                v-if="item.showType == 1"
-                :to="{ name: 'teaching-mineCourse-courseUnitMap', query: { id: item.id } }"
-              >
                 <img
                   :src="getFileAccessHttpUrl(item.courseCover)"
                   height="25px"
                   alt="封面不存在"
                   style="width: 100%; height: 100%"
                 />
-              </router-link>
-              <router-link
-                v-if="item.showType == 2"
-                :to="{ name: 'teaching-mineCourse-courseUnitCard', query: { id: item.id } }"
-              >
-                <img
-                  :src="getFileAccessHttpUrl(item.courseCover)"
-                  height="25px"
-                  alt="封面不存在"
-                  style="width: 100%; height: 100%"
-                />
-              </router-link>
             </div>
           </a-card-meta>
           <br />
@@ -67,6 +51,13 @@ export default {
         this.loading = false
       })
     },
+    toCourse(showType, id){
+      if(showType == 1){
+        this.$router.push("/teaching/mineCourse/courseUnitMap?id="+id)
+      }else{
+        this.$router.push("/teaching/mineCourse/courseUnitCard?id="+id)
+      }
+    }
   },
 }
 </script>
