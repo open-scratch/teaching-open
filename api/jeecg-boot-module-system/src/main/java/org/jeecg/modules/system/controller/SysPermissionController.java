@@ -209,7 +209,7 @@ public class SysPermissionController {
 			//添加首页路由
 			//update-begin-author:taoyan date:20200211 for: TASK #3368 【路由缓存】首页的缓存设置有问题，需要根据后台的路由配置来实现是否缓存
 			if(!PermissionDataUtil.hasIndexPage(metaList)){
-                SysPermission indexMenu = sysPermissionService.list(new LambdaQueryWrapper<SysPermission>().eq(SysPermission::getComponent,"dashboard/index")).get(0);
+                SysPermission indexMenu = sysPermissionService.list(new LambdaQueryWrapper<SysPermission>().eq(SysPermission::getComponent,"dashboard/Index")).get(0);
 				metaList.add(0,indexMenu);
 			}
 			//update-end-author:taoyan date:20200211 for: TASK #3368 【路由缓存】首页的缓存设置有问题，需要根据后台的路由配置来实现是否缓存
