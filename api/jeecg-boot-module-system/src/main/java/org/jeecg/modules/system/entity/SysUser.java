@@ -55,6 +55,7 @@ public class SysUser implements Serializable {
     /**
      * 密码
      */
+    @Excel(name = "密码")
     @JsonProperty(access = JsonProperty.Access.WRITE_ONLY)
     private String password;
 

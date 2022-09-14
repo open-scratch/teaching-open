@@ -159,7 +159,7 @@ public class SysUserController extends BaseController {
             int currentRoleLevel = getUserRoleLevel();
             for (String roleId: selectedRoles.split(",")){
                 SysRole role = sysRoleService.getById(roleId);
-                if (role.getRoleLevel() >= currentRoleLevel){
+                if (role.getRoleLevel() > currentRoleLevel){
                     result.error500("权限不足，无法分配所选角色");
                     return result;
                 }
@@ -220,7 +220,7 @@ public class SysUserController extends BaseController {
                     int currentRoleLevel = getUserRoleLevel();
                     for (String roleId: roles.split(",")){
                         SysRole role = sysRoleService.getById(roleId);
-                        if (role.getRoleLevel() >= currentRoleLevel){
+                        if (role.getRoleLevel() > currentRoleLevel){
                             result.error500("权限不足，无法分配所选角色");
                             return result;
                         }
@@ -563,6 +563,9 @@ public class SysUserController extends BaseController {
         // 错误信息
         List<String> errorMessage = new ArrayList<>();
         int successLines = 0, errorLines = 0;
+
+        SysRole studentRole = sysRoleService.getRoleByCode("student");
+
         for (Map.Entry<String, MultipartFile> entity : fileMap.entrySet()) {
             MultipartFile file = entity.getValue();// 获取上传文件对象
             ImportParams params = new ImportParams();
@@ -574,9 +577,9 @@ public class SysUserController extends BaseController {
                 for (int i = 0; i < listSysUsers.size(); i++) {
                     SysUserModel sysUserExcel = listSysUsers.get(i);
                     if (StringUtils.isBlank(sysUserExcel.getPassword())) {
-                        // 密码默认为 “123456”
-                        sysUserExcel.setPassword("123456");
+                        sysUserExcel.setPassword("123456");// 密码默认为 “123456”
                     }
+                    sysUserExcel.setUserIdentity(sysUserExcel.getUserIdentity() == 2 ? 2:1);
                     // 密码加密加盐
                     String salt = oConvertUtils.randomGen(8);
                     sysUserExcel.setSalt(salt);
@@ -624,6 +627,8 @@ public class SysUserController extends BaseController {
                             userRoleList.add(new SysUserRole(userId, roleId));
                         }
                         sysUserRoleService.saveBatch(userRoleList);
+                    }else if(studentRole != null){ //默认student角色
+                        sysUserRoleService.save(new SysUserRole(sysUserExcel.getId(), studentRole.getId()));
                     }
 
                 }
