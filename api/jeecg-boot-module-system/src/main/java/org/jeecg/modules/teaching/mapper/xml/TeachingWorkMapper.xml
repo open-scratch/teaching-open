@@ -42,10 +42,10 @@
             a.work_dept like CONCAT('%',#{id},'%')
         </foreach>
         <if test="submit==true">
-            and w.id is not null
+            and w.work_status >= 1
         </if>
         <if test="submit==false">
-            and w.id is null
+            and w.id is null or w.work_status <![CDATA[<]]> 1
         </if>
         <if test="submit==true and status != null">
             and w.work_status = #{status}

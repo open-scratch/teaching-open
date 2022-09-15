@@ -26,6 +26,7 @@
             <a-button v-if="work.workDocumentUrl != null" @click="openWorkFile(work.workDocumentUrl_url)">作业资料</a-button>
             <a-divider v-if="work.workDocumentUrl != null" type="vertical" />
             <a-button type="primary" :disabled="work.mineWorkStatus > 1" @click="toAdditionalWork(work, false)"> 去做作业 </a-button>
+            <a-button type="danger" v-if="work.mineWorkStatus == 0" @click="toAdditionalWork(work, true)"> 重做 </a-button>
           </div>
         </a-list-item>
       </a-list>
@@ -118,47 +119,7 @@ export default {
             item.workName +
             '&url=' + item.workUrl_url
           break
-        case 5:
-          workUrl =
-            '/onlinecode/index.html?scene=additional&lang=python&additionalId=' +
-            item.additionalWorkId +
-            '&departId=' +
-            item.departId +
-            '&workName=' +
-            item.workName +
-            '&workFile='
-          break
-        case 6:
-          workUrl =
-            '/onlinecode/index.html?scene=additional&lang=c&additionalId=' +
-            item.additionalWorkId +
-            '&departId=' +
-            item.departId +
-            '&workName=' +
-            item.workName +
-            '&workFile='
-          break
-        case 7:
-          workUrl =
-            '/onlinecode/index.html?scene=additional&lang=cpp&additionalId=' +
-            item.additionalWorkId +
-            '&departId=' +
-            item.departId +
-            '&workName=' +
-            item.workName +
-            '&workFile='
-          break
-        case 8:
-          workUrl =
-            '/onlinecode/index.html?scene=additional&lang=java&additionalId=' +
-            item.additionalWorkId +
-            '&departId=' +
-            item.departId +
-            '&workName=' +
-            item.workName
-          break
         default:
-          
           //workUrl = item.workUrl_url
           this.$refs.submitModal.open({
             workName:item.workName,
