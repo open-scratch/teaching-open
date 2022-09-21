@@ -153,7 +153,7 @@
   import JSelectPosition from '@/components/jeecgbiz/JSelectPosition'
   import { ACCESS_TOKEN } from "@/store/mutation-types"
   import { getAction } from '@/api/manage'
-  import {addUser,editUser,queryUserRole,queryall } from '@/api/api'
+  import {addUser,editUser,queryUserRole,queryMySubRole } from '@/api/api'
   import { disabledAuthFilter } from "@/utils/authFilter"
   import {duplicateCheck } from '@/api/api'
   import JImageUpload from '../../../components/jeecg/JImageUpload'
@@ -284,7 +284,7 @@
         this.modaltoggleFlag = !this.modaltoggleFlag;
       },
       initialRoleList(){
-        queryall().then((res)=>{
+        queryMySubRole().then((res)=>{
           if(res.success){
             this.roleList = res.result;
           }else{

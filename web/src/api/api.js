@@ -8,6 +8,7 @@ const addRole = (params)=>postAction("/sys/role/add",params);
 const editRole = (params)=>putAction("/sys/role/edit",params);
 const checkRoleCode = (params)=>getAction("/sys/role/checkRoleCode",params);
 const queryall = (params)=>getAction("/sys/role/queryall",params);
+const queryMySubRole = ()=>getAction("/sys/role/queryMySubRole");
 
 //用户管理
 const addUser = (params)=>postAction("/sys/user/add",params);
@@ -131,6 +132,7 @@ export {
   queryUserRole,
   getUserList,
   queryall,
+  queryMySubRole,
   frozenBatch,
   checkOnlyUser,
   changePassword,

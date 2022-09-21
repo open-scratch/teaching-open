@@ -198,7 +198,7 @@ import UserModal from './modules/UserModal'
 import PasswordModal from './modules/PasswordModal'
 import GenStudentModal from './modules/GenStudentModal'
 import { putAction, getFileAccessHttpUrl } from '@/api/manage'
-import { frozenBatch, queryall } from '@/api/api'
+import { frozenBatch, queryMySubRole } from '@/api/api'
 import { JeecgListMixin } from '@/mixins/JeecgListMixin'
 import SysUserAgentModal from './modules/SysUserAgentModal'
 import JInput from '@/components/jeecg/JInput'
@@ -332,7 +332,7 @@ export default {
   },
   methods: {
     initialRoleList() {
-      queryall().then((res) => {
+      queryMySubRole().then((res) => {
         if (res.success) {
           this.roleList = res.result
         } else {

@@ -25,10 +25,7 @@ import org.jeecg.modules.system.entity.SysPermissionDataRule;
 import org.jeecg.modules.system.entity.SysRole;
 import org.jeecg.modules.system.entity.SysRolePermission;
 import org.jeecg.modules.system.model.TreeModel;
-import org.jeecg.modules.system.service.ISysPermissionDataRuleService;
-import org.jeecg.modules.system.service.ISysPermissionService;
-import org.jeecg.modules.system.service.ISysRolePermissionService;
-import org.jeecg.modules.system.service.ISysRoleService;
+import org.jeecg.modules.system.service.*;
 import org.jeecgframework.poi.excel.ExcelImportUtil;
 import org.jeecgframework.poi.excel.def.NormalExcelConstants;
 import org.jeecgframework.poi.excel.entity.ExportParams;
@@ -71,15 +68,14 @@ import lombok.extern.slf4j.Slf4j;
 public class SysRoleController {
 	@Autowired
 	private ISysRoleService sysRoleService;
-	
 	@Autowired
 	private ISysPermissionDataRuleService sysPermissionDataRuleService;
-	
 	@Autowired
 	private ISysRolePermissionService sysRolePermissionService;
-	
 	@Autowired
 	private ISysPermissionService sysPermissionService;
+	@Autowired
+	private ISysUserService sysUserService;
 
 	/**
 	  * 分页列表查询
@@ -199,6 +195,22 @@ public class SysRoleController {
 	public Result<List<SysRole>> queryall() {
 		Result<List<SysRole>> result = new Result<>();
 		List<SysRole> list = sysRoleService.list();
+		if(list==null||list.size()<=0) {
+			result.error500("未找到角色信息");
+		}else {
+			result.setResult(list);
+			result.setSuccess(true);
+		}
+		return result;
+	}
+
+	//获取我可以管理的角色
+	@RequestMapping(value = "/queryMySubRole", method = RequestMethod.GET)
+	public Result<List<SysRole>> queryMySubRole() {
+		LoginUser sysUser = (LoginUser) SecurityUtils.getSubject().getPrincipal();
+		Integer myRoleLevel = sysUserService.getUserRoleLevel(sysUser.getId());
+		Result<List<SysRole>> result = new Result<>();
+		List<SysRole> list = sysRoleService.list(new QueryWrapper<SysRole>().lambda().le(SysRole::getRoleLevel, myRoleLevel));
 		if(list==null||list.size()<=0) {
 			result.error500("未找到角色信息");
 		}else {

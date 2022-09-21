@@ -64,7 +64,7 @@
 <script>
   import {filterObj} from '@/utils/util'
   import {getAction} from '@/api/manage'
-  import {queryall} from '@/api/api'
+  import {queryMySubRole} from '@/api/api'
 
   export default {
     name: "SelectUserModal",
@@ -180,7 +180,7 @@
     },
     methods: {
       initialRoleList(){
-        queryall().then((res)=>{
+        queryMySubRole().then((res)=>{
           if(res.success){
             this.roleList = res.result;
           }else{
