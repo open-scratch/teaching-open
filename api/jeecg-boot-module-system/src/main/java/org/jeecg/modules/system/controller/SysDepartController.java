@@ -7,15 +7,18 @@ import java.util.stream.Collectors;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import com.alibaba.fastjson.JSONObject;
 import com.baomidou.mybatisplus.core.conditions.query.LambdaQueryWrapper;
 import org.apache.shiro.SecurityUtils;
 import org.apache.shiro.authz.annotation.RequiresRoles;
 import org.jeecg.common.api.vo.Result;
 import org.jeecg.common.constant.CacheConstant;
 import org.jeecg.common.constant.CommonConstant;
+import org.jeecg.common.constant.FillRuleConstant;
 import org.jeecg.common.system.query.QueryGenerator;
 import org.jeecg.common.system.util.JwtUtil;
 import org.jeecg.common.system.vo.LoginUser;
+import org.jeecg.common.util.FillRuleUtil;
 import org.jeecg.common.util.ImportExcelUtil;
 import org.jeecg.common.util.oConvertUtils;
 import org.jeecg.modules.common.controller.BaseController;
@@ -36,6 +39,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.cache.annotation.CacheEvict;
 import org.springframework.data.redis.core.RedisTemplate;
 import org.springframework.util.CollectionUtils;
+import org.springframework.util.StringUtils;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.multipart.MultipartHttpServletRequest;
@@ -160,6 +164,16 @@ public class SysDepartController extends BaseController {
 		if (sysDepartEntity == null) {
 			result.error500("未找到对应实体");
 		} else {
+			// 如果调整了parentId，同步更新orgCode
+			if (!StringUtils.isEmpty(sysDepart.getParentId()) && !sysDepart.getParentId().equals(sysDepartEntity.getParentId())){
+//				JSONObject formData = new JSONObject();
+//				formData.put("parentId",sysDepart.getParentId());
+//				String[] codeArray = (String[]) FillRuleUtil.executeRule(FillRuleConstant.DEPART,formData);
+//				sysDepart.setOrgCode(codeArray[0]);
+//				List<String> subDeptIds = sysDepartService.getSubDepIdsByDepId(sysDepart.getId());
+				result.error500("暂不支持调整层级结构");
+				return result;
+			}
 			boolean ok = sysDepartService.updateDepartDataById(sysDepart, username);
 			// TODO 返回false说明什么？
 			if (ok) {
