@@ -1,18 +1,5 @@
 <template>
-  <div class="footer">
-    <div class="copyright">
-      Copyright
-      <a-icon type="copyright"/>
-      2020 
-      <span>{{brandName}}</span>
-      <a-divider type="vertical"></a-divider>
-      <div class="links">
-        <a href="https://github.com/open-scratch/teaching" target="_blank">
-        <a-icon type="github"/>
-      </a>
-    </div>
-    </div>
-    
+  <div class="footer" v-html="$store.getters.sysConfig.footer">
   </div>
 </template>
 
@@ -21,7 +8,7 @@
     name: "LayoutFooter",
     data() {
       return {
-        brandName: this.$store.getters.sysConfig.brandName
+        footer: this.$store.getters.sysConfig.brandName
       }
     },
   }
