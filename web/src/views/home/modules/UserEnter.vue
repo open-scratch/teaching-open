@@ -6,7 +6,7 @@
       <a-button type="dashed" @click="enter">进入系统</a-button>
     </div>
     <div v-else>
-      <a-avatar shape="square" class="avatar" :size="100" src="/logo.png" />
+      <a-avatar shape="square" class="avatar" :size="100" :src="logo" />
       <h3>欢迎来到{{ brandName }}</h3>
       <a-button type="dashed" @click="enter">登录/注册</a-button>
     </div>
@@ -22,10 +22,14 @@ export default {
     return {
       brandName: this.$store.getters.sysConfig.brandName,
       token: '',
+      logo: '/logo.png'
     }
   },
   created() {
     this.token = Vue.ls.get(ACCESS_TOKEN)
+    if(this.$store.getters.sysConfig.logo && this.$store.getters.sysConfig.qiniuDomain){
+      this.logo = this.$store.getters.sysConfig.qiniuDomain + "/" + this.$store.getters.sysConfig.logo
+    }
   },
   methods: {
     ...mapGetters(['nickname', 'avatar', 'userInfo']),
