@@ -15,13 +15,7 @@
 
       <route-view></route-view>
 
-      <div class="footer">
-        <div class="links">
-          <a href="http://github.com/open-scratch/teaching" target="_blank">帮助</a>
-        </div>
-        <div class="copyright">
-          Copyright &copy; 2019 <a href="http://github.com/open-scratch" target="_blank">Scratch开源社区</a> 出品
-        </div>
+      <div class="footer" v-html="$store.getters.sysConfig.footer">
       </div>
     </div>
   </div>
