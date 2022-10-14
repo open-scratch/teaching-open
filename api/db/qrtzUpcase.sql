@@ -1,0 +1,11 @@
+RENAME TABLE `qrtz_blob_triggers` TO `QRTZ_BLOB_TRIGGERS`;
+RENAME TABLE `qrtz_calendars` TO `QRTZ_CALENDARS`;
+RENAME TABLE `qrtz_cron_triggers` TO `QRTZ_CRON_TRIGGERS`;
+RENAME TABLE `qrtz_fired_triggers` TO `QRTZ_FIRED_TRIGGERS`;
+RENAME TABLE `qrtz_job_details` TO `QRTZ_JOB_DETAILS`;
+RENAME TABLE `qrtz_locks` TO `QRTZ_LOCKS`;
+RENAME TABLE `qrtz_paused_trigger_grps` TO `QRTZ_PAUSED_TRIGGER_GRPS`;
+RENAME TABLE `qrtz_scheduler_state` TO `QRTZ_SCHEDULER_STATE`;
+RENAME TABLE `qrtz_simple_triggers` TO `QRTZ_SIMPLE_TRIGGERS`;
+RENAME TABLE `qrtz_simprop_triggers` TO `QRTZ_SIMPROP_TRIGGERS`;
+RENAME TABLE `qrtz_triggers` TO `QRTZ_TRIGGERS`;
