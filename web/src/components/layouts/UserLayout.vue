@@ -4,12 +4,12 @@
       <div class="top">
         <div class="header">
           <a href="/">
-            <img src="/logo.png" class="logo" alt="logo">
+            <img :src="logo" class="logo" alt="logo">
             <span class="title">{{brandName}}</span>
           </a>
         </div>
         <div class="desc">
-          {{brandName}}教学平台
+          {{brandDesc}}
         </div>
       </div>
 
@@ -31,7 +31,14 @@
     mixins: [mixinDevice],
     data () {
       return {
-         brandName: this.$store.getters.sysConfig.brandName
+         brandName: this.$store.getters.sysConfig.brandName,
+         brandDesc: this.$store.getters.sysConfig.brandDesc,
+         logo: '/logo.png'
+      }
+    },
+    created() {
+      if(this.$store.getters.sysConfig.logo && this.$store.getters.sysConfig.qiniuDomain){
+        this.logo = this.$store.getters.sysConfig.qiniuDomain + "/" + this.$store.getters.sysConfig.logo
       }
     },
     mounted () {
@@ -86,7 +93,7 @@
           }
 
           .logo {
-            height: 44px;
+            max-height: 88px;
             vertical-align: top;
             margin-right: 16px;
             border-style: none;

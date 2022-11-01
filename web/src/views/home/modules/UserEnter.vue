@@ -14,7 +14,6 @@
 </template>
 <script>
 import Vue from 'vue'
-
 import { mapGetters } from 'vuex'
 import { ACCESS_TOKEN } from '@/store/mutation-types'
 export default {

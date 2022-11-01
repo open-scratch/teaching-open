@@ -1,7 +1,7 @@
 <template>
   <div class="logo">
     <router-link :to="{path:'/home'}">
-      <img src="/logo.png" alt="logo">
+      <img :src="logo" alt="logo">
       <h1 v-if="showTitle">{{ brandName }}</h1>
     </router-link>
   </div>
@@ -20,11 +20,17 @@
         required: false
       }
     },
-     data () {
+    data () {
       return {
-         brandName: this.$store.getters.sysConfig.brandName
+         brandName: this.$store.getters.sysConfig.brandName,
+         logo: '/logo.png'
       }
     },
+    created() {
+    if(this.$store.getters.sysConfig.logo && this.$store.getters.sysConfig.qiniuDomain){
+      this.logo = this.$store.getters.sysConfig.qiniuDomain + "/" + this.$store.getters.sysConfig.logo
+    }
+  },
   }
 </script>
 <style lang="less" scoped>

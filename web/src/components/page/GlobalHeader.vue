@@ -17,7 +17,7 @@
         :type="collapsed ? 'menu-unfold' : 'menu-fold'"
         @click="toggle"/>
 
-      <span v-if="device === 'desktop'">欢迎使用 {{brandName}} 教学平台</span>
+      <span v-if="device === 'desktop'">欢迎使用 {{brandName}}</span>
       <span v-else>{{brandName}}</span>
 
       <user-menu :theme="theme"/>

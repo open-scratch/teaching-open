@@ -33,7 +33,7 @@ export default {
     line-height: 30px;
 }
 .logo {
-  height: 100px;
+  max-height: 100px;
   width: auto;
   margin-right: 20px;
   display: inline-block;
