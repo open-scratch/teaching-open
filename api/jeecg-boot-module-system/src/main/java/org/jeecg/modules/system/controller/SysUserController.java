@@ -105,14 +105,33 @@ public class SysUserController extends BaseController {
             provinceId = area.getString("provinceId");
             cityId = area.getString("cityId");
         }
+
+//        String departName = param.containsKey("departName")?param.get("departName")[0]:null;
+        String roleCode = param.containsKey("roleCode")?param.get("roleCode")[0]:null;
         String roleId = param.containsKey("roleId")?param.get("roleId")[0]:null;
-        String departName = param.containsKey("departName")?param.get("departName")[0]:null;
+
         QueryWrapper<SysUserModel> queryWrapper = new QueryWrapper<>();
         queryWrapper.eq(org.apache.commons.lang3.StringUtils.isNotEmpty(provinceId), "sys_user.province", provinceId);
         queryWrapper.eq(org.apache.commons.lang3.StringUtils.isNotEmpty(cityId),"sys_user.city", cityId);
-        queryWrapper.eq(org.apache.commons.lang3.StringUtils.isNotEmpty(roleId), "role_id", roleId);
-        queryWrapper.eq(org.apache.commons.lang3.StringUtils.isNotEmpty(departName), "sys_depart.depart_name", departName);
-        queryWrapper.eq("sys_user.del_flag", 0);
+        queryWrapper.eq("sys_user.del_flag", 0); //过滤已删除用户
+
+        //departId批量查询条件
+        String departId = param.containsKey("departId")?param.get("departId")[0]:null;
+        if(StringUtils.isNotEmpty(departId)){
+            departId = "('" + departId.replaceAll(",", "','") + "')";
+            queryWrapper.inSql("sys_user.id","select user_id from sys_user_depart where dep_id in " + departId);
+        }
+        //roleCode查询条件
+        if (StringUtils.isNotEmpty(roleCode) && StringUtils.isEmpty(roleId)){
+            SysRole sysRole = sysRoleService.getRoleByCode(roleCode);
+            if (sysRole != null)roleId = sysRole.getId();
+        }
+        //roleId批量查询条件
+        if (StringUtils.isNotEmpty(roleId)){
+            roleId = "('" + roleId.replaceAll(",", "','") + "')";
+            queryWrapper.inSql("sys_user.id","select user_id from sys_user_role where role_id in " + roleId);
+        }
+
         QueryGenerator.installMplus(queryWrapper, user, req.getParameterMap());
 
         //非admin和dev角色，只显示自己管理的部门下的用户

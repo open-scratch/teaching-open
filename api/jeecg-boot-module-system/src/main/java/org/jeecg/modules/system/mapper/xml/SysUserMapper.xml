@@ -153,16 +153,8 @@
 	</select>
 
 	<select id="getUserList" resultType="org.jeecg.modules.system.model.SysUserModel">
-		select distinct (sys_user.id) userId, sys_user.*,
-		wu.nickname, wu.headimgurl
+		select sys_user.*
 		from sys_user
-		left join wechat_user wu on sys_user.id = wu.user_id
-		<if test="deptIds != null and deptIds.size()>0">
-			join sys_user_depart ud on sys_user.id = ud.user_id and dep_id in
-			<foreach collection="deptIds" index="index" item="id" open="(" separator="," close=")">
-				#{id}
-			</foreach>
-		</if>
 		${ew.customSqlSegment}
 	</select>
 

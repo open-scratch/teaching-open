@@ -33,8 +33,22 @@
               </a-select>
             </a-form-item>
           </a-col>
-
           <template v-if="toggleSearchStatus">
+            <a-col :md="6" :sm="8">
+              <a-form-item label="用户部门">
+                <j-select-depart v-model="queryParam.departId" :multi="true"></j-select-depart>
+              </a-form-item>
+            </a-col>
+            <a-col :md="6" :sm="8">
+              <a-form-item label="注册时间">
+                <a-range-picker
+                  
+                  format="YYYY-MM-DD HH:mm:ss"
+                  :placeholder="['开始时间', '结束时间']"
+                  @change="onDateChange"
+                />
+              </a-form-item>
+            </a-col>
             <a-col :md="6" :sm="8">
               <a-form-item label="性别">
                 <a-select v-model="queryParam.sex" placeholder="请选择性别">
@@ -203,6 +217,7 @@ import { JeecgListMixin } from '@/mixins/JeecgListMixin'
 import SysUserAgentModal from './modules/SysUserAgentModal'
 import JInput from '@/components/jeecg/JInput'
 import UserRecycleBinModal from './modules/UserRecycleBinModal'
+import JSelectDepart from '@/components/jeecgbiz/JSelectDepart'
 
 export default {
   name: 'UserList',
@@ -214,6 +229,7 @@ export default {
     GenStudentModal,
     JInput,
     UserRecycleBinModal,
+    JSelectDepart,
   },
   data() {
     return {
@@ -274,7 +290,7 @@ export default {
         },
         {
           title: '身份',
-          width: '80',
+          width: 80,
           dataIndex: 'userIdentity',
           customRender: (v) => {
             return v == '2' ? '上级' : '学生'
@@ -303,6 +319,12 @@ export default {
           align: 'center',
           width: 80,
           dataIndex: 'status_dictText',
+        },
+        {
+          title: '注册时间',
+          align: 'center',
+          width: 180,
+          dataIndex: 'createTime',
         },
         {
           title: '操作',
@@ -343,7 +365,11 @@ export default {
     getAvatarView: function (avatar) {
       return getFileAccessHttpUrl(avatar)
     },
-
+    onDateChange: function (value, dateString) {
+      console.log(dateString[0],dateString[1]);
+      this.queryParam.createTime_begin=dateString[0];
+      this.queryParam.createTime_end=dateString[1];
+    },
     batchFrozen: function (status) {
       if (this.selectedRowKeys.length <= 0) {
         this.$message.warning('请选择一条记录！')
