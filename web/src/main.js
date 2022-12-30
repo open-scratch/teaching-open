@@ -58,7 +58,7 @@ Vue.use(vueBus);
 Vue.use(JeecgComponents);
 Vue.use(VueAreaLinkage);
 
-let cacheTime = 600000 //缓存10分钟
+let cacheTime = 60000 //缓存1分钟
 
 const start = async()=>{
   //获取配置

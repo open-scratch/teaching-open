@@ -32,10 +32,12 @@
     <select id="userAdditionalWork" resultType="org.jeecg.modules.teaching.model.AdditionalWorkModel">
         select a.*, a.id additionalWorkId,
         w.id mineWorkId, w.work_name mineWorkName, w.work_status mineWorkStatus,
-        (select file_path from sys_file where sys_file.id=w.work_file) mineWorkUrl,
-        (select file_path from sys_file where sys_file.id = w.work_cover) mineWorkCover
+        w.work_file mineWorkUrl,
+        w.work_cover mineWorkCover,
+        c.score, c.comment
         from teaching_additional_work a
         left join teaching_work w on w.additional_id = a.id and w.user_id = #{userId}
+        left join teaching_work_correct c on c.work_id = w.id
         where
         a.status=1 and
         <foreach collection="departIds" index="index" item="id" open="(" separator=" or " close=")">

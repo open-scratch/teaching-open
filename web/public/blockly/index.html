@@ -45,9 +45,10 @@
               <select id="code_menu"></select>
             </td>
             <td class="tabmax">
+              <button onclick="window.location.href='/account/center'">返回</button>
               <select class="farSide" id="languageMenu"></select>
               <input type="text" id="project-name" placeholder="My blocks"></input>
-              <button id="submitButton" class="notext" title="...">
+              <button id="submitButton" class="notext" title="提交作品">
                 <img src='./media/1x1.gif' class="upload icon21">
               </button>
               <button id="trashButton" class="notext" title="...">
@@ -491,7 +492,7 @@
       }),
       success: function (res) {
         if (res.code == 200) {
-          alert("Submit success")
+          alert("提交成功")
           // createCode('qrcode', shareUrl)
         } else {
         }

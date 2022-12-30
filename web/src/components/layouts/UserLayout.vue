@@ -79,7 +79,7 @@
         text-align: center;
 
         .header {
-          height: 44px;
+          max-height: 88px;
           line-height: 44px;
 
           .badge {

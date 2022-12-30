@@ -2,37 +2,36 @@
   <div class="container">
     <a-layout>
       <a-layout-header>
-        <Header/>
+        <Header />
       </a-layout-header>
       <a-layout>
         <a-layout-content>
+          <div class="user-enter" v-if="_isMobile()">
+            <UserEnter />
+          </div>
           <div class="panel-works">
             <h1 class="panel-title">
-              <a-icon type="like" theme="twoTone" two-tone-color="#52c41a"/>
+              <a-icon type="like" theme="twoTone" two-tone-color="#52c41a" />
               最赞作品
             </h1>
-            <a-row type="flex" :gutter="[24, 24]">
-              <a-col v-for="(item, index) in greatWork" :key="index" :span="7">
+            <a-row type="flex" justify="space-between" :gutter="[24, 24]">
+              <a-col v-for="(item, index) in greatWork" :key="index" :xs="24" :sm="12" :md="12" :lg="7" :xl="7">
                 <a-card class="work-card">
                   <a @click="toDetail(item.id)" target="_blank">
                     <img class="work-cover" v-if="item.coverFileKey" :src="item.coverFileKey_url" />
                     <img v-if="item.workType == 4" src="@/assets/python.png" alt="" />
                   </a>
                   <a-row type="flex" justify="end">
-                    <a-col :span='5'>
-                      <a-icon type="eye" /> {{item.viewNum}}
-                    </a-col>
-                    <a-col :span='5'>
-                      <a-icon type="like" /> {{item.starNum}}
-                    </a-col>
+                    <a-col :span="5"> <a-icon type="eye" /> {{ item.viewNum }} </a-col>
+                    <a-col :span="5"> <a-icon type="like" /> {{ item.starNum }} </a-col>
                   </a-row>
                   <p>{{ item.workName }}</p>
                   <a-row class="work-author">
-                    <a-col :span='6'>
-                      <a-avatar shape="square" class="avatar" :size="40" :src="item.avatar_url"/>
+                    <a-col :span="6">
+                      <a-avatar shape="square" class="avatar" :size="40" :src="item.avatar_url" />
                     </a-col>
-                    <a-col :span='18'>
-                      <span>{{item.realname || item.username}}</span>
+                    <a-col :span="18">
+                      <span>{{ item.realname || item.username }}</span>
                     </a-col>
                   </a-row>
                 </a-card>
@@ -43,31 +42,27 @@
 
           <div class="panel-works">
             <h1 class="panel-title">
-              <a-icon type="fire" theme="twoTone" two-tone-color="#eb2f96"/>
+              <a-icon type="fire" theme="twoTone" two-tone-color="#eb2f96" />
               最火作品
             </h1>
-            <a-row type="flex" :gutter="[24, 24]">
-              <a-col v-for="(item, index) in hotWork" :key="index" :span="7">
+            <a-row type="flex" justify="space-between" :gutter="[24, 24]">
+              <a-col v-for="(item, index) in hotWork" :key="index" :xs="24" :sm="12" :md="12" :lg="7" :xl="7">
                 <a-card class="work-card">
                   <a @click="toDetail(item.id)" target="_blank">
                     <img class="work-cover" v-if="item.coverFileKey" :src="item.coverFileKey_url" />
                     <img v-if="item.workType == 4" src="@/assets/python.png" alt="" />
                   </a>
                   <a-row type="flex" justify="end">
-                    <a-col :span='5'>
-                      <a-icon type="eye" /> {{item.viewNum}}
-                    </a-col>
-                    <a-col :span='5'>
-                      <a-icon type="like" /> {{item.starNum}}
-                    </a-col>
+                    <a-col :span="5"> <a-icon type="eye" /> {{ item.viewNum }} </a-col>
+                    <a-col :span="5"> <a-icon type="like" /> {{ item.starNum }} </a-col>
                   </a-row>
                   <p>{{ item.workName }}</p>
                   <a-row class="work-author">
-                    <a-col :span='6'>
-                      <a-avatar shape="square" class="avatar" :size="40" :src="item.avatar_url"/>
+                    <a-col :span="6">
+                      <a-avatar shape="square" class="avatar" :size="40" :src="item.avatar_url" />
                     </a-col>
-                    <a-col :span='18'>
-                      <span>{{item.realname || item.username}}</span>
+                    <a-col :span="18">
+                      <span>{{ item.realname || item.username }}</span>
                     </a-col>
                   </a-row>
                 </a-card>
@@ -81,28 +76,24 @@
               <a-icon type="clock-circle" theme="twoTone" />
               最新作品
             </h1>
-            <a-row type="flex" :gutter="[24, 24]">
-              <a-col v-for="(item, index) in newWork" :key="index" :span="7">
+            <a-row type="flex" justify="space-between" :gutter="[24, 24]">
+              <a-col v-for="(item, index) in newWork" :key="index" :xs="24" :sm="12" :md="12" :lg="7" :xl="7">
                 <a-card class="work-card">
                   <a @click="toDetail(item.id)" target="_blank">
                     <img class="work-cover" v-if="item.coverFileKey" :src="item.coverFileKey_url" />
                     <img v-if="item.workType == 4" src="@/assets/python.png" alt="" />
                   </a>
                   <a-row type="flex" justify="end">
-                    <a-col :span='5'>
-                      <a-icon type="eye" /> {{item.viewNum}}
-                    </a-col>
-                    <a-col :span='5'>
-                      <a-icon type="like" /> {{item.starNum}}
-                    </a-col>
+                    <a-col :span="5"> <a-icon type="eye" /> {{ item.viewNum }} </a-col>
+                    <a-col :span="5"> <a-icon type="like" /> {{ item.starNum }} </a-col>
                   </a-row>
                   <p>{{ item.workName }}</p>
                   <a-row class="work-author">
-                    <a-col :span='6'>
-                      <a-avatar shape="square" class="avatar" :size="40" :src="item.avatar_url"/>
+                    <a-col :span="6">
+                      <a-avatar shape="square" class="avatar" :size="40" :src="item.avatar_url" />
                     </a-col>
-                    <a-col :span='18'>
-                      <span>{{item.realname || item.username}}</span>
+                    <a-col :span="18">
+                      <span>{{ item.realname || item.username }}</span>
                     </a-col>
                   </a-row>
                 </a-card>
@@ -111,12 +102,12 @@
             <a-button class="load-more" type="link" @click="getNewWork">加载更多……</a-button>
           </div>
         </a-layout-content>
-        <a-layout-sider>
-          <UserEnter/>
+        <a-layout-sider v-if="!_isMobile()">
+          <UserEnter />
         </a-layout-sider>
       </a-layout>
       <a-layout-footer>
-        <Footer/>
+        <Footer />
       </a-layout-footer>
     </a-layout>
   </div>
@@ -130,12 +121,12 @@ import UserEnter from './modules/UserEnter'
 import QrCode from '@/components/tools/QrCode'
 
 export default {
-  name: "PublicWorkList",
+  name: 'PublicWorkList',
   components: {
     qrcode: QrCode,
     Header,
     Footer,
-    UserEnter
+    UserEnter,
   },
   data() {
     return {
@@ -147,7 +138,6 @@ export default {
         greatWork: 0,
         hotWork: 0,
       },
-      
     }
   },
   created() {
@@ -159,40 +149,59 @@ export default {
     getFileAccessHttpUrl,
     getNewWork() {
       this.page.newWork += 1
-      getAction('/teaching/teachingWork/leaderboard', { orderBy: 'time', pageSize:3, pageNo: this.page.newWork }).then((res) => {
+      getAction('/teaching/teachingWork/leaderboard', {
+        orderBy: 'time',
+        pageSize: this._isMobile() ? 3 : 6,
+        pageNo: this.page.newWork,
+      }).then((res) => {
         if (res.success) {
           this.newWork = this.newWork.concat(res.result.records)
-          console.log(this.newWork);
-          if(res.result.records.length==0 && this.page.newWork>1){
-              this.$message.info("已加载完啦！")
+          console.log(this.newWork)
+          if (res.result.records.length == 0 && this.page.newWork > 1) {
+            this.$message.info('已加载完啦！')
           }
         }
       })
     },
-    getGreatWork(){
+    getGreatWork() {
       this.page.greatWork += 1
-      getAction('/teaching/teachingWork/leaderboard', { orderBy: 'star', pageSize:3, pageNo: this.page.greatWork }).then((res) => {
+      getAction('/teaching/teachingWork/leaderboard', {
+        orderBy: 'star',
+        pageSize: this._isMobile() ? 3 : 6,
+        pageNo: this.page.greatWork,
+      }).then((res) => {
         if (res.success) {
           this.greatWork = this.greatWork.concat(res.result.records)
-          if(res.result.records.length==0 && this.page.greatWork>1){
-              this.$message.info("已加载完啦！")
+          if (res.result.records.length == 0 && this.page.greatWork > 1) {
+            this.$message.info('已加载完啦！')
           }
         }
       })
     },
-    getHotWork(){
+    getHotWork() {
       this.page.hotWork += 1
-      getAction('/teaching/teachingWork/leaderboard', { orderBy: 'view', pageSize:3, pageNo: this.page.hotWork }).then((res) => {
+      getAction('/teaching/teachingWork/leaderboard', {
+        orderBy: 'view',
+        pageSize: this._isMobile() ? 3 : 6,
+        pageNo: this.page.hotWork,
+      }).then((res) => {
         if (res.success) {
           this.hotWork = this.hotWork.concat(res.result.records)
-          if(res.result.records.length==0 && this.page.hotWork>1){
-              this.$message.info("已加载完啦！")
+          if (res.result.records.length == 0 && this.page.hotWork > 1) {
+            this.$message.info('已加载完啦！')
           }
         }
       })
     },
     toDetail(id) {
-      this.$router.push('/work-detail?id='+id)
+      this.$router.push('/work-detail?id=' + id)
+    },
+    _isMobile() {
+      return (
+        navigator.userAgent.match(
+          /(phone|pad|pod|iPhone|iPod|ios|Android|Mobile|BlackBerry|IEMobile|MQQBrowser|JUC|Fennec|wOSBrowser|BrowserNG|WebOS|Symbian|Windows Phone)/i
+        ) != null
+      )
     },
   },
 }
@@ -221,15 +230,19 @@ export default {
 }
 
 .ant-layout-has-sider {
-  width: 1100px;
+  max-width: 1100px;
   margin: -100px auto 0;
 }
 
 .ant-layout-content {
-  .panel-works{
+  padding: 40px;
+  .user-enter{
     margin-bottom: 30px;
   }
-  .panel-title{
+  .panel-works {
+    margin-bottom: 30px;
+  }
+  .panel-title {
     font-size: 28px;
     text-shadow: 0 0 3px #000000d1;
   }
@@ -242,18 +255,19 @@ export default {
       width: 100%;
       max-height: 150px;
     }
-    .work-author{
-      span{
+    .work-author {
+      span {
         line-height: 40px;
       }
     }
   }
-  .load-more{
+  .load-more {
     margin: 10px auto;
     text-align: center;
   }
 }
 .ant-layout-sider {
+  margin-left: 30px;
   max-width: 300px !important;
   width: 300px !important;
 }

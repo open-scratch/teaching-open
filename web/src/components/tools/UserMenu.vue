@@ -71,6 +71,12 @@
       </a-menu>
     </a-dropdown>
     <span class="action">
+      <a class="logout_title" href="javascript:;" @click="handleHome">
+        <a-icon type="home"/>
+        <span v-if="isDesktop()">&nbsp;回到前台</span>
+      </a>
+    </span>
+    <span class="action">
       <a class="logout_title" href="javascript:;" @click="handleLogout">
         <a-icon type="logout"/>
         <span v-if="isDesktop()">&nbsp;退出登录</span>
@@ -154,6 +160,9 @@
       ...mapGetters(["nickname", "avatar","userInfo"]),
       getAvatar(){
         return getFileAccessHttpUrl(this.avatar())
+      },
+      handleHome(){
+        window.location.href = "http://" + window.location.hostname
       },
       handleLogout() {
         const that = this

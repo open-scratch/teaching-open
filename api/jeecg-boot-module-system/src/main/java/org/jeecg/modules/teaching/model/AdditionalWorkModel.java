@@ -1,6 +1,7 @@
 package org.jeecg.modules.teaching.model;
 
 import lombok.Data;
+import org.jeecg.common.aspect.annotation.Dict;
 import org.jeecg.modules.system.aspect.FileUrl;
 
 import java.util.Date;
@@ -10,7 +11,6 @@ public class AdditionalWorkModel {
     private String additionalWorkId;
     private String workName;
     private String workDesc;
-//    @Getter(AccessLevel.NONE)
     @FileUrl
     private String workCover;
     @FileUrl
@@ -19,26 +19,19 @@ public class AdditionalWorkModel {
     private String workDocumentUrl;
     private String workDept;
     private Date createTime;
+    @Dict(dictTable = "sys_user", dicCode = "username", dicText = "realname")
+    private String createBy;
+    @Dict(dicCode = "work_type")
     private Integer codeType;
-
     private String mineWorkId;
     private String mineWorkName;
     private Integer mineWorkStatus;
     @FileUrl
     private String mineWorkUrl;
-//    @Getter(AccessLevel.NONE)
     @FileUrl
     private String mineWorkCover;
-
     private String departId;
     private String departName;
-
-//    public String getWorkCover() {
-//        return workCover==null?null: QiniuConfig.domain + "//" + workCover;
-//    }
-//    public String getWorkUrl(){ return workUrl==null?null:QiniuConfig.domain+ "//" + workUrl;}
-//    public String getMineWorkUrl(){ return mineWorkUrl==null?null:QiniuConfig.domain+ "//" + mineWorkUrl;}
-//    public String getMineWorkCover() {
-//        return mineWorkCover==null?null:QiniuConfig.domain+ "//" + mineWorkCover;
-//    }
+    private String comment;
+    private Integer score;
 }

@@ -105,11 +105,8 @@
         </a-button>
       </a-form-item>
 
-      <div v-if="false" class="user-login-other">
-        <span>其他登陆方式</span>
-        <a @click="onThirdLogin('github')" title="github"><a-icon class="item-icon" type="github"></a-icon></a>
-        <a @click="onThirdLogin('wechat_enterprise')" title="企业微信"><a-icon class="item-icon" type="wechat"></a-icon></a>
-        <a @click="onThirdLogin('dingtalk')" title="钉钉"><a-icon class="item-icon" type="dingding"></a-icon></a>
+      <div>
+        <a href="/">返回首页</a>
       </div>
     </a-form>
 
@@ -525,29 +522,6 @@
       font-size: 16px;
       height: 40px;
       width: 100%;
-    }
-
-    .user-login-other {
-      text-align: left;
-      margin-top: 24px;
-      line-height: 22px;
-
-      .item-icon {
-        font-size: 24px;
-        color: rgba(0,0,0,.2);
-        margin-left: 16px;
-        vertical-align: middle;
-        cursor: pointer;
-        transition: color .3s;
-
-        &:hover {
-          color: #1890ff;
-        }
-      }
-
-      .register {
-        float: right;
-      }
     }
   }
 

@@ -83,6 +83,9 @@ public class TeachingCourseUnit implements Serializable {
     @ApiModelProperty(value = "课程视频")
     @FileUrl
     private java.lang.String courseVideo;
+    @ApiModelProperty(value = "是否对学生隐藏课程视频")
+    @Dict(dicCode = "yn")
+    private java.lang.Boolean showCourseVideo;
     //视频源
     private java.lang.Integer courseVideoSource;
     /**课程案例*/
@@ -90,11 +93,17 @@ public class TeachingCourseUnit implements Serializable {
     @ApiModelProperty(value = "课程案例")
     @FileUrl
     private java.lang.String courseCase;
+    @ApiModelProperty(value = "是否对学生隐藏课程案例")
+    @Dict(dicCode = "yn")
+    private java.lang.Boolean showCourseCase;
 	/**课程资料，多个文件逗号分割*/
 	@Excel(name = "课程资料", width = 15)
     @ApiModelProperty(value = "课程资料")
     @FileUrl
     private java.lang.String coursePpt;
+    @ApiModelProperty(value = "是否对学生隐藏课程资料")
+    @Dict(dicCode = "yn")
+    private java.lang.Boolean showCoursePpt;
 	/**作业类型*/
 	@Excel(name = "作业类型", width = 15, dicCode = "work_type")
 	@Dict(dicCode = "work_type")
@@ -115,6 +124,9 @@ public class TeachingCourseUnit implements Serializable {
     @ApiModelProperty(value = "教案")
     @FileUrl
     private java.lang.String coursePlan;
+    @ApiModelProperty(value = "是否对学生隐藏课程教案")
+    @Dict(dicCode = "yn")
+    private java.lang.Boolean showCoursePlan;
 	/**地图X坐标*/
 	@Excel(name = "地图X坐标", width = 15)
     @ApiModelProperty(value = "地图X坐标")

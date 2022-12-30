@@ -37,12 +37,19 @@
             <a-input v-if="model.courseVideoSource==2" v-decorator="[ 'courseVideo', validatorRules.courseVideo]" placeholder="请输入视频地址"></a-input>
             <a-textarea v-if="model.courseVideoSource==3" v-decorator="['courseVideo']" placeholder="请输入外部播放器代码"></a-textarea>
           </a-card>
+          <a-switch checkedChildren="对学生显示" unCheckedChildren="对学生隐藏" v-model="model.showCourseVideo" defaultChecked/>
         </a-form-item>
         <a-form-item label="课程案例" :labelCol="labelCol" :wrapperCol="wrapperCol">
           <j-upload v-decorator="['courseCase', validatorRules.courseCase]"  :number="1" :trigger-change="true"></j-upload>
+          <a-switch checkedChildren="对学生显示" unCheckedChildren="对学生隐藏" v-model="model.showCourseCase" defaultChecked/>
         </a-form-item>
         <a-form-item label="课程资料" :labelCol="labelCol" :wrapperCol="wrapperCol">
           <j-upload v-decorator="['coursePpt', validatorRules.coursePpt]" :trigger-change="true"></j-upload>
+          <a-switch checkedChildren="对学生显示" unCheckedChildren="对学生隐藏" v-model="model.showCoursePpt" />
+        </a-form-item>
+        <a-form-item label="课程教案" :labelCol="labelCol" :wrapperCol="wrapperCol">
+          <j-upload v-decorator="['coursePlan', validatorRules.coursePlan]" :trigger-change="true"></j-upload>
+          <a-switch checkedChildren="对学生显示" unCheckedChildren="对学生隐藏" v-model="model.showCoursePlan" />
         </a-form-item>
         <a-form-item label="作业类型" :labelCol="labelCol" :wrapperCol="wrapperCol">
           <j-dict-select-tag type="list" v-decorator="['courseWorkType', {initialValue: 2}, validatorRules.courseWorkType]" :trigger-change="true" dictCode="work_type" placeholder="请选择作业类型"/>
@@ -147,14 +154,23 @@
         })
       },
       add () {
-        this.edit({});
+        this.edit({
+          showCourseVideo: true,
+          showCourseCase: true,
+          showCoursePpt: false,
+          showCoursePlan: false
+        });
       },
       edit (record) {
         this.form.resetFields();
         this.model = Object.assign({}, record);
         this.visible = true;
         this.$nextTick(() => {
-          this.form.setFieldsValue(pick(this.model,'createBy','createTime','unitName','unitIntro','courseId','courseVideo','courseVideoSource','coursePpt','courseWorkType','courseWork','courseWorkAnswer','coursePlan','courseCase','mapX','mapY', 'orderNum'))
+          this.form.setFieldsValue(pick(this.model,
+          'createBy','createTime','unitName','unitIntro','courseId',
+          'courseVideo','showCourseVideo','courseVideoSource','coursePpt','showCoursePpt',
+          'courseWorkType','courseWork','courseWorkAnswer','coursePlan','showCoursePlan',
+          'courseCase','showCourseCase','mapX','mapY', 'orderNum'))
         })
       },
       close () {
@@ -203,7 +219,11 @@
         this.model.courseVideoSource = v.target.value
       },
       popupCallback(row){
-        this.form.setFieldsValue(pick(row,'createBy','createTime','unitName','unitIntro','courseId','courseVideo','coursePpt','courseWorkType','courseWork','courseWorkAnswer','coursePlan','courseCase','mapX','mapY'))
+        this.form.setFieldsValue(pick(row,
+        'createBy','createTime','unitName','unitIntro','courseId',
+        'courseVideo','showCourseVideo','coursePpt','showCoursePpt',
+        'courseWorkType','courseWork','courseWorkAnswer', 'orderNum',
+        'coursePlan','showCoursePlan','courseCase','showCourseCase','mapX','mapY'))
       },
     }
   }
@@ -211,7 +231,7 @@
 
 <style lang="less" scoped>
 .drawer-footer {
-  position: absolute;
+  // position: absolute;
   bottom: -8px;
   width: 100%;
   border-top: 1px solid #e8e8e8;

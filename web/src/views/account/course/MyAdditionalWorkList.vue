@@ -16,15 +16,28 @@
     <a-card :bordered="false">
       <a-list item-layout="horizontal" :dataSource="datasource" :pagination="pagination">
         <a-list-item slot="renderItem" slot-scope="work">
-          <a-list-item-meta :description="work.workDesc">
-            <!-- <img slot="avatar" style="height:150px" :src="work.mineWorkCover || work.workCover" alt="" /> -->
-            <img slot="avatar" style="height:150px" :src="work.workCover_url" alt="" />
-            <h3 slot="title" class="title" href="#">{{ work.workName }}</h3>
-            <p class="meta">班级：{{ work.departName }}</p>
+          <a-list-item-meta>
+            <img class="work-cover" slot="avatar" :src="work.workCover_url" alt="" />
+            <template slot="title" class="title" href="#">
+              <h3>{{ work.workName }} <a-tag>{{work.codeType_dictText}}</a-tag></h3>
+            </template>
+            <template slot="description">
+              <p>{{work.workDesc}}</p>
+              <div class="work-info">
+                <span>班级：{{ work.departName }}</span>
+                <a-divider type="vertical" />
+                <span>老师：{{ work.createBy_dictText }}</span>
+              </div>
+            </template>
           </a-list-item-meta>
-          <div slot="actions" class="btn-wrapper">
+          <div slot="extra" class="btns">
+            <a-tooltip>
+              <template slot="title">
+                <p>{{work.comment}}</p>
+              </template>
+              <a-rate v-if="work.score" :disabled="true" :value="work.score" />
+            </a-tooltip>
             <a-button v-if="work.workDocumentUrl != null" @click="openWorkFile(work.workDocumentUrl_url)">作业资料</a-button>
-            <a-divider v-if="work.workDocumentUrl != null" type="vertical" />
             <a-button type="primary" :disabled="work.mineWorkStatus > 1" @click="toAdditionalWork(work, false)"> 去做作业 </a-button>
             <a-button type="danger" v-if="work.mineWorkStatus == 0" @click="toAdditionalWork(work, true)"> 重做 </a-button>
           </div>
@@ -142,38 +155,40 @@ export default {
 </script>
 
 <style lang="less" scoped>
-.ant-row {
-  margin-bottom: 10px;
-  border: 1px solid #e0e0e0;
-  border-radius: 6px;
-  transition: all 0.1s ease-in;
-  .ant-col {
-    height: 180px;
-    img {
-      height: 100%;
-      max-width: 100%;
-    }
-    .title {
+
+.ant-list-item {
+  height: 180px;
+  .work-cover {
+    height:150px;
+    max-width: 100%;
+  }
+  .title {
+    display: block;
+    margin-top: 20px;
+    font-size: 16px;
+    line-height: 20px;
+    color: #333;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+  }
+  .meta {
+    margin-top: 8px;
+    font-size: 12px;
+    line-height: 16px;
+    color: #999;
+    overflow: hidden;
+    text-overflow: ellipsis;
+  }
+  .work-info{
+
+  }
+  .btns{
+    .ant-rate,.ant-btn{
       display: block;
-      margin-top: 20px;
-      font-size: 16px;
-      line-height: 20px;
-      color: #333;
-      overflow: hidden;
-      text-overflow: ellipsis;
-      white-space: nowrap;
-    }
-    .meta {
-      margin-top: 8px;
-      font-size: 12px;
-      line-height: 16px;
-      color: #999;
-      overflow: hidden;
-      text-overflow: ellipsis;
+      margin: 10px 0;
     }
   }
 }
-.ant-row:hover {
-  border: 1px solid @primary-color;
-}
+
 </style>
