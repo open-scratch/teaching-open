@@ -1097,7 +1097,7 @@ public class SysUserController extends BaseController {
                 return result;
             }
         }
-        if(oConvertUtils.isNotEmpty(phone)){
+        if(oConvertUtils.isNotEmpty(phone) && oConvertUtils.isNotEmpty(smscode)){
             if (!smscode.equals(code)) {
                 result.setMessage("手机验证码错误");
                 result.setSuccess(false);
