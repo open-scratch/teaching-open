@@ -19,14 +19,14 @@
           <a-list-item-meta>
             <img class="work-cover" slot="avatar" :src="work.workCover_url" alt="" />
             <template slot="title" class="title" href="#">
-              <h3>{{ work.workName }} <a-tag>{{work.codeType_dictText}}</a-tag></h3>
+              <h3>{{ work.workName }} <a-tag color="blue">{{work.codeType_dictText}}</a-tag></h3>
             </template>
             <template slot="description">
-              <p>{{work.workDesc}}</p>
+              <pre class="work-desc">{{work.workDesc}}</pre>
               <div class="work-info">
-                <span>班级：{{ work.departName }}</span>
+                <a-tag>班级：{{ work.departName }}</a-tag>
                 <a-divider type="vertical" />
-                <span>老师：{{ work.createBy_dictText }}</span>
+                <a-tag>老师：{{ work.createBy_dictText }}</a-tag>
               </div>
             </template>
           </a-list-item-meta>
@@ -179,6 +179,12 @@ export default {
     color: #999;
     overflow: hidden;
     text-overflow: ellipsis;
+  }
+  .work-desc{
+    white-space:pre-wrap;
+    word-wrap:break-word;
+    margin-right: 10px;
+    max-height: 100px;
   }
   .work-info{
 

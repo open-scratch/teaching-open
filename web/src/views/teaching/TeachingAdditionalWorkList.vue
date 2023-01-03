@@ -81,7 +81,9 @@
             下载
           </a-button>
         </template>
-
+        <span slot="desc" slot-scope="text">
+          <j-ellipsis :value="text" :length="20" />
+        </span>
         <span slot="action" slot-scope="text, record">
           <a @click="handleEdit(record)">编辑</a>
 
@@ -110,13 +112,14 @@ import { mixinDevice } from '@/utils/mixin'
 import { JeecgListMixin } from '@/mixins/JeecgListMixin'
 import TeachingAdditionalWorkModal from './modules/TeachingAdditionalWorkModal'
 import JSelectDepart from '@/components/jeecgbiz/JSelectDepart'
-
+import JEllipsis from '@/components/jeecg/JEllipsis'
 export default {
   name: 'TeachingAdditionalWorkList',
   mixins: [JeecgListMixin, mixinDevice],
   components: {
     JSelectDepart,
     TeachingAdditionalWorkModal,
+    JEllipsis
   },
   data() {
     return {
@@ -152,6 +155,7 @@ export default {
           title: '作业描述',
           align: 'center',
           dataIndex: 'workDesc',
+          scopedSlots: { customRender: 'desc' },
         },
         {
           title: '作业封面',
