@@ -9,7 +9,7 @@
                 {{ item.unitName }}
               </div>
               <div class="meta-cardInfo" slot="description">
-                <img :src="getFileAccessHttpUrl(item.unitCover)" height="25px" alt="图片不存在" style="width:100%;height:100%;"/>
+                <img :src="getFileAccessHttpUrl(item.unitCover)" height="25px" style="width:100%;height:100%;"/>
               </div>
           </a-card-meta>
         </a-card>

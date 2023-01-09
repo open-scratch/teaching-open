@@ -35,12 +35,35 @@
         <a-form-item label="课程封面" :labelCol="labelCol" :wrapperCol="wrapperCol">
           <j-upload v-decorator="['courseCover', validatorRules.courseCover]"  :number="1" :trigger-change="true"></j-upload>
         </a-form-item>
-        <a-form-item v-show="model.showType == 1" label="课程地图" :labelCol="labelCol" :wrapperCol="wrapperCol">
-          <j-upload v-decorator="['courseMap', validatorRules.courseMap]"  :number="1" :trigger-change="true"></j-upload>
+        <a-form-item v-show="model.showType == 1" label="课程地图设置" :labelCol="labelCol" :wrapperCol="wrapperCol">
+          <a-row>
+            <a-col :span="12">
+              <j-upload
+                style="display: inline"
+                v-decorator="['courseMap', validatorRules.courseMap]"
+                :fileType="'image'"
+                text="上传地图"
+                :number="1"
+                :trigger-change="true"
+              ></j-upload>
+              <a-button type="primary" @click="showMapEdit">地图编辑器</a-button>
+            </a-col>
+            <!-- <a-col :span="12">
+              <j-upload
+                style="display: inline"
+                v-decorator="['courseMapIcon']"
+                :uploadTarget="'qiniu'"
+                :fileType="'image'"
+                text="上传图标"
+                :number="1"
+                :trigger-change="true"
+              ></j-upload>
+            </a-col> -->
+          </a-row>
         </a-form-item>
-        
       </a-form>
     </a-spin>
+    <TeachingMapEditor ref="mapEditor" />
   </a-modal>
 </template>
 
@@ -50,11 +73,12 @@
   import pick from 'lodash.pick'
   import { validateDuplicateValue } from '@/utils/util'
   import JUpload from '@/components/jeecg/JUpload'
-
+  import TeachingMapEditor from './TeachingMapEditor'
   export default {
     name: "TeachingCourseModal",
     components: { 
       JUpload,
+      TeachingMapEditor
     },
     data () {
       return {
@@ -148,6 +172,10 @@
       },
       popupCallback(row){
         this.form.setFieldsValue(pick(row,'createBy','createTime','courseName','courseDesc','courseIcon','courseCover','showType', 'courseMap'))
+      },
+      showMapEdit() {
+        this.handleOk()
+        this.$refs.mapEditor.open(this.model)
       },
       onShowTypeSelected(value){
         this.model.showType = value

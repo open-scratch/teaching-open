@@ -58,14 +58,29 @@
           <j-upload v-decorator="['courseWork', validatorRules.courseWork]"  :number="1" :trigger-change="true"></j-upload>
         </a-form-item>
         <a-form-item label="地图坐标" :labelCol="labelCol" :wrapperCol="wrapperCol">
-          <a-input-number v-decorator="[ 'mapX', validatorRules.mapX]" placeholder="请输入地图X坐标" style="width: 40%"/>
-          <a-input-number v-decorator="[ 'mapY', validatorRules.mapY]" placeholder="请输入地图Y坐标" style="width: 40%"/>
+          <a-row>
+            <a-col :span="8">
+              <a-form-item label="X" :labelCol="labelCol" :wrapperCol="wrapperCol">
+                <a-input-number v-decorator="['mapX', validatorRules.mapX]" placeholder="请输入地图X坐标" />
+              </a-form-item>
+            </a-col>
+            <a-col :span="8">
+              <a-form-item label="Y" :labelCol="labelCol" :wrapperCol="wrapperCol">
+                <a-input-number v-decorator="['mapY', validatorRules.mapY]" placeholder="请输入地图Y坐标" />
+              </a-form-item>
+            </a-col>
+            <a-col :span="8">
+              <a-button type="primary" @click="showMapEdit">地图编辑器</a-button>
+            </a-col>
+          </a-row>
         </a-form-item>
       </a-form>
     </a-spin>
     <div class="drawer-footer">
       <a-button type="primary" @click="handleOk">确定</a-button>
+      <a-button type="default" @click="handleCancel">取消</a-button>
     </div>
+    <TeachingMapEditor ref="mapEditor" />
   </a-drawer>
 </template>
 
@@ -76,12 +91,13 @@
   import { validateDuplicateValue } from '@/utils/util'
   import JUpload from '@/components/jeecg/JUpload'
   import JDictSelectTag from "@/components/dict/JDictSelectTag"
-
+  import TeachingMapEditor from './TeachingMapEditor'
   export default {
     name: "TeachingCourseUnitModal",
     components: { 
       JUpload,
       JDictSelectTag,
+      TeachingMapEditor
     },
     data () {
       return {
@@ -167,7 +183,7 @@
         this.visible = true;
         this.$nextTick(() => {
           this.form.setFieldsValue(pick(this.model,
-          'createBy','createTime','unitName','unitIntro','courseId',
+          'createBy','createTime','unitName','unitIntro','courseId','unitCover',
           'courseVideo','showCourseVideo','courseVideoSource','coursePpt','showCoursePpt',
           'courseWorkType','courseWork','courseWorkAnswer','coursePlan','showCoursePlan',
           'courseCase','showCourseCase','mapX','mapY', 'orderNum'))
@@ -224,6 +240,10 @@
         'courseVideo','showCourseVideo','coursePpt','showCoursePpt',
         'courseWorkType','courseWork','courseWorkAnswer', 'orderNum',
         'coursePlan','showCoursePlan','courseCase','showCourseCase','mapX','mapY'))
+      },
+      //显示地图编辑器
+      showMapEdit() {
+        this.$refs.mapEditor.openById(this.model.courseId, this.model.id)
       },
     }
   }

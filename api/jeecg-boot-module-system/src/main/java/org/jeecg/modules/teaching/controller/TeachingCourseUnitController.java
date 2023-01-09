@@ -1,5 +1,6 @@
 package org.jeecg.modules.teaching.controller;
 
+import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 import java.util.Map;
@@ -135,7 +136,15 @@ public class TeachingCourseUnitController extends JeecgController<TeachingCourse
 		teachingCourseUnitService.updateById(teachingCourseUnit);
 		return Result.ok("编辑成功!");
 	}
-	
+
+	 @AutoLog(value = "课程单元地图-编辑")
+	 @ApiOperation(value="课程单元地图-编辑", notes="课程单元地图-编辑")
+	 @PutMapping(value = "/editBatch")
+	 public Result<?> editMap(@RequestBody ArrayList<TeachingCourseUnit> unitList){
+		 teachingCourseUnitService.updateBatchById(unitList);
+		 return Result.ok("编辑成功!");
+	 }
+
 	/**
 	 *   通过id删除
 	 *

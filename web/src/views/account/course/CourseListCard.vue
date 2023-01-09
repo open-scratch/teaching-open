@@ -12,7 +12,6 @@
                 <img
                   :src="getFileAccessHttpUrl(item.courseCover)"
                   height="25px"
-                  alt="封面不存在"
                   style="width: 100%; height: 100%"
                 />
             </div>
