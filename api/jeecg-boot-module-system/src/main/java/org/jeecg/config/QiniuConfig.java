@@ -10,6 +10,7 @@ public class QiniuConfig {
     public static String key;
     public static String secret;
     public static String bucket;
+    public static String area;
     public static Integer expires = 3600;
 
     @Value("${jeecg.qiniu.staticDomain}")
@@ -30,5 +31,9 @@ public class QiniuConfig {
     @Value("${jeecg.qiniu.bucketName}")
     public void setBucket(String bucket) {
         this.bucket = bucket;
+    }
+    @Value("${jeecg.qiniu.area}")
+    public void setArea(String area) {
+        this.area = area;
     }
 }

@@ -69,7 +69,7 @@
     window.scratchConfig = {
       logo: {
         show: true, 
-        url: "/logo.png",
+        url: window.getLogo(),
         handleClickLogo: () => {
           window.open("/")
         }
@@ -232,7 +232,8 @@
       //素材库配置
       assets:{
         //素材库地址
-        assetHost: JSON.parse(localStorage.getItem("CONFIG")).qn_base,
+        // assetHost: getSysConfig('qiniuDomain'), //使用七牛云的素材库,如果需要使用系统的自定义素材库，必须使用七牛云存储
+        assetHost: './static',
         //素材库索引地址
         defaultIndex:{
           sprites: "./static/json_index/sprites.json",
@@ -272,7 +273,7 @@
         }
       }
     }
-
+    console.log(getSysConfig('qiniuDomain'))
     //请求提交作业
     function requestUpload(status){
       workStatus = status
@@ -280,7 +281,7 @@
       $('.uploading').show()
       var uuid = window.uuid()
       uploadParam.projectTitle = window.scratch.getProjectName()
-      var defaultUploadType = JSON.parse(localStorage.getItem("CONFIG")).defaultUploadType
+      var defaultUploadType = getSysConfig('uploadType')
       window.scratch.getProjectCoverBlob(cover => {
         if(defaultUploadType == 'qiniu'){
           upload2Qiniu(cover, 'project3/' + uuid + '.jpg', uploadParam.projectTitle, observer)

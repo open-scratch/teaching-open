@@ -67,7 +67,7 @@
       console.log(code);
       var uuid = window.uuid()
       uploadParam.projectTitle = projectName
-      var defaultUploadType = JSON.parse(localStorage.getItem("CONFIG")).defaultUploadType
+      var defaultUploadType = getSysConfig('uploadType')
       if(defaultUploadType == 'qiniu'){
         upload2Qiniu(code, 'python/' + uuid + '.py', projectName, observer)
       }else{

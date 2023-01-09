@@ -7,6 +7,7 @@ import org.jeecg.config.QiniuConfig;
 import org.jeecg.modules.system.entity.SysConfig;
 import org.jeecg.modules.system.service.ISysConfigService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -17,6 +18,10 @@ import java.util.Map;
 public class SysConfigController {
     @Autowired
     private ISysConfigService sysConfigService;
+    @Value(value="${jeecg.path.staticDomain}")
+    private String staticDomain;
+    @Value(value="${jeecg.uploadType}")
+    private String uploadType;
 
     //保存配置
     @PostMapping("saveTenantConfig")
@@ -52,7 +57,10 @@ public class SysConfigController {
     public Result<Map<String, Object>> getCurrentConfig(){
         Result<Map<String, Object>> result = new Result();
         Map<String, Object> tenantConfig = sysConfigService.getConfigMap();
+        tenantConfig.put("uploadType", uploadType);
         tenantConfig.put("qiniuDomain", QiniuConfig.domain);
+        tenantConfig.put("qiniuArea", QiniuConfig.area);
+        tenantConfig.put("staticDomain", staticDomain);
         result.setResult(tenantConfig);
         return result;
     }

@@ -49,7 +49,6 @@ export default {
   data() {
     return {
       dataSource: [],
-      qn_base: window._CONFIG['qn_base'],
       url: {
         list: '/teaching/teachingWork/mine',
         delete: '/teaching/teachingWork/delete',

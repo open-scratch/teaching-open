@@ -107,7 +107,7 @@
 
   import { JeecgListMixin } from '@/mixins/JeecgListMixin'
   import TeachingCourseModal from './modules/TeachingCourseModal'
-
+  import { getFileAccessHttpUrl } from "@/api/manage"
   export default {
     name: "TeachingCourseList",
     mixins:[JeecgListMixin],

@@ -62,7 +62,7 @@
             console.log(name);
             var uuid = window.uuid()
             uploadParam.projectTitle = name
-            var defaultUploadType = JSON.parse(localStorage.getItem("CONFIG")).defaultUploadType
+            var defaultUploadType = getSysConfig('uploadType')
             if(defaultUploadType == 'qiniu'){
               upload2Qiniu(contents, 'scratchjr/' + uuid + '.sjr', name, observer)
             }else{

@@ -319,7 +319,7 @@ export const JeecgListMixin = {
       if(text.indexOf(",")>0){
         text = text.substring(0,text.indexOf(","))
       }
-      return window._CONFIG['qn_base'] + text;
+      return this.$store.getters.sysConfig.qiniuDomain + "/" + text;
     },
     getQiniuFile(text){
       if(!text){
@@ -329,7 +329,7 @@ export const JeecgListMixin = {
       if(text.indexOf(",")>0){
         text = text.substring(0,text.indexOf(","))
       }
-      window.open(window._CONFIG['qn_base'] + text);
+      window.open(this.$store.getters.sysConfig.qiniuDomain + "/" + text);
     }
   }
 

@@ -1,4 +1,4 @@
-version: 2.6
+version: 2.7
 spring:
   profiles:
     active: dev # dev开发测试环境  prod线上正式环境

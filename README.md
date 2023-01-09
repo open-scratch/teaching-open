@@ -83,7 +83,7 @@ Teaching针对机构、学校提供STEAM在线教育解决方案， 提供一个
 
 2. 设置数据库表名忽略大小写（重要）
 
-   lower_case_table_names=1
+   `lower_case_table_names=1`
 
 3. 导入api/db文件夹的sql文件。如果是升级，需要依次按版本号执行升级sql。
 
@@ -101,7 +101,7 @@ CentOS系统可执行命令一键安装
 #### 注册配置七牛云
 
 - 登录 www.qiniu.com 注册后实名认证
-- 新建对象存储Kodo，访问控制设为：开放，记录bucket名字和存储区域
+- 新建对象存储Kodo，访问控制设为：开放，记录bucket名字和存储区域以备后续配置
 - 绑定域名（免费分配的测试域名一个月后过期）
 - 获取accessKey，secretKey以备后续配置
 
@@ -116,14 +116,14 @@ CentOS系统可执行命令一键安装
 需要修改的地方：
 ```yml
 domain: 您的站点域名
-
+# 本地：local 七牛云：qiniu
+uploadType: 文件存储目标
 # 数据库连接配置
 datasource:
-        master:
-          url: jdbc:mysql://127.0.0.1:3306/teachingopen?characterEncoding=UTF-8&useUnicode=true&useSSL=false&tinyInt1isBit=false
-          username: teachingopen
-          password: teachingopen
-
+    master:
+      url: jdbc:mysql://127.0.0.1:3306/teachingopen?characterEncoding=UTF-8&useUnicode=true&useSSL=false&tinyInt1isBit=false
+      username: teachingopen
+      password: teachingopen
 #Redis连接配置
 redis:  
     database: 1
@@ -136,10 +136,11 @@ qiniu:
   secretKey: 您的七牛secretKey
   bucketName: 您的七牛bucketName
   staticDomain: 您的七牛域名
+  area: 您的七牛存储区域（z0：华东 z1：华北 z2：华南 na0：北美 as0：东南亚 cn-east-2：华东-浙江2）
 ```
 配置文件可以编译后修改，推荐将.yml配置文件放到jar包同级目录，java将优先使用同级目录的配置，这样方便后续升级。
 
-- 编译项目（若使用已编译好的jar文件，本步骤可以跳过）
+#### 编译项目（若使用已编译好的jar文件，本步骤可以跳过）
 
 配置maven源
 
@@ -171,21 +172,12 @@ qiniu:
   `bash start-teaching.sh`
 
 
-### 前端编译
+### 前端编译（若使用已编译好的前端，本步骤可以跳过）
 
 - 安装nodejs版本v12
   
 - 安装依赖
   `npm install` 或 `yarn install`
-
-  - 修改配置
-
-  public/index.html
-
-  ```js
-    window._CONFIG['qn_base'] = "//qn.open.teaching.vip/" //七牛域名
-    window._CONFIG['qn_area'] = 'z0' //七牛存储区域 z0华东 z1华北 z2华南 na0北美 as0东南亚
-  ```
 
 - 编译
   `npm run build` 或 `yarn run build`
@@ -197,13 +189,12 @@ qiniu:
 
 - 配置Nginx
 
-重点是要配置反向代理到API
 参考配置:
 ```
 server
 {
-    listen 80;
-    server_name open.teaching.vip;
+    listen 80 default_server;
+    server_name open.teaching.vip; # 改为你网站的域名
     location / {
       index index.html index.htm;
       root /www/wwwroot/teaching-open; # 改为你网站目录的路径
@@ -235,29 +226,27 @@ server
 
 ### 测试账号
 
-默认密码均为123456
-
 - admin —— 超级管理员
 - teacher —— 老师
 - student —— 学生
-
+默认密码均为123456
 
 ## 常见问题
 
-### 验证码出不来的问题
+### 页面一直加载中
 只有两种可能：
 1. api未启动，尝试访问http://ip地址:8080看是否有内容输出
 2. nginx反向代理配置错误，特征是接口报502或504错误
 
-### Scratch素材库不显示
-素材库默认是使用的你配置七牛云地址
+### 后台上传的Scratch素材库不显示
+自定义素材库，必须使用七牛云存储。默认使用的是本地素材库。
+解决方案：
+将本地素材库上传至七牛云，素材库位置在scratch3/static/internalapi，需要原来的保持目录结构，选择internalapi目录上传。
 
-方案1：将素材库上传至七牛云，素材库位置在scratch3/static/internalapi，需要原来的保持目录结构，选择internalapi目录上传。
-
-方案2：将素材库地址改为本地
+然后修改scratch3/index.html中的素材库配置地址切换为七牛云
 ```js
 assets:{
-  assetHost: "./static",
+  assetHost: getSysConfig('qiniuDomain')
 }
 ```
 
@@ -269,13 +258,7 @@ assets:{
 ### 切换为本地存储
 建议是使用云存储的，极大减少服务器的宽带压力。但是有些朋友不想用七牛云存储，或者局域网部署，则可以使用本地存储模式。
 
-1. 修改public/index.html
-```js
-window._CONFIG['defaultUploadType'] = 'local'
-window._CONFIG['qn_base'] = '/api/sys/common/static/'
-```
-
-2. 修改application-prod.yml
+修改application-prod.yml
 ```yml
 jeecg:
   uploadType: local
@@ -313,5 +296,3 @@ jeecg:
 注意xxx是版本号，不要照抄！！
 
 5. 上传覆盖前端文件
-
-注意覆盖之前备份index.html中的配置、scratch3/index.html的配置

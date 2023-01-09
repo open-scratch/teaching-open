@@ -1,5 +1,6 @@
 import Vue from 'vue'
 import { axios } from '@/utils/request'
+import { SYS_CONFIG } from "@/store/mutation-types"
 
 const api = {
   user: '/api/user',
@@ -165,16 +166,17 @@ export function uploadAction(url,parameter){
  * @param subStr
  * @returns {*}
  */
-export function getFileAccessHttpUrl(avatar,subStr) {
+export function getFileAccessHttpUrl(path,subStr) {
+  
   if(!subStr) subStr = 'http'
-  if(avatar && avatar.startsWith(subStr)){
-    return avatar;
+  if(path && path.startsWith(subStr)){
+    return path;
   }else{
-    if(avatar &&　avatar.length>0 && avatar.indexOf('[')==-1){
-      if(window._CONFIG['defaultUploadType'] == "qiniu"){
-        return window._CONFIG['qn_base'] + avatar;
+    if(path &&path.length>0 && path.indexOf('[')==-1){
+      if(Vue.ls.get(SYS_CONFIG).uploadType == "qiniu"){
+        return Vue.ls.get(SYS_CONFIG).qiniuDomain + '/' + path;
       }else{
-        return window._CONFIG['staticDomainURL'] + avatar;
+        return Vue.ls.get(SYS_CONFIG).staticDomain + '/' + + path;
       }
     }
   }

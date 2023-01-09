@@ -8,17 +8,7 @@
 - eslint
 - @vue/cli 3.2.1
 
-## 项目配置
-
-- 修改七牛云存储的域名
-
-  public/index.html  >  `window._CONFIG['qn_base']`
-
-- 修改七牛云存储区域，默认z0（华东区）
-
-  public/scratch3/index.html >  `region: qiniu.region.z0`
-
-项目运行
+## 项目运行
 ----
 
 - 安装依赖

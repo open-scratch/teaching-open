@@ -12,6 +12,8 @@ import com.qiniu.util.Auth;
 import org.jeecg.config.QiniuConfig;
 import org.springframework.stereotype.Component;
 
+import java.io.File;
+
 @Component
 public class QiniuUtil {
 
@@ -23,24 +25,38 @@ public class QiniuUtil {
      */
     public String uploadToQiniu(byte[] data, String key){
         Auth auth = Auth.create(QiniuConfig.key, QiniuConfig.secret);
-        String token = auth.uploadToken(QiniuConfig.bucket, null, QiniuConfig.expires, null);
-        Configuration cfg = new Configuration(Zone.zone0());
+        String token = auth.uploadToken(QiniuConfig.bucket, key);
+        Configuration cfg = new Configuration(Zone.autoZone());
         UploadManager uploadManager = new UploadManager(cfg);
         try {
             Response response = uploadManager.put(data, key, token);
             //解析上传成功的结果
             DefaultPutRet putRet = new Gson().fromJson(response.bodyString(), DefaultPutRet.class);
-            System.out.println(putRet.key);
-            System.out.println(putRet.hash);
             return putRet.key;
         } catch (QiniuException ex) {
-            Response r = ex.response;
-            System.err.println(r.toString());
-            try {
-                System.err.println(r.bodyString());
-            } catch (QiniuException ex2) {
-                //ignore
-            }
+            System.err.println(ex.error());
+            return null;
+        }
+    }
+
+    /**
+     * 上传文件到七牛
+     * @param file
+     * @param key
+     * @return key
+     */
+    public String uploadToQiniu(File file, String key){
+        Auth auth = Auth.create(QiniuConfig.key, QiniuConfig.secret);
+        String token = auth.uploadToken(QiniuConfig.bucket, key);
+        Configuration cfg = new Configuration(Zone.autoZone());
+        UploadManager uploadManager = new UploadManager(cfg);
+        try {
+            Response response = uploadManager.put(file, key, token);
+            //解析上传成功的结果
+            DefaultPutRet putRet = new Gson().fromJson(response.bodyString(), DefaultPutRet.class);
+            return putRet.key;
+        } catch (QiniuException ex) {
+            System.err.println(ex.error());
             return null;
         }
     }

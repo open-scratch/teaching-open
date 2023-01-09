@@ -16,6 +16,7 @@
 import Vue from 'vue'
 import { mapGetters } from 'vuex'
 import { ACCESS_TOKEN } from '@/store/mutation-types'
+import { getFileAccessHttpUrl } from "@/api/manage"
 export default {
   data() {
     return {

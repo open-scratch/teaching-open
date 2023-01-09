@@ -6,7 +6,7 @@
 
 <script>
 import Vue from 'vue'
-import { ACCESS_TOKEN } from '@/store/mutation-types'
+import { ACCESS_TOKEN,SYS_CONFIG } from '@/store/mutation-types'
 import tinymce from 'tinymce/tinymce'
 import Editor from '@tinymce/tinymce-vue'
 import Prism from 'prismjs'
@@ -78,7 +78,7 @@ export default {
     },
     uploadTarget: {
       type: String,
-      default: UPLOAD_TARGET_QINIU,
+      default: Vue.ls.get(SYS_CONFIG).uploadType,
       required: false,
     },
   },
@@ -226,12 +226,12 @@ export default {
         },
       },
       downloadUrl: {
-        local: window._CONFIG['domianURL'] + '/sys/common/download/',
-        qiniu: window._CONFIG['qn_base'],
+        local: this.$store.getters.sysConfig.staticDomain + '/',
+        qiniu: this.$store.getters.sysConfig.qiniuDomain + "/",
       },
       uploadAction: {
         local: window._CONFIG['domianURL'] + '/sys/common/upload',
-        qiniu: '//upload-' + window._CONFIG['qn_area'] + '.qiniup.com',
+        qiniu: '//upload-' + this.$store.getters.sysConfig.qiniuArea + '.qiniup.com',
         oss: '',
         cos: '',
       },

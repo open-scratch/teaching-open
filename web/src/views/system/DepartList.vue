@@ -147,7 +147,6 @@
               >
                 <j-upload
                   v-decorator="['departCover']"
-                  :uploadTarget="'qiniu'"
                   :fileType="'image'"
                   :number="1"
                   :trigger-change="true"

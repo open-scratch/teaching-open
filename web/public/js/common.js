@@ -41,6 +41,19 @@ window.getUserToken = function() {
   return token==null?null:token.value
 }
 
+window.getSysConfig = function(key){
+  var config = JSON.parse(localStorage.getItem("pro__SYS_CONFIG"))
+  if(config && config.value){
+    return config.value[key]
+  }else{
+    return null
+  }
+}
+
+window.getLogo = function(){
+  return getSysConfig('qiniuDomain') + "/" + getSysConfig('logo')
+}
+
 window.getWorkInfo = function(workId, cb) {
   $.ajax({
     url: '/api/teaching/teachingWork/studentWorkInfo',
@@ -162,7 +175,7 @@ window.getQiniuToken = function() {
   function upload2Qiniu(file, key, fileName, observer) {
     var config = {
       useCdnDomain: true,
-      region: qiniu.region[JSON.parse(localStorage.getItem("CONFIG")).qn_area],
+      region: qiniu.region[getSysConfig('qiniuArea')],
       disableStatisticsReport: true
     }
     var putExtra = {
@@ -228,10 +241,10 @@ function getFileAccessHttpUrl(avatar,subStr) {
     return avatar;
   }else{
     if(avatar &&　avatar.length>0 && avatar.indexOf('[')==-1){
-      if(JSON.parse(localStorage.getItem("CONFIG")).defaultUploadType == "qiniu"){
-        return JSON.parse(localStorage.getItem("CONFIG")).qn_base + avatar;
+      if(getSysConfig('uploadType') == "qiniu"){
+        return getSysConfig('qiniuDomain') + '/' + avatar;
       }else{
-        return JSON.parse(localStorage.getItem("CONFIG")).staticDomainURL + avatar;
+        return getSysConfig('staticDomain') + '/' + avatar;
       }
     }
   }

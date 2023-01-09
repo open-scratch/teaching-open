@@ -213,11 +213,7 @@
     window._CONFIG['webURL'] = window.location.protocol + '//' + window.location.hostname + (window.location.port ? ':' + window.location.port : '')
     window._CONFIG['casPrefixUrl'] = 'http://cas.example.org:8443/cas';
     window._CONFIG['onlinePreviewDomainURL'] = 'http://fileview.jeecg.com/onlinePreview'
-    window._CONFIG['staticDomainURL'] = window._CONFIG['domianURL'] + '/sys/common/static/';
     window._CONFIG['pdfDomainURL'] = window._CONFIG['domianURL'] + '/sys/common/pdf/pdfPreviewIframe';
-    window._CONFIG['defaultUploadType'] = 'qiniu' //local本地 qiniu七牛
-    window._CONFIG['qn_base'] = "http://open.qn.teaching.vip/" //七牛云存储地址
-    window._CONFIG['qn_area'] = 'z0' //七牛区域 z0：华东 z1：华北 z2：华南 na0：北美 as0：东南亚 cn-east-2：华东-浙江2
     localStorage.setItem("CONFIG", JSON.stringify(window._CONFIG))
   </script>
 </head>
