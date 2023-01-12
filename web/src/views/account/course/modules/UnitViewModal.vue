@@ -119,10 +119,10 @@ export default {
           window.open('/scratch3/index.html?scene=course&unitId='+unit.id)
           break
         case 3:
-          window.open('/scratchjr/editor.html?mode=edit&filepath=' + this.getFileAccessHttpUrl(unit.courseWork))
+          window.open('/scratchjr/editor.html?scene=course&mode=edit&filepath=' + this.getFileAccessHttpUrl(unit.courseWork))
           break
         case 4:
-          window.open('/python/index.html?lang=turtle&unitId='+unit.id + "&url=" + this.getFileAccessHttpUrl(unit.courseWork))
+          window.open('/python/index.html?scene=course&lang=turtle&unitId='+unit.id + "&url=" + this.getFileAccessHttpUrl(unit.courseWork))
           break
         default:
           window.open(this.getFileAccessHttpUrl(unit.mediaPath))

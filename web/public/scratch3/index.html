@@ -24,6 +24,7 @@
     var workName = urlParams('workName') //作业名
     var departId = urlParams('departId') //班级ID
     var additionalId = urlParams('additionalId') //附加作业ID
+    var scene = urlParams("scene") || 'create' //来源
     var userInfo = getUserInfo();
     var qn_token = getQiniuToken();
     var workStatus = 0
@@ -62,9 +63,6 @@
         alert("上传失败：" + res.message)
       }
     }
-
-    // twl mine create course
-    var scene = urlParams("scene")
 
     window.scratchConfig = {
       logo: {
@@ -321,6 +319,7 @@
           workStatus: workStatus,
           departId: departId,
           additionalId: additionalId,
+          workScene: scene,
         }),
         success: function (res) {
           canShare = true

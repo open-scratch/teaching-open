@@ -18,3 +18,8 @@ alter table teaching_course_unit
 alter table teaching_course_unit
     add show_course_plan tinyint default 0 null comment '对学生显示教案' after course_plan;
 
+alter table teaching_work
+    add work_scene varchar(20) null comment '来源场景';
+update teaching_work set work_scene = 'course' where course_id != '';
+update teaching_work set work_scene = 'additional' where additional_id != '';
+update teaching_work set work_scene = 'create' where (additional_id = '' or additional_id is null) and (course_id = '' or course_id is null);

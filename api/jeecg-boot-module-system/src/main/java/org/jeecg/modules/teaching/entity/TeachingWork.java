@@ -106,4 +106,8 @@ public class TeachingWork implements Serializable {
 	@Excel(name = "删除标识", width = 15)
     @ApiModelProperty(value = "删除标识")
     private java.lang.Integer delFlag;
+
+    @Excel(name = "提交场景", width = 15)
+    @ApiModelProperty(value = "提交场景")
+    private java.lang.String workScene; //create exam course
 }

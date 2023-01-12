@@ -10,8 +10,8 @@
             </a-form-item>
           </a-col>
           <a-col :xl="6" :lg="7" :md="8" :sm="24">
-            <a-form-item label="分配班级">
-              <j-select-depart placeholder="请选择分配班级" :onlyLeaf="true" :onlyCategory="3" :rootOpened="true" v-model="queryParam.workDept" />
+            <a-form-item label="班级">
+              <j-select-depart placeholder="请选择班级" :onlyLeaf="true" :onlyCategory="3" :rootOpened="true" v-model="queryParam.workDept" />
             </a-form-item>
           </a-col>
           <a-col :xl="6" :lg="7" :md="8" :sm="24">
@@ -50,16 +50,17 @@
       </div>
 
       <a-table
+        class="j-table-force-nowrap"
         ref="table"
         size="middle"
         bordered
         rowKey="id"
+        :scroll="{x:true}"
         :columns="columns"
         :dataSource="dataSource"
         :pagination="ipagination"
         :loading="loading"
         :rowSelection="{ selectedRowKeys: selectedRowKeys, onChange: onSelectChange }"
-        class="j-table-force-nowrap"
         @change="handleTableChange"
       >
         <template slot="htmlSlot" slot-scope="text">
@@ -187,7 +188,7 @@ export default {
           title: '操作',
           dataIndex: 'action',
           align: 'center',
-          // fixed:"right",
+          fixed:"right",
           width: 147,
           scopedSlots: { customRender: 'action' },
         },

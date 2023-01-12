@@ -9,11 +9,31 @@
                 <a-input placeholder="请输入作业名" v-model="queryParam.workName"></a-input>
               </a-form-item>
             </a-col>
-            <a-col :xl="6" :lg="7" :md="8" :sm="24">
-              <a-form-item label="作业类型">
-                <j-dict-select-tag placeholder="请选择作业类型" v-model="queryParam.workType" dictCode="work_type" />
+            <a-col :xl="4" :lg="5" :md="7" :sm="24">
+            <a-form-item label="账号">
+              <a-input placeholder="请输入账号" v-model="queryParam['username']"></a-input>
+            </a-form-item>
+          </a-col>
+          <a-col :xl="4" :lg="5" :md="7" :sm="24">
+            <a-form-item label="学生名">
+              <a-input placeholder="请输入学生名" v-model="queryParam['realname']"></a-input>
+            </a-form-item>
+          </a-col>
+          <a-col :xl="4" :lg="5" :md="7" :sm="24">
+              <a-form-item label="类型">
+                <j-dict-select-tag placeholder="请选择类型" v-model="queryParam.workType" dictCode="work_type" />
               </a-form-item>
             </a-col>
+          <a-col :xl="4" :lg="5" :md="7" :sm="24">
+            <a-form-item label="创作来源">
+              <a-select v-model="queryParam.workScene" @change="workSceneChange">
+                <a-select-option value="">全部</a-select-option>
+                <a-select-option value="create">创作</a-select-option>
+                <a-select-option value="course">课程作业</a-select-option>
+                <a-select-option value="additional">班级作业</a-select-option>
+              </a-select>
+            </a-form-item>
+          </a-col>
           <template v-if="toggleSearchStatus">
             <a-col :xl="6" :lg="7" :md="8" :sm="24">
             <a-form-item label="用户ID">
@@ -25,11 +45,11 @@
               <a-input placeholder="请输入课程ID" v-model="queryParam.courseId"></a-input>
             </a-form-item>
           </a-col>
-          <!-- <a-col :xl="6" :lg="7" :md="8" :sm="24">
+          <a-col :xl="6" :lg="7" :md="8" :sm="24">
             <a-form-item label="班级作业ID">
               <a-input placeholder="请输入班级作业ID" v-model="queryParam.additionalId"></a-input>
             </a-form-item>
-          </a-col> -->
+          </a-col>
           </template>
           <a-col :xl="6" :lg="7" :md="8" :sm="24">
             <span style="float: left; overflow: hidden" class="table-page-search-submitButtons">
@@ -79,10 +99,12 @@
       </div>
 
       <a-table
+        class="j-table-force-nowrap"
         ref="table"
         size="middle"
         bordered
         rowKey="id"
+        :scroll="{x:true}"
         :columns="columns"
         :dataSource="dataSource"
         :pagination="ipagination"
@@ -97,7 +119,7 @@
           <span v-if="!text" style="font-size: 12px; font-style: italic">无此图片</span>
           <img
             v-else
-            :src="getImgView(text)"
+            :src="text"
             height="25px"
             alt="图片不存在"
             style="max-width: 80px; font-size: 12px; font-style: italic"
@@ -187,35 +209,56 @@ export default {
           },
         },
         {
-          title: '用户',
+          title: '账号',
           align: 'center',
           dataIndex: 'username',
+          width: 100
         },
         {
-          title: '课程单元',
+          title: '姓名',
           align: 'center',
-          dataIndex: 'courseId_dictText',
+          dataIndex: 'realname',
+          width: 100
         },
-        {
-          title: '班级作业',
-          align: 'center',
-          dataIndex: 'additionalId_dictText',
 
-        },
         {
           title: '作业名',
           align: 'center',
           dataIndex: 'workName',
         },
         {
+          title:'封面',
+          align:"center",
+          dataIndex: 'coverFileKey_url',
+          scopedSlots: {customRender: 'imgSlot'}
+        },
+        {
+          title: '创作来源',
+          align: 'center',
+          width: 100,
+          dataIndex: 'workScene',
+          sorter: true,
+          customRender(v){
+            switch(v){
+              case "create": return "自由创作"
+              case "additional": return "班级作业"
+              case "course": return "课程作业"
+              case "exam": return "考试作品"
+              default: return v
+            }
+          }
+        },
+        {
           title: '作业类型',
           align: 'center',
           dataIndex: 'workType_dictText',
+          sorter: true,
         },
         {
           title: '作业状态',
           align: 'center',
           dataIndex: 'workStatus_dictText',
+          sorter: true,
         },
         {
           title: '查看次数',
@@ -231,11 +274,23 @@ export default {
           title: '提交时间',
           align: 'center',
           dataIndex: 'createTime',
+          sorter: true,
+        },
+        {
+          title: '课程单元',
+          align: 'center',
+          dataIndex: 'courseId_dictText',
+        },
+        {
+          title: '班级作业',
+          align: 'center',
+          dataIndex: 'additionalId_dictText',
         },
         {
           title: '操作',
           dataIndex: 'action',
           align: 'center',
+          fixed:"right",
           scopedSlots: { customRender: 'action' },
         },
       ],
@@ -249,6 +304,7 @@ export default {
         shareUrl: window._CONFIG['webURL'] + '/scratch3/scratch-mobile.html?workId=',
       },
       dictOptions: {},
+      disableMixinCreated: true
     }
   },
   computed: {
@@ -256,10 +312,20 @@ export default {
       return `${window._CONFIG['domianURL']}/${this.url.importExcelUrl}`
     },
   },
+  created(){
+    if(this.$route.query.workScene){
+      this.queryParam.workScene = this.$route.query.workScene
+    }
+    this.searchQuery()
+  },
   methods: {
     initDictConfig() {},
     handlePreview(record) {
       this.$refs.previewModal.previewCode(record)
+    },
+    workSceneChange(v) {
+      this.queryParam.workScene = v
+      this.searchQuery()
     },
     handleSend(id) {
       this.sendWorkId = id

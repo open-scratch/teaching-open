@@ -15,6 +15,9 @@
     var uploadParam = {}
     var workId = urlParams('workId')
     var unitId = urlParams('unitId')
+    var departId = urlParams('departId') //班级ID
+    var additionalId = urlParams('additionalId') //附加作业ID
+    var scene = urlParams("scene") || 'create' //来源
     var access_token = getUserToken()
     var userInfo = getUserInfo();
     var qn_token = getQiniuToken();
@@ -100,7 +103,11 @@
           workFile: uploadParam.projectKey,
           workName: uploadParam.projectTitle,
           id: workId,
-          workType: 3
+          workType: 3,
+          workStatus: 1,
+          departId: departId,
+          additionalId: additionalId,
+          workScene: scene,
         }),
         success: function (res) {
           canShare = true

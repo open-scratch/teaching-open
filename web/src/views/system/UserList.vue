@@ -138,10 +138,12 @@
       </div>
 
       <a-table
+        class="j-table-force-nowrap"
         ref="table"
         bordered
         size="middle"
         rowKey="id"
+        :scroll="{x:true}"
         :columns="columns"
         :dataSource="dataSource"
         :pagination="ipagination"
@@ -238,7 +240,7 @@ export default {
       recycleBinVisible: false,
       roleList: [],
       columns: [
-        /*{
+        {
             title: '#',
             dataIndex: '',
             key:'rowIndex',
@@ -247,7 +249,13 @@ export default {
             customRender:function (t,r,index) {
               return parseInt(index)+1;
             }
-          },*/
+          },
+          {
+          title: '用户ID',
+          align: 'center',
+          dataIndex: 'id',
+          width: 120,
+        },
         {
           title: '用户账号',
           align: 'center',
@@ -331,6 +339,7 @@ export default {
           dataIndex: 'action',
           scopedSlots: { customRender: 'action' },
           align: 'center',
+          fixed:"right",
           width: 170,
         },
       ],
