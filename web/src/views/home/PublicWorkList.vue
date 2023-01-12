@@ -2,7 +2,8 @@
   <div class="container">
     <a-layout>
       <a-layout-header>
-        <Header />
+        <Header/>
+        <Banner/>
       </a-layout-header>
       <a-layout>
         <a-layout-content>
@@ -116,6 +117,7 @@
 <script>
 import { getAction, getFileAccessHttpUrl } from '@/api/manage'
 import Header from './modules/Header'
+import Banner from './modules/Banner'
 import Footer from './modules/Footer'
 import UserEnter from './modules/UserEnter'
 import QrCode from '@/components/tools/QrCode'
@@ -127,6 +129,7 @@ export default {
     Header,
     Footer,
     UserEnter,
+    Banner
   },
   data() {
     return {
@@ -225,19 +228,29 @@ export default {
   min-height: calc(100vh - 200px);
 }
 .ant-layout-header {
-  height: 250px;
+  height: auto;
+  min-height: 250px;
   width: 100%;
+  margin-bottom: 80px;
+  /deep/.banner{
+    border-radius: 10px;
+    overflow: hidden;
+  }
 }
 
 .ant-layout-has-sider {
   max-width: 1100px;
   margin: -100px auto 0;
 }
-
+.ant-layout-sider{
+  z-index: 99;
+}
 .ant-layout-content {
   padding: 40px;
   .user-enter{
+    margin-top: 80px;
     margin-bottom: 30px;
+    z-index: 9;
   }
   .panel-works {
     margin-bottom: 30px;

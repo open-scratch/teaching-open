@@ -29,11 +29,11 @@ export default {
 
 <style scoped lang="less">
 .header{
-    margin-top: 25px;
+    margin: 15px 0;
     line-height: 30px;
 }
 .logo {
-  max-height: 100px;
+  max-height: 50px;
   width: auto;
   margin-right: 20px;
   display: inline-block;

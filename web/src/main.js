@@ -17,6 +17,11 @@ import Print from 'vue-print-nb-jeecg'
 import preview from 'vue-photo-preview'
 import 'vue-photo-preview/dist/skin.css'
 
+//swiper
+import VueAwesomeSwiper from 'vue-awesome-swiper'
+// import "swiper/css/swiper.css";
+import 'swiper/dist/css/swiper.css'
+
 require('@jeecg/antd-online-beta220')
 require('@jeecg/antd-online-beta220/dist/OnlineForm.css')
 
@@ -57,8 +62,9 @@ Vue.use(preview)
 Vue.use(vueBus);
 Vue.use(JeecgComponents);
 Vue.use(VueAreaLinkage);
+Vue.use(VueAwesomeSwiper, /* { default options with global component } */)
 
-let cacheTime = 60000 //缓存1分钟
+let cacheTime = 3600000 //缓存1小时（缓存失效时，需刷新页面重新加载）
 
 const start = async()=>{
   //获取配置
