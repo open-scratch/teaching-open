@@ -4,13 +4,13 @@
       <a-list-item slot="renderItem" slot-scope="item">
         <a-card :hoverable="true">
           <template class="ant-card-extra" slot="extra">
-            <span class="create-time">{{item.createTime}}</span>
-            <span style="margin-left: 6px">{{ item.workType_dictText }}</span>
+            <a :href="getEditorHref(item)" target="_blank">
+              <h3><a-tag color="blue">{{item.workType_dictText}}</a-tag>{{ item.workName }}</h3>
+            </a>
           </template>
           <a-card-meta>
             <div class="meta-cardInfo" slot="description">
               <a :href="getEditorHref(item)" target="_blank">
-                <p>{{item.workName}}</p>
                 <img v-if="item.coverFileKey" :src="getFileAccessHttpUrl(item.coverFileKey)" />
                 <img v-else src="@/assets/python.png" alt="">
               </a>
@@ -114,9 +114,10 @@ export default {
   .meta-cardInfo {
     zoom: 1;
     margin-top: 16px;
-    height: 200px;
+    min-height: 200px;
     img {
       width: 100%;
+      height: 200px;
     }
     > div {
       position: relative;

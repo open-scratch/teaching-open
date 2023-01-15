@@ -210,7 +210,13 @@ public class SysRoleController {
 		LoginUser sysUser = (LoginUser) SecurityUtils.getSubject().getPrincipal();
 		Integer myRoleLevel = sysUserService.getUserRoleLevel(sysUser.getId());
 		Result<List<SysRole>> result = new Result<>();
-		List<SysRole> list = sysRoleService.list(new QueryWrapper<SysRole>().lambda().le(SysRole::getRoleLevel, myRoleLevel));
+		List<SysRole> list;
+		if(SecurityUtils.getSubject().hasRole("admin") || SecurityUtils.getSubject().hasRole("dev")){
+			//如果是管理员，展示全部
+			list = sysRoleService.list();
+		}else{
+			list = sysRoleService.list(new QueryWrapper<SysRole>().lambda().lt(SysRole::getRoleLevel, myRoleLevel));
+		}
 		if(list==null||list.size()<=0) {
 			result.error500("未找到角色信息");
 		}else {

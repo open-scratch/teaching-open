@@ -234,17 +234,6 @@ public class SysUserServiceImpl extends ServiceImpl<SysUserMapper, SysUser> impl
 		return info;
 	}
 
-	// 根据部门Id查询
-	@Override
-	public IPage<SysUser> getUserByDepId(Page<SysUser> page, String departId,String username) {
-		return userMapper.getUserByDepId(page, departId,username);
-	}
-
-	@Override
-	public IPage<SysUser> getUserByDepIds(Page<SysUser> page, List<String> departIds, String username, String realname) {
-		return userMapper.getUserByDepIds(page, departIds,username, realname);
-	}
-
 	@Override
 	public Map<String, String> getDepNamesByUserIds(List<String> userIds) {
 		List<SysUserDepVo> list = this.baseMapper.getDepNamesByUserIds(userIds);
@@ -420,8 +409,8 @@ public class SysUserServiceImpl extends ServiceImpl<SysUserMapper, SysUser> impl
 	}
 
 	@Override
-	public Page<SysUserModel> getUserList(Page<SysUserModel> page, QueryWrapper<SysUserModel> queryWrapper, List<String> deptIds) {
-		List<SysUserModel> list = userMapper.getUserList(page, queryWrapper, deptIds);
+	public Page<SysUser> getUserList(Page<SysUser> page, QueryWrapper<SysUser> queryWrapper) {
+		List<SysUser> list = userMapper.getUserList(page, queryWrapper);
 		return page.setRecords(list);
 	}
 

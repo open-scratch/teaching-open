@@ -1,9 +1,8 @@
 <template>
   <a-modal
-    title="选择部门"
+    title="选择班级"
     :width="modalWidth"
     :visible="visible"
-    :confirmLoading="confirmLoading"
     @ok="handleSubmit"
     @cancel="handleCancel"
     cancelText="关闭">
@@ -11,6 +10,7 @@
       <a-input-search style="margin-bottom: 1px" placeholder="请输入部门名称按回车进行搜索" @search="onSearch" />
       <a-tree
         checkable
+        class="my-dept-select-tree"
         :treeData="treeData"
         :checkStrictly="true"
         @check="onCheck"
@@ -35,10 +35,10 @@
 </template>
 
 <script>
-  import { queryDepartTreeList } from '@/api/api'
+  import { queryDepartTreeList, queryMyDepartTreeList } from '@/api/api'
   export default {
     name: 'JSelectDepartModal',
-    props:['modalWidth','multi','rootOpened','departId'],
+    props:['modalWidth','multi','rootOpened','onlyLeaf','onlyCategory','departId'],
     data(){
       return {
         visible:false,
@@ -54,6 +54,7 @@
     },
     created(){
       this.loadDepart();
+      console.log(this.onlyLeaf, this.onlyCategory);
     },
     watch:{
       departId(){
@@ -77,17 +78,40 @@
         this.checkedKeys=[]
       },
       loadDepart(){
-        queryDepartTreeList().then(res=>{
+        queryMyDepartTreeList().then(res=>{
           if(res.success){
             let arr = [...res.result]
             this.reWriterWithSlot(arr)
             this.treeData = arr
             this.initDepartComponent()
+            if(this.onlyLeaf || this.onlyCategory){
+              this.disableNoneChildNode(this.treeData)
+            }
             if(this.rootOpened){
               this.initExpandedKeys(res.result)
             }
           }
         })
+      },
+      //递归禁用节点
+      disableNoneChildNode(treeData){
+        for(var i=0; i<treeData.length; i++){
+          if(this.onlyCategory!=null){
+            if(treeData[i].orgCategory==this.onlyCategory){
+              treeData[i].disabled = false
+            }else{
+              treeData[i].disabled = true
+            }
+          }
+          if(treeData[i].isLeaf){
+            // treeData[i].disabled = false
+          }else{
+            if(this.onlyLeaf){
+              treeData[i].disabled = true
+            }
+            this.disableNoneChildNode(treeData[i].children)
+          }
+        }
       },
       initDepartComponent(){
         let names = ''
@@ -236,6 +260,11 @@
 
 </script>
 
-<style scoped>
+<style lang="less" scoped>
+  // 限制部门选择树高度，避免部门太多时点击确定不便
+  .my-dept-select-tree{
+    height: 350px;
+    overflow-y: scroll;
+  }
 
 </style>

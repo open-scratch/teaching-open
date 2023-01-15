@@ -92,9 +92,10 @@
 
     <!-- 操作按钮区域 -->
     <div class="table-operator" style="border-top: 5px">
-      <a-button @click="handleAdd" type="primary" icon="plus">添加用户</a-button>
-      <a-button type="primary" icon="download" @click="handleExportXls('用户信息')">导出</a-button>
+      <a-button @click="handleAdd" v-has="'user:add'" type="primary" icon="plus">添加用户</a-button>
+      <a-button type="primary" v-has="'user:export'" icon="download" @click="handleExportXls('用户信息')">导出</a-button>
       <a-upload
+        v-has="'user:import'"
         name="file"
         :showUploadList="false"
         :multiple="false"
@@ -104,21 +105,12 @@
       >
         <a-button type="primary" icon="import">导入</a-button>
       </a-upload>
-      <a-button type="primary" icon="hdd" @click="recycleBinVisible = true">回收站</a-button>
+      <a-button v-has="'user:recycle'" type="primary" icon="hdd" @click="recycleBinVisible = true">回收站</a-button>
       <a-dropdown v-if="selectedRowKeys.length > 0">
         <a-menu slot="overlay" @click="handleMenuClick">
-          <a-menu-item key="1">
-            <a-icon type="delete" @click="batchDel" />
-            删除
-          </a-menu-item>
-          <a-menu-item key="2">
-            <a-icon type="lock" @click="batchFrozen('2')" />
-            冻结
-          </a-menu-item>
-          <a-menu-item key="3">
-            <a-icon type="unlock" @click="batchFrozen('1')" />
-            解冻
-          </a-menu-item>
+          <a-menu-item key="1" v-has="'user:del'"> <a-icon type="delete" @click="batchDel" />删除 </a-menu-item>
+          <a-menu-item key="2" v-has="'user:status'"> <a-icon type="lock" @click="batchFrozen('2')" />冻结 </a-menu-item>
+          <a-menu-item key="3" v-has="'user:status'"> <a-icon type="unlock" @click="batchFrozen('1')" />解冻 </a-menu-item>
         </a-menu>
         <a-button style="margin-left: 8px">
           批量操作
@@ -158,8 +150,7 @@
         </template>
 
         <span slot="action" slot-scope="text, record">
-          <!-- <a @click="handleEdit(record)" v-has="'user:edit'">编辑</a>-->
-          <a @click="handleEdit(record)">编辑</a>
+          <a @click="handleEdit(record)" v-has="'user:edit'">编辑</a>
 
           <a-divider type="vertical" />
 
@@ -174,19 +165,19 @@
                 <a href="javascript:;" @click="handleChangePassword(record.username)">密码</a>
               </a-menu-item>
 
-              <a-menu-item>
+              <a-menu-item v-has="'user:del'">
                 <a-popconfirm title="确定删除吗?" @confirm="() => handleDelete(record.id)">
                   <a>删除</a>
                 </a-popconfirm>
               </a-menu-item>
 
-              <a-menu-item v-if="record.status == 1">
+              <a-menu-item v-if="record.status == 1" v-has="'user:status'">
                 <a-popconfirm title="确定冻结吗?" @confirm="() => handleFrozen(record.id, 2, record.username)">
                   <a>冻结</a>
                 </a-popconfirm>
               </a-menu-item>
 
-              <a-menu-item v-if="record.status == 2">
+              <a-menu-item v-if="record.status == 2" v-has="'user:status'">
                 <a-popconfirm title="确定解冻吗?" @confirm="() => handleFrozen(record.id, 1, record.username)">
                   <a>解冻</a>
                 </a-popconfirm>

@@ -46,16 +46,6 @@ public interface SysUserMapper extends BaseMapper<SysUser> {
 	List<SysUserDepVo> getDepNamesByUserIds(@Param("userIds")List<String> userIds);
 
 	/**
-	 *  根据部门Ids,查询部门下用户信息
-	 * @param page
-	 * @param departIds
-	 * @return
-	 */
-	IPage<SysUser> getUserByDepIds(Page page, @Param("departIds") List<String> departIds,
-								   @Param("username") String username,
-								   @Param("realname") String realname);
-
-	/**
 	 * 根据角色Id查询用户信息
 	 * @param page
 	 * @param
@@ -134,8 +124,7 @@ public interface SysUserMapper extends BaseMapper<SysUser> {
 	 */
 	int deleteLogicDeleted(@Param("userIds") String userIds);
 
-	List<SysUserModel> getUserList(Page<SysUserModel> page, @Param("ew")QueryWrapper<SysUserModel> queryWrapper,
-								   @Param("deptIds") List<String> deptIds);
+	List<SysUser> getUserList(Page<SysUser> page, @Param("ew")QueryWrapper<SysUser> queryWrapper);
     /** 更新空字符串为null【此写法有sql注入风险，禁止随便用】 */
     int updateNullByEmptyString(@Param("fieldName") String fieldName);
     

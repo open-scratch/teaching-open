@@ -314,7 +314,7 @@
       add () {
         this.picUrl = "";
         this.refresh();
-        this.edit({activitiSync:'1'});
+        this.edit({activitiSync:'1', userIdentity:'1'});
       },
       edit (record) {
         this.resetScreenSize(); // 调用此方法,根据屏幕宽度自适应调整抽屉的宽度
@@ -438,7 +438,17 @@
               formData.avatar = null;
             }
             formData.selectedroles = this.selectedRole.length>0?this.selectedRole.join(","):'';
+            if(formData.selectedroles == ''){
+              that.$message.warning('请选择角色');
+              that.confirmLoading = false;
+              return;
+            }
             formData.selecteddeparts = this.userDepartModel.departIdList.length>0?this.userDepartModel.departIdList.join(","):'';
+            if(formData.selecteddeparts == ''){
+              that.$message.warning('请选择班级');
+              that.confirmLoading = false;
+              return;
+            }
             formData.userIdentity=this.userIdentity;
             //如果是上级择传入departIds,否则为空
             if(this.userIdentity==="2"){

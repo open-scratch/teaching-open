@@ -48,24 +48,6 @@
 		</foreach>
 	</select>
 
-	<!-- 通过多个部门IDS，查询部门下的用户信息 -->
-	<select id="getUserByDepIds" resultType="org.jeecg.modules.system.entity.SysUser">
-		select * from sys_user where del_flag = 0
-		<if test="departIds!=null  and departIds.size()>0">
-			and id in (select user_id from sys_user_depart where dep_id in
-			<foreach collection="departIds" index="index" item="id" open="(" separator="," close=")">
-				#{id}
-			</foreach>
-			)
-		</if>
-		<if test="username!=null and username!=''">
-			and username = #{username}
-		</if>
-		<if test="realname!=null and realname!=''">
-			and realname like concat('%',#{realname},'%')
-		</if>
-	</select>
-
 	<!-- 根据角色Id查询 -->
 	<select id="getUserByRoleId" resultType="org.jeecg.modules.system.entity.SysUser">
 		select * from sys_user where del_flag = 0 and id in (select user_id from sys_user_role where role_id=#{roleId})

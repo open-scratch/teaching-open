@@ -92,20 +92,6 @@ public interface ISysUserService extends IService<SysUser> {
 	public SysUserCacheInfo getCacheUser(String username);
 
 	/**
-	 * 根据部门Id查询
-	 * @param
-	 * @return
-	 */
-	public IPage<SysUser> getUserByDepId(Page<SysUser> page, String departId, String username);
-
-	/**
-	 * 根据部门Ids查询
-	 * @param
-	 * @return
-	 */
-	public IPage<SysUser> getUserByDepIds(Page<SysUser> page, List<String> departIds, String username, String realname);
-
-	/**
 	 * 根据 userIds查询，查询用户所属部门的名称（多个部门名逗号隔开）
 	 * @param
 	 * @return
@@ -216,7 +202,7 @@ public interface ISysUserService extends IService<SysUser> {
 	 */
 	boolean removeLogicDeleted(List<String> userIds);
 
-    IPage<SysUserModel> getUserList(Page<SysUserModel> page, QueryWrapper<SysUserModel> queryWrapper, List<String> deptIds);
+    IPage<SysUser> getUserList(Page<SysUser> page, QueryWrapper<SysUser> queryWrapper);
 
     SysUser getUserByOpenId(String openId);
     /**

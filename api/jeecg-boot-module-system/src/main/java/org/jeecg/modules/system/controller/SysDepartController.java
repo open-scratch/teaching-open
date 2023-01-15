@@ -241,25 +241,6 @@ public class SysDepartController extends BaseController {
 	 */
 	@RequestMapping(value = "/queryIdTree", method = RequestMethod.GET)
 	public Result<List<DepartIdModel>> queryIdTree() {
-//		Result<List<DepartIdModel>> result = new Result<List<DepartIdModel>>();
-//		List<DepartIdModel> idList;
-//		try {
-//			idList = FindsDepartsChildrenUtil.wrapDepartIdModel();
-//			if (idList != null && idList.size() > 0) {
-//				result.setResult(idList);
-//				result.setSuccess(true);
-//			} else {
-//				sysDepartService.queryTreeList();
-//				idList = FindsDepartsChildrenUtil.wrapDepartIdModel();
-//				result.setResult(idList);
-//				result.setSuccess(true);
-//			}
-//			return result;
-//		} catch (Exception e) {
-//			log.error(e.getMessage(),e);
-//			result.setSuccess(false);
-//			return result;
-//		}
 		Result<List<DepartIdModel>> result = new Result<>();
 		try {
 			List<DepartIdModel> list = sysDepartService.queryDepartIdTreeList();

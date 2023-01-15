@@ -37,7 +37,7 @@
 <script>
   import pick from 'lodash.pick'
   import { getAction } from '@/api/manage'
-  import { queryIdTree } from '@/api/api'
+  import { queryIdTree,queryMyDepartTreeList } from '@/api/api'
   import userModal from './UserModal'
   export default {
     name: "DepartWindow",
@@ -146,7 +146,8 @@
         console.log('onCheck', checkedKeys, info);
       },
       queryDepartTree(){
-        queryIdTree().then((res)=>{
+        // queryIdTree().then((res)=>{
+        queryMyDepartTreeList().then((res)=>{
           if(res.success){
             this.departTree = res.result;
             if(this.checkedKeys&&this.checkedKeys.length >0){

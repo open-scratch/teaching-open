@@ -1,7 +1,11 @@
 <template>
   <div class="components-input-demo-presuffix">
     <!---->
-    <a-input @click="openModal" placeholder="请点击选择部门" v-model="departNames" readOnly :disabled="disabled">
+    <a-input
+      @click="openModal" 
+      :placeholder="placeholder?placeholder:(onlyCategory==3?'请选择班级':'请选择部门')"
+      v-model="departNames"
+      :disabled="disabled">
       <a-icon slot="prefix" type="cluster" title="部门选择控件"/>
       <a-icon v-if="departIds" slot="suffix" type="close-circle" @click="handleEmpty" title="清空"/>
     </a-input>
@@ -11,6 +15,8 @@
       :modal-width="modalWidth"
       :multi="multi"
       :rootOpened="rootOpened"
+      :onlyLeaf="onlyLeaf"
+      :onlyCategory="onlyCategory"
       :depart-id="departIds"
       @ok="handleOK"
       @initComp="initComp"/>
@@ -40,7 +46,21 @@
         default:true,
         required:false
       },
+      onlyLeaf:{ //限制仅为叶子节点
+        type:Boolean, 
+        default:false,
+        required:false
+      },
+      onlyCategory:{ //限制部门类型
+        type: Number,
+        default: null,
+        required: false
+      },
       value:{
+        type:String,
+        required:false
+      },
+      placeholder:{
         type:String,
         required:false
       },
@@ -76,6 +96,18 @@
     methods:{
       initComp(departNames){
         this.departNames = departNames
+        //update-begin-author:lvdandan date:20200513 for:TESTA-438 部门选择组件自定义返回值，数据无法回填
+        //TODO 当返回字段为部门名称时会有问题,因为部门名称不唯一
+        //返回字段不为id时，根据返回字段获取id
+        if(this.customReturnField !== 'id' && this.value){
+          const dataList = this.$refs.innerDepartSelectModal.dataList;
+          console.log('this.value',this.value)
+          this.departIds = this.value.split(',').map(item => {
+            const data = dataList.filter(d=>d[this.customReturnField] === item)
+            return data.length > 0 ? data[0].id : ''
+          }).join(',')
+        }
+        //update-end-author:lvdandan date:20200513 for:TESTA-438 部门选择组件自定义返回值，数据无法回填
       },
       openModal(){
         this.$refs.innerDepartSelectModal.show()
