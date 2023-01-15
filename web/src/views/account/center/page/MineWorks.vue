@@ -12,7 +12,7 @@
             <div class="meta-cardInfo" slot="description">
               <a :href="getEditorHref(item)" target="_blank">
                 <img v-if="item.coverFileKey" :src="getFileAccessHttpUrl(item.coverFileKey)" />
-                <img v-else src="@/assets/python.png" alt="">
+                <img v-else src="@/assets/code.png" alt="">
               </a>
             </div>
           </a-card-meta>
