@@ -13,10 +13,10 @@
           <div class="panel-works">
             <h1 class="panel-title">
               <a-icon type="like" theme="twoTone" two-tone-color="#52c41a" />
-              最赞作品
+              精选作品
             </h1>
             <a-row type="flex" justify="space-between" :gutter="[24, 24]">
-              <a-col v-for="(item, index) in greatWork" :key="index" :xs="24" :sm="12" :md="12" :lg="7" :xl="7">
+              <a-col v-for="(item, index) in greatLeaderboard" :key="index" :xs="24" :sm="12" :md="12" :lg="7" :xl="7">
                 <a-card class="work-card">
                   <a @click="toDetail(item.id)" target="_blank">
                     <img class="work-cover" v-if="item.coverFileKey" :src="item.coverFileKey_url" />
@@ -38,7 +38,38 @@
                 </a-card>
               </a-col>
             </a-row>
-            <a-button class="load-more" type="link" @click="getGreatWork">加载更多……</a-button>
+            <a-button class="load-more" type="link" @click="getGreatLeaderboard">加载更多……</a-button>
+          </div>
+
+          <div class="panel-works">
+            <h1 class="panel-title">
+              <a-icon type="like" theme="twoTone" two-tone-color="#52c41a" />
+              最赞作品
+            </h1>
+            <a-row type="flex" justify="space-between" :gutter="[24, 24]">
+              <a-col v-for="(item, index) in starLeaderboard" :key="index" :xs="24" :sm="12" :md="12" :lg="7" :xl="7">
+                <a-card class="work-card">
+                  <a @click="toDetail(item.id)" target="_blank">
+                    <img class="work-cover" v-if="item.coverFileKey" :src="item.coverFileKey_url" />
+                    <img v-if="item.workType == 4" src="@/assets/python.png" alt="" />
+                  </a>
+                  <a-row type="flex" justify="end">
+                    <a-col :span="5"> <a-icon type="eye" /> {{ item.viewNum }} </a-col>
+                    <a-col :span="5"> <a-icon type="like" /> {{ item.starNum }} </a-col>
+                  </a-row>
+                  <p>{{ item.workName }}</p>
+                  <a-row class="work-author">
+                    <a-col :span="6">
+                      <a-avatar shape="square" class="avatar" :size="40" :src="item.avatar_url" />
+                    </a-col>
+                    <a-col :span="18">
+                      <span>{{ item.realname || item.username }}</span>
+                    </a-col>
+                  </a-row>
+                </a-card>
+              </a-col>
+            </a-row>
+            <a-button class="load-more" type="link" @click="getStarLeaderboard">加载更多……</a-button>
           </div>
 
           <div class="panel-works">
@@ -47,7 +78,7 @@
               最火作品
             </h1>
             <a-row type="flex" justify="space-between" :gutter="[24, 24]">
-              <a-col v-for="(item, index) in hotWork" :key="index" :xs="24" :sm="12" :md="12" :lg="7" :xl="7">
+              <a-col v-for="(item, index) in viewLeaderboard" :key="index" :xs="24" :sm="12" :md="12" :lg="7" :xl="7">
                 <a-card class="work-card">
                   <a @click="toDetail(item.id)" target="_blank">
                     <img class="work-cover" v-if="item.coverFileKey" :src="item.coverFileKey_url" />
@@ -69,38 +100,7 @@
                 </a-card>
               </a-col>
             </a-row>
-            <a-button class="load-more" type="link" @click="getHotWork">加载更多……</a-button>
-          </div>
-
-          <div class="panel-works">
-            <h1 class="panel-title">
-              <a-icon type="clock-circle" theme="twoTone" />
-              最新作品
-            </h1>
-            <a-row type="flex" justify="space-between" :gutter="[24, 24]">
-              <a-col v-for="(item, index) in newWork" :key="index" :xs="24" :sm="12" :md="12" :lg="7" :xl="7">
-                <a-card class="work-card">
-                  <a @click="toDetail(item.id)" target="_blank">
-                    <img class="work-cover" v-if="item.coverFileKey" :src="item.coverFileKey_url" />
-                    <img v-if="item.workType == 4" src="@/assets/python.png" alt="" />
-                  </a>
-                  <a-row type="flex" justify="end">
-                    <a-col :span="5"> <a-icon type="eye" /> {{ item.viewNum }} </a-col>
-                    <a-col :span="5"> <a-icon type="like" /> {{ item.starNum }} </a-col>
-                  </a-row>
-                  <p>{{ item.workName }}</p>
-                  <a-row class="work-author">
-                    <a-col :span="6">
-                      <a-avatar shape="square" class="avatar" :size="40" :src="item.avatar_url" />
-                    </a-col>
-                    <a-col :span="18">
-                      <span>{{ item.realname || item.username }}</span>
-                    </a-col>
-                  </a-row>
-                </a-card>
-              </a-col>
-            </a-row>
-            <a-button class="load-more" type="link" @click="getNewWork">加载更多……</a-button>
+            <a-button class="load-more" type="link" @click="getViewLeaderboard">加载更多……</a-button>
           </div>
         </a-layout-content>
         <a-layout-sider v-if="!_isMobile()">
@@ -133,64 +133,64 @@ export default {
   },
   data() {
     return {
-      newWork: [],
-      greatWork: [],
-      hotWork: [],
+      greatLeaderboard: [],
+      starLeaderboard:[],
+      viewLeaderboard: [],
       page: {
-        newWork: 0,
-        greatWork: 0,
-        hotWork: 0,
+        starLeaderboard: 0,
+        viewLeaderboard: 0,
+        greatLeaderboard: 0
       },
     }
   },
   created() {
-    this.getNewWork()
-    this.getGreatWork()
-    this.getHotWork()
+    this.getGreatLeaderboard()
+    this.getStarLeaderboard()
+    this.getViewLeaderboard()
   },
   methods: {
     getFileAccessHttpUrl,
-    getNewWork() {
-      this.page.newWork += 1
+    getGreatLeaderboard() {
+      this.page.greatLeaderboard += 1
       getAction('/teaching/teachingWork/leaderboard', {
-        orderBy: 'time',
-        pageSize: this._isMobile() ? 3 : 6,
-        pageNo: this.page.newWork,
+        orderBy: 'create_time',
+        workStatus: 4,
+        pageSize: 3,
+        pageNo: this.page.greatLeaderboard,
       }).then((res) => {
         if (res.success) {
-          this.newWork = this.newWork.concat(res.result.records)
-          console.log(this.newWork)
-          if (res.result.records.length == 0 && this.page.newWork > 1) {
+          this.greatLeaderboard = this.greatLeaderboard.concat(res.result.records)
+          if (res.result.records.length == 0 && this.page.greatLeaderboard > 1) {
             this.$message.info('已加载完啦！')
           }
         }
       })
     },
-    getGreatWork() {
-      this.page.greatWork += 1
+    getStarLeaderboard() {
+      this.page.starLeaderboard += 1
       getAction('/teaching/teachingWork/leaderboard', {
         orderBy: 'star',
         pageSize: this._isMobile() ? 3 : 6,
-        pageNo: this.page.greatWork,
+        pageNo: this.page.starLeaderboard,
       }).then((res) => {
         if (res.success) {
-          this.greatWork = this.greatWork.concat(res.result.records)
-          if (res.result.records.length == 0 && this.page.greatWork > 1) {
+          this.starLeaderboard = this.starLeaderboard.concat(res.result.records)
+          if (res.result.records.length == 0 && this.page.starLeaderboard > 1) {
             this.$message.info('已加载完啦！')
           }
         }
       })
     },
-    getHotWork() {
-      this.page.hotWork += 1
+    getViewLeaderboard() {
+      this.page.viewLeaderboard += 1
       getAction('/teaching/teachingWork/leaderboard', {
         orderBy: 'view',
         pageSize: this._isMobile() ? 3 : 6,
-        pageNo: this.page.hotWork,
+        pageNo: this.page.viewLeaderboard,
       }).then((res) => {
         if (res.success) {
-          this.hotWork = this.hotWork.concat(res.result.records)
-          if (res.result.records.length == 0 && this.page.hotWork > 1) {
+          this.viewLeaderboard = this.viewLeaderboard.concat(res.result.records)
+          if (res.result.records.length == 0 && this.page.viewLeaderboard > 1) {
             this.$message.info('已加载完啦！')
           }
         }

@@ -69,6 +69,11 @@ export const constantRouterMap = [
         name: 'workDetail',
         component: () => import(/* webpackChunkName: "home" */ '@/views/home/WorkDetail')
       },
+      {
+        path: 'new',
+        name: 'newWork',
+        component:() => import(/* webpackChunkName: "home" */ '@/views/home/NewWorkList')
+      }
     ]
   },
   {

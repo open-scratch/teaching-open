@@ -263,9 +263,11 @@ public class TeachingWorkController extends BaseController {
 	 public Result<?> listLeaderboard(@RequestParam(name = "pageNo", defaultValue = "1") Integer pageNo,
 									  @RequestParam(name = "pageSize", defaultValue = "10") Integer pageSize,
 									  @RequestParam(required = false, defaultValue = "view") String orderBy, //排序
+									  @RequestParam(required = false) Integer workStatus, //状态
 									  HttpServletRequest request) {
 		 QueryWrapper<StudentWorkModel> queryWrapper = new QueryWrapper<StudentWorkModel>();
 		 queryWrapper.ge("teaching_work.work_status", 3);
+		 queryWrapper.eq(workStatus!=null, "teaching_work.work_status", workStatus);
 		 switch (orderBy){
 			 case "view":
 				 queryWrapper.orderByDesc("teaching_work.view_num");
