@@ -847,6 +847,8 @@ public class SysUserController extends BaseController {
             subDepids = sysDepartService.getSubDepIdsByDepId(depId);
         }
         if(subDepids != null && subDepids.size()>0){
+            String myDeptIdStr = "('" + String.join("','", subDepids) + "')";
+            queryWrapper.inSql("sys_user.id","select user_id from sys_user_depart where dep_id in " + myDeptIdStr);
             IPage<SysUser> pageList = sysUserService.getUserList(page,queryWrapper);
             //批量查询用户的所属部门
             //step.1 先拿到全部的 useids

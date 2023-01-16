@@ -12,7 +12,7 @@
           </div>
           <div class="panel-works">
             <h1 class="panel-title">
-              <a-icon type="like" theme="twoTone" two-tone-color="#52c41a" />
+              <a-icon type="star" theme="twoTone" two-tone-color="#ffd81b" />
               精选作品
             </h1>
             <a-row type="flex" justify="space-between" :gutter="[24, 24]">
