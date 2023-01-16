@@ -52,6 +52,7 @@
         <if test="submit==true and status != null">
             and w.work_status = #{status}
         </if>
+        order by a.create_time desc
     </select>
 
 </mapper>
