@@ -199,8 +199,6 @@ jeecg :
     accessKey: ??
     secretKey: ??
     bucketName: teaching-open
-    staticDomain: //open.qn.teaching.vip
-    
     staticDomain: http://open.qn.teaching.vip
     # 七牛存储区域 z0：华东 z1：华北 z2：华南 na0：北美 as0：东南亚 cn-east-2：华东-浙江2
     area: z0
