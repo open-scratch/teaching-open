@@ -97,6 +97,7 @@ public class TeachingWorkController extends BaseController {
 		 teachingWork.setUserId(getCurrentUser().getId());
 		 Result<IPage<StudentWorkModel>> result = new Result<IPage<StudentWorkModel>>();
 		 QueryWrapper<StudentWorkModel> queryWrapper = QueryGenerator.initQueryWrapper(teachingWork, req.getParameterMap());
+		 queryWrapper.orderByDesc("teaching_work.create_time");
 //		 Page<TeachingWork> page = new Page<TeachingWork>(pageNo, pageSize);
 
 		 IPage<StudentWorkModel> pageList = teachingWorkService.listWorkModel(new Page<>(pageNo, pageSize), queryWrapper, null);
