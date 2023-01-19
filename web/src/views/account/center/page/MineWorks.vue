@@ -1,11 +1,14 @@
 <template>
   <div class="app-list">
-    <a-list :grid="{ gutter: 24, xxl:4, xl:4, lg: 3, md: 2, sm: 1, xs: 1 }" :dataSource="dataSource">
+    <a-list :grid="{ gutter: 24, xxl:4, xl:4, lg: 3, md: 2, sm: 1, xs: 1 }" :dataSource="dataSource" :pagination="pagination">
       <a-list-item slot="renderItem" slot-scope="item">
         <a-card :hoverable="true">
           <template class="ant-card-extra" slot="extra">
             <a :href="getEditorHref(item)" target="_blank">
-              <h3><a-tag color="blue">{{item.workType_dictText}}</a-tag>{{ item.workName }}</h3>
+              <h3>
+                <a-tag color="blue">{{item.workType_dictText}}</a-tag>
+                <j-ellipsis :value="item.workName" :length="35" />
+              </h3>
             </a>
           </template>
           <a-card-meta>
@@ -40,14 +43,21 @@
 <script>
 import { deleteAction, getAction, downFile,getFileAccessHttpUrl } from '@/api/manage'
 import QrCode from '@/components/tools/QrCode'
-
+import JEllipsis from '@/components/jeecg/JEllipsis'
 export default {
   name: 'MineWorksCard',
   components: {
     qrcode: QrCode,
+    JEllipsis
   },
   data() {
     return {
+      pagination: {
+        onChange: page => {
+          console.log(page);
+        },
+        pageSize: 12,
+      },
       dataSource: [],
       url: {
         list: '/teaching/teachingWork/mine',
@@ -110,6 +120,9 @@ export default {
   /deep/.ant-card-extra{
     margin-left:0!important;
     height: 55px;
+    .title{
+      
+    }
   }
   .meta-cardInfo {
     zoom: 1;
@@ -117,7 +130,7 @@ export default {
     min-height: 200px;
     img {
       width: 100%;
-      height: 200px;
+      max-height: 200px;
     }
     > div {
       position: relative;

@@ -16,7 +16,7 @@
               精选作品
             </h1>
             <a-row type="flex" justify="space-between" :gutter="[24, 24]">
-              <a-col v-for="(item, index) in greatLeaderboard" :key="index" :xs="24" :sm="12" :md="12" :lg="7" :xl="7">
+              <a-col v-for="(item, index) in greatLeaderboard" :key="index" :xs="24" :sm="12" :md="12" :lg="8" :xl="6">
                 <a-card class="work-card">
                   <a @click="toDetail(item.id)" target="_blank">
                     <img class="work-cover" v-if="item.coverFileKey" :src="item.coverFileKey_url" />
@@ -47,7 +47,7 @@
               最赞作品
             </h1>
             <a-row type="flex" justify="space-between" :gutter="[24, 24]">
-              <a-col v-for="(item, index) in starLeaderboard" :key="index" :xs="24" :sm="12" :md="12" :lg="7" :xl="7">
+              <a-col v-for="(item, index) in starLeaderboard" :key="index" :xs="24" :sm="12" :md="12" :lg="8" :xl="6">
                 <a-card class="work-card">
                   <a @click="toDetail(item.id)" target="_blank">
                     <img class="work-cover" v-if="item.coverFileKey" :src="item.coverFileKey_url" />
@@ -78,7 +78,7 @@
               最火作品
             </h1>
             <a-row type="flex" justify="space-between" :gutter="[24, 24]">
-              <a-col v-for="(item, index) in viewLeaderboard" :key="index" :xs="24" :sm="12" :md="12" :lg="7" :xl="7">
+              <a-col v-for="(item, index) in viewLeaderboard" :key="index" :xs="24" :sm="12" :md="12" :lg="8" :xl="6">
                 <a-card class="work-card">
                   <a @click="toDetail(item.id)" target="_blank">
                     <img class="work-cover" v-if="item.coverFileKey" :src="item.coverFileKey_url" />
@@ -103,7 +103,7 @@
             <a-button class="load-more" type="link" @click="getViewLeaderboard">加载更多……</a-button>
           </div>
         </a-layout-content>
-        <a-layout-sider v-if="!_isMobile()">
+        <a-layout-sider :width="250" v-if="!_isMobile()">
           <UserEnter />
         </a-layout-sider>
       </a-layout>
@@ -155,7 +155,7 @@ export default {
       getAction('/teaching/teachingWork/leaderboard', {
         orderBy: 'create_time',
         workStatus: 4,
-        pageSize: 3,
+        pageSize: 4,
         pageNo: this.page.greatLeaderboard,
       }).then((res) => {
         if (res.success) {
@@ -170,7 +170,7 @@ export default {
       this.page.starLeaderboard += 1
       getAction('/teaching/teachingWork/leaderboard', {
         orderBy: 'star',
-        pageSize: this._isMobile() ? 3 : 6,
+        pageSize: this._isMobile() ? 4 : 8,
         pageNo: this.page.starLeaderboard,
       }).then((res) => {
         if (res.success) {
@@ -185,7 +185,7 @@ export default {
       this.page.viewLeaderboard += 1
       getAction('/teaching/teachingWork/leaderboard', {
         orderBy: 'view',
-        pageSize: this._isMobile() ? 3 : 6,
+        pageSize: this._isMobile() ? 4 : 8,
         pageNo: this.page.viewLeaderboard,
       }).then((res) => {
         if (res.success) {
@@ -232,6 +232,7 @@ export default {
   min-height: 250px;
   width: 100%;
   margin-bottom: 80px;
+  padding: 0 20px;
   /deep/.banner{
     border-radius: 10px;
     overflow: hidden;
@@ -239,14 +240,14 @@ export default {
 }
 
 .ant-layout-has-sider {
-  max-width: 1100px;
+  max-width: 1600px;
   margin: -100px auto 0;
 }
 .ant-layout-sider{
   z-index: 99;
 }
 .ant-layout-content {
-  padding: 40px;
+  padding: 20px;
   .user-enter{
     margin-top: 80px;
     margin-bottom: 30px;
@@ -262,8 +263,7 @@ export default {
   .work-card {
     border-radius: 10px;
     box-shadow: grey 2px 2px 5px;
-    width: 250px;
-    height: 300px;
+    max-height: 300px;
     .work-cover {
       width: 100%;
       max-height: 150px;

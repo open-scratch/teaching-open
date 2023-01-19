@@ -101,7 +101,7 @@ export default {
 .carousel {
   max-height: 500px;
   min-height: 250px;
-  max-width: 1200px;
+  max-width: 1600px;
   img {
     min-height: 100px;
     width: 100%;
