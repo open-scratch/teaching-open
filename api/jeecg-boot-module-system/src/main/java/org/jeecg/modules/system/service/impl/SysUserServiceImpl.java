@@ -236,17 +236,16 @@ public class SysUserServiceImpl extends ServiceImpl<SysUserMapper, SysUser> impl
 
 	@Override
 	public Map<String, String> getDepNamesByUserIds(List<String> userIds) {
-		List<SysUserDepVo> list = this.baseMapper.getDepNamesByUserIds(userIds);
-
 		Map<String, String> res = new HashMap<String, String>();
+		if (userIds == null || userIds.isEmpty()){return res;}
+		List<SysUserDepVo> list = this.baseMapper.getDepNamesByUserIds(userIds);
 		list.forEach(item -> {
-					if (res.get(item.getUserId()) == null) {
-						res.put(item.getUserId(), item.getDepartName());
-					} else {
-						res.put(item.getUserId(), res.get(item.getUserId()) + "," + item.getDepartName());
-					}
-				}
-		);
+			if (res.get(item.getUserId()) == null) {
+				res.put(item.getUserId(), item.getDepartName());
+			} else {
+				res.put(item.getUserId(), res.get(item.getUserId()) + "," + item.getDepartName());
+			}
+		});
 		return res;
 	}
 
@@ -448,16 +447,16 @@ public class SysUserServiceImpl extends ServiceImpl<SysUserMapper, SysUser> impl
 
 	@Override
 	public Map<String, String> getRoleNamesByUserIds(List<String> userIds) {
-		List<SysUserDepVo> list = this.baseMapper.getRoleNamesByUserIds(userIds);
 		Map<String, String> res = new HashMap<String, String>();
+		if(userIds == null || userIds.isEmpty()){return res;}
+		List<SysUserDepVo> list = this.baseMapper.getRoleNamesByUserIds(userIds);
 		list.forEach(item -> {
-					if (res.get(item.getUserId()) == null) {
-						res.put(item.getUserId(), item.getRoleName());
-					} else {
-						res.put(item.getUserId(), res.get(item.getUserId()) + "," + item.getRoleName());
-					}
-				}
-		);
+			if (res.get(item.getUserId()) == null) {
+				res.put(item.getUserId(), item.getRoleName());
+			} else {
+				res.put(item.getUserId(), res.get(item.getUserId()) + "," + item.getRoleName());
+			}
+		});
 		return res;
 	}
 
