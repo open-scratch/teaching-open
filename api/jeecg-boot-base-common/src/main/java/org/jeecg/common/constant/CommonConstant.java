@@ -149,7 +149,7 @@ public interface CommonConstant {
     
     /**字典翻译文本后缀*/
     public static final String DICT_TEXT_SUFFIX = "_dictText";
-
+    public static final String URL_TEXT_SUFFIX = "_url";
     /**
      * 表单设计器主表类型
      */

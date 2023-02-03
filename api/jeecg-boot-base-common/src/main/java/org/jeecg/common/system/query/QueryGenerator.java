@@ -196,6 +196,10 @@ public class QueryGenerator {
 			if(column.endsWith(CommonConstant.DICT_TEXT_SUFFIX)) {
 				column = column.substring(0, column.lastIndexOf(CommonConstant.DICT_TEXT_SUFFIX));
 			}
+			//去掉自动封装url的后缀
+			if(column.endsWith(CommonConstant.URL_TEXT_SUFFIX)) {
+				column = column.substring(0, column.lastIndexOf(CommonConstant.URL_TEXT_SUFFIX));
+			}
 			//SQL注入check
 			SqlInjectionUtil.filterContent(column); 
 			
