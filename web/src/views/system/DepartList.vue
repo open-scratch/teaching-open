@@ -362,11 +362,22 @@ export default {
       })
     },
     setThisExpandedKeys(node) {
+      //递归展开全部
+      // if (node.children && node.children.length > 0) {
+      //   this.iExpandedKeys.push(node.key)
+      //   for (let a = 0; a < node.children.length; a++) {
+      //     this.setThisExpandedKeys(node.children[a])
+      //   }
+      // }
+      //展开两层
       if (node.children && node.children.length > 0) {
-        this.iExpandedKeys.push(node.key)
-        for (let a = 0; a < node.children.length; a++) {
-          this.setThisExpandedKeys(node.children[a])
+        let keys = []
+        for(let item of node.children){
+          if(item.children && item.children.length>0){
+            keys.push(item.id)
+          }
         }
+        this.iExpandedKeys=[...keys]
       }
     },
     refresh() {
@@ -469,6 +480,9 @@ export default {
         this.checkedKeys = checkedKeys
       }
       // <!---- author:os_chengtgen -- date:20190827 --  for:切换父子勾选模式 =======------>
+      let record = info.node.dataRef
+      console.log('onChecked-record', record)
+      this.selectDepart(record)
     },
     //当选择一个部门
     onSelect(selectedKeys, e) {
@@ -476,6 +490,9 @@ export default {
       this.hiding = false
       let record = e.node.dataRef
       console.log('onSelect-record', record)
+      this.selectDepart(record)
+    },
+    selectDepart(record){
       this.currSelected = Object.assign({}, record)
       this.model = this.currSelected
       this.selectedKeys = [record.key]
