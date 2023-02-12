@@ -1,6 +1,7 @@
 package org.jeecg.modules.system.controller;
 
 import com.alibaba.fastjson.JSONObject;
+import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
 import org.apache.shiro.authz.annotation.RequiresRoles;
 import org.jeecg.common.api.vo.Result;
 import org.jeecg.config.QiniuConfig;
@@ -22,6 +23,19 @@ public class SysConfigController {
     private String staticDomain;
     @Value(value="${jeecg.uploadType}")
     private String uploadType;
+
+    @GetMapping("getConfig")
+    public Result<String> getConfig(@RequestParam String key){
+        Result<String> result = new Result<>();
+        SysConfig sysConfig = sysConfigService.getOne(new QueryWrapper<SysConfig>().lambda().eq(SysConfig::getConfigKey, key));
+        if (sysConfig == null){
+            result.setSuccess(false);
+        }else{
+            result.setSuccess(true);
+            result.setResult(sysConfig.getConfigValue());
+        }
+        return result;
+    }
 
     //保存配置
     @PostMapping("saveTenantConfig")

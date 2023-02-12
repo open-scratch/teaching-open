@@ -4,6 +4,11 @@
     <a-form :form="form" slot="detail">
       <a-tabs>
         <a-button type="primary" slot="tabBarExtraContent" @click="saveCurrentConfig">保存</a-button>
+         <a-tab-pane key="index" tab="首页配置" forceRender>
+            <a-form-item label="首页配置" :labelCol="labelCol2" :wrapperCol="wrapperCol2">
+              <j-editor v-decorator="['_indexHtml']" :triggerChange="true" :height="700"/>
+            </a-form-item>
+         </a-tab-pane>
         <a-tab-pane key="concat" tab="基本信息" forceRender>
           <a-row>
             <a-col :span="24">

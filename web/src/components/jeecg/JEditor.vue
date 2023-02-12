@@ -81,6 +81,10 @@ export default {
       default: Vue.ls.get(SYS_CONFIG).uploadType,
       required: false,
     },
+    height: {
+      type: Number,
+      default: 300
+    }
   },
   data() {
     let that = this
@@ -91,7 +95,7 @@ export default {
         language_url: '/tinymce/langs/zh_CN.js',
         language: 'zh_CN',
         skin_url: '/tinymce/skins/lightgray',
-        height: 300,
+        height: this.height,
         plugins: this.plugins,
         toolbar: this.toolbar,
         branding: false,
