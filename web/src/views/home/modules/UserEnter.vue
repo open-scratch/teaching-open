@@ -7,7 +7,7 @@
     </div>
     <div v-else>
       <a-avatar shape="square" class="avatar" :size="100" :src="logo" />
-      <h3>欢迎来到{{ brandName }}</h3>
+      <h3 class="welcome">欢迎来到{{ brandName }}</h3>
       <a-button type="dashed" @click="enter">登录/注册</a-button>
     </div>
   </div>
@@ -53,5 +53,9 @@ export default {
 }
 .ant-btn {
   width: 80%;
+}
+.welcome{
+  padding: 0 20px;
+  line-height: 30px;
 }
 </style>
