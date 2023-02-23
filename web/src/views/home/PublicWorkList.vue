@@ -241,6 +241,7 @@ export default {
 
 .ant-layout-has-sider {
   max-width: 1600px;
+  min-width: 800px;
   margin: -100px auto 0;
 }
 .ant-layout-sider{
@@ -264,6 +265,7 @@ export default {
     border-radius: 10px;
     box-shadow: grey 2px 2px 5px;
     max-height: 300px;
+    min-width: 280px;
     .work-cover {
       width: 100%;
       max-height: 150px;

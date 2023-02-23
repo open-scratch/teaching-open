@@ -174,7 +174,7 @@
         this.form.setFieldsValue(pick(row,'createBy','createTime','courseName','courseDesc','courseIcon','courseCover','showType', 'courseMap'))
       },
       showMapEdit() {
-        this.handleOk()
+        // this.handleOk()
         this.$refs.mapEditor.open(this.model)
       },
       onShowTypeSelected(value){

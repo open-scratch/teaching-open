@@ -92,7 +92,7 @@ export default {
     },
     handleOk() {
       putAction('/teaching/teachingCourseUnit/editBatch', this.unitList).then((res) => {
-        this.$notification.success(res)
+        this.$message.success(res.message)
         this.saved = true
       })
     },
@@ -120,7 +120,7 @@ export default {
           this.currentUnitId = selectUnitId==null?this.unitList[0].id:selectUnitId
           console.log("----"+this.currentUnitId);
         } else {
-          this.$notification.error('未找到课程单元')
+          this.$message.error('没有课程单元')
         }
       })
     },
