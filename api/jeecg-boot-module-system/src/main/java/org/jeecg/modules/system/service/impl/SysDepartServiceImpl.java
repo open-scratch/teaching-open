@@ -371,12 +371,9 @@ public class SysDepartServiceImpl extends ServiceImpl<SysDepartMapper, SysDepart
 		return baseMapper.queryDepartsByUsername(username);
 	}
 
-	/**
-	 * 根据用户所负责部门ids获取父级部门编码
-	 * @param departIds
-	 * @return
-	 */
-	private String[] getMyDeptParentOrgCode(String departIds){
+
+	@Override
+	public String[] getMyDeptParentOrgCode(String departIds){
 		//根据部门id查询所负责部门
 		LambdaQueryWrapper<SysDepart> query = new LambdaQueryWrapper<SysDepart>();
 		query.eq(SysDepart::getDelFlag, CommonConstant.DEL_FLAG_0.toString());

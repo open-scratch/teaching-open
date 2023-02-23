@@ -105,5 +105,10 @@ public interface ISysDepartService extends IService<SysDepart>{
 
     //获取所有根机构
     List<SysDepart> getRootDepart();
-    
+    /**
+     * 根据用户所负责部门ids获取父级部门编码
+     * @param departIds
+     * @return
+     */
+    String[] getMyDeptParentOrgCode(String departIds);
 }

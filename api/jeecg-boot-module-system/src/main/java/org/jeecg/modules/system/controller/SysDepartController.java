@@ -287,11 +287,20 @@ public class SysDepartController extends BaseController {
      */
     @RequestMapping(value = "/exportXls")
     public ModelAndView exportXls(SysDepart sysDepart,HttpServletRequest request) {
+		LoginUser user = (LoginUser) SecurityUtils.getSubject().getPrincipal();
         // Step.1 组装查询条件
-        QueryWrapper<SysDepart> queryWrapper = QueryGenerator.initQueryWrapper(sysDepart, request.getParameterMap());
+		LambdaQueryWrapper<SysDepart> query = new LambdaQueryWrapper<SysDepart>();
+		// 如果角色是admin和dev，展示所有部门
+		if(!hasRole("admin") && !hasRole("dev")){
+			String[] codeArr = sysDepartService.getMyDeptParentOrgCode(user.getDepartIds());
+			for(int i=0;i<codeArr.length;i++){
+				query.or().likeRight(SysDepart::getOrgCode,codeArr[i]);
+			}
+		}
+		query.orderByAsc(SysDepart::getDepartOrder);
         //Step.2 AutoPoi 导出Excel
         ModelAndView mv = new ModelAndView(new JeecgEntityExcelView());
-        List<SysDepart> pageList = sysDepartService.list(queryWrapper);
+        List<SysDepart> pageList = sysDepartService.list(query);
         //按字典排序
         Collections.sort(pageList, new Comparator<SysDepart>() {
             @Override
@@ -302,7 +311,6 @@ public class SysDepartController extends BaseController {
         //导出文件名称
         mv.addObject(NormalExcelConstants.FILE_NAME, "部门列表");
         mv.addObject(NormalExcelConstants.CLASS, SysDepart.class);
-        LoginUser user = (LoginUser) SecurityUtils.getSubject().getPrincipal();
         mv.addObject(NormalExcelConstants.PARAMS, new ExportParams("部门列表数据", "导出人:"+user.getRealname(), "导出信息"));
         mv.addObject(NormalExcelConstants.DATA_LIST, pageList);
         return mv;
