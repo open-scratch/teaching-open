@@ -33,7 +33,7 @@
           </a-tooltip>
         </a-form-item>
         <a-form-item label="授权部门" :labelCol="labelCol" :wrapperCol="wrapperCol">
-          <a-tooltip placement="top" title="有权限的部门才可分配本课程,留空表示不做限制。">
+          <a-tooltip placement="top" title="有权限的部门和其子部门才可分配本课程,留空表示不做限制。">
             <j-select-depart :onlyLeaf="false" :rootOpened="true" :multi="true" v-decorator="['departIds']"/>
           </a-tooltip>
         </a-form-item>

@@ -8,6 +8,11 @@
             <a-form-item label="课程名">
               <a-input placeholder="请输入课程名" v-model="queryParam.courseName"></a-input>
             </a-form-item>
+        </a-col>
+          <a-col :xl="6" :lg="7" :md="8" :sm="24">
+            <a-form-item label="授权部门">
+              <j-select-depart placeholder="请选择授权部门或其子部门"  :rootOpened="true" v-model="queryParam.departId" />
+            </a-form-item>
           </a-col>
           <a-col :xl="6" :lg="7" :md="8" :sm="24">
             <span style="float: left;overflow: hidden;" class="table-page-search-submitButtons">
@@ -107,12 +112,14 @@
 
   import { JeecgListMixin } from '@/mixins/JeecgListMixin'
   import TeachingCourseModal from './modules/TeachingCourseModal'
+  import JSelectDepart from '@/components/jeecgbiz/JSelectDepart'
   import { getFileAccessHttpUrl } from "@/api/manage"
   export default {
     name: "TeachingCourseList",
     mixins:[JeecgListMixin],
     components: {
-      TeachingCourseModal
+      TeachingCourseModal,
+      JSelectDepart
     },
     data () {
       return {
