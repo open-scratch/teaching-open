@@ -111,4 +111,17 @@ public interface ISysDepartService extends IService<SysDepart>{
      * @return
      */
     String[] getMyDeptParentOrgCode(String departIds);
+
+    /**
+     * 获取某个部门的所有上级部门
+     * @param departId
+     * @return
+     */
+    List<SysDepart> getParentDeparts(String departId);
+    /**
+     * 获取某个部门的所有上级部门的Id
+     * @param departId
+     * @return
+     */
+    List<String> getParentDepartIds(String departId);
 }

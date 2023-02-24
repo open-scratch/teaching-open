@@ -23,7 +23,6 @@
             <a-col :span="8">
                     <span style="float: left;overflow: hidden;" class="table-page-search-submitButtons">
                       <a-button type="primary" @click="searchQuery" icon="search">查询</a-button>
-                      <a-button type="primary" @click="searchReset" icon="reload" style="margin-left: 8px">重置</a-button>
                     </span>
             </a-col>
 
@@ -146,14 +145,15 @@
       }
     },
     created() {
-      this.loadData();
+      // this.loadData();
     },
     methods: {
-      searchQuery() {
+      show(departId){
+        this.visible = true
+        this.queryParam.departId = departId
         this.loadData(1);
       },
-      searchReset() {
-        this.queryParam = {};
+      searchQuery() {
         this.loadData(1);
       },
       handleCancel() {

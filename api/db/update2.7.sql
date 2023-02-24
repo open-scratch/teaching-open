@@ -48,3 +48,6 @@ update teaching_work set work_scene = 'create' where (additional_id = '' or addi
 
 INSERT INTO `sys_dict_item`(`id`, `dict_id`, `item_text`, `item_value`, `description`, `sort_order`, `status`, `create_by`, `create_time`, `update_by`, `update_time`) VALUES ('1614538431740420098', '1278612830199599105', '精选作品', '4', '', 4, 1, 'admin', '2023-01-15 16:22:13', NULL, NULL);
 INSERT INTO `teaching_menu`(`id`, `parent_id`, `name`, `url`, `menu_type`, `sort_no`, `icon`, `is_leaf`, `description`, `create_by`, `create_time`, `update_by`, `update_time`, `del_flag`, `internal_or_external`, `is_route`, `hidden`, `need_login`) VALUES ('1614545041074384897', '', '发现', '/new', 0, 2.00, 'search', 1, NULL, 'admin', '2023-01-15 16:48:29', 'admin', '2023-01-15 16:48:43', 0, 0, 1, 0, 0);
+
+alter table teaching_course
+    add depart_ids varchar(1000) default '' not null comment '授权部门';

@@ -3,6 +3,7 @@ package org.jeecg.modules.system.service.impl;
 import java.util.*;
 
 import com.alibaba.fastjson.JSONObject;
+import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
 import org.jeecg.common.constant.CacheConstant;
 import org.jeecg.common.constant.CommonConstant;
 import org.jeecg.common.constant.FillRuleConstant;
@@ -387,6 +388,37 @@ public class SysDepartServiceImpl extends ServiceImpl<SysDepartMapper, SysDepart
 		String orgCode = this.getMyDeptParentNode(list);
 		String[] codeArr = orgCode.split(",");
 		return codeArr;
+	}
+
+	@Override
+	public List<SysDepart> getParentDeparts(String departId) {
+		List<SysDepart> departList = new ArrayList<>();
+		SysDepart  depart = this.getById(departId);
+		if(depart != null){
+			departList.add(depart);
+			for (int i=1; i< depart.getOrgCode().length()/3; i++){
+				String code = depart.getOrgCode().substring(0,i*3);
+				departList.add(this.getOne(new QueryWrapper<SysDepart>().eq("org_code", code).eq("del_flag", 0)));
+			}
+		}
+		return departList;
+	}
+
+	@Override
+	public List<String> getParentDepartIds(String departId) {
+		List<String> departList = new ArrayList<>();
+		SysDepart  depart = this.getById(departId);
+		if(depart != null){
+			departList.add(depart.getId());
+			for (int i=1; i< depart.getOrgCode().length()/3; i++){
+				String code = depart.getOrgCode().substring(0,i*3);
+				SysDepart pd = this.getOne(new QueryWrapper<SysDepart>().eq("org_code", code).eq("del_flag", 0));
+				if (pd != null){
+					departList.add(pd.getId());
+				}
+			}
+		}
+		return departList;
 	}
 
 	/**

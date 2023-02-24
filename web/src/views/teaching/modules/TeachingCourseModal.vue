@@ -29,7 +29,12 @@
         </a-form-item>
         <a-form-item label="是否共享" :labelCol="labelCol" :wrapperCol="wrapperCol">
           <a-tooltip placement="top" title="共享后所有学生都可以上本课程">
-          <a-switch v-model="model.isShared" checkedChildren="是" unCheckedChildren="否"/>
+            <a-switch v-model="model.isShared" checkedChildren="是" unCheckedChildren="否"/>
+          </a-tooltip>
+        </a-form-item>
+        <a-form-item label="授权部门" :labelCol="labelCol" :wrapperCol="wrapperCol">
+          <a-tooltip placement="top" title="有权限的部门才可分配本课程,留空表示不做限制。">
+            <j-select-depart :onlyLeaf="false" :rootOpened="true" :multi="true" v-decorator="['departIds']"/>
           </a-tooltip>
         </a-form-item>
         <a-form-item label="课程封面" :labelCol="labelCol" :wrapperCol="wrapperCol">
@@ -74,11 +79,13 @@
   import { validateDuplicateValue } from '@/utils/util'
   import JUpload from '@/components/jeecg/JUpload'
   import TeachingMapEditor from './TeachingMapEditor'
+  import JSelectDepart from '@/components/jeecgbiz/JSelectDepart'
   export default {
     name: "TeachingCourseModal",
     components: { 
       JUpload,
-      TeachingMapEditor
+      TeachingMapEditor,
+      JSelectDepart
     },
     data () {
       return {
@@ -128,7 +135,7 @@
         this.model = Object.assign({}, record);
         this.visible = true;
         this.$nextTick(() => {
-          this.form.setFieldsValue(pick(this.model,'createBy','createTime','courseName','courseDesc','courseIcon','courseCover','showType','isShared', 'courseMap', 'orderNum'))
+          this.form.setFieldsValue(pick(this.model,'createBy','createTime','courseName','courseDesc','courseIcon','courseCover','showType','isShared', 'courseMap', 'orderNum', 'departIds'))
         })
       },
       close () {

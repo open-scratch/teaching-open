@@ -11,6 +11,7 @@ import org.jeecg.common.aspect.annotation.AutoLog;
 import org.jeecg.common.aspect.annotation.PermissionData;
 import org.jeecg.common.system.base.controller.JeecgController;
 import org.jeecg.common.system.query.QueryGenerator;
+import org.jeecg.modules.system.service.ISysDepartService;
 import org.jeecg.modules.system.service.ISysFileService;
 import org.jeecg.modules.teaching.entity.TeachingCourse;
 import org.jeecg.modules.teaching.service.ITeachingCourseService;
@@ -22,8 +23,9 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.util.Arrays;
 import java.util.List;
+import java.util.Map;
 
- /**
+/**
  * @Description: 课程
  * @Author: jeecg-boot
  * @Date:   2020-04-14
@@ -38,6 +40,8 @@ public class TeachingCourseController extends JeecgController<TeachingCourse, IT
 	private ITeachingCourseService teachingCourseService;
 	@Autowired
 	private ISysFileService sysFileService;
+	@Autowired
+	private ISysDepartService sysDepartService;
 
 	 @GetMapping("/mineCourse")
 	 public Result<List<TeachingCourse>> mineCourse(){
@@ -62,7 +66,18 @@ public class TeachingCourseController extends JeecgController<TeachingCourse, IT
 								   @RequestParam(name="pageNo", defaultValue="1") Integer pageNo,
 								   @RequestParam(name="pageSize", defaultValue="10") Integer pageSize,
 								   HttpServletRequest req) {
-		QueryWrapper<TeachingCourse> queryWrapper = QueryGenerator.initQueryWrapper(teachingCourse, req.getParameterMap());
+		Map<String, String[]> param = req.getParameterMap();
+		QueryWrapper<TeachingCourse> queryWrapper = new QueryWrapper<>();
+		//部门权限过滤
+		if (param.containsKey("departId")){
+			List<String> parentDepIds = sysDepartService.getParentDepartIds(param.get("departId")[0]);
+			queryWrapper.and(wrapper -> {
+				wrapper.or().eq("depart_ids","");
+				for (String departId : parentDepIds){wrapper.or().like("depart_ids", departId);}
+				return wrapper;
+			});
+		}
+		QueryGenerator.installMplus(queryWrapper, teachingCourse, req.getParameterMap());
 		Page<TeachingCourse> page = new Page<TeachingCourse>(pageNo, pageSize);
 		IPage<TeachingCourse> pageList = teachingCourseService.page(page, queryWrapper);
 		return Result.ok(pageList);

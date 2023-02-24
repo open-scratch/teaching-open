@@ -96,4 +96,9 @@ public class TeachingCourse implements Serializable {
 
 	/**排序*/
 	private java.lang.Integer orderNum;
+
+	@Excel(name = "授权部门",dictTable = "sys_depart", dicText = "depart_name", dicCode = "id", width = 15)
+	@ApiModelProperty(value = "授权部门")
+	@Dict(dictTable = "sys_depart", dicText = "depart_name", dicCode = "id")
+	private java.lang.String departIds;
 }

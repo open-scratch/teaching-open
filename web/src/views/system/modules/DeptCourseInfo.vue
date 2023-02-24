@@ -219,7 +219,7 @@ export default {
       if (this.currentDeptId == '') {
         this.$message.error('请选择一个部门!')
       } else {
-        this.$refs.selectCourseModal.visible = true
+        this.$refs.selectCourseModal.show(this.currentDeptId)
       }
     },
     handleEditCourse(record) {

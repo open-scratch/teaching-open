@@ -143,6 +143,11 @@
             }
           },
           {
+            title:'授权部门',
+            align:"center",
+            dataIndex: 'departIds_dictText',
+          },
+          {
             title:'课程图标',
             align:"center",
             dataIndex: 'courseIcon',
