@@ -37,7 +37,7 @@
                       v-model="costumFile"
                       @selected="selectedCostume"
                       @delete="onCostumeDelete"
-                      
+                      :multiple="true"
                       :uploadPath="assetPrefix"
                       fileType="image"
                       :number="99"
@@ -49,7 +49,7 @@
                       v-model="soundFile"
                       @selected="selectedSound"
                       @delete="onSoundDelete"
-                      
+                      :multiple="true"
                       :uploadPath="assetPrefix"
                       :number="99"
                       :trigger-change="true"

@@ -98,7 +98,7 @@
         headers:{},
         fileList: [],
         uploadToken: '',
-        uploadKey: '',
+        uploadKey: {},
         newFileList: [],
         uploadGoOn:true,
         previewVisible: false,
@@ -272,12 +272,11 @@
       },
       //获取要上传数据
       getUploadData(file){
-        console.log("getUploadData");
         switch(this.uploadTarget){
           case UPLOAD_TARGET_LOCAL:
             return {'isup':1,'bizPath':this.bizPath};
           case UPLOAD_TARGET_QINIU:
-            return {'token': this.uploadToken, 'key': this.uploadKey};
+            return {'token': this.uploadToken, 'key': this.uploadKey[file.uid]};
           case UPLOAD_TARGET_OSS:
             return {};
           case UPLOAD_TARGET_COS:
@@ -402,7 +401,7 @@
       beforeUpload(file){
         this.uploadGoOn=true
         var fileType = file.type;
-        console.log("file type :" + fileType);
+        
         if(this.fileType===FILE_TYPE_IMG){
           if(fileType.indexOf('image')<0){
             this.$message.warning('请上传图片');
@@ -417,9 +416,8 @@
         //获取文件key
         let suffix = file.name.split(".")
         if(suffix.length>1){suffix = suffix.pop()}else{suffix = ""}
-        this.uploadKey = this.getFileFullName(suffix)
-        this.$emit("selected", this.uploadKey, file);
-
+        this.uploadKey[file.uid] = this.getFileFullName(suffix)
+        this.$emit("selected", this.uploadKey[file.uid], file);
         //获取上传token
         switch(this.uploadTarget){
           case UPLOAD_TARGET_QINIU:
