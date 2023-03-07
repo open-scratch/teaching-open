@@ -10,14 +10,12 @@
             <!-- 播放器 -->
             <div class="scratch-player">
               <iframe
-                :src="
-                  workInfo.workFile ? '/scratch3/player.html?workUrl=' + workInfo.workFileKey_url : 'about:blank'
-                "
+                :src="frameHref"
                 id="player"
                 frameborder="0"
                 width="100%"
                 height="100%"
-                scrolling="no"
+                :scrolling="workInfo.workType==4||workInfo.workType==10?'auto':'no'"
               ></iframe>
             </div>
 
@@ -154,6 +152,7 @@ export default {
     return {
       workId: '',
       workInfo: {},
+      frameHref: '',
       token: '',
       commentContent: '',
       showLoadingMore: true,
@@ -198,11 +197,34 @@ export default {
       getAction('/teaching/teachingWork/studentWorkInfo?workId=' + workId).then((res) => {
         if (res.success) {
           this.workInfo = res.result
+          this.previewCode(this.workInfo)
           this.workComments()
         } else {
           this.$message.error('作品获取失败')
         }
       })
+    },
+    previewCode(record) {
+      this.visible = true
+      // this.frameHref = '/scratch3/player.html?workId=' + record.id
+      this.frameHref = ''
+      switch (record.workType) {
+        case '1':
+          this.frameHref = '/scratch3/player.html?workId=' + record.id
+          return
+        case '2':
+          this.frameHref = '/scratch3/player.html?workId=' + record.id
+          return
+        case '3':
+          this.frameHref = '/scratchjr/editor.html?mode=edit&filepath=' + record.workFileKey_url
+          return
+        case '4':
+          this.frameHref = '/python/player.html?lang=turtle&url=' + record.workFileKey_url
+          return
+        case '10':
+          this.frameHref = '/blockly/index.html?workId=' + record.id
+          return
+      }
     },
     starWork() {
       getAction('/teaching/teachingWork/starWork?workId=' + this.workId).then((res) => {

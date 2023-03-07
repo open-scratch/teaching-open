@@ -6,7 +6,13 @@
         <a-row :gutter="24">
           <a-col :xl="6" :lg="7" :md="8" :sm="24">
             <a-form-item label="素材类型">
-              <j-dict-select-tag placeholder="请选择素材类型" v-model="queryParam.assetType" dictCode="scratch_asset_type"/>
+              <a-select v-model="queryParam.assetType">
+                <a-select-option :value="undefined">全部</a-select-option>
+                <a-select-option :value="1">背景</a-select-option>
+                <a-select-option :value="2">声音</a-select-option>
+                <a-select-option :value="3">造型</a-select-option>
+                <a-select-option :value="4">角色</a-select-option>
+              </a-select>
             </a-form-item>
           </a-col>
           <a-col :xl="6" :lg="7" :md="8" :sm="24">
