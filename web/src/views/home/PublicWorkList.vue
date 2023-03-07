@@ -51,7 +51,7 @@
                 <a-card class="work-card">
                   <a @click="toDetail(item.id)" target="_blank">
                     <img class="work-cover" v-if="item.coverFileKey" :src="item.coverFileKey_url" />
-                    <img v-if="item.workType == 4 || item.workType == 4" src="@/assets/code.png" alt="" />
+                    <img v-if="item.workType == 4 || item.workType == 10" src="@/assets/code.png" alt="" />
                   </a>
                   <a-row type="flex" justify="end">
                     <a-col :span="5"> <a-icon type="eye" /> {{ item.viewNum }} </a-col>
@@ -82,7 +82,7 @@
                 <a-card class="work-card">
                   <a @click="toDetail(item.id)" target="_blank">
                     <img class="work-cover" v-if="item.coverFileKey" :src="item.coverFileKey_url" />
-                    <img v-if="item.workType == 4 || item.workType == 4" src="@/assets/code.png" alt="" />
+                    <img v-if="item.workType == 4 || item.workType == 10" src="@/assets/code.png" alt="" />
                   </a>
                   <a-row type="flex" justify="end">
                     <a-col :span="5"> <a-icon type="eye" /> {{ item.viewNum }} </a-col>
