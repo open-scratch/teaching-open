@@ -52,7 +52,7 @@ export default {
           this.height = 600
           return
         case '10':
-          this.frameHref = '/blockly/index.html?workId=' + record.id
+          this.frameHref = '/blockly/index.html?lang=zh-hans&workId=' + record.id
           this.width = 1500
           this.height = 700
           return

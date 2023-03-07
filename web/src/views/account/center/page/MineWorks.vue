@@ -106,7 +106,7 @@ export default {
         case '4':
           return '/python/index.html?workId=' + item.id
         case '10':
-          return '/blockly/index.html?workId=' + item.id
+          return '/blockly/index.html?lang=zh-hans&workId=' + item.id
         default:
           return item.workFileKey_url
       }

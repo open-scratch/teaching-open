@@ -222,7 +222,7 @@ export default {
           this.frameHref = '/python/player.html?lang=turtle&url=' + record.workFileKey_url
           return
         case '10':
-          this.frameHref = '/blockly/index.html?workId=' + record.id
+          this.frameHref = '/blockly/index.html?lang=zh-hans&workId=' + record.id
           return
       }
     },
