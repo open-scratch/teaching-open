@@ -162,7 +162,7 @@
               </a-menu-item>
 
               <a-menu-item>
-                <a href="javascript:;" @click="handleChangePassword(record.username)">密码</a>
+                <a href="javascript:;" @click="handleChangePassword(record)">密码</a>
               </a-menu-item>
 
               <a-menu-item v-has="'user:del'">
@@ -432,8 +432,8 @@ export default {
         }
       })
     },
-    handleChangePassword(username) {
-      this.$refs.passwordmodal.show(username)
+    handleChangePassword(record) {
+      this.$refs.passwordmodal.show(record)
     },
     handleAgentSettings(username) {
       this.$refs.sysUserAgentModal.agentSettings(username)

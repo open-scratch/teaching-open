@@ -13,7 +13,7 @@
       <a-form :form="form">
 
         <a-form-item label="用户账号" :labelCol="labelCol" :wrapperCol="wrapperCol">
-          <a-input placeholder="请输入用户账号" v-decorator="[ 'username', {}]" :readOnly="true"/>
+          <a-input placeholder="请输入用户账号" v-decorator="[ 'username', {}]"/>
         </a-form-item>
 
         <a-form-item label="登陆密码" :labelCol="labelCol" :wrapperCol="wrapperCol" hasFeedback >
@@ -76,12 +76,13 @@
     },
 
     methods: {
-      show (username) {
+      show (record) {
         this.form.resetFields();
         this.visible = true;
-        this.model.username = username;
+        this.model.id = record.id
+        this.model.username = record.username;
         this.$nextTick(() => {
-          this.form.setFieldsValue({username:username});
+          this.form.setFieldsValue({username:this.model.username});
         });
       },
       close () {
