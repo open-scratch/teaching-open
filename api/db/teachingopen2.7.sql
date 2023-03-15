@@ -3102,6 +3102,7 @@ CREATE TABLE `teaching_course`  (
   `course_map` varchar(256) CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT NULL COMMENT '课程地图',
   `is_shared` tinyint(4) NOT NULL DEFAULT 0 COMMENT '是否共享课程',
   `order_num` int(11) NOT NULL DEFAULT 1 COMMENT '排序',
+  `depart_ids` varchar(1000) CHARACTER SET utf8 COLLATE utf8_general_ci NOT NULL DEFAULT '' COMMENT '授权部门',
   PRIMARY KEY (`id`) USING BTREE,
   INDEX `courseName`(`course_name`) USING BTREE
 ) ENGINE = InnoDB CHARACTER SET = utf8 COLLATE = utf8_general_ci ROW_FORMAT = Compact;
