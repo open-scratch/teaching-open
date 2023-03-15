@@ -78,9 +78,6 @@ const start = async()=>{
       }
     })
   }
-  if(sysConfig.brandName){
-    window.document.title = sysConfig.brandName
-  }
   //获取菜单
   if (store.getters.menuList == null) {
     await getMenu().then(res => {
@@ -93,6 +90,23 @@ const start = async()=>{
   new Vue({
     router,
     store,
+    created(){
+      if(sysConfig.brandName){
+        window.document.title = sysConfig.brandName
+      }
+      if(sysConfig.customJS){
+        let script = document.createElement('script')
+        script.type = 'text/javascript'
+        script.textContent = sysConfig.customJS
+        document.head.appendChild(script)
+      }
+      if(sysConfig.customCss){
+        let style = document.createElement('style')
+        style.type = 'text/css'
+        style.textContent = sysConfig.customCss
+        document.head.appendChild(style)
+      }
+    },
     mounted () {
       store.commit('SET_SIDEBAR_TYPE', Vue.ls.get(SIDEBAR_TYPE, true))
       store.commit('TOGGLE_THEME', Vue.ls.get(DEFAULT_THEME, config.navTheme))

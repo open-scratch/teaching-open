@@ -165,14 +165,14 @@
           }
         }
       },
-      // value: {
-      //   immediate: false,
-      //   handler(value) {
-      //     this._getCoder().then(() => {
-      //       this.coder.setValue(value)
-      //     })
-      //   }
-      // },
+      value: {
+        immediate: false,
+        handler(value) {
+          this._getCoder().then(() => {
+            this.coder.setValue(value)
+          })
+        }
+      },
       language: {
         immediate: true,
         handler(language) {

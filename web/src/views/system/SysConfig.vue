@@ -100,6 +100,28 @@
             </a-col>
           </a-row>
         </a-tab-pane>
+        <a-tab-pane key="jscss" tab="自定义代码" forceRender>
+          <a-form-item label="自定义JS" :labelCol="labelCol2" :wrapperCol="wrapperCol2">
+            <j-code-editor
+              ref="customJS"
+              language="json"
+              placeholder=""
+              v-model="model.customJS"
+              :fullScreen="false"
+              style="min-height: 200px"
+            />
+          </a-form-item>
+          <a-form-item label="自定义CSS" :labelCol="labelCol2" :wrapperCol="wrapperCol2">
+            <j-code-editor
+              ref="customCss"
+              language="json"
+              placeholder=""
+              v-model="model.customCss"
+              :fullScreen="false"
+              style="min-height: 200px"
+            />
+          </a-form-item>
+        </a-tab-pane>
       </a-tabs>
     </a-form>
   </div>
@@ -112,10 +134,11 @@ import JUpload from '@/components/jeecg/JUpload'
 import JSearchSelectTag from '@/components/dict/JSearchSelectTag'
 import JSelectDepart from '@/components/jeecgbiz/JSelectDepart'
 import JEditor from '@/components/jeecg/JEditor'
+import JCodeEditor from '@/components/jeecg/JCodeEditor'
 
 export default {
   name: 'TenantConfig',
-  components: { JUpload, JSearchSelectTag,JSelectDepart,JEditor },
+  components: { JUpload, JSearchSelectTag,JSelectDepart,JEditor,JCodeEditor },
   data() {
     return {
       labelCol: {
