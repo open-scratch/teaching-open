@@ -11,6 +11,7 @@
               size="large"
               v-decorator="['username',{initialValue:'', rules: validatorRules.username.rules}]"
               type="text"
+              autocomplete="off"
               placeholder="请输入帐户名">
               <a-icon slot="prefix" type="user" :style="{ color: 'rgba(0,0,0,.25)' }"/>
             </a-input>
@@ -21,7 +22,7 @@
               v-decorator="['password',{initialValue:'', rules: validatorRules.password.rules}]"
               size="large"
               type="password"
-              autocomplete="false"
+              autocomplete="off"
               placeholder="密码">
               <a-icon slot="prefix" type="lock" :style="{ color: 'rgba(0,0,0,.25)' }"/>
             </a-input>

@@ -3,7 +3,8 @@
     <div v-if="token">
       <a-avatar shape="square" class="avatar" :size="100" :src="getFileAccessHttpUrl(avatar())" />
       <h3>欢迎您，{{ nickname() }}</h3>
-      <a-button type="dashed" @click="enter">进入系统</a-button>
+      <a-button type="primary" @click="enter">进入系统</a-button>
+      <a-button type="dashed" @click="changeAccount">切换账号</a-button>
     </div>
     <div v-else>
       <a-avatar shape="square" class="avatar" :size="100" :src="logo" />
@@ -14,7 +15,7 @@
 </template>
 <script>
 import Vue from 'vue'
-import { mapGetters } from 'vuex'
+import { mapActions, mapGetters } from 'vuex'
 import { ACCESS_TOKEN } from '@/store/mutation-types'
 import { getFileAccessHttpUrl } from "@/api/manage"
 export default {
@@ -32,11 +33,31 @@ export default {
     }
   },
   methods: {
+    ...mapActions(["Logout"]),
     ...mapGetters(['nickname', 'avatar', 'userInfo']),
     getFileAccessHttpUrl,
     enter() {
       this.$router.push('/account/center')
     },
+    changeAccount(){
+      const that = this
+      this.$confirm({
+        title: '提示',
+        content: '确定要退出当前账号并登录新的账号吗 ?',
+        onOk() {
+          return that.Logout({}).then(() => {
+            window.location.href="/user/login";
+          }).catch(err => {
+            that.$message.error({
+              title: '错误',
+              description: err.message
+            })
+          })
+        },
+        onCancel() {
+        },
+      });
+    }
   },
 }
 </script>
@@ -46,9 +67,10 @@ export default {
   background-size: 100% 100%;
   border-radius: 10px;
   width: 250px;
-  height: 360px;
+  min-height: 360px;
   text-align: center;
   padding-top: 110px;
+  padding-bottom: 20px;
   line-height: 50px;
 }
 .ant-btn {
