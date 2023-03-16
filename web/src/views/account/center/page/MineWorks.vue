@@ -62,7 +62,7 @@ export default {
       url: {
         list: '/teaching/teachingWork/mine',
         delete: '/teaching/teachingWork/delete',
-        shareUrl: window._CONFIG['webURL'] + "/scratch3/scratch-mobile.html?workId=",
+        shareUrl: window._CONFIG['webURL'] + "/work-detail?id=",
       }
     }
   },

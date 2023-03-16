@@ -18,7 +18,7 @@
                 :scrolling="workInfo.workType==4||workInfo.workType==10?'auto':'no'"
               ></iframe>
             </div>
-
+            <keyboard v-if="_isMobile() && workInfo.workType==2" @event="keyEvent"/>
             <!-- 作品信息 -->
             <div class="project-info">
               <a-row type="flex" justify="space-around">
@@ -40,7 +40,7 @@
                     <a-icon type="like" theme="twoTone" @click="starWork" />
                     <span class="gap">{{ workInfo.starNum }}</span>
 
-                    <a-popover title="微信扫一扫手机体验和分享">
+                    <a-popover v-if="!_isMobile()" title="微信扫一扫手机体验和分享">
                       <template slot="content">
                         <qrcode :value="getShareUrl()" :size="200" level="H"></qrcode>
                       </template>
@@ -116,6 +116,10 @@
               </a-list>
             </div>
           </div>
+          <div v-if="shareHtml" class="work-share-html">
+            <a-divider></a-divider>
+            <div v-html="shareHtml"></div>
+          </div>
         </a-layout-content>
         <a-layout-sider v-if="!_isMobile()">
           <UserEnter/>
@@ -134,6 +138,7 @@ import { getAction, getFileAccessHttpUrl } from '@/api/manage'
 import { mapGetters } from 'vuex'
 import { ACCESS_TOKEN } from '@/store/mutation-types'
 import QrCode from '@/components/tools/QrCode'
+import Keyboard from '@/components/tools/Keyboard'
 import Header from './modules/Header'
 import Footer from './modules/Footer'
 import UserEnter from './modules/UserEnter'
@@ -144,6 +149,7 @@ export default {
   name:"WorkDetail",
   components: {
     qrcode: QrCode,
+    Keyboard,
     Header,
     Footer,
     UserEnter
@@ -159,14 +165,14 @@ export default {
       loadingMore: false,
       commentsPage: 0,
       comments: [],
+      shareHtml: ''
     }
   },
   created() {
     this.workId = this.$route.query.id
-    this.getWorkInfo(this.workId)
     this.token = Vue.ls.get(ACCESS_TOKEN)
-    console.log(this.getFileAccessHttpUrl(this.avatar()));
-    console.log(this.nickname());
+    this.getWorkInfo(this.workId)
+    this.getWorkShareHtml()
   },
   mounted() {
     var that = this
@@ -193,6 +199,14 @@ export default {
     ...mapGetters(['nickname', 'avatar', 'userInfo']),
     moment,
     getFileAccessHttpUrl,
+    keyEvent(key, keyCode, isDown){
+      let player = document.getElementById("player");
+      player.contentWindow.vm.postIOData("keyboard", {
+        keyCode: keyCode,
+        key: key,
+        isDown: isDown,
+      });
+    },
     getWorkInfo(workId) {
       getAction('/teaching/teachingWork/studentWorkInfo?workId=' + workId).then((res) => {
         if (res.success) {
@@ -268,8 +282,15 @@ export default {
         )
       }
     },
+    getWorkShareHtml(){
+      getAction("/sys/config/getConfig?key=_workShareHtml").then(res=>{
+        if(res.success){
+          this.shareHtml = res.result
+        }
+      })
+    },
     getShareUrl() {
-      return window.location.protocol + '//' + window.location.host + '/scratch3/scratch-mobile?workId=' + this.workId
+      return window.location.protocol + '//' + window.location.host + '/work-detail?id=' + this.workId
     },
     enter() {
       this.$router.push('/account/center')
@@ -277,6 +298,7 @@ export default {
     _isMobile() {
       return navigator.userAgent.match(/(phone|pad|pod|iPhone|iPod|ios|Android|Mobile|BlackBerry|IEMobile|MQQBrowser|JUC|Fennec|wOSBrowser|BrowserNG|WebOS|Symbian|Windows Phone)/i) != null
     },
+    
   },
 }
 </script>
