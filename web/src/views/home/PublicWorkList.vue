@@ -15,10 +15,11 @@
               <a-icon type="star" theme="twoTone" two-tone-color="#ffd81b" />
               精选作品
             </h1>
-            <a-row type="flex" justify="space-between" :gutter="[24, 24]">
+            <a-row type="flex" justify="start" :gutter="[24, 24]">
               <a-col v-for="(item, index) in greatLeaderboard" :key="index" :xs="24" :sm="12" :md="12" :lg="8" :xl="6">
                 <a-card class="work-card">
                   <a @click="toDetail(item.id)" target="_blank">
+                    <a-tag color="blue">{{item.workType_dictText}}</a-tag>
                     <img class="work-cover" v-if="item.coverFileKey" :src="item.coverFileKey_url" />
                     <img v-if="item.workType == 4 || item.workType == 10" src="@/assets/code.png" alt="" />
                   </a>
@@ -46,10 +47,11 @@
               <a-icon type="like" theme="twoTone" two-tone-color="#52c41a" />
               最赞作品
             </h1>
-            <a-row type="flex" justify="space-between" :gutter="[24, 24]">
+            <a-row type="flex" justify="start" :gutter="[24, 24]">
               <a-col v-for="(item, index) in starLeaderboard" :key="index" :xs="24" :sm="12" :md="12" :lg="8" :xl="6">
                 <a-card class="work-card">
                   <a @click="toDetail(item.id)" target="_blank">
+                    <a-tag color="blue">{{item.workType_dictText}}</a-tag>
                     <img class="work-cover" v-if="item.coverFileKey" :src="item.coverFileKey_url" />
                     <img v-if="item.workType == 4 || item.workType == 10" src="@/assets/code.png" alt="" />
                   </a>
@@ -77,10 +79,11 @@
               <a-icon type="fire" theme="twoTone" two-tone-color="#eb2f96" />
               最火作品
             </h1>
-            <a-row type="flex" justify="space-between" :gutter="[24, 24]">
+            <a-row type="flex" justify="start" :gutter="[24, 24]">
               <a-col v-for="(item, index) in viewLeaderboard" :key="index" :xs="24" :sm="12" :md="12" :lg="8" :xl="6">
                 <a-card class="work-card">
                   <a @click="toDetail(item.id)" target="_blank">
+                    <a-tag color="blue">{{item.workType_dictText}}</a-tag>
                     <img class="work-cover" v-if="item.coverFileKey" :src="item.coverFileKey_url" />
                     <img v-if="item.workType == 4 || item.workType == 10" src="@/assets/code.png" alt="" />
                   </a>
@@ -249,6 +252,8 @@ export default {
 }
 .ant-layout-content {
   padding: 20px;
+  max-width: 1300px;
+  width: 100%;
   .user-enter{
     margin-top: 80px;
     margin-bottom: 30px;
@@ -274,6 +279,14 @@ export default {
       span {
         line-height: 40px;
       }
+    }
+    .ant-tag{
+      position: absolute;
+      margin: 5px;
+    }
+    >div {
+      padding: 10px;
+      margin: 10px;
     }
   }
   .load-more {

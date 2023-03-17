@@ -1,42 +1,33 @@
 <template>
   <div class="app-list">
-    <a-list :grid="{ gutter: 24, xxl:4, xl:4, lg: 3, md: 2, sm: 1, xs: 1 }" :dataSource="dataSource" :pagination="pagination">
-      <a-list-item slot="renderItem" slot-scope="item">
-        <a-card :hoverable="true">
-          <template class="ant-card-extra" slot="extra">
-            <a :href="getEditorHref(item)" target="_blank">
-              <h3>
-                <a-tag color="blue">{{item.workType_dictText}}</a-tag>
-                <j-ellipsis :value="item.workName" :length="35" />
-              </h3>
-            </a>
+    <a-card hoverable  v-for="item in dataSource" :key="item.id">
+      <div slot="cover" class="meta-cardInfo">
+        <a-tag color="blue">{{item.workType_dictText}}</a-tag>
+        <a :href="getEditorHref(item)" target="_blank">
+          <img v-if="item.coverFileKey" :src="getFileAccessHttpUrl(item.coverFileKey)" />
+          <img v-else src="@/assets/code.png" alt="">
+        </a>
+        </div>
+      <a-card-meta>
+        <a slot="description" :href="getEditorHref(item)" target="_blank">
+          <h3><j-ellipsis :value="item.workName" :length="35" /></h3>
+        </a>
+      </a-card-meta>
+      <template class="ant-card-actions" slot="actions">
+        <a-popconfirm title="确定删除吗?" @confirm="() => handleDelete(item.id)">
+          <a><a-icon type="delete" /></a>
+        </a-popconfirm>
+        <a :href="getEditorHref(item)" target="_blank">
+          <a-icon type="edit"/>
+        </a>
+        <a-popover trigger="click" v-if="item.workType==1||item.workType==2">
+          <template slot="content">
+            <qrcode :value="url.shareUrl + item.id" :size="250"></qrcode>
           </template>
-          <a-card-meta>
-            <div class="meta-cardInfo" slot="description">
-              <a :href="getEditorHref(item)" target="_blank">
-                <img v-if="item.coverFileKey" :src="getFileAccessHttpUrl(item.coverFileKey)" />
-                <img v-else src="@/assets/code.png" alt="">
-              </a>
-            </div>
-          </a-card-meta>
-          
-          <template class="ant-card-actions" slot="actions">
-            <a-popconfirm title="确定删除吗?" @confirm="() => handleDelete(item.id)">
-              <a><a-icon type="delete" /></a>
-            </a-popconfirm>
-            <a :href="getEditorHref(item)" target="_blank">
-              <a-icon type="edit"/>
-            </a>
-            <a-popover trigger="click" v-if="item.workType==1||item.workType==2">
-              <template slot="content">
-                <qrcode :value="url.shareUrl + item.id" :size="250"></qrcode>
-              </template>
-              <a><a-icon type="share-alt"/></a>
-            </a-popover>
-          </template>
-        </a-card>
-      </a-list-item>
-    </a-list>
+          <a><a-icon type="share-alt"/></a>
+        </a-popover>
+      </template>
+    </a-card>
   </div>
 </template>
 
@@ -59,6 +50,7 @@ export default {
         pageSize: 12,
       },
       dataSource: [],
+      loading: false,
       url: {
         list: '/teaching/teachingWork/mine',
         delete: '/teaching/teachingWork/delete',
@@ -73,6 +65,7 @@ export default {
     getFileAccessHttpUrl,
     getWorkList: function() {
       var that = this;
+      that.loading = true
       getAction(that.url.list, null).then(res => {
         if (res.success) {
           that.dataSource = res.result.records
@@ -120,17 +113,26 @@ export default {
   /deep/.ant-card-extra{
     margin-left:0!important;
     height: 55px;
-    .title{
-      
-    }
+  }
+  /deep/.ant-card{
+    width: 300px;
+    display: inline-block;
+    margin: 20px;
+  }
+  /deep/.ant-card-body{
+    padding: 5px;
   }
   .meta-cardInfo {
     zoom: 1;
-    margin-top: 16px;
-    min-height: 200px;
+    border-bottom: solid #e9e9e9 1px;
+    .ant-tag{
+      position: absolute;
+      margin: 5px;
+    }
     img {
       width: 100%;
-      max-height: 200px;
+      max-height: 100%;
+      
     }
     > div {
       position: relative;
@@ -151,9 +153,9 @@ export default {
         }
       }
     }
-    .create-time {
-      margin:0 20px;
-    }
+  }
+  /deep/.ant-card-actions li{
+    margin: 5px 0;
   }
 }
 </style>
