@@ -441,8 +441,10 @@ public class SysDepartServiceImpl extends ServiceImpl<SysDepartMapper, SysDepart
 		StringBuffer parentOrgCode = new StringBuffer();
 		//2.获取同一公司的根节点
 		for(String str : map.values()){
-			String[] arrStr = str.split(",");
-			parentOrgCode.append(",").append(this.getMinLengthNode(arrStr));
+			//这里有bug，一串部门编码中间如果有个高层级的，后面的就截断了
+//			String[] arrStr = str.split(",");
+//			parentOrgCode.append(",").append(this.getMinLengthNode(arrStr));
+			parentOrgCode.append(",").append(str);
 		}
 		return parentOrgCode.substring(1);
 	}
