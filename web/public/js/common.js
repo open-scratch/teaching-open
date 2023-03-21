@@ -1,7 +1,9 @@
-window.urlParams = function(paramName) {
+window.urlParams = function (paramName) {
   var reg = new RegExp('[?&]' + paramName + '=([^&]*)[&]?', 'i')
   var paramVal = window.location.search.match(reg)
-  return paramVal == null ? '' : decodeURIComponent(paramVal[1])
+  if(paramVal == null) return ''
+  var param = paramVal[1].replace(/%/g,'%25');
+  return decodeURIComponent(param)
 }
 
 window.uuid = function() {
