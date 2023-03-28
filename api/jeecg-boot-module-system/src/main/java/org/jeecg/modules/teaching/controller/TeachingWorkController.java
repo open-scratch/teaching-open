@@ -1,5 +1,6 @@
 package org.jeecg.modules.teaching.controller;
 
+import com.alibaba.fastjson.JSONObject;
 import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
 import com.baomidou.mybatisplus.core.metadata.IPage;
 import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
@@ -19,6 +20,7 @@ import org.jeecg.common.util.IPUtils;
 import org.jeecg.common.util.RedisUtil;
 import org.jeecg.common.util.oConvertUtils;
 import org.jeecg.modules.common.controller.BaseController;
+import org.jeecg.modules.system.service.ISysDataLogService;
 import org.jeecg.modules.system.service.ISysDepartService;
 import org.jeecg.modules.system.service.ISysFileService;
 import org.jeecg.modules.system.service.ISysUserService;
@@ -74,6 +76,8 @@ public class TeachingWorkController extends BaseController {
 	private ISysUserService sysUserService;
 	@Autowired
 	private ISysDepartService sysDepartService;
+	@Autowired
+	private ISysDataLogService sysDataLogService;
 	@Autowired
 	private RedisUtil redisUtil;
 	 @Autowired
@@ -131,11 +135,15 @@ public class TeachingWorkController extends BaseController {
 	  */
 	 @PostMapping(value = "/submit")
 	 public Result<TeachingWork> add(@RequestBody TeachingWork teachingWork) {
-		 teachingWork.setUserId(getCurrentUser().getId());
 		 Result<TeachingWork> result = new Result<TeachingWork>();
 		 try {
 			 List<TeachingWork> oldWorks = new ArrayList<>();
-			 if (isNotEmpty(teachingWork.getAdditionalId())) {
+			 if (isNotEmpty(teachingWork.getId())){
+				oldWorks = teachingWorkService.getBaseMapper().selectByMap(new HashMap<String, Object>() {{
+					put("user_id", getCurrentUser().getId());
+					put("id", teachingWork.getId());
+				}});
+			 }else if (isNotEmpty(teachingWork.getAdditionalId())) {
 				 oldWorks = teachingWorkService.getBaseMapper().selectByMap(new HashMap<String, Object>() {{
 					 put("user_id", getCurrentUser().getId());
 					 put("additional_id", teachingWork.getAdditionalId());
@@ -152,12 +160,16 @@ public class TeachingWorkController extends BaseController {
 					 put("work_type", teachingWork.getWorkType());
 				 }});
 			 }
+			 teachingWork.setId(null);
+			 teachingWork.setUserId(getCurrentUser().getId());
 			 if (oldWorks.size() > 0){
 				 teachingWork.setId(oldWorks.get(0).getId());
 				 teachingWork.setCreateTime(new Date());
 				 teachingWork.setUpdateTime(new Date());
 				 result.setResult(teachingWork);
 				 result.success("更新成功！");
+				 //保留原作品的历史记录
+				 sysDataLogService.addDataLog("teaching_work", teachingWork.getId(), JSONObject.toJSONString(teachingWork));
 			 }else{
 				 result.setResult(teachingWork);
 				 result.success("添加成功！");
