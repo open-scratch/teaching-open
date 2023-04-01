@@ -195,7 +195,7 @@ export default {
     .unit-title {
       background-color: #52c41ab3;
       display: block;
-      min-width: 64px;
+      width: fit-content;
       padding: 0.4em 0.6em 0.3em;
       font-size: 75%;
       font-weight: 700;

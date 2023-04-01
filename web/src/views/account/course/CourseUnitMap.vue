@@ -118,7 +118,7 @@
     .unit-title{
         background-color: #52c41ab3;
         display: block; 
-        width: 64px;
+        width: fit-content;
         padding: .4em .6em .3em;
         font-size: 75%;
         font-weight: 700;
