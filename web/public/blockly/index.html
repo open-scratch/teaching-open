@@ -413,6 +413,7 @@
 
   //点击提交按钮
   $("#submitButton").click(() => {
+    qn_token = getQiniuToken();
     let xml = Blockly.Xml.workspaceToDom(Blockly.getMainWorkspace());
     let text = Blockly.Xml.domToText(xml);
     console.log(text);

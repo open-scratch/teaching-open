@@ -66,6 +66,7 @@
 
     window.submitCode = function (projectName, code) {
       console.log(code);
+      qn_token = getQiniuToken();
       var uuid = window.uuid()
       uploadParam.projectTitle = projectName
       var defaultUploadType = getSysConfig('uploadType')

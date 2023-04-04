@@ -282,6 +282,7 @@
     console.log(getSysConfig('qiniuDomain'))
     //请求提交作业
     function requestUpload(status){
+      qn_token = getQiniuToken();
       workStatus = status
       $('.scratch-filter').show()
       $('.uploading').show()
