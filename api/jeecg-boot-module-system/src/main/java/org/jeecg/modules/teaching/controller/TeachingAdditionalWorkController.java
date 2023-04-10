@@ -77,7 +77,13 @@ public class TeachingAdditionalWorkController extends JeecgController<TeachingAd
            if (myDeptIds==null || myDeptIds.isEmpty()){
                return Result.error("您没有负责的班级");
            }
-           queryWrapper.in("work_dept",myDeptIds);
+           List<String> finalMyDeptIds = myDeptIds;
+           queryWrapper.and(q->{
+               for (String depId: finalMyDeptIds){
+                   q.or().like("work_dept",depId);
+               }
+               return q;
+           });
        }
        QueryGenerator.installMplus(queryWrapper, teachingAdditionalWork, req.getParameterMap());
        Page<TeachingAdditionalWork> page = new Page<TeachingAdditionalWork>(pageNo, pageSize);
