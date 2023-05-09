@@ -20,7 +20,7 @@
                 <a-card class="work-card">
                   <a @click="toDetail(item.id)" target="_blank">
                     <a-tag color="blue">{{item.workType_dictText}}</a-tag>
-                    <img class="work-cover" v-if="item.coverFileKey" :src="item.coverFileKey_url" />
+                    <img class="work-cover" v-if="item.coverFileKey_url" :src="item.coverFileKey_url" />
                     <img v-if="item.workType == 4 || item.workType == 10" src="@/assets/code.png" alt="" />
                   </a>
                   <a-row type="flex" justify="end">
@@ -52,7 +52,7 @@
                 <a-card class="work-card">
                   <a @click="toDetail(item.id)" target="_blank">
                     <a-tag color="blue">{{item.workType_dictText}}</a-tag>
-                    <img class="work-cover" v-if="item.coverFileKey" :src="item.coverFileKey_url" />
+                    <img class="work-cover" v-if="item.coverFileKey_url" :src="item.coverFileKey_url" />
                     <img v-if="item.workType == 4 || item.workType == 10" src="@/assets/code.png" alt="" />
                   </a>
                   <a-row type="flex" justify="end">
@@ -84,7 +84,7 @@
                 <a-card class="work-card">
                   <a @click="toDetail(item.id)" target="_blank">
                     <a-tag color="blue">{{item.workType_dictText}}</a-tag>
-                    <img class="work-cover" v-if="item.coverFileKey" :src="item.coverFileKey_url" />
+                    <img class="work-cover" v-if="item.coverFileKey_url" :src="item.coverFileKey_url" />
                     <img v-if="item.workType == 4 || item.workType == 10" src="@/assets/code.png" alt="" />
                   </a>
                   <a-row type="flex" justify="end">

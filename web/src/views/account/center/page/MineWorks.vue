@@ -4,7 +4,7 @@
       <div slot="cover" class="meta-cardInfo">
         <a-tag color="blue">{{item.workType_dictText}}</a-tag>
         <a :href="getEditorHref(item)" target="_blank">
-          <img v-if="item.coverFileKey" :src="getFileAccessHttpUrl(item.coverFileKey)" />
+          <img v-if="item.coverFileKey_url" :src="item.coverFileKey_url" />
           <img v-else src="@/assets/code.png" alt="">
         </a>
         </div>
