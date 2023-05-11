@@ -596,7 +596,7 @@ public class SysUserController extends BaseController {
                     if (StringUtils.isBlank(sysUserExcel.getPassword())) {
                         sysUserExcel.setPassword("123456");// 密码默认为 “123456”
                     }
-                    sysUserExcel.setUserIdentity(sysUserExcel.getUserIdentity() == 2 ? 2:1);
+                    sysUserExcel.setUserIdentity(sysUserExcel.getUserIdentity() != null && sysUserExcel.getUserIdentity() == 2 ? 2:1);
                     // 密码加密加盐
                     String salt = oConvertUtils.randomGen(8);
                     sysUserExcel.setSalt(salt);
