@@ -591,6 +591,7 @@ public class SysUserController extends BaseController {
             try {
                 List<SysUserModel> listSysUsers = ExcelImportUtil.importExcel(file.getInputStream(), SysUserModel.class, params);
                 for (int i = 0; i < listSysUsers.size(); i++) {
+                    int lineNumber = i + 1;
                     SysUserModel sysUserExcel = listSysUsers.get(i);
                     if (StringUtils.isBlank(sysUserExcel.getPassword())) {
                         sysUserExcel.setPassword("123456");// 密码默认为 “123456”
@@ -607,7 +608,6 @@ public class SysUserController extends BaseController {
                     } catch (Exception e) {
                         errorLines++;
                         String message = e.getMessage();
-                        int lineNumber = i + 1;
                         // 通过索引名判断出错信息
                         if (message.contains(CommonConstant.SQL_INDEX_UNIQ_SYS_USER_USERNAME)) {
                             errorMessage.add("第 " + lineNumber + " 行：用户名已经存在，忽略导入。");
@@ -628,7 +628,18 @@ public class SysUserController extends BaseController {
                         String[] departIdArray = departIds.split(",");
                         List<SysUserDepart> userDepartList = new ArrayList<>(departIdArray.length);
                         for (String departId : departIdArray) {
-                            userDepartList.add(new SysUserDepart(userId, departId));
+                            SysDepart depart = sysDepartService.getOne(new QueryWrapper<SysDepart>().lambda()
+                                    .eq(SysDepart::getId, departId)
+                                    .or().eq(SysDepart::getOrgCode, departId)
+                                    .or().eq(SysDepart::getDepartName, departId)
+                                    .last("limit 1")
+                            );
+                            if (depart != null){
+                                userDepartList.add(new SysUserDepart(userId, depart.getId()));
+                            }else{
+                                errorLines++;
+                                errorMessage.add("第 " + lineNumber + " 行：部门不存在。");
+                            }
                         }
                         sysUserDepartService.saveBatch(userDepartList);
                     }
@@ -640,7 +651,18 @@ public class SysUserController extends BaseController {
                         String[] roleIdArray = roleIds.split(",");
                         List<SysUserRole> userRoleList = new ArrayList<>(roleIdArray.length);
                         for (String roleId : roleIdArray) {
-                            userRoleList.add(new SysUserRole(userId, roleId));
+                            SysRole role = sysRoleService.getOne(new QueryWrapper<SysRole>().lambda()
+                                    .eq(SysRole::getId, roleId)
+                                    .or().eq(SysRole::getRoleCode, roleId)
+                                    .or().eq(SysRole::getRoleName, roleId)
+                                    .last("limit 1")
+                            );
+                            if (role != null){
+                                userRoleList.add(new SysUserRole(userId, role.getId()));
+                            }else{
+                                errorLines++;
+                                errorMessage.add("第 " + lineNumber + " 行：角色不存在。");
+                            }
                         }
                         sysUserRoleService.saveBatch(userRoleList);
                     }else if(studentRole != null){ //默认student角色

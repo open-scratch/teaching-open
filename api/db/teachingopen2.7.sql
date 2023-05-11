@@ -2948,7 +2948,6 @@ CREATE TABLE `sys_user`  (
   `user_identity` tinyint(1) NULL DEFAULT NULL COMMENT '身份（1普通成员 2上级）',
   `depart_ids` longtext CHARACTER SET utf8 COLLATE utf8_general_ci NULL COMMENT '负责部门',
   PRIMARY KEY (`id`) USING BTREE,
-  UNIQUE INDEX `index_user_name`(`username`) USING BTREE,
   UNIQUE INDEX `uniq_sys_user_work_no`(`work_no`) USING BTREE,
   UNIQUE INDEX `uniq_sys_user_username`(`username`) USING BTREE,
   UNIQUE INDEX `uniq_sys_user_phone`(`phone`) USING BTREE,

@@ -51,3 +51,6 @@ INSERT INTO `teaching_menu`(`id`, `parent_id`, `name`, `url`, `menu_type`, `sort
 
 alter table teaching_course
     add depart_ids varchar(1000) default '' not null comment '授权部门';
+
+alter table sys_user
+    drop key index_user_name;
