@@ -64,7 +64,7 @@ Vue.use(JeecgComponents);
 Vue.use(VueAreaLinkage);
 Vue.use(VueAwesomeSwiper, /* { default options with global component } */)
 
-let cacheTime = 3600000 //缓存1小时（缓存失效时，需刷新页面重新加载）
+let cacheTime = 300000 //缓存5分（缓存失效时，需刷新页面重新加载）
 
 const start = async()=>{
   //获取配置
