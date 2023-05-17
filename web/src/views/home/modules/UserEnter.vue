@@ -1,7 +1,7 @@
 <template>
   <div class="user-enter">
     <div v-if="token">
-      <a-avatar shape="square" class="avatar" :size="100" :src="getFileAccessHttpUrl(avatar())" />
+      <a-avatar shape="square" class="avatar" :size="100" :src="avatarUrl" />
       <h3>欢迎您，{{ nickname() }}</h3>
       <a-button type="primary" @click="enter">进入系统</a-button>
       <a-button type="dashed" @click="changeAccount">切换账号</a-button>
@@ -23,13 +23,17 @@ export default {
     return {
       brandName: this.$store.getters.sysConfig.brandName,
       token: '',
-      logo: '/logo.png'
+      logo: '/logo.png',
+      avatarUrl: '/logo.png',
     }
   },
   created() {
     this.token = Vue.ls.get(ACCESS_TOKEN)
     if(this.$store.getters.sysConfig.logo && this.$store.getters.sysConfig.qiniuDomain){
       this.logo = this.$store.getters.sysConfig.qiniuDomain + "/" + this.$store.getters.sysConfig.logo
+    }
+    if(this.getFileAccessHttpUrl(this.avatar())){
+      this.avatarUrl = this.getFileAccessHttpUrl(this.avatar())
     }
   },
   methods: {

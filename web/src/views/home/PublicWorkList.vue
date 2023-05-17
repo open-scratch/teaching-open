@@ -270,7 +270,10 @@ export default {
     border-radius: 10px;
     box-shadow: grey 2px 2px 5px;
     max-height: 300px;
-    min-width: 280px;
+    min-width: 200px;
+    /deep/.ant-card-body{
+      padding: 10px;
+    }
     .work-cover {
       width: 100%;
       max-height: 150px;
