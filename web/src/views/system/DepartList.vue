@@ -369,15 +369,9 @@ export default {
       //     this.setThisExpandedKeys(node.children[a])
       //   }
       // }
-      //展开两层
+      //展开一层
       if (node.children && node.children.length > 0) {
-        let keys = []
-        for(let item of node.children){
-          if(item.children && item.children.length>0){
-            keys.push(item.id)
-          }
-        }
-        this.iExpandedKeys=[...keys]
+        this.iExpandedKeys.push(node.key)
       }
     },
     refresh() {
