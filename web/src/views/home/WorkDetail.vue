@@ -332,7 +332,10 @@ export default {
 }
 
 .project-detail {
-  max-width: 730px;
+  max-width: 780px;
+  background: #fff;
+  border-radius: 10px;
+  padding: 20px;
   .scratch-player {
     margin: auto;
     iframe {

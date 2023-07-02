@@ -62,7 +62,7 @@ export const constantRouterMap = [
       {
         path: 'home',
         name: 'publicWork',
-        component: () => import(/* webpackChunkName: "home" */ '@/views/home/PublicWorkList')
+        component: () => import(/* webpackChunkName: "home" */ '@/views/home/Index2')
       },
       {
         path: 'work-detail',

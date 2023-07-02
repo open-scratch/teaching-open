@@ -64,23 +64,32 @@ Vue.use(JeecgComponents);
 Vue.use(VueAreaLinkage);
 Vue.use(VueAwesomeSwiper, /* { default options with global component } */)
 
-let cacheTime = 300000 //缓存5分（缓存失效时，需刷新页面重新加载）
+let cacheTime = 1800000 //缓存时间
 
 const start = async()=>{
   //获取配置
   let sysConfig = store.getters.sysConfig;
+  let getConfigCallback = function(res){
+    if (res.success) {
+      sysConfig = res.result
+      Vue.ls.set(SYS_CONFIG, sysConfig, cacheTime)
+      store.commit('SET_SYS_CONFIG', sysConfig)
+    }
+  }
   if (!sysConfig) {
-    await getSysConfig().then(res => {
-      if (res.success) {
-        sysConfig = res.result
-        Vue.ls.set(SYS_CONFIG, sysConfig, cacheTime)
-        store.commit('SET_SYS_CONFIG', sysConfig)
-      }
-    })
+    await getSysConfig().then(getConfigCallback)
+  }else{
+    getSysConfig().then(getConfigCallback)
   }
   //获取菜单
   if (store.getters.menuList == null) {
     await getMenu().then(res => {
+      const menuData = res.result;
+      Vue.ls.set(MENU, menuData, cacheTime)
+      store.commit('SET_MENU', menuData)
+    })
+  }else{
+    getMenu().then(res => {
       const menuData = res.result;
       Vue.ls.set(MENU, menuData, cacheTime)
       store.commit('SET_MENU', menuData)

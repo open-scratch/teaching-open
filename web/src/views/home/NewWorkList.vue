@@ -19,23 +19,25 @@
               <a-col v-for="(item, index) in newWork" :key="index" :xs="24" :sm="12" :md="12" :lg="8" :xl="6">
                 <a-card class="work-card">
                   <a @click="toDetail(item.id)" target="_blank">
-                    <a-tag color="blue">{{item.workType_dictText}}</a-tag>
+                    <a-tag color="orange">{{item.workType_dictText}}</a-tag>
                     <img class="work-cover" v-if="item.coverFileKey_url" :src="item.coverFileKey_url" />
                     <img v-if="item.workType == 4 || item.workType == 10" src="@/assets/code.png" alt="" />
                   </a>
-                  <a-row type="flex" justify="end">
-                    <a-col :span="5"> <a-icon type="eye" /> {{ item.viewNum }} </a-col>
-                    <a-col :span="5"> <a-icon type="like" /> {{ item.starNum }} </a-col>
-                  </a-row>
-                  <p>{{ item.workName }}</p>
-                  <a-row class="work-author">
-                    <a-col :span="6">
-                      <a-avatar shape="square" class="avatar" :size="40" :src="item.avatar_url" />
-                    </a-col>
-                    <a-col :span="18">
-                      <span>{{ item.realname || item.username }}</span>
-                    </a-col>
-                  </a-row>
+                  <div class="work-info">
+                    <a-row type="flex" justify="start">
+                      <a-col :span="5"> <a-icon type="eye" /> {{ item.viewNum }} </a-col>
+                      <a-col :span="5"> <a-icon type="like" /> {{ item.starNum }} </a-col>
+                    </a-row>
+                    <p>{{ item.workName }}</p>
+                    <a-row class="work-author">
+                      <a-col :span="6">
+                        <a-avatar shape="square" class="avatar" :size="40" :src="item.avatar_url" />
+                      </a-col>
+                      <a-col :span="18">
+                        <span>{{ item.realname || item.username }}</span>
+                      </a-col>
+                    </a-row>
+                  </div>
                 </a-card>
               </a-col>
             </a-row>
@@ -172,15 +174,19 @@ export default {
   }
   .work-card {
     border-radius: 10px;
+    overflow: hidden;
     box-shadow: grey 2px 2px 5px;
     max-height: 300px;
     min-width: 200px;
     /deep/.ant-card-body{
-      padding: 10px;
+      padding: 0px;
     }
     .work-cover {
       width: 100%;
       max-height: 150px;
+    }
+    .work-info{
+      padding: 10px;
     }
     .work-author {
       span {
