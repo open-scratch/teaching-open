@@ -323,6 +323,7 @@ export default {
 .ant-layout-header {
   height: 250px;
   width: 100%;
+  padding: 0;
 }
 
 .ant-layout-has-sider {

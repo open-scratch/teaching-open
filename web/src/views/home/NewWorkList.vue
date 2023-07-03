@@ -142,7 +142,7 @@ export default {
   min-height: 250px;
   width: 100%;
   margin-bottom: 80px;
-  padding: 0 20px;
+  padding: 0;
   /deep/.banner{
     border-radius: 10px;
     overflow: hidden;

@@ -1,5 +1,5 @@
 <template>
-  <div class="header">
+  <div :class="['header', menuFixed?'menu-fixed':'']">
     <router-link :to="{ path: '/home' }">
       <img class="logo" :src="logo" alt="" />
     </router-link>
@@ -33,6 +33,7 @@ export default {
       menus: [],
       logo: '/logo.png',
       avatarUrl: '/logo.png',
+      menuFixed: false
     }
   },
   created() {
@@ -44,10 +45,24 @@ export default {
       this.avatarUrl = this.getFileAccessHttpUrl(this.avatar())
     } 
   },
+  mounted() {
+    window.addEventListener('scroll', this.handleScroll)
+  },
+  beforeDestroy() {
+    window.removeEventListener('scroll', this.handleScroll)
+  },
   methods:{
     ...mapActions(["Logout"]),
     ...mapGetters(['nickname', 'avatar', 'userInfo']),
     getFileAccessHttpUrl,
+    handleScroll(){
+      let scrollTop = document.documentElement.scrollTop
+      if (scrollTop >= 105) {
+        this.menuFixed = true
+      } else {
+        this.menuFixed = false
+      }
+    },
     enter() {
       this.$router.push('/account/center')
     },
@@ -79,7 +94,7 @@ export default {
 
 <style scoped lang="less">
 .header {
-  margin: 15px 0;
+  padding: 15px;
   line-height: 30px;
 }
 .logo {
@@ -103,7 +118,14 @@ export default {
   font-size: 18px;
   font-style: italic;
 }
-
+.menu-fixed{
+    position: fixed;
+    top: 0px;
+    z-index: 99;
+    padding-bottom: 10px;
+    width: 100%;
+    background: radial-gradient(ellipse at top left, #005dff 10%, #23aeffd9 67%);
+}
 .menu {
   display: inline-block;
   background: transparent;
