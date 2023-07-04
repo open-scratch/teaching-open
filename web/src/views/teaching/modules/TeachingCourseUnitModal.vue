@@ -1,17 +1,18 @@
 <template>
-  <a-drawer
+  <j-modal
     :title="title"
     :width="width"
-    placement="right"
-    :closable="false"
-    @close="close"
+    :confirmLoading="confirmLoading"
+    switchFullscreen
+    @ok="handleOk"
+    @cancel="handleCancel"
     :visible="visible">
     <a-spin :spinning="confirmLoading">
       <a-form :form="form">
         <a-form-item label="展示排序" :labelCol="labelCol" :wrapperCol="wrapperCol">
           <a-input-number v-decorator="[ 'orderNum']" placeholder="请输入排序"></a-input-number>
         </a-form-item>
-        <a-form-item label="所属课程" :labelCol="labelCol" :wrapperCol="wrapperCol">
+        <a-form-item label="所属课程包" :labelCol="labelCol" :wrapperCol="wrapperCol">
           <a-select v-decorator="['courseId', validatorRules.courseId]" rows="4">
             <a-select-option v-for="(course,index) in courseList" :key="index.toString()" :value="course.id">{{course.courseName}}</a-select-option>
           </a-select>
@@ -54,8 +55,11 @@
         <a-form-item label="作业类型" :labelCol="labelCol" :wrapperCol="wrapperCol">
           <j-dict-select-tag type="list" v-decorator="['courseWorkType', {initialValue: 2}, validatorRules.courseWorkType]" :trigger-change="true" dictCode="work_type" placeholder="请选择作业类型"/>
         </a-form-item>
-        <a-form-item label="课程作业" :labelCol="labelCol" :wrapperCol="wrapperCol">
+        <a-form-item label="预设作业" :labelCol="labelCol" :wrapperCol="wrapperCol">
           <j-upload v-decorator="['courseWork', validatorRules.courseWork]"  :number="1" :trigger-change="true"></j-upload>
+        </a-form-item>
+        <a-form-item label="课程内容" :labelCol="labelCol" :wrapperCol="wrapperCol" >
+          <j-editor v-decorator="['mediaContent', { trigger: 'input' }]" />
         </a-form-item>
         <a-form-item label="地图坐标" :labelCol="labelCol" :wrapperCol="wrapperCol">
           <a-row>
@@ -76,12 +80,12 @@
         </a-form-item>
       </a-form>
     </a-spin>
-    <div class="drawer-footer">
+    <!-- <div class="drawer-footer">
       <a-button type="primary" @click="handleOk">确定</a-button>
       <a-button type="default" @click="handleCancel">取消</a-button>
-    </div>
+    </div> -->
     <TeachingMapEditor ref="mapEditor" />
-  </a-drawer>
+  </j-modal>
 </template>
 
 <script>
@@ -90,12 +94,14 @@
   import pick from 'lodash.pick'
   import { validateDuplicateValue } from '@/utils/util'
   import JUpload from '@/components/jeecg/JUpload'
+  import JEditor from '@/components/jeecg/JEditor'
   import JDictSelectTag from "@/components/dict/JDictSelectTag"
   import TeachingMapEditor from './TeachingMapEditor'
   export default {
     name: "TeachingCourseUnitModal",
     components: { 
       JUpload,
+      JEditor,
       JDictSelectTag,
       TeachingMapEditor
     },
@@ -103,7 +109,7 @@
       return {
         form: this.$form.createForm(this),
         title:"操作",
-        width:800,
+        width:1000,
         visible: false,
         model: {},
         labelCol: {
@@ -186,7 +192,7 @@
           'createBy','createTime','unitName','unitIntro','courseId','unitCover',
           'courseVideo','showCourseVideo','courseVideoSource','coursePpt','showCoursePpt',
           'courseWorkType','courseWork','courseWorkAnswer','coursePlan','showCoursePlan',
-          'courseCase','showCourseCase','mapX','mapY', 'orderNum'))
+          'courseCase','showCourseCase','mapX','mapY','mediaContent', 'orderNum'))
         })
       },
       close () {

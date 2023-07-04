@@ -19,6 +19,9 @@
           <a-tab-pane key="scratch" tab="案例" v-if="unit.courseCase">
             <iframe id="player" :src="previewCourseCase(unit)" scrolling="no"></iframe>
           </a-tab-pane>
+          <a-tab-pane key="media" tab="课程内容" v-if="unit.mediaContent">
+            <div v-html="unit.mediaContent"></div>
+          </a-tab-pane>
         </a-tabs>
       </div>
       <a-divider>本节课资料</a-divider>
@@ -34,7 +37,7 @@
               <template v-slot:expandIcon="props">
                 <a-icon type="caret-right" :rotate="props.isActive ? 90 : 0" />
               </template>
-              <a-collapse-panel v-if="unit.courseWork_url" :header="'课后作业'" :style="customStyle">
+              <a-collapse-panel v-if="unit.courseWork_url" key="0" :header="'课后作业'" :style="customStyle">
                 <a-button @click="handleViewCode(unit)" type="primary" icon="edit">去做作业</a-button>
               </a-collapse-panel>
               <a-collapse-panel v-if="unit.coursePpt_url" :header="'课程资料'" :style="customStyle">

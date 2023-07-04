@@ -54,3 +54,7 @@ alter table teaching_course
 
 alter table sys_user
     drop key index_user_name;
+
+alter table teaching_course_unit
+    add media_content longtext null comment '富文本课件' after map_y;
+

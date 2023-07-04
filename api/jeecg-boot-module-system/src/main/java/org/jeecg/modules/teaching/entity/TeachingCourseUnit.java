@@ -136,6 +136,11 @@ public class TeachingCourseUnit implements Serializable {
     @ApiModelProperty(value = "地图Y坐标")
     private java.lang.Integer mapY;
 
+    /**富文本内容*/
+    @Excel(name = "富文本内容", width = 15)
+    @ApiModelProperty(value = "富文本内容")
+    private java.lang.String mediaContent;
+
     /**排序*/
     private java.lang.Integer orderNum;
 }
