@@ -15,14 +15,14 @@
                 <div v-if="token">
                   <a-avatar shape="square" class="avatar" :size="100" :src="avatarUrl" />
                   <h3>欢迎您，{{ nickname() }}</h3>
-                  <a-button size="large" type="primary" @click="enter">我的作品</a-button>
+                  <a-button size="large" type="primary" @click="enter(1)">我的作品</a-button>
                   <a-divider type="vertical"></a-divider>
                   <a-button size="large" type="primary" @click="enter(2)">我的课程</a-button>
                 </div>
                 <div v-else>
                   <a-avatar shape="square" class="avatar" :size="100" :src="logo" />
                   <h3 class="welcome">欢迎来到{{ brandName }}</h3>
-                  <a-button type="dashed" @click="enter">登录/注册</a-button>
+                  <a-button type="dashed" @click="enter(0)">登录/注册</a-button>
                 </div>
               </div>
             </a-col>
@@ -241,6 +241,7 @@ export default {
     ...mapGetters(['nickname', 'avatar', 'userInfo']),
     enter(type) {
       switch(type){
+        case 0:this.$router.push('/user/login');break;
         case 1:this.$router.push('/account/center');break;
         case 2:this.$router.push('/teaching/mineCourse/cardList');break;
         default:this.$router.push('/account/center');break;

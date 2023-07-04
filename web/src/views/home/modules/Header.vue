@@ -75,7 +75,6 @@ export default {
           return that
             .Logout({})
             .then(() => {
-              Vue.ls.remove("cysccToken")
               window.location.reload()
             })
             .catch((err) => {

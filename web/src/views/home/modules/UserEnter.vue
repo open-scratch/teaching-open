@@ -9,7 +9,7 @@
     <div v-else>
       <a-avatar shape="square" class="avatar" :size="100" :src="logo" />
       <h3 class="welcome">欢迎来到{{ brandName }}</h3>
-      <a-button type="dashed" @click="enter">登录/注册</a-button>
+      <a-button type="dashed" @click="login">登录/注册</a-button>
     </div>
   </div>
 </template>
@@ -40,6 +40,9 @@ export default {
     ...mapActions(["Logout"]),
     ...mapGetters(['nickname', 'avatar', 'userInfo']),
     getFileAccessHttpUrl,
+    login(){
+      this.$router.push('/user/login')
+    },
     enter() {
       this.$router.push('/account/center')
     },
