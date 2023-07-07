@@ -21,6 +21,7 @@ import org.jeecg.modules.system.service.ISysFileService;
 import org.jeecg.modules.teaching.entity.TeachingCourseUnit;
 import org.jeecg.modules.teaching.model.CourseUnitModel;
 import org.jeecg.modules.teaching.model.CourseUnitWorkModel;
+import org.jeecg.modules.teaching.service.ITeachingCourseDeptService;
 import org.jeecg.modules.teaching.service.ITeachingCourseUnitService;
 
 import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
@@ -57,8 +58,38 @@ import org.jeecg.common.aspect.annotation.AutoLog;
 public class TeachingCourseUnitController extends JeecgController<TeachingCourseUnit, ITeachingCourseUnitService> {
 	@Autowired
 	private ITeachingCourseUnitService teachingCourseUnitService;
+	@Autowired
+	private ITeachingCourseDeptService teachingCourseDeptService;
 	 @Autowired
 	 private ISysFileService sysFileService;
+
+
+	 @ApiOperation(value="我的课程单元", notes="我的课程单元")
+	 @GetMapping(value = "/mineUnit")
+	 public Result<?> mineUnit(@RequestParam String courseId,
+								@RequestParam(name="pageNo", defaultValue="1") Integer pageNo,
+								@RequestParam(name="pageSize", defaultValue="10") Integer pageSize,
+								HttpServletRequest req) {
+		 //验证权限
+		 if (!teachingCourseDeptService.checkCoursePermission(courseId, getCurrentUser().getId())){
+			 return Result.error("无课程权限");
+		 }
+
+		 QueryWrapper<CourseUnitModel> queryWrapper = new QueryWrapper<>();
+		 queryWrapper.eq("course_id", courseId);
+		 queryWrapper.orderByAsc("order_num");
+		 Page<CourseUnitModel> page = new Page<CourseUnitModel>(pageNo, pageSize);
+		 IPage<CourseUnitModel> pageList = teachingCourseUnitService.getCourseUnitList(page, queryWrapper);
+		 if (getCurrentUser().getUserIdentity().equals(1)){
+			 for (CourseUnitModel model: pageList.getRecords()){
+				 model.setCourseVideo(model.getShowCourseVideo()?model.getCourseVideo(): null);
+				 model.setCourseCase(model.getShowCourseCase()?model.getCourseCase(): null);
+				 model.setCoursePlan(model.getShowCoursePlan()?model.getCoursePlan(): null);
+				 model.setCoursePpt(model.getShowCoursePpt()?model.getCoursePpt(): null);
+			 }
+		 }
+		 return Result.ok(pageList);
+	 }
 	
 	/**
 	 * 分页列表查询
@@ -81,14 +112,6 @@ public class TeachingCourseUnitController extends JeecgController<TeachingCourse
 		queryWrapper.orderByAsc("order_num");
 		Page<CourseUnitModel> page = new Page<CourseUnitModel>(pageNo, pageSize);
 		IPage<CourseUnitModel> pageList = teachingCourseUnitService.getCourseUnitList(page, queryWrapper);
-		if (getCurrentUser().getUserIdentity().equals(1)){
-			for (CourseUnitModel model: pageList.getRecords()){
-				model.setCourseVideo(model.getShowCourseVideo()?model.getCourseVideo(): null);
-				model.setCourseCase(model.getShowCourseCase()?model.getCourseCase(): null);
-				model.setCoursePlan(model.getShowCoursePlan()?model.getCoursePlan(): null);
-				model.setCoursePpt(model.getShowCoursePpt()?model.getCoursePpt(): null);
-			}
-		}
 		return Result.ok(pageList);
 	}
 

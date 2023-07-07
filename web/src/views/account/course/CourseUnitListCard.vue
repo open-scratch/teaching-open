@@ -32,7 +32,7 @@ export default {
       courseInfo: {},
       url:{
         courseInfo: "/teaching/teachingCourse/queryById",
-        unitList: "/teaching/teachingCourseUnit/list"
+        unitList: "/teaching/teachingCourseUnit/mineUnit"
       },
       visible : false,
       unit: {}
@@ -54,11 +54,11 @@ export default {
         getAction(this.url.courseInfo, {id: courseId}).then(res=>{
             console.log(res)
             if(res.success){
-                this.courseInfo = res.result
-                this.$route.meta.title = "我的课程-" + this.courseInfo.courseName
-                this.courseInfo.map = this.getFileAccessHttpUrl(this.courseInfo.map)
+              this.courseInfo = res.result
+              this.$route.meta.title = "我的课程-" + this.courseInfo.courseName
+              this.courseInfo.map = this.getFileAccessHttpUrl(this.courseInfo.map)
             }else{
-
+              this.$message.error(res.message)
             }
         })
     },
@@ -66,9 +66,9 @@ export default {
         getAction(this.url.unitList, {courseId: courseId, pageNo: 1, pageSize:99}).then(res=>{
             console.log(res)
             if(res.success){
-                this.dataSource = res.result.records
+              this.dataSource = res.result.records
             }else{
-
+              this.$message.error(res.message)
             }
         })
     },

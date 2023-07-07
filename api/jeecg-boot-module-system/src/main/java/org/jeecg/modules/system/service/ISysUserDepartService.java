@@ -26,6 +26,9 @@ public interface ISysUserDepartService extends IService<SysUserDepart> {
 	 * @return
 	 */
 	List<DepartIdModel> queryDepartIdsOfUser(String userId);
+
+	//用户所属的部门id
+	List<String> userDepartIds(String userId);
 	
 
 	/**

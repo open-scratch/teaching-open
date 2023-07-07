@@ -6,6 +6,7 @@ import java.util.stream.Collectors;
 import java.util.stream.Collectors;
 
 import com.baomidou.mybatisplus.core.conditions.Wrapper;
+import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
 import org.jeecg.common.util.oConvertUtils;
 import org.jeecg.modules.system.entity.SysDepart;
 import org.jeecg.modules.system.entity.SysUser;
@@ -69,8 +70,18 @@ public class SysUserDepartServiceImpl extends ServiceImpl<SysUserDepartMapper, S
 		
 	}
 
+    @Override
+    public List<String> userDepartIds(String userId) {
+		List<SysUserDepart> sysUserDeparts = this.list(new QueryWrapper<SysUserDepart>().lambda().eq(SysUserDepart::getUserId, userId));
+		List<String> departIds = new ArrayList<>();
+		if (!sysUserDeparts.isEmpty()){
+			departIds = sysUserDeparts.stream().map(SysUserDepart::getDepId).collect(Collectors.toList());
+		}
+        return departIds;
+    }
 
-	/**
+
+    /**
 	 * 根据部门id查询用户信息
 	 */
 	@Override

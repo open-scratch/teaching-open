@@ -16,4 +16,7 @@ import org.jeecg.modules.teaching.model.CourseDeptModel;
 public interface ITeachingCourseDeptService extends IService<TeachingCourseDept> {
 
     IPage<CourseDeptModel> list(Page<CourseDeptModel> page, QueryWrapper<CourseDeptModel> queryWrapper);
+
+    //检查课程权限
+    boolean checkCoursePermission(String courseId, String userId);
 }
