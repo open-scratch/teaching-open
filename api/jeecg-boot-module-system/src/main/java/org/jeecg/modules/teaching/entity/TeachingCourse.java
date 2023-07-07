@@ -65,8 +65,11 @@ public class TeachingCourse implements Serializable {
 	/**是否共享*/
 	@Excel(name = "是否共享", width = 15)
 	@ApiModelProperty(value = "是否共享")
-	@Dict(dicCode = "yn")
 	private java.lang.Boolean isShared;
+	/**首页展示*/
+	@Excel(name = "首页展示", width = 15)
+	@ApiModelProperty(value = "首页展示")
+	private java.lang.Boolean showHome;
 	/**课程名*/
 	@Excel(name = "课程名", width = 15)
     @ApiModelProperty(value = "课程名")

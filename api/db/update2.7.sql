@@ -57,4 +57,8 @@ alter table sys_user
 
 alter table teaching_course_unit
     add media_content longtext null comment '富文本课件' after map_y;
+alter table teaching_course
+    add show_home tinyint default 0 not null comment '首页展示' after is_shared;
+INSERT INTO `teaching_menu`(`id`, `parent_id`, `name`, `url`, `menu_type`, `sort_no`, `icon`, `is_leaf`, `description`, `create_by`, `create_time`, `update_by`, `update_time`, `del_flag`, `internal_or_external`, `is_route`, `hidden`, `need_login`) VALUES ('1677199026683559937', '', '课程', '/courseList', 0, 2.00, 'calculator', 1, NULL, 'admin', '2023-07-07 14:13:03', 'admin', '2023-07-07 14:13:28', 0, 0, 1, 0, 0);
+update teaching_menu set url='/workList?type=1' where `name`='发现';
 

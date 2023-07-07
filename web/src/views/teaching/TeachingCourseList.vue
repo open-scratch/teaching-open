@@ -150,16 +150,24 @@
             }
           },
           {
+            title:'首页展示',
+            align:"center",
+            dataIndex: 'showHome',
+            customRender(v){
+              return v?"是":"否"
+            }
+          },
+          {
             title:'授权部门',
             align:"center",
             dataIndex: 'departIds_dictText',
           },
-          {
-            title:'课程图标',
-            align:"center",
-            dataIndex: 'courseIcon',
-            scopedSlots: {customRender: 'imgSlot'}
-          },
+          // {
+          //   title:'课程图标',
+          //   align:"center",
+          //   dataIndex: 'courseIcon',
+          //   scopedSlots: {customRender: 'imgSlot'}
+          // },
           {
             title:'课程封面',
             align:"center",

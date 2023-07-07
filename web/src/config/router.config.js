@@ -1,5 +1,5 @@
 import { UserLayout, TabLayout, RouteView, BlankLayout, PageView } from '@/components/layouts'
-
+import HomeLayout from '@/views/home/HomeLayout'
 /**
  * 走菜单，走权限控制
  * @type {[null,null]}
@@ -55,26 +55,31 @@ export const constantRouterMap = [
   {
     path: '/',
     name: 'index',
-    component: BlankLayout,
+    component: HomeLayout,
     meta: {title: '首页'},
     redirect: '/home',
     children: [
       {
         path: 'home',
         name: 'publicWork',
-        component: () => import(/* webpackChunkName: "home" */ '@/views/home/Index2')
+        component: () => import(/* webpackChunkName: "home" */ '@/views/home/Index')
       },
       {
-        path: 'work-detail',
-        name: 'workDetail',
-        component: () => import(/* webpackChunkName: "home" */ '@/views/home/WorkDetail')
+        path: 'workList',
+        name: 'workList',
+        component:() => import(/* webpackChunkName: "home" */ '@/views/home/WorkList')
       },
       {
-        path: 'new',
-        name: 'newWork',
-        component:() => import(/* webpackChunkName: "home" */ '@/views/home/NewWorkList')
+        path: 'courseList',
+        name: 'courseList',
+        component:() => import(/* webpackChunkName: "home" */ '@/views/home/CourseList')
       }
     ]
+  },
+  {
+    path: '/work-detail',
+    name: 'workDetail',
+    component: () => import(/* webpackChunkName: "home" */ '@/views/home/WorkDetail')
   },
   {
     path: '/404',

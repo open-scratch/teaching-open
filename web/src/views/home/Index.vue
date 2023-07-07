@@ -1,124 +1,150 @@
 <template>
-  <div class="container">
-    <a-layout>
-      <a-layout-header>
-        <Header/>
-        <Banner/>
-      </a-layout-header>
-      <a-layout>
-        <a-layout-content>
-          <div class="user-enter" v-if="_isMobile()">
-            <UserEnter />
-          </div>
-          <div class="panel-works">
-            <h1 class="panel-title">
-              <a-icon type="star" theme="twoTone" two-tone-color="#ffd81b" />
-              精选作品
-            </h1>
-            <a-row type="flex" justify="start" :gutter="[24, 24]">
-              <a-col v-for="(item, index) in greatLeaderboard" :key="index" :xs="24" :sm="12" :md="12" :lg="8" :xl="6">
-                <a-card class="work-card">
-                  <a @click="toDetail(item.id)" target="_blank">
-                    <a-tag color="blue">{{item.workType_dictText}}</a-tag>
-                    <img class="work-cover" v-if="item.coverFileKey_url" :src="item.coverFileKey_url" />
-                    <img v-if="item.workType == 4 || item.workType == 10" src="@/assets/code.png" alt="" />
-                  </a>
-                  <a-row type="flex" justify="end">
-                    <a-col :span="5"> <a-icon type="eye" /> {{ item.viewNum }} </a-col>
-                    <a-col :span="5"> <a-icon type="like" /> {{ item.starNum }} </a-col>
-                  </a-row>
-                  <p>{{ item.workName }}</p>
-                  <a-row class="work-author">
-                    <a-col :span="6">
-                      <a-avatar shape="square" class="avatar" :size="40" :src="item.avatar_url" />
-                    </a-col>
-                    <a-col :span="18">
-                      <span>{{ item.realname || item.username }}</span>
-                    </a-col>
-                  </a-row>
-                </a-card>
-              </a-col>
-            </a-row>
-            <a-button class="load-more" type="link" @click="getGreatLeaderboard">加载更多……</a-button>
-          </div>
+  <div>
+    <a-row :gutter="[24,24]">
+      <a-col :xs="24" :sm="24" :md="8" :lg="8" :xl="8">
+        <div class="editor-card" style="background: linear-gradient(-60deg,#ffaa30,#ffbf35);">
+          <a-row type="flex" justify="space-around" align="middle">
+            <a-col :span="10">
+              <img src="@assets/scratch.png" alt="">
+            </a-col>
+            <a-col :span="14">
+              <h2>Scratch编辑器</h2>
+              <a-button size="large" @click="toEditor(1)">开始创作</a-button>
+            </a-col>
+          </a-row>
+        </div>
+      </a-col>
+      <a-col :xs="24" :sm="24" :md="8" :lg="8" :xl="8">
+        <div class="editor-card" style="background: linear-gradient(-30deg,#4fb5ff,#60bcff);">
+          <a-row type="flex" justify="space-around" align="middle">
+            <a-col :span="10">
+              <img src="@assets/sjr.png" alt="">
+            </a-col>
+            <a-col :span="14">
+              <h2>ScratchJr编辑器</h2>
+              <a-button size="large" @click="toEditor(2)">开始创作</a-button>
+            </a-col>
+          </a-row>
+        </div>
+      </a-col>
+      <a-col :xs="24" :sm="24" :md="8" :lg="8" :xl="8">
+        <div class="editor-card" style="background: linear-gradient(-30deg,#f35981,#fb7397);">
+          <a-row type="flex" justify="space-around" align="middle">
+            <a-col :span="10">
+              <img src="@assets/python.png" alt="">
+            </a-col>
+            <a-col :span="14">
+              <h2>Python编辑器</h2>
+              <a-button size="large" @click="toEditor(3)">开始创作</a-button>
+            </a-col>
+          </a-row>
+        </div>
+      </a-col>
+    </a-row>
+    <div class="panel-works">
+      <h1 class="panel-title">
+        <a-icon type="star" theme="twoTone" two-tone-color="#ffd81b" />
+        精选作品
+      </h1>
+      <a-row type="flex" justify="start" :gutter="[24, 24]">
+        <a-col v-for="(item, index) in greatLeaderboard" :key="index" :xs="24" :sm="12" :md="12" :lg="8" :xl="6">
+          <a-card class="work-card">
+            <a @click="toDetail(item.id)" target="_blank">
+              <img class="work-cover" v-if="item.coverFileKey_url" :src="item.coverFileKey_url" />
+              <img v-if="item.workType == 4 || item.workType == 10" src="@/assets/code.png" alt="" />
+            </a>
+            <div class="work-info">
+              <a-row type="flex" justify="space-between">
+                <a-col :span="10"> 
+                  <a-icon type="eye" /> {{ item.viewNum }} 
+                  <a-divider type="vertical"></a-divider>
+                  <a-icon type="like" /> {{ item.starNum }}
+                </a-col>
+                <a-col :span="10"> <a-tag color="orange">{{ item.workType_dictText }}</a-tag> </a-col>
+              </a-row>
+              <p>{{ item.workName }}</p>
+              <a-row class="work-author">
+                <a-col :span="6">
+                  <a-avatar shape="square" class="avatar" :size="40" :src="item.avatar_url" />
+                </a-col>
+                <a-col :span="18">
+                  <span>{{ item.realname || item.username }}</span>
+                </a-col>
+              </a-row>
+            </div>
+          </a-card>
+        </a-col>
+      </a-row>
+      <!-- <a-button class="load-more" type="link" @click="getGreatLeaderboard">加载更多……</a-button> -->
+      <router-link class="load-more" :to="{path:'/workList?type=3'}" >查看更多...</router-link>
+    </div>
 
-          <div class="panel-works">
-            <h1 class="panel-title">
-              <a-icon type="like" theme="twoTone" two-tone-color="#52c41a" />
-              最赞作品
-            </h1>
-            <a-row type="flex" justify="start" :gutter="[24, 24]">
-              <a-col v-for="(item, index) in starLeaderboard" :key="index" :xs="24" :sm="12" :md="12" :lg="8" :xl="6">
-                <a-card class="work-card">
-                  <a @click="toDetail(item.id)" target="_blank">
-                    <a-tag color="blue">{{item.workType_dictText}}</a-tag>
-                    <img class="work-cover" v-if="item.coverFileKey_url" :src="item.coverFileKey_url" />
-                    <img v-if="item.workType == 4 || item.workType == 10" src="@/assets/code.png" alt="" />
-                  </a>
-                  <a-row type="flex" justify="end">
-                    <a-col :span="5"> <a-icon type="eye" /> {{ item.viewNum }} </a-col>
-                    <a-col :span="5"> <a-icon type="like" /> {{ item.starNum }} </a-col>
-                  </a-row>
-                  <p>{{ item.workName }}</p>
-                  <a-row class="work-author">
-                    <a-col :span="6">
-                      <a-avatar shape="square" class="avatar" :size="40" :src="item.avatar_url" />
-                    </a-col>
-                    <a-col :span="18">
-                      <span>{{ item.realname || item.username }}</span>
-                    </a-col>
-                  </a-row>
-                </a-card>
-              </a-col>
-            </a-row>
-            <a-button class="load-more" type="link" @click="getStarLeaderboard">加载更多……</a-button>
-          </div>
+    <div class="panel-works">
+      <h1 class="panel-title">
+        <a-icon type="calculator" theme="twoTone" two-tone-color="#eb2f96" />
+        推荐课程
+      </h1>
+      <a-row type="flex" justify="start" :gutter="[24, 24]">
+        <a-col v-for="(item, index) in courseLeaderboard" :key="index" :xs="24" :sm="12" :md="12" :lg="8" :xl="6">
+          <a-card class="work-card">
+              <a @click="toCourseDetail(item.id)" target="_blank">
+                <img class="work-cover" :src="item.courseCover_url" />
+              </a>
+              <div class="work-info">
+                <p>{{ item.courseName }}</p>
+              </div>
+            </a-card>
+        </a-col>
+      </a-row>
+      <!-- <a-button class="load-more" type="link" @click="getCourseLeaderboard">加载更多……</a-button> -->
+      <router-link class="load-more" :to="{path:'/courseList'}" >查看更多...</router-link>
+    </div>
 
-          <div class="panel-works">
-            <h1 class="panel-title">
-              <a-icon type="fire" theme="twoTone" two-tone-color="#eb2f96" />
-              最火作品
-            </h1>
-            <a-row type="flex" justify="start" :gutter="[24, 24]">
-              <a-col v-for="(item, index) in viewLeaderboard" :key="index" :xs="24" :sm="12" :md="12" :lg="8" :xl="6">
-                <a-card class="work-card">
-                  <a @click="toDetail(item.id)" target="_blank">
-                    <a-tag color="blue">{{item.workType_dictText}}</a-tag>
-                    <img class="work-cover" v-if="item.coverFileKey_url" :src="item.coverFileKey_url" />
-                    <img v-if="item.workType == 4 || item.workType == 10" src="@/assets/code.png" alt="" />
-                  </a>
-                  <a-row type="flex" justify="end">
-                    <a-col :span="5"> <a-icon type="eye" /> {{ item.viewNum }} </a-col>
-                    <a-col :span="5"> <a-icon type="like" /> {{ item.starNum }} </a-col>
-                  </a-row>
-                  <p>{{ item.workName }}</p>
-                  <a-row class="work-author">
-                    <a-col :span="6">
-                      <a-avatar shape="square" class="avatar" :size="40" :src="item.avatar_url" />
-                    </a-col>
-                    <a-col :span="18">
-                      <span>{{ item.realname || item.username }}</span>
-                    </a-col>
-                  </a-row>
-                </a-card>
-              </a-col>
-            </a-row>
-            <a-button class="load-more" type="link" @click="getViewLeaderboard">加载更多……</a-button>
-          </div>
-        </a-layout-content>
-        <a-layout-sider :width="250" v-if="!_isMobile()">
-          <UserEnter />
-        </a-layout-sider>
-      </a-layout>
-      <a-layout-footer>
-        <Footer />
-      </a-layout-footer>
-    </a-layout>
+    <div class="panel-works">
+      <h1 class="panel-title">
+        <a-icon type="like" theme="twoTone" two-tone-color="#52c41a" />
+        最赞作品
+      </h1>
+      <a-row type="flex" justify="start" :gutter="[24, 24]">
+        <a-col v-for="(item, index) in starLeaderboard" :key="index" :xs="24" :sm="12" :md="12" :lg="8" :xl="6">
+          <a-card class="work-card">
+            <a @click="toDetail(item.id)" target="_blank">
+              <img class="work-cover" v-if="item.coverFileKey_url" :src="item.coverFileKey_url" />
+              <img v-if="item.workType == 4 || item.workType == 10" src="@/assets/code.png" alt="" />
+            </a>
+            <div class="work-info">
+              <a-row type="flex" justify="space-between">
+                <a-col :span="10"> 
+                  <a-icon type="eye" /> {{ item.viewNum }} 
+                  <a-divider type="vertical"></a-divider>
+                  <a-icon type="like" /> {{ item.starNum }}
+                </a-col>
+                <a-col :span="10"> <a-tag color="orange">{{ item.workType_dictText }}</a-tag> </a-col>
+              </a-row>
+              <p>{{ item.workName }}</p>
+              <a-row class="work-author">
+                <a-col :span="6">
+                  <a-avatar shape="square" class="avatar" :size="40" :src="item.avatar_url" />
+                </a-col>
+                <a-col :span="18">
+                  <span>{{ item.realname || item.username }}</span>
+                </a-col>
+              </a-row>
+            </div>
+          </a-card>
+        </a-col>
+      </a-row>
+      <!-- <a-button class="load-more" type="link" @click="getStarLeaderboard">加载更多……</a-button> -->
+      <router-link class="load-more" :to="{path:'/workList?type=2'}" >查看更多...</router-link>
+    </div>
   </div>
 </template>
 
 <script>
+import Vue from 'vue'
 import { getAction, getFileAccessHttpUrl } from '@/api/manage'
+import { ACCESS_TOKEN } from '@/store/mutation-types'
+import { mapActions, mapGetters } from 'vuex'
 import Header from './modules/Header'
 import Banner from './modules/Banner'
 import Footer from './modules/Footer'
@@ -132,27 +158,68 @@ export default {
     Header,
     Footer,
     UserEnter,
-    Banner
+    Banner,
   },
   data() {
     return {
+      brandName: this.$store.getters.sysConfig.brandName,
+      logo: '/logo.png',
+      avatarUrl: '/logo.png',
+      token: '',
       greatLeaderboard: [],
-      starLeaderboard:[],
-      viewLeaderboard: [],
+      starLeaderboard: [],
+      courseLeaderboard: [],
       page: {
         starLeaderboard: 0,
-        viewLeaderboard: 0,
-        greatLeaderboard: 0
+        courseLeaderboard: 0,
+        greatLeaderboard: 0,
       },
     }
   },
   created() {
+    this.token = Vue.ls.get(ACCESS_TOKEN)
+    if (this.$store.getters.sysConfig.logo && this.$store.getters.sysConfig.qiniuDomain) {
+      this.logo = this.$store.getters.sysConfig.qiniuDomain + '/' + this.$store.getters.sysConfig.logo
+    }
+    if (this.getFileAccessHttpUrl(this.avatar())) {
+      this.avatarUrl = this.getFileAccessHttpUrl(this.avatar())
+    }
     this.getGreatLeaderboard()
     this.getStarLeaderboard()
-    this.getViewLeaderboard()
+    this.getCourseLeaderboard()
   },
   methods: {
     getFileAccessHttpUrl,
+    ...mapActions(['Logout']),
+    ...mapGetters(['nickname', 'avatar', 'userInfo']),
+    enter(type) {
+      switch(type){
+        case 0:this.$router.push('/user/login');break;
+        case 1:this.$router.push('/account/center');break;
+        case 2:this.$router.push('/teaching/mineCourse/cardList');break;
+        default:this.$router.push('/account/center');break;
+      }
+    },
+    changeAccount(){
+      const that = this
+      this.$confirm({
+        title: '提示',
+        content: '确定要退出当前账号并登录新的账号吗 ?',
+        onOk() {
+          return that.Logout({}).then(() => {
+            window.location.href="/user/login";
+          }).catch(err => {
+            that.$message.error({
+              title: '错误',
+              description: err.message
+            })
+          })
+        },
+        onCancel() {
+        },
+      });
+    },
+    //获取精选作品
     getGreatLeaderboard() {
       this.page.greatLeaderboard += 1
       getAction('/teaching/teachingWork/leaderboard', {
@@ -169,6 +236,7 @@ export default {
         }
       })
     },
+    //获取点赞排行
     getStarLeaderboard() {
       this.page.starLeaderboard += 1
       getAction('/teaching/teachingWork/leaderboard', {
@@ -184,16 +252,16 @@ export default {
         }
       })
     },
-    getViewLeaderboard() {
-      this.page.viewLeaderboard += 1
-      getAction('/teaching/teachingWork/leaderboard', {
-        orderBy: 'view',
+    //获取推荐课程
+    getCourseLeaderboard() {
+      this.page.courseLeaderboard += 1
+      getAction('/teaching/teachingCourse/getHomeCourse', {
         pageSize: this._isMobile() ? 4 : 8,
-        pageNo: this.page.viewLeaderboard,
+        pageNo: this.page.courseLeaderboard,
       }).then((res) => {
         if (res.success) {
-          this.viewLeaderboard = this.viewLeaderboard.concat(res.result.records)
-          if (res.result.records.length == 0 && this.page.viewLeaderboard > 1) {
+          this.courseLeaderboard = this.courseLeaderboard.concat(res.result.records)
+          if (res.result.records.length == 0 && this.page.courseLeaderboard > 1) {
             this.$message.info('已加载完啦！')
           }
         }
@@ -201,6 +269,22 @@ export default {
     },
     toDetail(id) {
       this.$router.push('/work-detail?id=' + id)
+    },
+    toCourseDetail(id){
+      this.$router.push('/teaching/mineCourse/courseUnitCard?id=' + id)
+    },
+    toEditor(type){
+      switch(type){
+        case 1:
+          window.open("/scratch3/index.html?scene=create")
+          break;
+        case 2:
+          window.open("/scratchjr/home.html")
+          break;
+        case 3:
+          window.open("/python/index.html")
+          break;
+      }
     },
     _isMobile() {
       return (
@@ -214,92 +298,70 @@ export default {
 </script>
 
 <style lang="less" scoped>
-.container {
-  background: url(/img/bg_blue.png) no-repeat;
-  background-color: #f6f6f6;
-  background-size: 100% 250px;
-}
-.ant-layout-header,
-.ant-layout-content,
-.ant-layout-sider,
-.ant-layout-sider-children,
-.ant-layout-footer {
-  background: transparent;
-}
-.ant-layout {
-  background: transparent;
-  min-height: calc(100vh - 200px);
-}
-.ant-layout-header {
-  height: auto;
-  min-height: 250px;
-  width: 100%;
-  margin-bottom: 80px;
-  padding: 0 20px;
-  /deep/.banner{
-    border-radius: 10px;
-    overflow: hidden;
-  }
-}
-
-.ant-layout-has-sider {
-  max-width: 1600px;
-  min-width: 800px;
-  margin: -100px auto 0;
-}
-.ant-layout-sider{
-  z-index: 99;
-}
-.ant-layout-content {
-  padding: 20px;
-  max-width: 1300px;
-  width: 100%;
-  .user-enter{
-    margin-top: 80px;
-    margin-bottom: 30px;
-    z-index: 9;
+  .editor-card{
+    width: 100%;
+    height: 200px;
+    margin: 30px auto;
+    padding: 20px;
+    background: linear-gradient(-30deg,#4fb5ff,#60bcff);
+    border-radius: 20px;
+    .ant-row-flex{
+      height: 100%;
+    }
+    img{
+      width: auto;
+      height: 100px;
+    }
+    h2{
+      color: white;
+      text-align: center;
+    }
+    .ant-btn{
+      border-radius: 50px;
+      display: block;
+      margin: 10px auto;
+    }
   }
   .panel-works {
     margin-bottom: 30px;
   }
   .panel-title {
-    font-size: 28px;
-    text-shadow: 0 0 3px #000000d1;
+    font-size: 26px;
+    color: #333;
   }
   .work-card {
     border-radius: 10px;
-    box-shadow: grey 2px 2px 5px;
+    overflow: hidden;
+    box-shadow: rgb(218, 218, 218) 2px 2px 5px;
     max-height: 300px;
     min-width: 200px;
-    /deep/.ant-card-body{
-      padding: 10px;
+    /deep/.ant-card-body {
+      padding: 0px;
     }
     .work-cover {
       width: 100%;
       max-height: 150px;
+    }
+    .work-info{
+      padding: 10px;
     }
     .work-author {
       span {
         line-height: 40px;
       }
     }
-    .ant-tag{
-      position: absolute;
-      margin: 5px;
+    .ant-tag {
+      float: right;
     }
-    >div {
+    > div {
       padding: 10px;
       margin: 10px;
     }
   }
   .load-more {
+    display: block;
     margin: 10px auto;
-    text-align: center;
+    text-align: left;
   }
-}
-.ant-layout-sider {
-  margin-left: 30px;
-  max-width: 300px !important;
-  width: 300px !important;
-}
+
 </style>

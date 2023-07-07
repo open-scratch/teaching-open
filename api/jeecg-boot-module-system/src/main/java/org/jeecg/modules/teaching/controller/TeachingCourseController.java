@@ -43,11 +43,30 @@ public class TeachingCourseController extends JeecgController<TeachingCourse, IT
 	@Autowired
 	private ISysDepartService sysDepartService;
 
+	/**
+	 * 获取我的课程
+	 * @return
+	 */
 	 @GetMapping("/mineCourse")
 	 public Result<List<TeachingCourse>> mineCourse(){
 		 String mineUserId = getCurrentUser().getId();
 		 return teachingCourseService.mineCourse(mineUserId);
 	 }
+
+	/**
+	 * 获取首页展示的课程
+	 * @return
+	 */
+	@GetMapping("getHomeCourse")
+	public Result<?> getHomeCourse( @RequestParam(name="pageNo", defaultValue="1") Integer pageNo,
+									@RequestParam(name="pageSize", defaultValue="10") Integer pageSize,
+									HttpServletRequest req){
+		QueryWrapper<TeachingCourse> queryWrapper = new QueryWrapper<>();
+		queryWrapper.lambda().eq(TeachingCourse::getShowHome, 1);
+		Page<TeachingCourse> page = new Page<TeachingCourse>(pageNo, pageSize);
+		IPage<TeachingCourse> pageList = teachingCourseService.page(page, queryWrapper);
+		return Result.ok(pageList);
+	}
 	
 	/**
 	 * 分页列表查询
