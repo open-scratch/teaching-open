@@ -3100,6 +3100,7 @@ CREATE TABLE `teaching_course`  (
   `show_type` int(11) NULL DEFAULT NULL COMMENT '展示类型',
   `course_map` varchar(256) CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT NULL COMMENT '课程地图',
   `is_shared` tinyint(4) NOT NULL DEFAULT 0 COMMENT '是否共享课程',
+  `show_home` tinyint(4) NOT NULL DEFAULT 0 COMMENT '是否首页展示',
   `order_num` int(11) NOT NULL DEFAULT 1 COMMENT '排序',
   `depart_ids` varchar(1000) CHARACTER SET utf8 COLLATE utf8_general_ci NOT NULL DEFAULT '' COMMENT '授权部门',
   PRIMARY KEY (`id`) USING BTREE,
@@ -3167,6 +3168,7 @@ create table teaching_course_unit
     show_course_plan    tinyint      default 0  null comment '对学生显示教案',
     map_x               int                     null comment '地图X坐标',
     map_y               int                     null comment '地图Y坐标',
+    media_content       longtext                null comment '富文本课件',
     order_num           int          default 1  not null comment '排序'
 );
 
@@ -3221,7 +3223,8 @@ INSERT INTO `teaching_menu` VALUES ('1481959345444990978', '', '个人中心', '
 INSERT INTO `teaching_menu` VALUES ('1509808945860902914', '1481554751841755137', 'Python', '/python/index.html?scene=create', 1, 2.00, NULL, 1, NULL, 'admin', '2022-04-01 16:24:38', 'admin', '2022-04-01 17:02:11', 0, 1, 1, 0, 0);
 INSERT INTO `teaching_menu` VALUES ('1509809019143782402', '1481554751841755137', 'ScratchJr', '/scratchjr/home.html?scene=create', 1, 1.00, NULL, 1, NULL, 'admin', '2022-04-01 16:24:55', 'admin', '2022-04-01 17:01:59', 0, 1, 1, 0, 0);
 INSERT INTO `teaching_menu` VALUES ('1515601801083052034', '1481554751841755137', 'Blockly', '/blockly/index.html?lang=zh-hans&scene=create', 1, 4.00, NULL, 1, NULL, 'admin', '2022-04-17 16:03:22', NULL, NULL, 0, 1, 0, 0, 0);
-INSERT INTO `teaching_menu` VALUES ('1614545041074384897', '', '发现', '/new', 0, 2.00, 'search', 1, NULL, 'admin', '2023-01-15 16:48:29', 'admin', '2023-01-15 16:48:43', 0, 0, 1, 0, 0);
+INSERT INTO `teaching_menu` VALUES ('1614545041074384897', '', '发现', '/workList?type=1', 0, 2.00, 'search', 1, NULL, 'admin', '2023-01-15 16:48:29', 'admin', '2023-01-15 16:48:43', 0, 0, 1, 0, 0);
+INSERT INTO `teaching_menu`(`id`, `parent_id`, `name`, `url`, `menu_type`, `sort_no`, `icon`, `is_leaf`, `description`, `create_by`, `create_time`, `update_by`, `update_time`, `del_flag`, `internal_or_external`, `is_route`, `hidden`, `need_login`) VALUES ('1677199026683559937', '', '课程', '/courseList', 0, 2.00, 'calculator', 1, NULL, 'admin', '2023-07-07 14:13:03', 'admin', '2023-07-07 14:13:28', 0, 0, 1, 0, 0);
 
 -- ----------------------------
 -- Table structure for teaching_scratch_assets

@@ -1,3 +1,4 @@
+-- 2023-01-15
 alter table sys_role
     add role_level int default 0 not null comment '角色等级';
 update sys_role set role_level=99 where role_code='admin' or role_code='dev';
@@ -27,6 +28,7 @@ INSERT INTO `sys_role_permission`(`id`, `role_id`, `permission_id`, `data_rule_i
 INSERT INTO `sys_role_permission`(`id`, `role_id`, `permission_id`, `data_rule_ids`) VALUES ('1614182465526231042', '1252532323347161090', '1614181468561141762', NULL);
 INSERT INTO `sys_role_permission`(`id`, `role_id`, `permission_id`, `data_rule_ids`) VALUES ('1614182465526231044', '1252532323347161090', '1614181090612408322', NULL);
 
+-- 2022-12-30
 
 alter table teaching_course_unit
     add show_course_video tinyint default 1 null comment '对学生显示课程视频' after course_video_source;
@@ -46,14 +48,20 @@ update teaching_work set work_scene = 'course' where course_id != '';
 update teaching_work set work_scene = 'additional' where additional_id != '';
 update teaching_work set work_scene = 'create' where (additional_id = '' or additional_id is null) and (course_id = '' or course_id is null);
 
+-- 2023-01-15
+
 INSERT INTO `sys_dict_item`(`id`, `dict_id`, `item_text`, `item_value`, `description`, `sort_order`, `status`, `create_by`, `create_time`, `update_by`, `update_time`) VALUES ('1614538431740420098', '1278612830199599105', '精选作品', '4', '', 4, 1, 'admin', '2023-01-15 16:22:13', NULL, NULL);
 INSERT INTO `teaching_menu`(`id`, `parent_id`, `name`, `url`, `menu_type`, `sort_no`, `icon`, `is_leaf`, `description`, `create_by`, `create_time`, `update_by`, `update_time`, `del_flag`, `internal_or_external`, `is_route`, `hidden`, `need_login`) VALUES ('1614545041074384897', '', '发现', '/new', 0, 2.00, 'search', 1, NULL, 'admin', '2023-01-15 16:48:29', 'admin', '2023-01-15 16:48:43', 0, 0, 1, 0, 0);
+
+-- 2023-02-24
 
 alter table teaching_course
     add depart_ids varchar(1000) default '' not null comment '授权部门';
 
 alter table sys_user
     drop key index_user_name;
+
+-- 2023-07-06
 
 alter table teaching_course_unit
     add media_content longtext null comment '富文本课件' after map_y;
