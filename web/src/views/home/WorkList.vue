@@ -46,7 +46,9 @@
             </a-card>
           </a-col>
         </a-row>
-        <a-button class="load-more" type="dash" @click="getData">加载更多……</a-button>
+        <a-spin style="margin:50px auto;" v-if="loading"/>
+        <a-empty v-if="!loading && datasource.length==0"/>
+        <a-button v-if="!loading && datasource.length>0" class="load-more" type="dash" @click="getData">加载更多……</a-button>
       </div>
   </div>
 </template>
@@ -69,6 +71,7 @@ export default {
   },
   data() {
     return {
+      loading: false,
       datasource: [],
       page: 0,
       type: 1
@@ -83,6 +86,7 @@ export default {
    methods: {
     getFileAccessHttpUrl,
     getData() {
+      this.loading = true
       this.page += 1
       let queryParam = {
         pageSize: this._isMobile() ? 12 : 24,
@@ -101,6 +105,7 @@ export default {
       }
 
       getAction('/teaching/teachingWork/leaderboard', queryParam).then((res) => {
+        this.loading = false
         if (res.success) {
           this.datasource = this.datasource.concat(res.result.records)
           console.log(this.datasource)

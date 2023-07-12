@@ -6,6 +6,7 @@ import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
 import lombok.extern.slf4j.Slf4j;
+import org.apache.commons.lang.StringUtils;
 import org.jeecg.common.api.vo.Result;
 import org.jeecg.common.aspect.annotation.AutoLog;
 import org.jeecg.common.aspect.annotation.PermissionData;
@@ -58,11 +59,18 @@ public class TeachingCourseController extends JeecgController<TeachingCourse, IT
 	 * @return
 	 */
 	@GetMapping("getHomeCourse")
-	public Result<?> getHomeCourse( @RequestParam(name="pageNo", defaultValue="1") Integer pageNo,
-									@RequestParam(name="pageSize", defaultValue="10") Integer pageSize,
-									HttpServletRequest req){
+	public Result<?> getHomeCourse(
+			@RequestParam(required = false) String courseName,
+			@RequestParam(required = false) Integer courseType,
+			@RequestParam(required = false) Integer courseCategory,
+			@RequestParam(name="pageNo", defaultValue="1") Integer pageNo,
+			@RequestParam(name="pageSize", defaultValue="10") Integer pageSize){
 		QueryWrapper<TeachingCourse> queryWrapper = new QueryWrapper<>();
-		queryWrapper.lambda().eq(TeachingCourse::getShowHome, 1);
+		queryWrapper.lambda()
+				.eq(TeachingCourse::getShowHome, 1)
+				.like(StringUtils.isNotBlank(courseName), TeachingCourse::getCourseName, courseName)
+				.eq(courseCategory!=null, TeachingCourse::getCourseCategory, courseCategory)
+				.eq(courseType!=null, TeachingCourse::getCourseType, courseType);
 		Page<TeachingCourse> page = new Page<TeachingCourse>(pageNo, pageSize);
 		IPage<TeachingCourse> pageList = teachingCourseService.page(page, queryWrapper);
 		return Result.ok(pageList);

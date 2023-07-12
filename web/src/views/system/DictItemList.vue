@@ -81,7 +81,8 @@
   import {filterObj} from '@/utils/util';
   import DictItemModal from './modules/DictItemModal'
   import {JeecgListMixin} from '@/mixins/JeecgListMixin'
-
+  import { getAction } from '@/api/manage'
+  
   export default {
     name: "DictItemList",
     mixins: [JeecgListMixin],
@@ -133,6 +134,7 @@
           itemValue: {rules: [{required: true, message: '请输入数据值!'}]},
         },
         url: {
+          get: '/sys/dict/getByCode?dicCode=',
           list: "/sys/dictItem/list",
           delete: "/sys/dictItem/delete",
           deleteBatch: "/sys/dictItem/deleteBatch",
@@ -144,6 +146,13 @@
       this.resetScreenSize();
     },
     methods: {
+      open(dicCode){
+        getAction(this.url.get + dicCode).then((res) => {
+          if (res.success) {
+            this.edit(res.result)
+          }
+        })
+      },
       add(dictId) {
         this.dictId = dictId;
         this.edit({});

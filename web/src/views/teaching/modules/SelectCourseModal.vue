@@ -85,12 +85,12 @@
             width: 100,
             dataIndex: 'courseName'
           },
-          {
-            title:'课程介绍',
-            align:"center",
-            width: 200,
-            dataIndex: 'courseDesc'
-          },
+          // {
+          //   title:'课程介绍',
+          //   align:"center",
+          //   width: 200,
+          //   dataIndex: 'courseDesc'
+          // },
           {
             title:'创建时间',
             align:"center",

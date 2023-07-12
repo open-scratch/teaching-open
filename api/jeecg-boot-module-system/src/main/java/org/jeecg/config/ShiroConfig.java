@@ -143,18 +143,15 @@ public class ShiroConfig {
 		filterChainDefinitionMap.put("/teaching/menu/getUserMenu", "anon");
 		//配置
 		filterChainDefinitionMap.put("/sys/config/getCurrentConfig", "anon");
-
+		//字典
+		filterChainDefinitionMap.put("/sys/dict/getDictItems/**", "anon");
 		// 作业
 		filterChainDefinitionMap.put("/teaching/teachingWork/studentWorkInfo", "anon");
 		filterChainDefinitionMap.put("/teaching/teachingWork/greatWork", "anon");
 		filterChainDefinitionMap.put("/teaching/teachingWork/starWork", "anon");
 		filterChainDefinitionMap.put("/teaching/teachingWork/leaderboard", "anon");
 		filterChainDefinitionMap.put("/teaching/teachingWork/getWorkComments", "anon");
-
-
-		filterChainDefinitionMap.put("/teaching/teachingCms/list", "anon");
-		filterChainDefinitionMap.put("/teaching/teachingCms/queryById", "anon");
-
+		filterChainDefinitionMap.put("/teaching/teachingCourse/getHomeCourse", "anon");
 
 		//学生
 		filterChainDefinitionMap.put("/student/**", "anon");

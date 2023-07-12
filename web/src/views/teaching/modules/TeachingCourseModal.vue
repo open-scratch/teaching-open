@@ -12,11 +12,30 @@
         <a-form-item label="展示排序" :labelCol="labelCol" :wrapperCol="wrapperCol">
           <a-input-number v-decorator="[ 'orderNum']" placeholder="请输入排序"></a-input-number>
         </a-form-item>
+        <a-form-item label="课程性质" :labelCol="labelCol" :wrapperCol="wrapperCol">
+          <j-dict-select-tag
+            type="list"
+            v-decorator="['courseType', validatorRules.courseType]"
+            :trigger-change="true"
+            dictCode="course_type"
+            placeholder="请选择课程性质"
+          />
+        </a-form-item>
+        <a-form-item label="课程分类" :labelCol="labelCol" :wrapperCol="wrapperCol">
+          <j-dict-select-tag
+            type="list"
+            v-decorator="['courseCategory', validatorRules.courseType]"
+            :trigger-change="true"
+            dictCode="course_category"
+            placeholder="请选择课程分类"
+          />
+        </a-form-item>
         <a-form-item label="课程名" :labelCol="labelCol" :wrapperCol="wrapperCol">
           <a-input v-decorator="[ 'courseName', validatorRules.courseName]" placeholder="请输入课程名"></a-input>
         </a-form-item>
         <a-form-item label="课程介绍" :labelCol="labelCol" :wrapperCol="wrapperCol">
-          <a-textarea v-decorator="['courseDesc', validatorRules.courseDesc]" rows="4" placeholder="请输入课程介绍"/>
+          <!-- <a-textarea v-decorator="['courseDesc', validatorRules.courseDesc]" rows="4" placeholder="请输入课程介绍"/> -->
+          <j-editor v-decorator="['courseDesc', { trigger: 'input' }]" />
         </a-form-item>
         <a-form-item label="课程封面" :labelCol="labelCol" :wrapperCol="wrapperCol">
           <j-upload v-decorator="['courseCover', validatorRules.courseCover]"  :number="1" :trigger-change="true"></j-upload>
@@ -86,12 +105,14 @@
   import JUpload from '@/components/jeecg/JUpload'
   import TeachingMapEditor from './TeachingMapEditor'
   import JSelectDepart from '@/components/jeecgbiz/JSelectDepart'
+  import JEditor from '@/components/jeecg/JEditor'
   export default {
     name: "TeachingCourseModal",
     components: { 
       JUpload,
       TeachingMapEditor,
-      JSelectDepart
+      JSelectDepart,
+      JEditor
     },
     data () {
       return {
@@ -141,7 +162,7 @@
         this.model = Object.assign({}, record);
         this.visible = true;
         this.$nextTick(() => {
-          this.form.setFieldsValue(pick(this.model,'createBy','createTime','courseName','courseDesc','courseIcon','courseCover','showType','isShared', 'showHome', 'courseMap', 'orderNum', 'departIds'))
+          this.form.setFieldsValue(pick(this.model,'createBy','createTime','courseName','courseDesc','courseIcon','courseCover','showType','isShared', 'showHome', 'courseMap', 'orderNum', 'departIds', 'courseType', 'courseCategory'))
         })
       },
       close () {

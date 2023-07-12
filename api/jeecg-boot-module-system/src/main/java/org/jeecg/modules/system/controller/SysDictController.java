@@ -74,6 +74,13 @@ public class SysDictController {
 	@Autowired
 	public RedisTemplate<String, Object> redisTemplate;
 
+	@RequestMapping("getByCode")
+	public Result<SysDict> getByCode(@RequestParam String dicCode){
+		Result<SysDict> result = new Result<>();
+		result.setResult(sysDictService.getOne(new QueryWrapper<SysDict>().eq("dict_code", dicCode)));
+		return result;
+	}
+
 	@RequestMapping(value = "/list", method = RequestMethod.GET)
 	public Result<IPage<SysDict>> queryPageList(SysDict sysDict,@RequestParam(name="pageNo", defaultValue="1") Integer pageNo,
 									  @RequestParam(name="pageSize", defaultValue="10") Integer pageSize,HttpServletRequest req) {

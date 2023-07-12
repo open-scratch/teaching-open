@@ -8,7 +8,12 @@
             <a-form-item label="课程名">
               <a-input placeholder="请输入课程名" v-model="queryParam.courseName"></a-input>
             </a-form-item>
-        </a-col>
+          </a-col>
+          <a-col :xl="6" :lg="7" :md="8" :sm="24">
+            <a-form-item label="课程类型">
+              <j-dict-select-tag type="list" v-model="queryParam.courseType" dictCode="course_type" placeholder="请选择课程类型"/>
+            </a-form-item>
+          </a-col>
           <a-col :xl="6" :lg="7" :md="8" :sm="24">
             <a-form-item label="授权部门">
               <j-select-depart placeholder="请选择授权部门或其子部门"  :rootOpened="true" v-model="queryParam.departId" />
@@ -37,6 +42,8 @@
       <a-upload v-if="false" name="file" :showUploadList="false" :multiple="false" :headers="tokenHeader" :action="importExcelUrl" @change="handleImportExcel">
         <a-button type="primary" icon="import">导入</a-button>
       </a-upload>
+      <a-button type="primary" @click="handleEditDict('course_type')">课程性质管理</a-button>
+      <a-button type="primary" @click="handleEditDict('course_category')">课程类分类管理</a-button>
       <a-dropdown v-if="selectedRowKeys.length > 0">
         <a-menu slot="overlay">
           <a-menu-item key="1" @click="batchDel"><a-icon type="delete"/>删除</a-menu-item>
@@ -105,6 +112,7 @@
       </a-table>
     </div>
     <teachingCourse-modal ref="modalForm" @ok="modalFormOk"></teachingCourse-modal>
+    <DictItemList ref="dictItemList"/>
   </a-card>
 </template>
 
@@ -113,13 +121,15 @@
   import { JeecgListMixin } from '@/mixins/JeecgListMixin'
   import TeachingCourseModal from './modules/TeachingCourseModal'
   import JSelectDepart from '@/components/jeecgbiz/JSelectDepart'
+  import DictItemList from '../system/DictItemList'
   import { getFileAccessHttpUrl } from "@/api/manage"
   export default {
     name: "TeachingCourseList",
     mixins:[JeecgListMixin],
     components: {
       TeachingCourseModal,
-      JSelectDepart
+      JSelectDepart,
+      DictItemList
     },
     data () {
       return {
@@ -135,6 +145,16 @@
             customRender:function (t,r,index) {
               return parseInt(index)+1;
             }
+          },
+          {
+            title:'课程性质',
+            align:"center",
+            dataIndex: 'courseType_dictText'
+          },
+          {
+            title:'课程分类',
+            align:"center",
+            dataIndex: 'courseCategory_dictText'
           },
           {
             title:'课程名',
@@ -228,6 +248,10 @@
             courseId: record.id
           }
         })
+      },
+      //打开字典编辑器
+      handleEditDict(dictCode){
+        this.$refs.dictItemList.open(dictCode)
       },
     }
   }

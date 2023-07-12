@@ -70,3 +70,10 @@ alter table teaching_course
 INSERT INTO `teaching_menu`(`id`, `parent_id`, `name`, `url`, `menu_type`, `sort_no`, `icon`, `is_leaf`, `description`, `create_by`, `create_time`, `update_by`, `update_time`, `del_flag`, `internal_or_external`, `is_route`, `hidden`, `need_login`) VALUES ('1677199026683559937', '', '课程', '/courseList', 0, 2.00, 'calculator', 1, NULL, 'admin', '2023-07-07 14:13:03', 'admin', '2023-07-07 14:13:28', 0, 0, 1, 0, 0);
 update teaching_menu set url='/workList?type=1' where `name`='发现';
 
+-- 2023-07-10
+INSERT INTO `sys_dict`(`id`, `dict_name`, `dict_code`, `description`, `del_flag`, `create_by`, `create_time`, `update_by`, `update_time`, `type`) VALUES ('1678348253119864834', '课程类型', 'course_type', '', 0, 'admin', '2023-07-10 18:19:40', NULL, NULL, 0);
+alter table teaching_course
+    add course_type varchar(16) default '' not null comment '课程类型';
+INSERT INTO `sys_dict`(`id`, `dict_name`, `dict_code`, `description`, `del_flag`, `create_by`, `create_time`, `update_by`, `update_time`, `type`) VALUES ('1678348253119864835', '课程分类', 'course_category', '', 0, 'admin', '2023-07-10 18:19:40', NULL, NULL, 0);
+alter table teaching_course
+    add course_category varchar(16) default '' not null comment '课程分类';

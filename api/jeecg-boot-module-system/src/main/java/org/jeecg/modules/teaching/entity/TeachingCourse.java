@@ -104,4 +104,14 @@ public class TeachingCourse implements Serializable {
 	@ApiModelProperty(value = "授权部门")
 	@Dict(dictTable = "sys_depart", dicText = "depart_name", dicCode = "id")
 	private java.lang.String departIds;
+
+	@Excel(name = "课程类型", width = 15, dicCode = "course_type")
+	@ApiModelProperty(value = "课程类型")
+	@Dict(dicCode = "course_type")
+	private java.lang.String courseType;
+
+	@Excel(name = "课程分类", width = 15, dicCode = "course_category")
+	@ApiModelProperty(value = "课程分类")
+	@Dict(dicCode = "course_category")
+	private java.lang.String courseCategory;
 }

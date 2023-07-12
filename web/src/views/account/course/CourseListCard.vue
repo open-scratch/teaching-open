@@ -2,13 +2,17 @@
   <div class="app-list">
     <a-list :grid="{ gutter: 24, xxl:4, xl:4, lg: 3, md: 2, sm: 1, xs: 1 }" :dataSource="dataSource">
       <a-list-item slot="renderItem" slot-scope="item, index">
-        <a-card :hoverable="true" @click="toCourse(item.showType, item.id)">
+        <a-card :hoverable="true">
           <!-- <template class="ant-card-extra" slot="extra">
             <span class="create-time">{{item.createTime}}</span>
           </template> -->
           <a-card-meta>
-            <div style="margin-bottom: 3px" slot="title">{{ item.courseName }}</div>
-            <div class="meta-cardInfo" slot="description">
+            <div style="margin-bottom: 3px" slot="title">
+              <a-icon type="info-circle" @click="toDetail(item)"/>
+              <a-divider type="vertical"></a-divider>
+              <span @click="toCourse(item.showType, item.id)">{{ item.courseName }}</span>
+            </div>
+            <div @click="toCourse(item.showType, item.id)" class="meta-cardInfo" slot="description">
                 <img
                   :src="getFileAccessHttpUrl(item.courseCover)"
                   height="25px"
@@ -16,11 +20,18 @@
                 />
             </div>
           </a-card-meta>
-          <br />
-          <span v-html="item.courseDesc" class="article-content"></span>
         </a-card>
       </a-list-item>
     </a-list>
+    <j-modal 
+      :visible="showCourseDetail" 
+      :title="currentCourse.courseName"
+      :width="800"
+      :footer="null"
+      @cancel="showCourseDetail=false"
+      >
+        <div v-html="currentCourse.courseDesc"></div>
+      </j-modal>
   </div>
 </template>
 <script>
@@ -32,6 +43,8 @@ export default {
   data() {
     return {
       dataSource: [],
+      showCourseDetail: false,
+      currentCourse: {}
     }
   },
   mounted() {
@@ -56,7 +69,11 @@ export default {
       }else{
         this.$router.push("/teaching/mineCourse/courseUnitCard?id="+id)
       }
-    }
+    },
+    toDetail(item) {
+      this.showCourseDetail = true
+      this.currentCourse = item
+    },
   },
 }
 </script>
@@ -64,7 +81,8 @@ export default {
 <style lang="less" scoped>
 .app-list {
   .ant-card {
-    height: 350px;
+    min-height: 200px;
+    max-height: 400px;
   }
   .meta-cardInfo {
     zoom: 1;

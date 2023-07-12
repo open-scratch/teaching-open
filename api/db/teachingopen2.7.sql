@@ -1787,6 +1787,8 @@ INSERT INTO `sys_dict` VALUES ('c36169beb12de8a71c8683ee7c28a503', '部门状态
 INSERT INTO `sys_dict` VALUES ('c5a14c75172783d72cbee6ee7f5df5d1', 'Online图表类型', 'online_graph_type', 'Online图表类型', 0, 'admin', '2019-04-12 17:04:06', NULL, NULL, 0);
 INSERT INTO `sys_dict` VALUES ('d6e1152968b02d69ff358c75b48a6ee1', '流程类型', 'bpm_process_type', NULL, 1, 'admin', '2021-02-22 19:26:54', 'admin', '2019-03-30 18:14:44', 0);
 INSERT INTO `sys_dict` VALUES ('fc6cd58fde2e8481db10d3a1e68ce70c', '用户状态', 'user_status', NULL, 0, 'admin', '2019-03-18 21:57:25', 'admin', '2019-03-18 23:11:58', 1);
+INSERT INTO `sys_dict`(`id`, `dict_name`, `dict_code`, `description`, `del_flag`, `create_by`, `create_time`, `update_by`, `update_time`, `type`) VALUES ('1678348253119864835', '课程分类', 'course_category', '', 0, 'admin', '2023-07-10 18:19:40', NULL, NULL, 0);
+INSERT INTO `sys_dict`(`id`, `dict_name`, `dict_code`, `description`, `del_flag`, `create_by`, `create_time`, `update_by`, `update_time`, `type`) VALUES ('1678348253119864834', '课程类型', 'course_type', '', 0, 'admin', '2023-07-10 18:19:40', NULL, NULL, 0);
 
 -- ----------------------------
 -- Table structure for sys_dict_item
@@ -3094,7 +3096,7 @@ CREATE TABLE `teaching_course`  (
   `sys_org_code` varchar(64) CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT NULL COMMENT '所属部门',
   `del_flag` int(1) NULL DEFAULT NULL COMMENT '删除标志',
   `course_name` varchar(32) CHARACTER SET utf8 COLLATE utf8_general_ci NOT NULL COMMENT '科目名',
-  `course_desc` text CHARACTER SET utf8 COLLATE utf8_general_ci NULL COMMENT '科目介绍',
+  `course_desc` longtext CHARACTER SET utf8 COLLATE utf8_general_ci NULL COMMENT '科目介绍',
   `course_icon` varchar(256) CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT NULL COMMENT '科目图标',
   `course_cover` varchar(256) CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT NULL COMMENT '科目封面',
   `show_type` int(11) NULL DEFAULT NULL COMMENT '展示类型',
@@ -3103,6 +3105,8 @@ CREATE TABLE `teaching_course`  (
   `show_home` tinyint(4) NOT NULL DEFAULT 0 COMMENT '是否首页展示',
   `order_num` int(11) NOT NULL DEFAULT 1 COMMENT '排序',
   `depart_ids` varchar(1000) CHARACTER SET utf8 COLLATE utf8_general_ci NOT NULL DEFAULT '' COMMENT '授权部门',
+  `course_type` varchar(16) CHARACTER SET utf8 COLLATE utf8_general_ci NOT NULL COMMENT '课程类型',
+  `course_category` varchar(16) CHARACTER SET utf8 COLLATE utf8_general_ci NOT NULL COMMENT '课程分类',
   PRIMARY KEY (`id`) USING BTREE,
   INDEX `courseName`(`course_name`) USING BTREE
 ) ENGINE = InnoDB CHARACTER SET = utf8 COLLATE = utf8_general_ci ROW_FORMAT = Compact;
