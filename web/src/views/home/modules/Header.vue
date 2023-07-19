@@ -32,6 +32,7 @@ export default {
     return {
       menus: [],
       logo: '/logo.png',
+      logo2: '/logo.png',
       avatarUrl: '/logo.png',
       menuFixed: false
     }
@@ -40,6 +41,11 @@ export default {
     this.menus = this.$store.getters.menuList
     if (this.$store.getters.sysConfig.logo && this.$store.getters.sysConfig.qiniuDomain) {
       this.logo = this.$store.getters.sysConfig.qiniuDomain + '/' + this.$store.getters.sysConfig.logo
+      this.avatarUrl = this.logo
+    }
+    if (this.$store.getters.sysConfig.logo2 && this.$store.getters.sysConfig.qiniuDomain) {
+      this.logo2 = this.$store.getters.sysConfig.qiniuDomain + '/' + this.$store.getters.sysConfig.logo2
+      this.avatarUrl = this.logo2
     }
     if(this.getFileAccessHttpUrl(this.avatar())){
       this.avatarUrl = this.getFileAccessHttpUrl(this.avatar())

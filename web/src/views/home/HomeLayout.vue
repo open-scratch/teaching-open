@@ -20,7 +20,7 @@
                   <a-button size="large" type="primary" @click="enter(2)">我的课程</a-button>
                 </div>
                 <div v-else>
-                  <a-avatar shape="square" class="avatar" :size="100" :src="logo" />
+                  <a-avatar shape="square" class="avatar" :size="100" :src="logo2" />
                   <h3 class="welcome">欢迎来到{{ brandName }}</h3>
                   <a-button type="dashed" @click="enter(0)">登录/注册</a-button>
                 </div>
@@ -59,6 +59,7 @@ export default {
     return {
       brandName: this.$store.getters.sysConfig.brandName,
       logo: '/logo.png',
+      logo2: '/logo.png',
       avatarUrl: '/logo.png',
       token: '',
     }
@@ -67,6 +68,10 @@ export default {
     this.token = Vue.ls.get(ACCESS_TOKEN)
     if (this.$store.getters.sysConfig.logo && this.$store.getters.sysConfig.qiniuDomain) {
       this.logo = this.$store.getters.sysConfig.qiniuDomain + '/' + this.$store.getters.sysConfig.logo
+    }
+    if (this.$store.getters.sysConfig.logo2 && this.$store.getters.sysConfig.qiniuDomain) {
+      this.logo2 = this.$store.getters.sysConfig.qiniuDomain + '/' + this.$store.getters.sysConfig.logo2
+      this.avatarUrl = this.logo
     }
     if (this.getFileAccessHttpUrl(this.avatar())) {
       this.avatarUrl = this.getFileAccessHttpUrl(this.avatar())

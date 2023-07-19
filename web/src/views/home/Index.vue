@@ -241,7 +241,7 @@ export default {
       this.page.starLeaderboard += 1
       getAction('/teaching/teachingWork/leaderboard', {
         orderBy: 'star',
-        pageSize: this._isMobile() ? 4 : 8,
+        pageSize: 8,
         pageNo: this.page.starLeaderboard,
       }).then((res) => {
         if (res.success) {
@@ -256,7 +256,7 @@ export default {
     getCourseLeaderboard() {
       this.page.courseLeaderboard += 1
       getAction('/teaching/teachingCourse/getHomeCourse', {
-        pageSize: this._isMobile() ? 4 : 8,
+        pageSize: 4,
         pageNo: this.page.courseLeaderboard,
       }).then((res) => {
         if (res.success) {

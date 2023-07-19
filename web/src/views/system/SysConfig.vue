@@ -45,10 +45,20 @@
                 <a-textarea v-decorator="['brandDesc', validatorRules.brandDesc]" placeholder="请输入品牌简介"></a-textarea>
               </a-form-item>
             </a-col>
-            <a-col :span="24">
-              <a-form-item label="LOGO" :labelCol="labelCol2" :wrapperCol="wrapperCol2">
+            <a-col :span="12">
+              <a-form-item label="LOGO" :labelCol="labelCol" :wrapperCol="wrapperCol">
                 <j-upload
                   v-decorator="['logo', validatorRules.logo]"
+                  :fileType="'image'"
+                  :number="1"
+                  :trigger-change="true"
+                ></j-upload>
+              </a-form-item>
+            </a-col>
+            <a-col :span="12">
+              <a-form-item label="小LOGO" :labelCol="labelCol" :wrapperCol="wrapperCol">
+                <j-upload
+                  v-decorator="['logo2', validatorRules.logo]"
                   :fileType="'image'"
                   :number="1"
                   :trigger-change="true"
