@@ -3105,8 +3105,8 @@ CREATE TABLE `teaching_course`  (
   `show_home` tinyint(4) NOT NULL DEFAULT 0 COMMENT '是否首页展示',
   `order_num` int(11) NOT NULL DEFAULT 1 COMMENT '排序',
   `depart_ids` varchar(1000) CHARACTER SET utf8 COLLATE utf8_general_ci NOT NULL DEFAULT '' COMMENT '授权部门',
-  `course_type` varchar(16) CHARACTER SET utf8 COLLATE utf8_general_ci NOT NULL COMMENT '课程类型',
-  `course_category` varchar(16) CHARACTER SET utf8 COLLATE utf8_general_ci NOT NULL COMMENT '课程分类',
+  `course_type` varchar(16) CHARACTER SET utf8 COLLATE utf8_general_ci NOT NULL DEFAULT '' COMMENT '课程类型',
+  `course_category` varchar(16) CHARACTER SET utf8 COLLATE utf8_general_ci NOT NULL DEFAULT '' COMMENT '课程分类',
   PRIMARY KEY (`id`) USING BTREE,
   INDEX `courseName`(`course_name`) USING BTREE
 ) ENGINE = InnoDB CHARACTER SET = utf8 COLLATE = utf8_general_ci ROW_FORMAT = Compact;
