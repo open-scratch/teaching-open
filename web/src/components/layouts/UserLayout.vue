@@ -119,7 +119,7 @@
       .main {
         min-width: 260px;
         width: 368px;
-        margin: 0 auto;
+        margin: 0 auto 60px;
       }
 
       .footer {
