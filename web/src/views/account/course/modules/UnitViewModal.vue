@@ -43,17 +43,26 @@
               <a-collapse-panel v-if="unit.coursePpt_url" :header="'课程资料'" :style="customStyle">
                 <div v-for="(u,i) in unit.coursePpt_url.split(',')" :key="i">
                   <a v-if="u.endsWith('sb3')" target="_blank" :href="'/scratch3/index.html?scene=create&workFile='+u"
-                    ><a-icon type="code" /> 查看代码 {{(i+1)}}</a
+                    ><a-icon type="code" /> {{(i+1)}}. 查看代码 </a
+                  >
+                  <a v-else-if="u.endsWith('ppt')||u.endsWith('pptx')" target="_blank" :href="'https://view.officeapps.live.com/op/embed.aspx?src='+u"
+                    ><a-icon type="file-ppt" /> {{(i+1)}}. 查看PPT </a
                   >
                   <a v-else target="_blank" :href="u"
-                    ><a-icon type="file" /> 查看资料 {{(i+1)}}</a
+                    ><a-icon type="file" /> {{(i+1)}}. 查看资料 </a
                   >
                 </div>
               </a-collapse-panel>
               <a-collapse-panel v-if="unit.coursePlan_url" :header="'课程教案'" :style="customStyle">
                 <div v-for="(u,i) in unit.coursePlan_url.split(',')" :key="i">
-                  <a target="_blank" :href="u"
-                    ><a-icon type="file" /> 查看教案 {{(i+1)}}</a
+                 <a v-if="u.endsWith('sb3')" target="_blank" :href="'/scratch3/index.html?scene=create&workFile='+u"
+                    ><a-icon type="code" /> {{(i+1)}}. 查看代码 </a
+                  >
+                  <a v-else-if="u.endsWith('ppt')||u.endsWith('pptx')" target="_blank" :href="'https://view.officeapps.live.com/op/embed.aspx?src='+u"
+                    ><a-icon type="file-ppt" /> {{(i+1)}}. 查看PPT </a
+                  >
+                  <a v-else target="_blank" :href="u"
+                    ><a-icon type="file" /> {{(i+1)}}. 查看资料 </a
                   >
                 </div>
               </a-collapse-panel>

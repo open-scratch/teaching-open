@@ -97,7 +97,11 @@ export default {
       this.getList()
     },
     openWorkFile(workUrl) {
-      window.open(workUrl)
+      if(workUrl.endsWith('ppt')||workUrl.endsWith('pptx')){
+        window.open('https://view.officeapps.live.com/op/embed.aspx?src='+workUrl)
+      }else{
+        window.open(workUrl)
+      }
     },
     toAdditionalWork(item, reset) {
       console.log(item);
