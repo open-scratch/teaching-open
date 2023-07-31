@@ -9,7 +9,7 @@
 
 <script>
   import { mixin } from '@/utils/mixin.js'
-
+  import { getFileAccessHttpUrl } from '@/api/manage'
   export default {
     name: 'Logo',
     mixins: [mixin],
@@ -27,8 +27,8 @@
       }
     },
     created() {
-    if(this.$store.getters.sysConfig.logo && this.$store.getters.sysConfig.qiniuDomain){
-      this.logo = this.$store.getters.sysConfig.qiniuDomain + "/" + this.$store.getters.sysConfig.logo
+    if(this.$store.getters.sysConfig.logo){
+      this.logo = getFileAccessHttpUrl(this.$store.getters.sysConfig.logo)
     }
   },
   }
