@@ -103,7 +103,7 @@ public class ThirdLoginController {
     		String token = JwtUtil.sign(user.getUsername(), user.getPassword());
     		redisUtil.set(CommonConstant.PREFIX_USER_TOKEN + token, token);
     		// 设置超时时间
-    		redisUtil.expire(CommonConstant.PREFIX_USER_TOKEN + token, JwtUtil.EXPIRE_TIME / 1000);
+    		redisUtil.expire(CommonConstant.PREFIX_USER_TOKEN + token, JwtUtil.EXPIRE_TIME);
     		modelMap.addAttribute("token", token);
     		
         }

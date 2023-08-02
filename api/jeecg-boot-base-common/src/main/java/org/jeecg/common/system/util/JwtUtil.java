@@ -27,7 +27,7 @@ import org.jeecg.common.util.oConvertUtils;
 public class JwtUtil {
 
 	// Token过期时间
-	public static final long EXPIRE_TIME = 30 * 60 * 60 * 1000;
+	public static final long EXPIRE_TIME = 30 * 60 * 60;
 
 	/**
 	 * 校验token是否正确

@@ -81,7 +81,7 @@ public class CasClientController {
 	 		String token = JwtUtil.sign(sysUser.getUsername(), sysUser.getPassword());
 	 		// 设置超时时间
 	 		redisUtil.set(CommonConstant.PREFIX_USER_TOKEN + token, token);
-	 		redisUtil.expire(CommonConstant.PREFIX_USER_TOKEN + token, JwtUtil.EXPIRE_TIME*2 / 1000);
+	 		redisUtil.expire(CommonConstant.PREFIX_USER_TOKEN + token, JwtUtil.EXPIRE_TIME);
 	  		//获取用户部门信息
 			JSONObject obj = new JSONObject();
 			List<SysDepart> departs = sysDepartService.queryUserDeparts(sysUser.getId());
