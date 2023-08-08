@@ -2,19 +2,6 @@
   <div>
     <a-row :gutter="[24,24]">
       <a-col :xs="24" :sm="24" :md="8" :lg="8" :xl="8">
-        <div class="editor-card" style="background: linear-gradient(-60deg,#ffaa30,#ffbf35);">
-          <a-row type="flex" justify="space-around" align="middle">
-            <a-col :span="10">
-              <img src="@assets/scratch.png" alt="">
-            </a-col>
-            <a-col :span="14">
-              <h2>Scratch编辑器</h2>
-              <a-button size="large" @click="toEditor(1)">开始创作</a-button>
-            </a-col>
-          </a-row>
-        </div>
-      </a-col>
-      <a-col :xs="24" :sm="24" :md="8" :lg="8" :xl="8">
         <div class="editor-card" style="background: linear-gradient(-30deg,#4fb5ff,#60bcff);">
           <a-row type="flex" justify="space-around" align="middle">
             <a-col :span="10">
@@ -23,6 +10,19 @@
             <a-col :span="14">
               <h2>ScratchJr编辑器</h2>
               <a-button size="large" @click="toEditor(2)">开始创作</a-button>
+            </a-col>
+          </a-row>
+        </div>
+      </a-col>
+      <a-col :xs="24" :sm="24" :md="8" :lg="8" :xl="8">
+        <div class="editor-card" style="background: linear-gradient(-60deg,#ffaa30,#ffbf35);">
+          <a-row type="flex" justify="space-around" align="middle">
+            <a-col :span="10">
+              <img src="@assets/scratch.png" alt="">
+            </a-col>
+            <a-col :span="14">
+              <h2>Scratch编辑器</h2>
+              <a-button size="large" @click="toEditor(1)">开始创作</a-button>
             </a-col>
           </a-row>
         </div>
