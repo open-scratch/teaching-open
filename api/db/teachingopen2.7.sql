@@ -3114,8 +3114,8 @@ CREATE TABLE `teaching_course`  (
 -- ----------------------------
 -- Records of teaching_course
 -- ----------------------------
-INSERT INTO `teaching_course` VALUES ('1443420350180347906', 'admin', '2021-09-30 11:40:03', 'admin', '2023-01-09 15:29:16', 'A01', NULL, 'Scratch入门课', 'Scratch入门课程', NULL, '4670249d28704923811397a063e083d5.jpg', 1, NULL, 0, 1);
-INSERT INTO `teaching_course` VALUES ('1468455261786087426', 'admin', '2021-12-08 13:39:51', 'admin', '2023-01-09 15:30:20', 'A01', NULL, 'Scratch进阶课', 'Scratch进阶课程', NULL, 'b893dbb7324c4c80807b468b5e7a7e3f.jpg', 1, 'e788a77fafa943f08cfe77785194eebd.jpg', 0, 2);
+INSERT INTO `teaching_course` VALUES ('1443420350180347906', 'admin', '2021-09-30 11:40:03', 'admin', '2023-01-09 15:29:16', 'A01', NULL, 'Scratch入门课', 'Scratch入门课程', NULL, '4670249d28704923811397a063e083d5.jpg', 1, NULL, 0, 1, 0, '', '', '');
+INSERT INTO `teaching_course` VALUES ('1468455261786087426', 'admin', '2021-12-08 13:39:51', 'admin', '2023-01-09 15:30:20', 'A01', NULL, 'Scratch进阶课', 'Scratch进阶课程', NULL, 'b893dbb7324c4c80807b468b5e7a7e3f.jpg', 1, 'e788a77fafa943f08cfe77785194eebd.jpg', 0, 2, 0, '', '', '');
 
 -- ----------------------------
 -- Table structure for teaching_course_dept
@@ -3177,17 +3177,11 @@ create table teaching_course_unit
 );
 
 create index courseId
-    on teachingopendev.teaching_course_unit (course_id);
+    on teaching_course_unit (course_id);
 
 create index unitName
-    on teachingopendev.teaching_course_unit (unit_name);
+    on teaching_course_unit (unit_name);
 
-
-
--- ----------------------------
--- Records of teaching_course_unit
--- ----------------------------
-INSERT INTO `teaching_course_unit` VALUES ('1443420554338095106', 'admin', '2021-09-30 11:40:52', 'admin', '2023-01-12 12:51:29', 'A01', NULL, '第一课', '第一课，Scratch是什么', '55ae580f1d31403ebf8ba66d3092a094.jpg', '1468455261786087426', 'cctv_1652803839525.mp4', 1, 'Epic Ninja v1.12_1652803422180.12.sb3', '', 2, 'a176bfc29b624fe48540d76dae79b5ba.sb3', NULL, NULL, 587, 426, 1);
 
 -- ----------------------------
 -- Table structure for teaching_menu
@@ -3288,20 +3282,6 @@ CREATE TABLE `teaching_work`  (
   INDEX `courseId`(`course_id`) USING BTREE,
   INDEX `userId`(`user_id`) USING BTREE
 ) ENGINE = InnoDB CHARACTER SET = utf8 COLLATE = utf8_general_ci ROW_FORMAT = Compact;
-
--- ----------------------------
--- Records of teaching_work
--- ----------------------------
-INSERT INTO `teaching_work` VALUES ('1515608509045952514', 'admin', '2023-01-09 16:32:45', 'admin', '2023-01-09 16:32:53', 'A01', 'e9ca23d68d884d4ebb19d07889727dae', '', '管理员作品', '2', '1612366754000596993', '1612366754227089409', 1, 2, 0, 0, 19, '', 'create');
-INSERT INTO `teaching_work` VALUES ('1517395583084597249', 'admin', '2022-04-22 14:51:13', 'admin', '2023-01-15 14:15:34', 'A03', 'e9ca23d68d884d4ebb19d07889727dae', '', 'Epic Ninja v1.12', '2', '1517395582551920641', '1517395581432041474', 3, 1, 0, 0, 7, '', 'create');
-INSERT INTO `teaching_work` VALUES ('1517395625572896770', 'admin', '2022-04-22 14:51:23', 'admin', '2023-01-15 16:45:34', 'A03', 'e9ca23d68d884d4ebb19d07889727dae', '', '2 PacMan', '2', '1517395624650149889', '1517395625098940418', 4, 0, 0, 0, 32, '', 'create');
-INSERT INTO `teaching_work` VALUES ('1517395658737258497', 'admin', '2022-04-22 14:51:31', 'admin', '2022-07-16 18:14:34', 'A03', 'e9ca23d68d884d4ebb19d07889727dae', '', '新作品', '2', '1517395657600602113', '1517395655587336193', 3, 0, 0, 0, 3, '', 'create');
-INSERT INTO `teaching_work` VALUES ('1517395755046866945', 'admin', '2022-04-22 14:51:54', 'teacher', '2022-07-16 18:14:38', 'A03', 'e9ca23d68d884d4ebb19d07889727dae', '', 'Glitchy Logo Tutorial', '2', '1517395754593882113', '1517395751389433858', 3, 0, 0, 0, 11, '', 'create');
-INSERT INTO `teaching_work` VALUES ('1517396542489694209', 'student', '2022-04-22 14:55:02', 'teacher', '2022-04-22 15:02:27', 'A01A05A01', '2cb6e8e9b9ac4ccca17a1c3020a118d4', '', 'ScrollingDemo', '2', '1517396541818605569', '1517396540770029569', 3, 0, 0, 0, 0, '', 'create');
-INSERT INTO `teaching_work` VALUES ('1587018459311169537', 'admin', '2022-10-31 17:49:43', 'admin', '2023-01-15 12:24:28', 'A01', 'e9ca23d68d884d4ebb19d07889727dae', '', '羊了个羊-改编wwf', '2', '1587018973830635521', '1587018968826830849', 1, 0, 0, 0, 2, '', 'create');
-INSERT INTO `teaching_work` VALUES ('1587019591622254594', 'student', '2022-10-31 17:52:10', 'admin', '2023-01-15 16:45:27', '班级2,班级1', '2cb6e8e9b9ac4ccca17a1c3020a118d4', '', '羊了个羊-改编学生', '2', '1587019591198629890', '1587019590808559617', 4, 0, 0, 0, 1, '1478636409044680705', 'additional');
-INSERT INTO `teaching_work` VALUES ('1588090874574794753', 'admin', '2022-11-03 16:49:14', 'admin', '2023-01-15 14:19:19', 'A01', 'e9ca23d68d884d4ebb19d07889727dae', '', 'Blockly code', '10', '1588090917876789249', '', 0, 0, 0, 0, 2, '', 'create');
-INSERT INTO `teaching_work` VALUES ('1608691048804712450', 'admin', '2022-12-30 13:06:48', 'admin', '2023-01-15 14:19:22', 'A01', 'e9ca23d68d884d4ebb19d07889727dae', '', 'Scratch3班级作业', '2', '1608691048418836482', '1608691048011988994', 1, 0, 0, 0, 1, '1478636409044680705', 'additional');
 
 -- ----------------------------
 -- Table structure for teaching_work_comment
