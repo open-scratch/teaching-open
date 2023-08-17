@@ -156,7 +156,7 @@ public class TeachingWorkController extends BaseController {
 			 }else{
 				 oldWorks = teachingWorkService.getBaseMapper().selectByMap(new HashMap<String, Object>(){{
 					 put("work_name", teachingWork.getWorkName());
-					 put("user_id", teachingWork.getUserId());
+					 put("user_id", getCurrentUser().getId());
 					 put("work_type", teachingWork.getWorkType());
 				 }});
 			 }
@@ -165,7 +165,7 @@ public class TeachingWorkController extends BaseController {
 			 if (oldWorks.size() > 0){
 				 teachingWork.setId(oldWorks.get(0).getId());
 				 teachingWork.setCreateTime(new Date());
-				 teachingWork.setUpdateTime(new Date());
+				 //teachingWork.setUpdateTime(new Date());
 				 result.setResult(teachingWork);
 				 result.success("更新成功！");
 				 //保留原作品的历史记录
