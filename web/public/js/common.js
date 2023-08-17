@@ -64,7 +64,11 @@ window.getSysConfig = function(key){
 }
 
 window.getLogo = function(){
-  return getSysConfig('qiniuDomain') + "/" + getSysConfig('logo')
+  if(getSysConfig('uploadType') == "qiniu"){
+    return getSysConfig('qiniuDomain') + "/" + getSysConfig('logo')
+  }else{
+    return getSysConfig('staticDomain') + "/" + getSysConfig('logo')
+  }
 }
 
 window.getWorkInfo = function(workId, cb) {

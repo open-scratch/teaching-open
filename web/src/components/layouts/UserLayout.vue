@@ -24,7 +24,7 @@
 <script>
   import RouteView from "@/components/layouts/RouteView"
   import { mixinDevice } from '@/utils/mixin.js'
-
+  import { getFileAccessHttpUrl } from '@/api/manage'
   export default {
     name: "UserLayout",
     components: { RouteView },
@@ -37,8 +37,8 @@
       }
     },
     created() {
-      if(this.$store.getters.sysConfig.logo && this.$store.getters.sysConfig.qiniuDomain){
-        this.logo = this.$store.getters.sysConfig.qiniuDomain + "/" + this.$store.getters.sysConfig.logo
+      if(this.$store.getters.sysConfig.logo){
+        this.logo = getFileAccessHttpUrl(this.$store.getters.sysConfig.logo)
       }
     },
     mounted () {
