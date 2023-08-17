@@ -7,10 +7,7 @@ import org.jeecg.common.api.vo.Result;
 import org.jeecg.common.constant.CommonConstant;
 import org.jeecg.common.system.api.ISysBaseAPI;
 import org.jeecg.common.system.util.JwtUtil;
-import org.jeecg.common.util.CommonUtils;
-import org.jeecg.common.util.RestUtil;
-import org.jeecg.common.util.TokenUtils;
-import org.jeecg.common.util.oConvertUtils;
+import org.jeecg.common.util.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.http.HttpHeaders;
@@ -128,9 +125,9 @@ public class CommonController {
 			String orgName = mf.getOriginalFilename();// 获取文件名
 			orgName = CommonUtils.getFileName(orgName);
 			if(orgName.indexOf(".")!=-1){
-				fileName = orgName.substring(0, orgName.lastIndexOf(".")) + "_" + System.currentTimeMillis() + orgName.substring(orgName.indexOf("."));
+				fileName = UUIDGenerator.generate() + orgName.substring(orgName.indexOf("."));
 			}else{
-				fileName = orgName+ "_" + System.currentTimeMillis();
+				fileName = UUIDGenerator.generate();
 			}
 			String savePath = file.getPath() + File.separator + fileName;
 			File savefile = new File(savePath);
