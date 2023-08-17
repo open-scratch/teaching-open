@@ -62,7 +62,7 @@
         <aliyun-java-sdk-core.version>3.2.3</aliyun-java-sdk-core.version>
 		<aliyun-java-sdk-dysmsapi.version>1.0.0</aliyun-java-sdk-dysmsapi.version>
 		<aliyun.oss.version>3.6.0</aliyun.oss.version>
-		<guava.version>26.0-jre</guava.version>
+		<guava.version>30.0-jre</guava.version>
 		<log4j2.version>2.17.0</log4j2.version>
 		<logback.version>1.2.9</logback.version>
     </properties>
@@ -147,7 +147,7 @@
 		<dependency>
 			<groupId>mysql</groupId>
 			<artifactId>mysql-connector-java</artifactId>
-			<version>5.1.47</version>
+			<version>8.0.28</version>
 			<scope>runtime</scope>
 		</dependency>
 		<!--  sqlserver-->
@@ -168,7 +168,7 @@
 		<dependency>
 			<groupId>org.postgresql</groupId>
 			<artifactId>postgresql</artifactId>
-			<version>42.2.6</version>
+			<version>42.2.27</version>
 			<scope>runtime</scope>
 		</dependency>
 		<dependency>
@@ -179,6 +179,7 @@
 		<dependency>
 			<groupId>org.hibernate</groupId>
 			<artifactId>hibernate-core</artifactId>
+			<version>5.3.20.Final</version>
 			<exclusions>
 				<exclusion>
 					<groupId>commons-collections</groupId>
@@ -204,7 +205,7 @@
 		<dependency>
 		    <groupId>org.apache.shiro</groupId>
 		    <artifactId>shiro-spring-boot-starter</artifactId>
-		    <version>1.4.0</version>
+		    <version>1.7.0</version>
 		</dependency>
 		<!-- shiro-redis -->
         <dependency>
