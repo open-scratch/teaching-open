@@ -162,7 +162,7 @@
         return getFileAccessHttpUrl(this.avatar())
       },
       handleHome(){
-        window.location.href = "http://" + window.location.hostname
+        window.location.href = location.protocol + "//" + window.location.host
       },
       handleLogout() {
         const that = this
