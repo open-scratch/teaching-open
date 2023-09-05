@@ -49,6 +49,8 @@ const err = (error) => {
             }
           })
           // update-end- --- author:scott ------ date:20190225 ---- for:Token失效采用弹框模式，不直接跳转----
+        }else{
+          notification.error({ message: '系统提示', description:'服务器无法完成请求!',duration: 4})
         }
         break
       case 404:
