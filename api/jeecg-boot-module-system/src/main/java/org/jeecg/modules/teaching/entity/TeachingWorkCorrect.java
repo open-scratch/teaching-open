@@ -49,7 +49,7 @@ public class TeachingWorkCorrect implements Serializable {
 	@ApiModelProperty(value = "更新日期")
 	private java.util.Date updateTime;
 	/**所属部门*/
-	@Excel(name = "所属部门", width = 15)
+//	@Excel(name = "所属部门", width = 15)
 	@ApiModelProperty(value = "所属部门")
 	private java.lang.String sysOrgCode;
 	/**作业ID*/

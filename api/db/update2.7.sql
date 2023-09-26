@@ -77,3 +77,8 @@ alter table teaching_course
 INSERT INTO `sys_dict`(`id`, `dict_name`, `dict_code`, `description`, `del_flag`, `create_by`, `create_time`, `update_by`, `update_time`, `type`) VALUES ('1678348253119864835', '课程分类', 'course_category', '', 0, 'admin', '2023-07-10 18:19:40', NULL, NULL, 0);
 alter table teaching_course
     add course_category varchar(16) default '' not null comment '课程分类';
+
+-- 0223-09-26
+update sys_user set realname='' where realname is null;
+alter table sys_user
+    modify realname varchar(100) default '' not null comment '真实姓名';

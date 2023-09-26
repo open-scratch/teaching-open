@@ -494,8 +494,8 @@ public class TeachingWorkController extends BaseController {
           BeanUtils.copyProperties(main, vo);
           List<TeachingWorkCorrect> teachingWorkCorrectList = teachingWorkCorrectService.selectByMainId(main.getId());
           vo.setTeachingWorkCorrectList(teachingWorkCorrectList);
-          List<TeachingWorkComment> teachingWorkCommentList = teachingWorkCommentService.selectByMainId(main.getId());
-          vo.setTeachingWorkCommentList(teachingWorkCommentList);
+//          List<TeachingWorkComment> teachingWorkCommentList = teachingWorkCommentService.selectByMainId(main.getId());
+//          vo.setTeachingWorkCommentList(teachingWorkCommentList);
           pageList.add(vo);
       }
 

@@ -143,6 +143,7 @@ public class ShiroConfig {
 		filterChainDefinitionMap.put("/teaching/menu/getUserMenu", "anon");
 		//配置
 		filterChainDefinitionMap.put("/sys/config/getCurrentConfig", "anon");
+		filterChainDefinitionMap.put("/sys/config/getConfig", "anon");
 		//字典
 		filterChainDefinitionMap.put("/sys/dict/getDictItems/**", "anon");
 		// 作业
