@@ -13,6 +13,15 @@
     var workId = urlParams('workId')
     var workUrl = urlParams('workUrl')
     window.scratchConfig = {
+      cloudData:{
+        enable: true,
+        id: workId, //云变量ID
+        api: window.location.hostname + "/api/websocket/scratch/cloudData" //云变量API地址
+      },
+      projectInfo: {//作品信息
+        authorUsername: "",
+        authorAvatar: './static/avatar.png',
+      },
       stageArea: {
         scale: window.innerWidth / 480, //自适应屏幕大小
         width: 480,
@@ -54,11 +63,13 @@
       handleDefaultProjectLoaded: () => {
         if(workUrl){
           window.scratch.loadProject(workUrl, () => {
+            window.scratch.setCloudId(workUrl)
             vm.runtime.start()
           })
         }else if(workId){
           getWorkInfo(workId, function (info) {
             window.scratch.loadProject(info.workFileKey_url, () => {
+              window.scratch.setCloudId(workId)
               vm.runtime.start()
             })
           })

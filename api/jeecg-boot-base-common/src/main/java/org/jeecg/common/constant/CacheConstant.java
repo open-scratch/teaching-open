@@ -6,6 +6,10 @@ package org.jeecg.common.constant;
  * @description: 缓存常量
  */
 public interface CacheConstant {
+	// Scratch
+	public static final String SCRATCH_CLOUD = "scratch:cloud:";
+	public static final String SCRATCH_BACKPACK_LIST = "scratch:backpackList:";
+	public static final String SCRATCH_BACKPACK_BODY = "scratch:backpackBody:";
 
 	/**
 	 * 字典信息缓存

@@ -1,4 +1,4 @@
-<!DOCTYPE html>
+﻿<!DOCTYPE html>
 <html>
 
 <head>
@@ -27,6 +27,7 @@
     var scene = urlParams("scene") || 'create' //来源
     var userInfo = getUserInfo();
     var qn_token = getQiniuToken();
+    var userToken = getUserToken();
     var workStatus = 0
     setInterval(function () {
       qn_token = getQiniuToken();
@@ -65,6 +66,25 @@
     }
 
     window.scratchConfig = {
+      session: {
+        token: userToken,
+        username: userInfo.realname || userInfo.username,
+        //avatar: getQiniuUrl(userInfo.avatar) || './static/avatar.png',
+      },
+      backpack:{
+        enable: true,
+        api: "/api/teaching/scratch/backpack",
+      },
+      cloudData:{
+        enable: true,
+        id: "create", //云变量ID，提交作业后使用window.scratch.setCloudId换成作品ID
+        api: window.location.hostname +"/api/websocket/scratch/cloudData" //云变量API地址
+      },
+      projectInfo: {//作品信息
+        projectName: "",
+        authorUsername: userInfo.username, //默认为自己的用户名
+        authorAvatar: './static/avatar.png',
+      },
       logo: {
         show: true, 
         url: window.getLogo(),
@@ -215,6 +235,8 @@
               $('.loading').hide()
               $('.scratch-filter').hide()
               window.scratch.setProjectName(info.workName)
+              //设置云变量ID
+              window.scratch.setCloudId(workId)
             })
           })
         } else if(unitId){
@@ -316,7 +338,7 @@
         dataType: 'json',
         contentType: 'application/json',
         beforeSend: function (request) {
-          request.setRequestHeader('X-Access-Token', getUserToken())
+          request.setRequestHeader('X-Access-Token', userToken)
         },
         data: JSON.stringify({
           courseId: unitId,
@@ -329,10 +351,17 @@
           departId: departId,
           additionalId: additionalId,
           workScene: scene,
+          hasCloudData: window.vm.runtime.hasCloudData() //是否包含云变量
         }),
         success: function (res) {
           canShare = true
           if (res.code == 200) {
+             //如果包含云变量
+            if(window.vm.runtime.hasCloudData()){
+              workId = res.result.id
+              //更新cloudId
+              window.scratch.setCloudId(workId)
+            }
             $('#projectTitle').html(projectTitle)
             var shareUrl =
               window.location.protocol +

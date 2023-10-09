@@ -45,6 +45,8 @@ public class TeachingWork implements Serializable {
     @Dict(dictTable = "teaching_additional_work", dicText = "work_name", dicCode = "id")
     @ApiModelProperty(value = "附加作业")
     private java.lang.String additionalId;
+    @ApiModelProperty(value = "是否包含云变量")
+    private java.lang.Boolean hasCloudData;
 	/**作业名*/
 	@Excel(name = "作业名", width = 15)
     @ApiModelProperty(value = "作业名")

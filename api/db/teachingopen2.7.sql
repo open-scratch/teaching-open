@@ -3277,6 +3277,7 @@ CREATE TABLE `teaching_work`  (
   `view_num` int(11) NOT NULL DEFAULT 0 COMMENT '查看次数',
   `additional_id` varchar(40) CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT '',
   `work_scene` varchar(20) CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT NULL COMMENT '来源场景',
+  `has_cloud_data` int(11) NOT NULL DEFAULT 0 COMMENT '是否包含云变量',
   PRIMARY KEY (`id`) USING BTREE,
   INDEX `workName`(`work_name`) USING BTREE,
   INDEX `courseId`(`course_id`) USING BTREE,

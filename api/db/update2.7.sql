@@ -78,7 +78,10 @@ INSERT INTO `sys_dict`(`id`, `dict_name`, `dict_code`, `description`, `del_flag`
 alter table teaching_course
     add course_category varchar(16) default '' not null comment '课程分类';
 
--- 0223-09-26
+-- 2023-09-26
 update sys_user set realname='' where realname is null;
 alter table sys_user
     modify realname varchar(100) default '' not null comment '真实姓名';
+-- 2023-10-09
+alter table teaching_work
+    add has_cloud_data tinyint default 0 null comment '是否包含云变量';
