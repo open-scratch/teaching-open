@@ -68,18 +68,23 @@ public class ScratchWebSocket {
         String name = req.getString("name");
         String value = req.getString("value");
         String token = req.getString("token");
-    	switch (method){
-            case "handshake":
-                this.handshake(token, projectId);
-                break;
-            case "create":
-                 this.create(token, projectId, name, value);
-                break;
-            case "set":
-                this.set(token, projectId, name, value);
-                break;
-            case "delete":
-                this.delete(token, projectId, name);
+        try{
+            switch (method){
+                case "handshake":
+                    this.handshake(token, projectId);
+                    break;
+                case "create":
+                    this.create(token, projectId, name, value);
+                    break;
+                case "set":
+                    this.set(token, projectId, name, value);
+                    break;
+                case "delete":
+                    this.delete(token, projectId, name);
+            }
+        }catch (Exception e){
+            e.printStackTrace();
+            this.sendAck(name, "FAIL");
         }
     }
 
@@ -106,25 +111,25 @@ public class ScratchWebSocket {
 
     private void create(String token, String projectId, String name, String value){
         //作品的作者才可以创建变量
-        try {
-            LoginUser loginUser = getShiroRealm().checkUserTokenIsEffect(token);
-            TeachingWork work = getTeachingWork().getById(projectId);
-            //创建变量
-            if (loginUser.getId().equals(work.getUserId())) {
-                getRedisUtil().hset(getKey(loginUser.getUsername(), projectId), name, value);
-                this.sendAck(name, "OK");
-            }else{
-                this.sendAck(name, "FAIL");
-            }
-        }catch (Exception e){
+        LoginUser loginUser = getShiroRealm().checkUserTokenIsEffect(token);
+        TeachingWork work = getTeachingWork().getById(projectId);
+        //创建变量
+        if (loginUser.getId().equals(work.getUserId())) {
+            getRedisUtil().hset(getKey(loginUser.getUsername(), projectId), name, value);
+            this.sendAck(name, "OK");
+        }else{
             this.sendAck(name, "FAIL");
         }
     }
 
     private void set(String token, String projectId, String name, String value){
-        LoginUser loginUser = getShiroRealm().checkUserTokenIsEffect(token);
+        String username = "";
+        if (token != null){
+            LoginUser loginUser = getShiroRealm().checkUserTokenIsEffect(token);
+            username = loginUser.getUsername();
+        }
         //设置变量
-        getRedisUtil().hset(getKey(loginUser.getUsername(), projectId),name, value);
+        getRedisUtil().hset(getKey(username, projectId),name, value);
     }
 
     private void delete(String token, String projectId, String name){
