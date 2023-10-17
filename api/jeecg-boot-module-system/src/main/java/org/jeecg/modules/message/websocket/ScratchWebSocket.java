@@ -16,7 +16,9 @@ import javax.websocket.OnMessage;
 import javax.websocket.OnOpen;
 import javax.websocket.Session;
 import javax.websocket.server.ServerEndpoint;
+import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 import java.util.concurrent.CopyOnWriteArraySet;
 
@@ -35,9 +37,11 @@ public class ScratchWebSocket {
 
     
     private Session session;
+    private String projectId;
+    private String token;
     
     private static CopyOnWriteArraySet<ScratchWebSocket> webSockets =new CopyOnWriteArraySet<>();
-    private static Map<String,Session> sessionPool = new HashMap<String,Session>();
+    private static Map<String, List<Session>> sessionPool = new HashMap<String,List<Session>>(); // 作品ID，sessions
     
     @OnOpen
     public void onOpen(Session session) {
@@ -53,6 +57,15 @@ public class ScratchWebSocket {
     public void onClose() {
         try {
 			webSockets.remove(this);
+            String username = "";
+            if (token != null){
+                LoginUser loginUser = getShiroRealm().checkUserTokenIsEffect(token);
+                username = loginUser.getUsername();
+            }
+            String key = getKey(username, projectId);
+			if (sessionPool.containsKey(key)){
+			    sessionPool.get(key).remove(this.session);
+            }
 			log.info("【scratch websocket消息】连接断开，总数为:"+webSockets.size());
 		} catch (Exception e) {
 		}
@@ -63,24 +76,24 @@ public class ScratchWebSocket {
     	log.info("【scratch websocket消息】收到客户端消息:"+message);
     	JSONObject req = JSONObject.parseObject(message);
     	String method = req.getString("method");
-    	String projectId = req.getString("project_id");
+    	this.projectId = req.getString("project_id");
     	String user = req.getString("user");
         String name = req.getString("name");
         String value = req.getString("value");
-        String token = req.getString("token");
+        this.token = req.getString("token");
         try{
             switch (method){
                 case "handshake":
-                    this.handshake(token, projectId);
+                    this.handshake();
                     break;
                 case "create":
-                    this.create(token, projectId, name, value);
+                    this.create(name, value);
                     break;
                 case "set":
-                    this.set(token, projectId, name, value);
+                    this.set(name, value);
                     break;
                 case "delete":
-                    this.delete(token, projectId, name);
+                    this.delete(name);
             }
         }catch (Exception e){
             e.printStackTrace();
@@ -88,14 +101,15 @@ public class ScratchWebSocket {
         }
     }
 
-    private void handshake(String token, String projectId){
+    private void handshake(){
         //读取变量
         String username = "";
         if (token != null){
             LoginUser loginUser = getShiroRealm().checkUserTokenIsEffect(token);
             username = loginUser.getUsername();
         }
-        Map<Object, Object> map = getRedisUtil().hmget(getKey(username, projectId));
+        String key = getKey(username, projectId);
+        Map<Object, Object> map = getRedisUtil().hmget(key);
         String res = "";
         for (Map.Entry<Object, Object> e: map.entrySet()){
             JSONObject obj = new JSONObject();
@@ -105,11 +119,17 @@ public class ScratchWebSocket {
             obj.put("value", e.getValue());
             res = res + obj.toJSONString() + "\n";
         }
-
+        if (sessionPool.containsKey(key)){
+            sessionPool.get(key).add(this.session);
+        }else{
+            List<Session> sessions = new ArrayList<>();
+            sessions.add(this.session);
+            sessionPool.put(key, sessions);
+        }
         session.getAsyncRemote().sendText(res);
     }
 
-    private void create(String token, String projectId, String name, String value){
+    private void create(String name, String value){
         //作品的作者才可以创建变量
         LoginUser loginUser = getShiroRealm().checkUserTokenIsEffect(token);
         TeachingWork work = getTeachingWork().getById(projectId);
@@ -122,17 +142,33 @@ public class ScratchWebSocket {
         }
     }
 
-    private void set(String token, String projectId, String name, String value){
+    private void set(String name, String value){
         String username = "";
         if (token != null){
             LoginUser loginUser = getShiroRealm().checkUserTokenIsEffect(token);
             username = loginUser.getUsername();
         }
+        String key = getKey(username, projectId);
         //设置变量
-        getRedisUtil().hset(getKey(username, projectId),name, value);
+        getRedisUtil().hset(key,name, value);
+        if (sessionPool.containsKey(key)){
+            List<Session> sessions = sessionPool.get(key);
+            String res = "";
+            JSONObject obj = new JSONObject();
+            obj.put("method", "set");
+            obj.put("project_id", projectId);
+            obj.put("name", name);
+            obj.put("value", value);
+            res = res + obj.toJSONString() + "\n";
+            for (Session session: sessions){
+                if (session.isOpen()){
+                    session.getAsyncRemote().sendText(res);
+                }
+            }
+        }
     }
 
-    private void delete(String token, String projectId, String name){
+    private void delete(String name){
         //作品的作者才可以删除变量
         LoginUser loginUser = getShiroRealm().checkUserTokenIsEffect(token);
         TeachingWork work = getTeachingWork().getById(projectId);
@@ -154,11 +190,11 @@ public class ScratchWebSocket {
     }
 
     private String getKey(String username, String key){
-        if ("create".equals(key)){
-            return CacheConstant.SCRATCH_CLOUD + username + ":" + key;
-        }else{
+//        if ("create".equals(key)){
+//            return CacheConstant.SCRATCH_CLOUD + username + ":" + key;
+//        }else{
             return CacheConstant.SCRATCH_CLOUD + key;
-        }
+//        }
     }
     
 }
