@@ -48,7 +48,8 @@
               <button onclick="window.location.href='/account/center'">返回</button>
               <select class="farSide" id="languageMenu"></select>
               <input type="text" id="project-name" placeholder="My blocks"></input>
-              <button id="submitButton" class="notext" title="提交作品">
+              <button id="submitButton" class="notext" title="发布">
+                <span style="font-size:18px;">发布</span>
                 <img src='./media/1x1.gif' class="upload icon21">
               </button>
               <button id="trashButton" class="notext" title="...">
@@ -413,7 +414,12 @@
 
   //点击提交按钮
   $("#submitButton").click(() => {
-    qn_token = getQiniuToken();
+    qn_token = getQiniuToken((res)=>{}, (e)=>{
+      console.log(e);
+      if(e.responseJSON.message == 'Token失效，请重新登录'){
+        alert('请登录后提交')
+      }
+    });
     let xml = Blockly.Xml.workspaceToDom(Blockly.getMainWorkspace());
     let text = Blockly.Xml.domToText(xml);
     console.log(text);

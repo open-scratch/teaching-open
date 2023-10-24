@@ -105,7 +105,7 @@ window.getScratchAssets = function(assetType, cb){
   return data
 }
 
-window.getQiniuToken = function() {
+window.getQiniuToken = function(onSuccess, onError) {
   var qn_token;
   $.ajax({
     url: '/api/common/qiniu/getToken?t=' + new Date().getTime(),
@@ -117,16 +117,17 @@ window.getQiniuToken = function() {
       console.log(res)
       if (res.code == 200) {
         qn_token = res.result
+        if (onSuccess) {
+          onSuccess(res)
+        }
       } else {
         //alert(res.message)
       }
     },
     error: function(e) {
-      if (e.responseJSON.status == 500) {
-        //alert(e.responseJSON.message);
-        // location.href = '/'
+      if (onError) {
+        onError(e)
       }
-      console.log(e)
     }
   });
   return qn_token;
