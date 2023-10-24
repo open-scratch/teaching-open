@@ -114,7 +114,7 @@ export default {
       }
     },
     getUnitInfo(courseId, selectUnitId) {
-      getAction('/teaching/teachingCourseUnit/list', { courseId: courseId }).then((res) => {
+      getAction('/teaching/teachingCourseUnit/list', { courseId: courseId, pageSize:999 }).then((res) => {
         if (res.success && res.result.total > 0) {
           this.unitList = res.result.records
           this.currentUnitId = selectUnitId==null?this.unitList[0].id:selectUnitId
