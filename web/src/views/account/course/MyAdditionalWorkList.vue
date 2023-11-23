@@ -37,8 +37,8 @@
               </template>
               <a-rate v-if="work.score" :disabled="true" :value="work.score" />
             </a-tooltip>
-            <a-button v-if="work.workDocumentUrl != null" @click="openWorkFile(work.workDocumentUrl_url)">作业资料</a-button>
-            <a-divider v-if="work.workDocumentUrl != null" type="vertical" />
+            <a-button v-if="work.workDocumentUrl" @click="openWorkFile(work.workDocumentUrl_url)">作业资料</a-button>
+            <!-- <a-divider v-if="work.workDocumentUrl != null" type="vertical" /> -->
             <a-button type="primary" :disabled="work.mineWorkStatus > 1" @click="toAdditionalWork(work, false)"> {{work.mineWorkStatus==null?'去做作业':'修改作业'}} </a-button>
             <a-divider v-if="work.mineWorkStatus == 0" type="vertical" />
             <a-button type="primary" v-if="work.mineWorkStatus == 0" @click="toAdditionalWork(work, true)"> 重做 </a-button>
@@ -135,8 +135,12 @@ export default {
             '&departId=' +
             item.departId +
             '&workName=' +
-            item.workName +
-            '&url=' + item.workUrl_url
+            item.workName
+            if(!reset && item.mineWorkUrl){
+              workUrl += "&url=" + item.mineWorkUrl;
+            }else{
+                workUrl += "&url=" + item.workUrl_url;
+            }
           break
         default:
           //workUrl = item.workUrl_url

@@ -19,7 +19,10 @@ import org.jeecg.common.system.vo.LoginUser;
 import org.jeecg.common.util.IPUtils;
 import org.jeecg.common.util.RedisUtil;
 import org.jeecg.common.util.oConvertUtils;
+import org.jeecg.config.QiniuConfig;
 import org.jeecg.modules.common.controller.BaseController;
+import org.jeecg.modules.common.util.QiniuUtil;
+import org.jeecg.modules.system.entity.SysFile;
 import org.jeecg.modules.system.service.ISysDataLogService;
 import org.jeecg.modules.system.service.ISysDepartService;
 import org.jeecg.modules.system.service.ISysFileService;
@@ -80,6 +83,8 @@ public class TeachingWorkController extends BaseController {
 	private ISysDataLogService sysDataLogService;
 	@Autowired
 	private RedisUtil redisUtil;
+	@Autowired
+	private QiniuUtil qiniuUtil;
 	 @Autowired
 	 private ISysFileService sysFileService;
 
@@ -124,6 +129,20 @@ public class TeachingWorkController extends BaseController {
 		 DictResult<List<AdditionalWorkModel>> result = new DictResult<>();
 		 String userId = getCurrentUser().getId();
 		 List<AdditionalWorkModel> list = teachingWorkService.userAdditionalWork(userId, departId, submit, status);
+		 for (AdditionalWorkModel work : list) {
+			 if (StringUtils.isNotBlank(work.getMineWorkUrl())){
+				 SysFile file = sysFileService.getById(work.getMineWorkUrl());
+				 if (file != null && StringUtils.isNotBlank(file.getFilePath())){
+					 work.setMineWorkUrl(QiniuConfig.domain + "/" + file.getFilePath());
+				 }
+			 }
+			 if (StringUtils.isNotBlank(work.getMineWorkCover())){
+				 SysFile file = sysFileService.getById(work.getMineWorkCover());
+				 if (file != null && StringUtils.isNotBlank(file.getFilePath())){
+					 work.setMineWorkCover(QiniuConfig.domain + "/" + file.getFilePath());
+				 }
+			 }
+		 }
 		 result.setResult(list);
 		 return result;
 	 }
@@ -131,6 +150,7 @@ public class TeachingWorkController extends BaseController {
 	 /**
 	  * 提交作业
 	  * @param teachingWork
+	  *
 	  * @return
 	  */
 	 @PostMapping(value = "/submit")
