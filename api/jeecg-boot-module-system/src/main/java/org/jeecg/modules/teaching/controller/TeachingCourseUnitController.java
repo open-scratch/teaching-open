@@ -80,7 +80,7 @@ public class TeachingCourseUnitController extends JeecgController<TeachingCourse
 		 queryWrapper.orderByAsc("order_num");
 		 Page<CourseUnitModel> page = new Page<CourseUnitModel>(pageNo, pageSize);
 		 IPage<CourseUnitModel> pageList = teachingCourseUnitService.getCourseUnitList(page, queryWrapper);
-		 if (getCurrentUser().getUserIdentity().equals(1)){
+		 if (getCurrentUser().getUserIdentity() == null || getCurrentUser().getUserIdentity().equals(1)){
 			 for (CourseUnitModel model: pageList.getRecords()){
 				 model.setCourseVideo(model.getShowCourseVideo()?model.getCourseVideo(): null);
 				 model.setCourseCase(model.getShowCourseCase()?model.getCourseCase(): null);
