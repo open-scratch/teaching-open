@@ -48,7 +48,7 @@
       <j-modal 
       :visible="showCourseDetail" 
       :title="currentCourse.courseName"
-      :width="800"
+      :width="500"
       @cancel="showCourseDetail=false"
       @ok="toCourse"
       okText="去上课"
@@ -138,7 +138,7 @@ export default {
       
     },
     toCourse(){
-      this.$router.push('/teaching/mineCourse/courseUnitCard?id=' + this.showCourseDetail.id)
+      this.$router.push('/teaching/mineCourse/courseUnitCard?id=' + this.currentCourse.id)
     },
     _isMobile() {
       return (
