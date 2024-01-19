@@ -85,3 +85,12 @@ alter table sys_user
 -- 2023-10-09
 alter table teaching_work
     add has_cloud_data tinyint default 0 null comment '是否包含云变量';
+
+-- 2024-01-19
+update `teaching_menu` set url = '/index' where url = '/home';
+update `teaching_menu` set sort_no=9 where url = '/account/center';
+INSERT INTO `teaching_menu`(`id`, `parent_id`, `name`, `url`, `menu_type`, `sort_no`, `icon`, `is_leaf`, `description`, `create_by`, `create_time`, `update_by`, `update_time`, `del_flag`, `internal_or_external`, `is_route`, `hidden`, `need_login`) VALUES ('1748233072370798594', NULL, '社区', '/home', 0, 0.00, 'experiment', 1, NULL, 'admin', '2024-01-19 14:36:59', NULL, NULL, 0, 0, 1, 0, 0);
+INSERT INTO `sys_config`(`id`, `config_key`, `config_value`, `config_enabled`, `comment`) VALUES ('1748234993433325570', 'homeBgColor', '', 1, NULL);
+INSERT INTO `sys_config`(`id`, `config_key`, `config_value`, `config_enabled`, `comment`) VALUES ('1748234993630457857', 'homeBgRepeat', 'no-repeat', 1, NULL);
+INSERT INTO `sys_config`(`id`, `config_key`, `config_value`, `config_enabled`, `comment`) VALUES ('1748234994012139522', 'file_homeBg', '', 1, NULL);
+INSERT INTO `sys_config`(`id`, `config_key`, `config_value`, `config_enabled`, `comment`) VALUES ('1748234994079248386', '_homeHtml', '<h2 style=\"text-align: center;\">&nbsp;</h2>\n<h2 style=\"text-align: center;\">&nbsp;</h2>\n<h2 style=\"text-align: center;\"><span style=\"color: #b96ad9;\"><strong>这里是自定义首页</strong></span></h2>', 1, NULL);

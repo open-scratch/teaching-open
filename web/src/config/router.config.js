@@ -1,5 +1,7 @@
 import { UserLayout, TabLayout, RouteView, BlankLayout, PageView } from '@/components/layouts'
 import HomeLayout from '@/views/home/HomeLayout'
+import store from '@/store/'
+
 /**
  * 走菜单，走权限控制
  * @type {[null,null]}
@@ -18,6 +20,8 @@ export const asyncRouterMap = [
     path: '*', redirect: '/404', hidden: true
   }
 ]
+
+// let sysConfig = store.getters.sysConfig
 
 /**
  * 基础路由
@@ -54,15 +58,19 @@ export const constantRouterMap = [
   },
   {
     path: '/',
-    name: 'index',
     component: HomeLayout,
     meta: {title: '首页'},
-    redirect: '/home',
+    redirect: '/index',
     children: [
+      {
+        path: 'index',
+        name: 'index',
+        component: () => import(/* webpackChunkName: "home" */ '@/views/home/Index')
+      },
       {
         path: 'home',
         name: 'publicWork',
-        component: () => import(/* webpackChunkName: "home" */ '@/views/home/Index')
+        component: () => import(/* webpackChunkName: "home" */ '@/views/home/Home')
       },
       {
         path: 'workList',
