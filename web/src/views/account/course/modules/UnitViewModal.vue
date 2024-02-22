@@ -10,7 +10,7 @@
       :width="800"
     >
       <div class="video-area">
-        <a-tabs v-if="unit.courseVideo || unit.courseCase">
+        <a-tabs v-if="unit.courseVideo || unit.courseCase || unit.mediaContent">
           <a-tab-pane key="video" tab="视频" v-if="unit.courseVideo">
             <video v-if="unit.courseVideoSource==1" :src="unit.courseVideo_url" controls="true" controlsList='nodownload noremote footbar' oncontextmenu="return false;"></video>
             <video v-if="unit.courseVideoSource==2" :src="unit.courseVideo" controls="true" controlsList='nodownload noremote footbar' oncontextmenu="return false;"></video>
