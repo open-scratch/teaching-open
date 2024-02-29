@@ -1,6 +1,6 @@
 <template>
   <div id="IndexPage" :style="{ background: sysConfig.homeBgColor }">
-    <div :style="{ 'background-image': 'url(' + sysConfig.homeBg + ')', 'background-repeat': sysConfig.homeBgRepeat }">
+    <div :style="{ 'background-image': 'url(' + getFileAccessHttpUrl(sysConfig.file_homeBg) + ')', 'background-repeat': sysConfig.homeBgRepeat }">
       <div class="boxBackground">
         <div class="boxContent" v-html="sysConfig._homeHtml"></div>
       </div>
@@ -8,6 +8,7 @@
   </div>
 </template>
 <script>
+import { getFileAccessHttpUrl } from '@/api/manage'
 export default {
   components: {},
   data() {
@@ -21,6 +22,9 @@ export default {
     this.sysConfig = this.$store.getters.sysConfig
   },
   mounted() {},
+  methods:{
+    getFileAccessHttpUrl
+  }
 }
 </script>
 <style lang='scss' scoped>
