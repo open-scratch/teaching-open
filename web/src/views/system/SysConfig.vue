@@ -161,19 +161,21 @@
             <j-code-editor
               ref="customJS"
               language="json"
-              placeholder=""
-              v-model="model.customJS"
-              :fullScreen="false"
+              placeholder="请输入自定义JS"
+              :value="model.customJS"
+              @input="v=>{customJS=v}"
+              :fullScreen="true"
               style="min-height: 200px"
             />
           </a-form-item>
           <a-form-item label="自定义CSS" :labelCol="labelCol2" :wrapperCol="wrapperCol2">
             <j-code-editor
               ref="customCss"
-              language="json"
-              placeholder=""
-              v-model="model.customCss"
-              :fullScreen="false"
+              language="css"
+              placeholder="请输入自定义CSS"
+              :value="model.customCss"
+              @input="v=>{customCss=v}"
+              :fullScreen="true"
               style="min-height: 200px"
             />
           </a-form-item>
@@ -246,6 +248,8 @@ export default {
       },
       tenantInfo: {},
       model: {},
+      customJS:'',
+      customCss:''
     }
   },
   created() {
@@ -269,6 +273,8 @@ export default {
     },
     saveCurrentConfig() {
       const that = this
+      this.model['customJS'] = this.customJS
+      this.model['customCss'] = this.customCss
       // 触发表单验证
       this.form.validateFields((err, values) => {
         if (!err) {
