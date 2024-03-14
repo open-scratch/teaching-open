@@ -22,14 +22,14 @@ window.uuid = function() {
 
 window.getUserInfo = function() {
   userInfo = localStorage.getItem('pro__Login_Userinfo')
-  if(!userInfo){ return null;}
+  if(!userInfo){ return {};}
   userInfo = JSON.parse(userInfo).value
   return userInfo
 }
 
 window.getUserRole = function(){
   userRole = localStorage.getItem('pro__Login_UserRole')
-  if(!userRole){return null;}
+  if(!userRole){return {};}
   userRole = JSON.parse(userRole).value
   return userRole
 }

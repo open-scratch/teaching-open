@@ -68,7 +68,7 @@
     window.scratchConfig = {
       session: {
         token: userToken,
-        username: userInfo.realname || userInfo.username,
+        username: userInfo.realname || userInfo.username || '',
         //avatar: getQiniuUrl(userInfo.avatar) || './static/avatar.png',
       },
       backpack:{
@@ -82,7 +82,7 @@
       },
       projectInfo: {//作品信息
         projectName: "",
-        authorUsername: userInfo.username, //默认为自己的用户名
+        authorUsername: userInfo.username || '', //默认为自己的用户名
         authorAvatar: './static/avatar.png',
       },
       logo: {
@@ -249,7 +249,7 @@
           })
         } else {
           window.scratch.loadProject('/project/project.sb3', () => {
-            window.scratch.setProjectName(userInfo?userInfo.realname + '作品' : 'Scratch作品')
+            window.scratch.setProjectName(userInfo&&userInfo.realname?userInfo.realname + '作品' : 'Scratch作品')
             $('.loading').hide()
             $('.scratch-filter').hide()
           })
