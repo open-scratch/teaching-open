@@ -9,6 +9,16 @@
               <a-input placeholder="请输入作品名" v-model="queryParam.workName"></a-input>
             </a-form-item>
           </a-col>
+          <a-col :xl="4" :lg="5" :md="7" :sm="24">
+            <a-form-item label="标签">
+              <a-input placeholder="请输入标签" v-model="queryParam['workTag']"></a-input>
+            </a-form-item>
+          </a-col>
+          <a-col :xl="4" :lg="5" :md="7" :sm="24">
+            <a-form-item label="类型">
+              <j-dict-select-tag placeholder="请选择类型" v-model="queryParam.workType" dictCode="work_type" />
+            </a-form-item>
+          </a-col>
           <a-col :md="6" :sm="8">
             <span style="float: left;overflow: hidden;" class="table-page-search-submitButtons">
               <a-button type="primary" @click="searchQuery" icon="search">查询</a-button>
@@ -69,10 +79,21 @@
             style="max-width:80px;font-size: 12px;font-style: italic;"
           />
         </template>
-        
+
+        <a-popover slot="workTag"
+          slot-scope="text, row"  title="作品标签" trigger="click">
+          <div slot="content">
+            <a-input :value="text" @change="v=>workTagValue=v.target.value" style="width:150px;"></a-input>
+            <a-button type="primary" @click="setWorkTag(row.id, workTagValue)">修改</a-button>
+          </div>
+          <a href="#">{{text || '暂无'}}</a>
+        </a-popover>
+
         <a-tooltip slot="scoreInfo" slot-scope="text, row" :title="row.teacherComment">
           <a-rate v-model="row.score" disabled />
         </a-tooltip>
+        
+
 
         <span slot="action" slot-scope="text, record">
           <a @click="handleView(record)">查看</a>
@@ -107,13 +128,15 @@ import { postAction, getAction } from '@/api/manage'
 import QrCode from '@/components/tools/QrCode'
 import { JeecgListMixin } from '@/mixins/JeecgListMixin'
 import TeachingWorkPreviewModal from '@/views/teaching/modules/TeachingWorkPreviewModal'
+import JDictSelectTag from '@/components/dict/JDictSelectTag.vue'
 
 export default {
   name: 'MineWorkList',
   mixins: [JeecgListMixin],
   components: {
     qrcode: QrCode,
-    TeachingWorkPreviewModal
+    TeachingWorkPreviewModal,
+    JDictSelectTag
   },
   data() {
     return {
@@ -137,7 +160,7 @@ export default {
           dataIndex: 'workName'
         },
         {
-          title: '截图',
+          title: '封面',
           align: 'center',
           dataIndex: 'coverFileKey_url',
           scopedSlots: { customRender: 'imgSlot' }
@@ -145,17 +168,25 @@ export default {
         {
           title: '观看数量',
           align: 'center',
-          dataIndex: 'viewNum'
+          dataIndex: 'viewNum',
+          sorter: true,
         },
         {
           title: '点赞数量',
           align: 'center',
-          dataIndex: 'starNum'
+          dataIndex: 'starNum',
+          sorter: true,
         },
         {
           title: '作品状态',
           align: 'center',
           dataIndex: 'workStatus_dictText'
+        },
+        {
+          title: '标签',
+          align: 'center',
+          dataIndex: 'workTag',
+          scopedSlots: {customRender: 'workTag'}
         },
         {
           title: '得分/评语',
@@ -171,7 +202,8 @@ export default {
         {
           title: '创作时间',
           align: 'center',
-          dataIndex: 'createTime'
+          dataIndex: 'createTime',
+          sorter: true,
         },
         {
           title: '操作',
@@ -190,6 +222,15 @@ export default {
   },
   computed: {},
   methods: {
+    setWorkTag(id, tag){
+      getAction('/teaching/teachingWork/setWorkTag',{
+        workId: id,
+        workTag: tag
+      }).then(res=>{
+        this.$message.info(res.message)
+        this.loadData(1)
+      })
+    },
     handlePreview(record){
       this.$refs.previewModal.previewCode(record)
     },

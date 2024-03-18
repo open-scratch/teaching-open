@@ -1,5 +1,6 @@
 package org.jeecg.modules.teaching.model;
 
+import com.baomidou.mybatisplus.annotation.TableField;
 import com.baomidou.mybatisplus.annotation.TableId;
 import io.swagger.annotations.ApiModelProperty;
 import lombok.Data;
@@ -31,4 +32,6 @@ public class StudentWorkModel extends TeachingWork {
     private String teacherComment;
     //老师评分
     private Integer score;
+    @TableField(exist = false)
+    private String workTag;
 }

@@ -14,6 +14,7 @@ import org.jeecg.common.api.vo.DictResult;
 import org.jeecg.common.api.vo.Result;
 import org.jeecg.common.aspect.annotation.AutoLog;
 import org.jeecg.common.aspect.annotation.PermissionData;
+import org.jeecg.common.constant.CacheConstant;
 import org.jeecg.common.system.query.QueryGenerator;
 import org.jeecg.common.system.vo.LoginUser;
 import org.jeecg.common.util.IPUtils;
@@ -103,13 +104,26 @@ public class TeachingWorkController extends BaseController {
 												 @RequestParam(name = "pageNo", defaultValue = "1") Integer pageNo,
 												 @RequestParam(name = "pageSize", defaultValue = "999") Integer pageSize,
 												 HttpServletRequest req) {
+		 String tag = teachingWork.getWorkTag();
+		 teachingWork.setWorkTag(null);
 		 teachingWork.setUserId(getCurrentUser().getId());
 		 Result<IPage<StudentWorkModel>> result = new Result<IPage<StudentWorkModel>>();
 		 QueryWrapper<StudentWorkModel> queryWrapper = QueryGenerator.initQueryWrapper(teachingWork, req.getParameterMap());
 		 queryWrapper.orderByDesc("teaching_work.create_time");
 //		 Page<TeachingWork> page = new Page<TeachingWork>(pageNo, pageSize);
-
+		 if (StringUtils.isNotBlank(tag)){
+			 String keyTag = String.format(CacheConstant.WORK_TAG, getCurrentUser().getId(), tag);
+			 Set<Object> tagWorkIds = redisUtil.sGet(keyTag);
+			 queryWrapper.in(tagWorkIds!=null&&!tagWorkIds.isEmpty(),"teaching_work.id", tagWorkIds);
+		 }
 		 IPage<StudentWorkModel> pageList = teachingWorkService.listWorkModel(new Page<>(pageNo, pageSize), queryWrapper, null);
+		 for (StudentWorkModel workModel: pageList.getRecords()){
+			 String key = String.format(CacheConstant.WORK_TAG, getCurrentUser().getId(), workModel.getId());
+			 Object tagObj = redisUtil.get(key);
+			 if(tagObj!=null){
+				 workModel.setWorkTag((String) tagObj);
+			 }
+		 }
 		 return Result.ok(pageList);
 	 }
 
@@ -232,6 +246,8 @@ public class TeachingWorkController extends BaseController {
 								   HttpServletRequest req) {
 //		QueryWrapper<TeachingWork> queryWrapper = QueryGenerator.initQueryWrapper(teachingWork, req.getParameterMap());
 		Page<TeachingWork> page = new Page<TeachingWork>(pageNo, pageSize);
+		String tag = studentWorkModel.getWorkTag();
+		studentWorkModel.setWorkTag(null);
 		QueryWrapper<StudentWorkModel> queryWrapper = new QueryWrapper<>();
 		queryWrapper.eq(null != studentWorkModel.getUsername(), "teaching_work.create_by", studentWorkModel.getUsername())
 				.like(null != studentWorkModel.getWorkName(), "work_name", studentWorkModel.getWorkName())
@@ -251,7 +267,19 @@ public class TeachingWorkController extends BaseController {
 				return Result.error("您没有负责的班级");
 			}
 		}
+		if (StringUtils.isNotBlank(tag)){
+			String keyTag = String.format(CacheConstant.WORK_TAG, getCurrentUser().getId(), tag);
+			Set<Object> tagWorkIds = redisUtil.sGet(keyTag);
+			queryWrapper.in(tagWorkIds!=null&&!tagWorkIds.isEmpty(),"teaching_work.id", tagWorkIds);
+		}
 		IPage<StudentWorkModel> pageList = teachingWorkService.listWorkModel(new Page<>(pageNo, pageSize), queryWrapper,myDeptIds);
+		for (StudentWorkModel workModel: pageList.getRecords()){
+			String key = String.format(CacheConstant.WORK_TAG, getCurrentUser().getId(), workModel.getId());
+			Object tagObj = redisUtil.get(key);
+			if(tagObj!=null){
+				workModel.setWorkTag((String) tagObj);
+			}
+		}
 		return Result.ok(pageList);
 	}
 
@@ -261,6 +289,25 @@ public class TeachingWorkController extends BaseController {
 		IPage<StudentWorkModel> pageList = teachingWorkService.listWorkModel(new Page<>(pageNo, pageSize), new QueryWrapper<StudentWorkModel>()
 				.eq("teaching_work.work_status", 2), null);
 		return Result.ok(pageList);
+	}
+
+	//设置作品标签
+	@GetMapping("setWorkTag")
+	public Result<?> setWorkTag(@RequestParam String workId, @RequestParam String workTag){
+		TeachingWork teachingWork = teachingWorkService.getById(workId);
+		if (teachingWork == null) {
+			return Result.error("未找到对作业");
+		}
+		String keyId = String.format(CacheConstant.WORK_TAG, getCurrentUser().getId(), workId);
+		String keyTag = String.format(CacheConstant.WORK_TAG, getCurrentUser().getId(), workTag);
+		if (StringUtils.isNotBlank(workTag)){
+			redisUtil.set(keyId, workTag);
+			redisUtil.sSet(keyTag, workId);
+		}else{
+			redisUtil.del(keyId);
+			redisUtil.setRemove(keyTag, workId);
+		}
+		return Result.ok("标记成功");
 	}
 
 	 @ApiOperation(value = "点赞作品")
