@@ -2,7 +2,7 @@
   <div>
     <a-row :gutter="[24,24]">
       <a-col :xs="24" :sm="24" :md="8" :lg="8" :xl="8">
-        <div class="editor-card" style="background: linear-gradient(-30deg,#4fb5ff,#60bcff);">
+        <div class="editor-card editor-sjr" style="background: linear-gradient(-30deg,#4fb5ff,#60bcff);">
           <a-row type="flex" justify="space-around" align="middle">
             <a-col :span="10">
               <img src="@assets/sjr.png" alt="">
@@ -15,7 +15,7 @@
         </div>
       </a-col>
       <a-col :xs="24" :sm="24" :md="8" :lg="8" :xl="8">
-        <div class="editor-card" style="background: linear-gradient(-60deg,#ffaa30,#ffbf35);">
+        <div class="editor-card editor-sc" style="background: linear-gradient(-60deg,#ffaa30,#ffbf35);">
           <a-row type="flex" justify="space-around" align="middle">
             <a-col :span="10">
               <img src="@assets/scratch.png" alt="">
@@ -28,7 +28,7 @@
         </div>
       </a-col>
       <a-col :xs="24" :sm="24" :md="8" :lg="8" :xl="8">
-        <div class="editor-card" style="background: linear-gradient(-30deg,#f35981,#fb7397);">
+        <div class="editor-card editor-py" style="background: linear-gradient(-30deg,#f35981,#fb7397);">
           <a-row type="flex" justify="space-around" align="middle">
             <a-col :span="10">
               <img src="@assets/python.png" alt="">
@@ -41,7 +41,7 @@
         </div>
       </a-col>
     </a-row>
-    <div class="panel-works">
+    <div class="panel-works" v-if="greatLeaderboard.length>0">
       <h1 class="panel-title">
         <a-icon type="star" theme="twoTone" two-tone-color="#ffd81b" />
         精选作品
@@ -79,7 +79,7 @@
       <router-link class="load-more" :to="{path:'/workList?type=3'}" >查看更多...</router-link>
     </div>
 
-    <div class="panel-works">
+    <div class="panel-works" v-if="courseLeaderboard.length>0">
       <h1 class="panel-title">
         <a-icon type="calculator" theme="twoTone" two-tone-color="#eb2f96" />
         推荐课程
@@ -186,7 +186,7 @@ export default {
     }
     this.getGreatLeaderboard()
     this.getStarLeaderboard()
-    this.getCourseLeaderboard()
+    // this.getCourseLeaderboard()
   },
   methods: {
     getFileAccessHttpUrl,

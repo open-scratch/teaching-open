@@ -27,7 +27,7 @@ export default {
   }
 }
 </script>
-<style lang='scss' scoped>
+<style lang='less' scoped>
 .slick-arrow {
   border-radius: 50%;
   text-align: center;
