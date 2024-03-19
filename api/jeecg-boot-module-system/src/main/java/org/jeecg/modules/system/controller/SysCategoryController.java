@@ -88,6 +88,9 @@ public class SysCategoryController {
 	
 	@GetMapping(value = "/childList")
 	public Result<List<SysCategory>> queryPageList(SysCategory sysCategory,HttpServletRequest req) {
+		if(oConvertUtils.isNotEmpty(sysCategory.getPid())){
+			sysCategory.setCode(null);
+		}
 		Result<List<SysCategory>> result = new Result<List<SysCategory>>();
 		QueryWrapper<SysCategory> queryWrapper = QueryGenerator.initQueryWrapper(sysCategory, req.getParameterMap());
 		List<SysCategory> list = sysCategoryService.list(queryWrapper);
