@@ -25,10 +25,7 @@ import org.jeecg.common.system.util.JwtUtil;
 import org.jeecg.common.system.vo.DictModel;
 import org.jeecg.common.system.vo.LoginUser;
 import org.jeecg.common.system.vo.SysPermissionDataRuleModel;
-import org.jeecg.common.util.PasswordUtil;
-import org.jeecg.common.util.PmsUtil;
-import org.jeecg.common.util.RedisUtil;
-import org.jeecg.common.util.oConvertUtils;
+import org.jeecg.common.util.*;
 import org.jeecg.modules.common.controller.BaseController;
 import org.jeecg.modules.system.entity.*;
 import org.jeecg.modules.system.model.DepartIdModel;
@@ -706,6 +703,104 @@ public class SysUserController extends BaseController {
             return res;
         }
     }
+
+    @RequestMapping(value = "/importStudent", method = RequestMethod.POST)
+    public Result<?> importStudent(@RequestParam(required = false)String departIds, //默认班级ID
+                                   HttpServletRequest request, HttpServletResponse response)throws IOException {
+        MultipartHttpServletRequest multipartRequest = (MultipartHttpServletRequest) request;
+        Map<String, MultipartFile> fileMap = multipartRequest.getFileMap();
+        // 错误信息
+        List<String> errorMessage = new ArrayList<>();
+
+        SysRole studentRole = sysRoleService.getRoleByCode("student");
+        if (studentRole == null){ return Result.error("student角色不存在"); }
+
+        int successLines = 0, errorLines = 0;
+        for (Map.Entry<String, MultipartFile> entity : fileMap.entrySet()) {
+            MultipartFile file = entity.getValue();// 获取上传文件对象
+            ImportParams params = new ImportParams();
+            params.setTitleRows(2);
+            params.setHeadRows(1);
+            params.setNeedSave(true);
+            try {
+                List<SysUser> listSysUsers = ExcelImportUtil.importExcel(file.getInputStream(), SysUser.class, params);
+                for (int i = 0; i < listSysUsers.size(); i++) {
+                    int lineNumber = i + 1;
+                    SysUser sysUserExcel = listSysUsers.get(i);
+                    if(sysUserExcel == null || StringUtils.isEmpty(sysUserExcel.getUsername())){
+                        errorMessage.add("第 " + lineNumber + " 行：账号为空，忽略导入。");
+                        errorLines++;
+                        continue;
+                    }
+                    sysUserExcel.setUserIdentity(1);
+                    sysUserExcel.setDelFlag(0);
+                    //判断是否有密码字段，没有则使用用户名生成密码
+                    String password;
+                    if(StringUtils.isNotBlank(sysUserExcel.getPassword())){
+                        password = sysUserExcel.getPassword();
+                    }else{
+                        password = "123456";
+                    }
+                    // 密码加密加盐
+                    String salt = oConvertUtils.randomGen(8);
+                    sysUserExcel.setSalt(salt);
+                    String passwordEncode = PasswordUtil.encrypt(sysUserExcel.getUsername(), password, salt);
+                    sysUserExcel.setPassword(passwordEncode);
+
+                    SysUser oldUser = sysUserService.getUserByName(sysUserExcel.getUsername());
+                    if (oldUser != null){
+                        sysUserExcel.setId(oldUser.getId());
+                        successLines++;
+                    }else{
+                        try {
+                            sysUserService.save(sysUserExcel);
+                            successLines++;
+                        } catch (Exception e) {
+                            errorLines++;
+                            String message = e.getMessage();
+                            // 通过索引名判断出错信息
+                            if (message.contains(CommonConstant.SQL_INDEX_UNIQ_SYS_USER_USERNAME)) {
+                                errorMessage.add("第 " + lineNumber + " 行：用户名已经存在，忽略导入。");
+                            } else if (message.contains(CommonConstant.SQL_INDEX_UNIQ_SYS_USER_PHONE)) {
+                                errorMessage.add("第 " + lineNumber + " 行：手机号已经存在，忽略导入。");
+                            } else {
+                                errorMessage.add("第 " + lineNumber + " 行：" + e.getMessage());
+                                log.error(e.getMessage(), e);
+                            }
+                        }
+                    }
+
+                    // 批量将负责部门和用户信息建立关联关系
+                    if (StringUtils.isBlank(departIds)){
+                        departIds = sysUserExcel.getOrgCodeTxt();
+                    }
+                    if (StringUtils.isNotBlank(departIds)) {
+                        String userId = sysUserExcel.getId();
+                        String[] departIdArray = departIds.split(",");
+                        List<SysUserDepart> userDepartList = new ArrayList<>(departIdArray.length);
+                        for (String d : departIdArray) {
+                            userDepartList.add(new SysUserDepart(userId, d));
+                        }
+                        sysUserDepartService.saveBatch(userDepartList);
+                    }
+                    // 批量将角色和用户信息建立关联关系
+                    sysUserRoleService.save(new SysUserRole(sysUserExcel.getId(), studentRole.getId()));
+
+                }
+            } catch (Exception e) {
+                errorMessage.add("发生异常：" + e.getMessage());
+                log.error(e.getMessage(), e);
+            } finally {
+                try {
+                    file.getInputStream().close();
+                } catch (IOException e) {
+                    log.error(e.getMessage(), e);
+                }
+            }
+        }
+        return ImportExcelUtil.imporReturnRes(errorLines,successLines,errorMessage);
+    }
+
 
     /**
 	 * @功能：根据id 批量查询

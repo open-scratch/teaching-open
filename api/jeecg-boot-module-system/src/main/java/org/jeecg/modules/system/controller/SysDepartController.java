@@ -12,6 +12,7 @@ import com.baomidou.mybatisplus.core.conditions.query.LambdaQueryWrapper;
 import org.apache.shiro.SecurityUtils;
 import org.apache.shiro.authz.annotation.RequiresRoles;
 import org.jeecg.common.api.vo.Result;
+import org.jeecg.common.aspect.annotation.AutoLog;
 import org.jeecg.common.constant.CacheConstant;
 import org.jeecg.common.constant.CommonConstant;
 import org.jeecg.common.constant.FillRuleConstant;
@@ -23,10 +24,12 @@ import org.jeecg.common.util.ImportExcelUtil;
 import org.jeecg.common.util.oConvertUtils;
 import org.jeecg.modules.common.controller.BaseController;
 import org.jeecg.modules.system.entity.SysDepart;
+import org.jeecg.modules.system.entity.SysUserDepart;
 import org.jeecg.modules.system.model.DepartIdModel;
 import org.jeecg.modules.system.model.SysDepartTreeModel;
 import org.jeecg.modules.system.service.ISysDepartService;
 import org.jeecg.modules.system.service.ISysPositionService;
+import org.jeecg.modules.system.service.ISysUserDepartService;
 import org.jeecg.modules.system.service.ISysUserService;
 import org.jeecg.modules.system.util.FindsDepartsChildrenUtil;
 import org.jeecgframework.poi.excel.ExcelImportUtil;
@@ -64,7 +67,17 @@ public class SysDepartController extends BaseController {
 	@Autowired
 	private ISysDepartService sysDepartService;
 	@Autowired
+	private ISysUserDepartService sysUserDepartService;
+	@Autowired
 	public RedisTemplate<String, Object> redisTemplate;
+
+	@AutoLog("清空班级")
+	@GetMapping("removeAll")
+	public Result<?> removeAll(@RequestParam String id){
+		sysUserDepartService.remove(new QueryWrapper<SysUserDepart>().lambda().eq(SysUserDepart::getDepId, id));
+		return Result.ok();
+	}
+
 	/**
 	 * 查询数据 查出我的部门,并以树结构数据格式响应给前端
 	 *
