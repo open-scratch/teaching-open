@@ -21,7 +21,9 @@
           </a-col>
           <a-col :xl="4" :lg="5" :md="7" :sm="24">
             <a-form-item label="标签">
-              <a-input placeholder="请输入标签" v-model="queryParam['workTag']"></a-input>
+              <a-select v-model="queryParam['workTag']" showSearch>
+                <a-select-option v-for="(t,i) in workTag" :key="i" :value="t">{{t}}</a-select-option>
+              </a-select>
             </a-form-item>
           </a-col>
           <a-col :xl="4" :lg="5" :md="7" :sm="24">
@@ -139,8 +141,13 @@
         <a-popover slot="workTag"
           slot-scope="text, row"  title="作品标签" trigger="click">
           <div slot="content">
-            <a-input :value="text" @change="v=>workTagValue=v.target.value" style="width:150px;"></a-input>
-            <a-button type="primary" @click="setWorkTag(row.id, workTagValue)">修改</a-button>
+            <div v-if="workTag.length>0">
+              <span>快捷选择：</span>
+              <a-tag v-for="(t,i) in workTag" :key="i" @click="workTagValue=t">{{t}}</a-tag>
+              <a-divider></a-divider>
+            </div>
+            <a-input :value="workTagValue" @change="v=>workTagValue=v.target.value" style="width:200px;"></a-input>
+            <a-button type="primary" @click="setWorkTag(row.id)">添加</a-button>
           </div>
           <a href="#">{{text || '暂无'}}</a>
         </a-popover>
@@ -325,7 +332,9 @@ export default {
         shareUrl: window._CONFIG['webURL'] + '/work-detail?id=',
       },
       dictOptions: {},
-      disableMixinCreated: true
+      disableMixinCreated: true,
+      workTagValue: '',
+      workTag: []
     }
   },
   computed: {
@@ -338,16 +347,18 @@ export default {
       this.queryParam.workScene = this.$route.query.workScene
     }
     this.searchQuery()
+    this.getWorkTags()
   },
   methods: {
     initDictConfig() {},
-    setWorkTag(id, tag){
+    setWorkTag(id){
       getAction('/teaching/teachingWork/setWorkTag',{
         workId: id,
-        workTag: tag
+        workTag: this.workTagValue
       }).then(res=>{
         this.$message.info(res.message)
         this.loadData(1)
+        this.getWorkTags()
       })
     },
     handlePreview(record) {
@@ -396,6 +407,11 @@ export default {
           return window.open(record.workFileKey_url)
       }
     },
+    getWorkTags(){
+      getAction("/teaching/teachingWork/getWorkTags").then(res=>{
+        this.workTag = res.result
+      })
+    }
   },
 }
 </script>

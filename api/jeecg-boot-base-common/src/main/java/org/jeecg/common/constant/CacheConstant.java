@@ -7,6 +7,7 @@ package org.jeecg.common.constant;
  */
 public interface CacheConstant {
 	public static final String WORK_TAG = "work:tag:%s:%s";
+	public static final String USER_WORK_TAG = "work:tag:%s";
 
 	// Scratch
 	public static final String SCRATCH_CLOUD = "scratch:cloud:";

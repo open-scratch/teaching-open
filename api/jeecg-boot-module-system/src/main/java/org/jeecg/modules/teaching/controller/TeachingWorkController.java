@@ -300,12 +300,21 @@ public class TeachingWorkController extends BaseController {
 		}
 		String keyId = String.format(CacheConstant.WORK_TAG, getCurrentUser().getId(), workId);
 		String keyTag = String.format(CacheConstant.WORK_TAG, getCurrentUser().getId(), workTag);
+		String keyUserTag = String.format(CacheConstant.USER_WORK_TAG, getCurrentUser().getId());
 		if (StringUtils.isNotBlank(workTag)){
 			redisUtil.set(keyId, workTag);
 			redisUtil.sSet(keyTag, workId);
+			redisUtil.sSet(keyUserTag, workTag);
 		}else{
-			redisUtil.del(keyId);
-			redisUtil.setRemove(keyTag, workId);
+			Object oldTag = redisUtil.get(keyId);
+			if (oldTag != null){
+				keyTag = String.format(CacheConstant.WORK_TAG, getCurrentUser().getId(), oldTag);
+				redisUtil.del(keyId);
+				redisUtil.setRemove(keyTag, workId);
+				if(redisUtil.sGetSetSize(keyTag) <= 0){
+					redisUtil.setRemove(keyUserTag, oldTag);
+				}
+			}
 		}
 		return Result.ok("标记成功");
 	}
@@ -408,6 +417,14 @@ public class TeachingWorkController extends BaseController {
 		 c.setUserId(userId);
 		 teachingWorkCommentService.save(c);
 		 return Result.ok("评论成功");
+	 }
+
+	 // 获取全部的标签
+	 @GetMapping("getWorkTags")
+	 public Result<?> getWorkTags(){
+		 String keyUserTag = String.format(CacheConstant.USER_WORK_TAG, getCurrentUser().getId());
+		 Set<Object> tags =redisUtil.sGet(keyUserTag);
+		 return Result.ok(tags);
 	 }
 	
 	/**
