@@ -368,11 +368,17 @@ export default {
     },
     delWorkTag(e, tag){
        e.preventDefault();
-      if(confirm('是否删除标签？')){
-        deleteAction('/teaching/teachingWork/delWorkTag', {tag}).then(res=>{
+       deleteAction('/teaching/teachingWork/delWorkTag', {tag}).then(res=>{
+         if(res.success){
           this.getWorkTags()
+         }else{
+          if(confirm(res.message)){
+            deleteAction('/teaching/teachingWork/delWorkTag', {tag:tag, force:true}).then(res=>{
+              this.getWorkTags()
+            })
+          }
+         }
         })
-      }
     },
     handlePreview(record) {
       this.$refs.previewModal.previewCode(record)

@@ -429,7 +429,15 @@ public class TeachingWorkController extends BaseController {
 
 	//删除标签
 	@DeleteMapping("delWorkTag")
-	public Result delWorkTag(@RequestParam String tag){
+	public Result delWorkTag(@RequestParam String tag, @RequestParam(defaultValue = "false") Boolean force){
+		//检查标签是否正在使用
+		if (!force){
+			String keyTag = String.format(CacheConstant.WORK_TAG, getCurrentUser().getId(), tag);
+			Set<Object> tagWorkIds = redisUtil.sGet(keyTag);
+			if (tagWorkIds != null && !tagWorkIds.isEmpty()) {
+				return Result.error("标签正在使用中,是否确认删除？");
+			}
+		}
 		String keyUserTag = String.format(CacheConstant.USER_WORK_TAG, getCurrentUser().getId());
 		redisUtil.setRemove(keyUserTag, tag);
 		return Result.ok();
