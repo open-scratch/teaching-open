@@ -143,7 +143,7 @@
           <div slot="content">
             <div v-if="workTag.length>0">
               <span>快捷选择：</span>
-              <a-tag v-for="(t,i) in workTag" :key="i" @click="workTagValue=t">{{t}}</a-tag>
+              <a-tag v-for="(t,i) in workTag" :key="i" @click="workTagValue=t" closable @close="delWorkTag($event,t)">{{t}}</a-tag>
               <a-divider></a-divider>
             </div>
             <a-input :value="workTagValue" @change="v=>workTagValue=v.target.value" style="width:200px;"></a-input>
@@ -195,7 +195,7 @@
 
 <script>
 import QrCode from '@/components/tools/QrCode'
-import { postAction, getAction } from '@/api/manage'
+import { postAction, getAction, deleteAction } from '@/api/manage'
 import { JeecgListMixin } from '@/mixins/JeecgListMixin'
 import TeachingWorkModal from './modules/TeachingWorkModal'
 import TeachingWorkPreviewModal from './modules/TeachingWorkPreviewModal'
@@ -351,6 +351,11 @@ export default {
   },
   methods: {
     initDictConfig() {},
+    getWorkTags(){
+      getAction("/teaching/teachingWork/getWorkTags").then(res=>{
+        this.workTag = res.result
+      })
+    },
     setWorkTag(id){
       getAction('/teaching/teachingWork/setWorkTag',{
         workId: id,
@@ -360,6 +365,14 @@ export default {
         this.loadData(1)
         this.getWorkTags()
       })
+    },
+    delWorkTag(e, tag){
+       e.preventDefault();
+      if(confirm('是否删除标签？')){
+        deleteAction('/teaching/teachingWork/delWorkTag', {tag}).then(res=>{
+          this.getWorkTags()
+        })
+      }
     },
     handlePreview(record) {
       this.$refs.previewModal.previewCode(record)
@@ -407,11 +420,7 @@ export default {
           return window.open(record.workFileKey_url)
       }
     },
-    getWorkTags(){
-      getAction("/teaching/teachingWork/getWorkTags").then(res=>{
-        this.workTag = res.result
-      })
-    }
+
   },
 }
 </script>

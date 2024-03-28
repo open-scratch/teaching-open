@@ -291,34 +291,6 @@ public class TeachingWorkController extends BaseController {
 		return Result.ok(pageList);
 	}
 
-	//设置作品标签
-	@GetMapping("setWorkTag")
-	public Result<?> setWorkTag(@RequestParam String workId, @RequestParam String workTag){
-		TeachingWork teachingWork = teachingWorkService.getById(workId);
-		if (teachingWork == null) {
-			return Result.error("未找到对作业");
-		}
-		String keyId = String.format(CacheConstant.WORK_TAG, getCurrentUser().getId(), workId);
-		String keyTag = String.format(CacheConstant.WORK_TAG, getCurrentUser().getId(), workTag);
-		String keyUserTag = String.format(CacheConstant.USER_WORK_TAG, getCurrentUser().getId());
-		if (StringUtils.isNotBlank(workTag)){
-			redisUtil.set(keyId, workTag);
-			redisUtil.sSet(keyTag, workId);
-			redisUtil.sSet(keyUserTag, workTag);
-		}else{
-			Object oldTag = redisUtil.get(keyId);
-			if (oldTag != null){
-				keyTag = String.format(CacheConstant.WORK_TAG, getCurrentUser().getId(), oldTag);
-				redisUtil.del(keyId);
-				redisUtil.setRemove(keyTag, workId);
-				if(redisUtil.sGetSetSize(keyTag) <= 0){
-					redisUtil.setRemove(keyUserTag, oldTag);
-				}
-			}
-		}
-		return Result.ok("标记成功");
-	}
-
 	 @ApiOperation(value = "点赞作品")
 	 @GetMapping("/starWork")
 	 public Result starWork(@RequestParam(name = "workId") String workId, HttpServletRequest request) {
@@ -426,6 +398,42 @@ public class TeachingWorkController extends BaseController {
 		 Set<Object> tags =redisUtil.sGet(keyUserTag);
 		 return Result.ok(tags);
 	 }
+
+	//设置作品标签
+	@GetMapping("setWorkTag")
+	public Result<?> setWorkTag(@RequestParam String workId, @RequestParam String workTag){
+		TeachingWork teachingWork = teachingWorkService.getById(workId);
+		if (teachingWork == null) {
+			return Result.error("未找到对作业");
+		}
+		String keyId = String.format(CacheConstant.WORK_TAG, getCurrentUser().getId(), workId);
+		String keyTag = String.format(CacheConstant.WORK_TAG, getCurrentUser().getId(), workTag);
+		String keyUserTag = String.format(CacheConstant.USER_WORK_TAG, getCurrentUser().getId());
+		if (StringUtils.isNotBlank(workTag)){
+			redisUtil.set(keyId, workTag);
+			redisUtil.sSet(keyTag, workId);
+			redisUtil.sSet(keyUserTag, workTag);
+		}else{
+			Object oldTag = redisUtil.get(keyId);
+			if (oldTag != null){
+				keyTag = String.format(CacheConstant.WORK_TAG, getCurrentUser().getId(), oldTag);
+				redisUtil.del(keyId);
+				redisUtil.setRemove(keyTag, workId);
+				if(redisUtil.sGetSetSize(keyTag) <= 0){
+					redisUtil.setRemove(keyUserTag, oldTag);
+				}
+			}
+		}
+		return Result.ok("标记成功");
+	}
+
+	//删除标签
+	@DeleteMapping("delWorkTag")
+	public Result delWorkTag(@RequestParam String tag){
+		String keyUserTag = String.format(CacheConstant.USER_WORK_TAG, getCurrentUser().getId());
+		redisUtil.setRemove(keyUserTag, tag);
+		return Result.ok();
+	}
 	
 	/**
 	 *   添加
