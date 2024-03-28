@@ -257,7 +257,7 @@ export default {
           this.getWorkTags()
          }else{
           if(confirm(res.message)){
-            deleteAction('/teaching/teachingWork/delWorkTag', {tag}).then(res=>{
+            deleteAction('/teaching/teachingWork/delWorkTag', {tag:tag, force:true}).then(res=>{
               this.getWorkTags()
             })
           }
