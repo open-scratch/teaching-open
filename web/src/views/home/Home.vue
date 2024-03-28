@@ -1,6 +1,6 @@
 <template>
   <div>
-    <a-row :gutter="[24,24]">
+    <a-row :gutter="[24,24]" class="editor-nav">
       <a-col :xs="24" :sm="24" :md="8" :lg="8" :xl="8">
         <div class="editor-card editor-sjr" style="background: linear-gradient(-30deg,#4fb5ff,#60bcff);">
           <a-row type="flex" justify="space-around" align="middle">
@@ -75,8 +75,7 @@
           </a-card>
         </a-col>
       </a-row>
-      <!-- <a-button class="load-more" type="link" @click="getGreatLeaderboard">加载更多……</a-button> -->
-      <router-link class="load-more" :to="{path:'/workList?type=3'}" >查看更多...</router-link>
+      <router-link v-if="page.greatLeaderboard>-1"  class="load-more" :to="{path:'/workList?type=3'}" >查看更多...</router-link>
     </div>
 
     <div class="panel-works" v-if="courseLeaderboard.length>0">
@@ -96,8 +95,7 @@
             </a-card>
         </a-col>
       </a-row>
-      <!-- <a-button class="load-more" type="link" @click="getCourseLeaderboard">加载更多……</a-button> -->
-      <router-link class="load-more" :to="{path:'/courseList'}" >查看更多...</router-link>
+      <router-link v-if="page.courseLeaderboard>-1" class="load-more" :to="{path:'/courseList'}" >查看更多...</router-link>
     </div>
 
     <div class="panel-works">
@@ -134,8 +132,7 @@
           </a-card>
         </a-col>
       </a-row>
-      <!-- <a-button class="load-more" type="link" @click="getStarLeaderboard">加载更多……</a-button> -->
-      <router-link class="load-more" :to="{path:'/workList?type=2'}" >查看更多...</router-link>
+      <router-link v-if="page.starLeaderboard>-1" class="load-more" :to="{path:'/workList?type=2'}" >查看更多...</router-link>
     </div>
   </div>
 </template>
@@ -230,8 +227,8 @@ export default {
       }).then((res) => {
         if (res.success) {
           this.greatLeaderboard = this.greatLeaderboard.concat(res.result.records)
-          if (res.result.records.length == 0 && this.page.greatLeaderboard > 1) {
-            this.$message.info('已加载完啦！')
+          if(this.greatLeaderboard.length >= res.result.total){
+            this.page.greatLeaderboard = -1
           }
         }
       })
@@ -246,8 +243,8 @@ export default {
       }).then((res) => {
         if (res.success) {
           this.starLeaderboard = this.starLeaderboard.concat(res.result.records)
-          if (res.result.records.length == 0 && this.page.starLeaderboard > 1) {
-            this.$message.info('已加载完啦！')
+          if(this.starLeaderboard.length >= res.result.total){
+            this.page.starLeaderboard = -1
           }
         }
       })
@@ -261,8 +258,8 @@ export default {
       }).then((res) => {
         if (res.success) {
           this.courseLeaderboard = this.courseLeaderboard.concat(res.result.records)
-          if (res.result.records.length == 0 && this.page.courseLeaderboard > 1) {
-            this.$message.info('已加载完啦！')
+          if(this.courseLeaderboard.length >= res.result.total){
+            this.page.courseLeaderboard = -1
           }
         }
       })

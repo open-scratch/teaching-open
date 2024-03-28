@@ -7,7 +7,7 @@
       <a-button type="dashed" @click="changeAccount">切换账号</a-button>
     </div>
     <div v-else>
-      <a-avatar shape="square" class="avatar" :size="100" :src="logo" />
+      <a-avatar shape="square" class="avatar" :size="100" :src="logo2" />
       <h3 class="welcome">欢迎来到{{ brandName }}</h3>
       <a-button type="dashed" @click="login">登录/注册</a-button>
     </div>
@@ -24,13 +24,17 @@ export default {
       brandName: this.$store.getters.sysConfig.brandName,
       token: '',
       logo: '/logo.png',
+      logo2: '/logo.png',
       avatarUrl: '/logo.png',
     }
   },
   created() {
     this.token = Vue.ls.get(ACCESS_TOKEN)
     if(this.$store.getters.sysConfig.logo && this.$store.getters.sysConfig.qiniuDomain){
-      this.logo = this.$store.getters.sysConfig.qiniuDomain + "/" + this.$store.getters.sysConfig.logo
+      this.logo2 = this.$store.getters.sysConfig.qiniuDomain + "/" + this.$store.getters.sysConfig.logo2
+    }
+    if (this.$store.getters.sysConfig.avatar && this.$store.getters.sysConfig.qiniuDomain) {
+       this.avatarUrl = this.$store.getters.sysConfig.qiniuDomain + '/' + this.$store.getters.sysConfig.avatar
     }
     if(this.getFileAccessHttpUrl(this.avatar())){
       this.avatarUrl = this.getFileAccessHttpUrl(this.avatar())

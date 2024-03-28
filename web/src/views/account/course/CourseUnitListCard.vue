@@ -1,20 +1,16 @@
 <template>
   <div class="app-list">
-    <a-list :grid="{ gutter: 24, lg: 4, md: 3, sm: 2, xs: 1 }" :dataSource="dataSource">
-      <a-list-item slot="renderItem" slot-scope="item">
-        <a-card @click="viewUnit(item)">
-          <a-card-meta>
-              <div style="margin-bottom: 3px" slot="title">
-                <a-icon type="right-circle"/>&nbsp;&nbsp;
-                {{ item.unitName }}
-              </div>
-              <div class="meta-cardInfo" slot="description">
-                <img :src="getFileAccessHttpUrl(item.unitCover)" height="25px" style="width:100%;height:100%;"/>
-              </div>
-          </a-card-meta>
-        </a-card>
-      </a-list-item>
-    </a-list>
+    <a-card v-for="item in dataSource" :key="item.id" @click="viewUnit(item)">
+      <a-card-meta>
+          <div style="margin-bottom: 3px" slot="title">
+            <a-icon type="right-circle"/>&nbsp;&nbsp;
+            {{ item.unitName }}
+          </div>
+          <div class="meta-cardInfo" slot="description">
+            <img :src="getFileAccessHttpUrl(item.unitCover)" height="25px" style="width:100%;height:100%;"/>
+          </div>
+      </a-card-meta>
+    </a-card>
     <unitView-modal ref="unitViewModal"/>
   </div>
 </template>
@@ -84,7 +80,11 @@ export default {
 <style lang="less" scoped>
 .app-list {
   .ant-card {
-    height: 300px;
+    min-height: 200px;
+    max-height: 400px;
+    width: 300px;
+    display: inline-block;
+    margin: 20px;
   }
   .meta-cardInfo {
     zoom: 1;

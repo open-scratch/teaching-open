@@ -3,10 +3,8 @@
     <div class="container">
       <div class="top">
         <div class="header">
-          <a href="/">
-            <img :src="logo" class="logo" alt="logo">
-            <span class="title">{{brandName}}</span>
-          </a>
+          <img :src="logo" class="logo" alt="logo">
+          <h3 class="title">{{brandName}}</h3>
         </div>
         <div class="desc">
           {{brandDesc}}
@@ -68,7 +66,7 @@
       min-height: 100%;
       background: #f0f2f5 url(~@/assets/background.svg) no-repeat 50%;
       background-size: 100%;
-      padding: 110px 0 144px;
+      padding: 50px 0 44px;
       position: relative;
 
       a {
@@ -79,18 +77,8 @@
         text-align: center;
 
         .header {
-          max-height: 88px;
+          max-height: 144px;
           line-height: 44px;
-
-          .badge {
-            position: absolute;
-            display: inline-block;
-            line-height: 1;
-            vertical-align: middle;
-            margin-left: -12px;
-            margin-top: -10px;
-            opacity: 0.8;
-          }
 
           .logo {
             max-height: 88px;
@@ -123,7 +111,7 @@
       }
 
       .footer {
-        position: relative;
+        position: absolute;
         width: 100%;
         bottom: 0;
         padding: 0 16px;

@@ -53,10 +53,10 @@
           <a-icon type="setting"/>
           <span>密码修改</span>
         </a-menu-item>
-        <a-menu-item key="5" @click="updateCurrentDepart">
+        <!-- <a-menu-item key="5" @click="updateCurrentDepart">
           <a-icon type="cluster"/>
           <span>切换部门</span>
-        </a-menu-item>
+        </a-menu-item> -->
        <!-- <a-menu-item key="2" disabled>
           <a-icon type="setting"/>
           <span>测试</span>
@@ -70,13 +70,13 @@
         </a-menu-item>-->
       </a-menu>
     </a-dropdown>
-    <span class="action">
+    <span class="action" id="back-front">
       <a class="logout_title" href="javascript:;" @click="handleHome">
         <a-icon type="home"/>
         <span v-if="isDesktop()">&nbsp;回到前台</span>
       </a>
     </span>
-    <span class="action">
+    <span class="action" id="logout">
       <a class="logout_title" href="javascript:;" @click="handleLogout">
         <a-icon type="logout"/>
         <span v-if="isDesktop()">&nbsp;退出登录</span>
@@ -158,8 +158,16 @@
       /* update_end author:zhaoxin date:20191129 for: 做头部菜单栏导航*/
       ...mapActions(["Logout"]),
       ...mapGetters(["nickname", "avatar","userInfo"]),
+      getFileAccessHttpUrl,
       getAvatar(){
-        return getFileAccessHttpUrl(this.avatar())
+        let avatarUrl = '/logo.png'
+        if (this.$store.getters.sysConfig.avatar && this.$store.getters.sysConfig.qiniuDomain) {
+          avatarUrl = this.$store.getters.sysConfig.qiniuDomain + '/' + this.$store.getters.sysConfig.avatar
+        }
+        if(this.getFileAccessHttpUrl(this.avatar())){
+          avatarUrl = this.getFileAccessHttpUrl(this.avatar())
+        } 
+        return avatarUrl
       },
       handleHome(){
         window.location.href = location.protocol + "//" + window.location.host

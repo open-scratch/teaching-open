@@ -1,5 +1,12 @@
 <template>
-  <div class="container">
+  <div
+    class="container"
+    :style="{
+      backgroundColor: sysConfig.homeBgColor,
+      backgroundImage: sysConfig.file_homeBg ? 'url(' + getFileAccessHttpUrl(sysConfig.file_homeBg) + ')' : '',
+      backgroundRepeat: sysConfig.homeBgRepeat ? sysConfig.homeBgRepeat : '',
+    }"
+  >
     <a-layout>
       <a-layout-header>
         <Header />
@@ -15,9 +22,9 @@
                 <div v-if="token">
                   <a-avatar shape="square" class="avatar" :size="100" :src="avatarUrl" />
                   <h3>欢迎您，{{ nickname() }}</h3>
-                  <a-button size="large" type="primary" @click="enter(1)">我的作品</a-button>
+                  <a-button type="primary" class="btn-my-work" @click="enter(1)">我的作品</a-button>
                   <a-divider type="vertical"></a-divider>
-                  <a-button size="large" type="primary" @click="enter(2)">我的课程</a-button>
+                  <a-button type="primary" class="btn-my-course" @click="enter(2)">我的课程</a-button>
                 </div>
                 <div v-else>
                   <a-avatar shape="square" class="avatar" :size="100" :src="logo2" />
@@ -28,7 +35,7 @@
             </a-col>
           </a-row>
           <router-view />
-          </a-layout-content>
+        </a-layout-content>
       </a-layout>
       <a-layout-footer>
         <Footer />
@@ -62,16 +69,21 @@ export default {
       logo2: '/logo.png',
       avatarUrl: '/logo.png',
       token: '',
+      sysConfig: {},
     }
   },
   created() {
     this.token = Vue.ls.get(ACCESS_TOKEN)
+    this.sysConfig = this.$store.getters.sysConfig
     if (this.$store.getters.sysConfig.logo && this.$store.getters.sysConfig.qiniuDomain) {
       this.logo = this.$store.getters.sysConfig.qiniuDomain + '/' + this.$store.getters.sysConfig.logo
     }
     if (this.$store.getters.sysConfig.logo2 && this.$store.getters.sysConfig.qiniuDomain) {
       this.logo2 = this.$store.getters.sysConfig.qiniuDomain + '/' + this.$store.getters.sysConfig.logo2
       this.avatarUrl = this.logo
+    }
+    if (this.$store.getters.sysConfig.avatar && this.$store.getters.sysConfig.qiniuDomain) {
+      this.avatarUrl = this.$store.getters.sysConfig.qiniuDomain + '/' + this.$store.getters.sysConfig.avatar
     }
     if (this.getFileAccessHttpUrl(this.avatar())) {
       this.avatarUrl = this.getFileAccessHttpUrl(this.avatar())
@@ -82,43 +94,53 @@ export default {
     ...mapActions(['Logout']),
     ...mapGetters(['nickname', 'avatar', 'userInfo']),
     enter(type) {
-      switch(type){
-        case 0:this.$router.push('/user/login');break;
-        case 1:this.$router.push('/account/center');break;
-        case 2:this.$router.push('/teaching/mineCourse/cardList');break;
-        default:this.$router.push('/account/center');break;
+      switch (type) {
+        case 0:
+          this.$router.push('/user/login')
+          break
+        case 1:
+          this.$router.push('/account/center')
+          break
+        case 2:
+          this.$router.push('/teaching/mineCourse/cardList')
+          break
+        default:
+          this.$router.push('/account/center')
+          break
       }
     },
-    changeAccount(){
+    changeAccount() {
       const that = this
       this.$confirm({
         title: '提示',
         content: '确定要退出当前账号并登录新的账号吗 ?',
         onOk() {
-          return that.Logout({}).then(() => {
-            window.location.href="/user/login";
-          }).catch(err => {
-            that.$message.error({
-              title: '错误',
-              description: err.message
+          return that
+            .Logout({})
+            .then(() => {
+              window.location.href = '/user/login'
             })
-          })
+            .catch((err) => {
+              that.$message.error({
+                title: '错误',
+                description: err.message,
+              })
+            })
         },
-        onCancel() {
-        },
-      });
+        onCancel() {},
+      })
     },
-    toEditor(type){
-      switch(type){
+    toEditor(type) {
+      switch (type) {
         case 1:
-          window.open("/scratch3/index.html?scene=create")
-          break;
+          window.open('/scratch3/index.html?scene=create')
+          break
         case 2:
-          window.open("/scratchjr/home.html")
-          break;
+          window.open('/scratchjr/home.html')
+          break
         case 3:
-          window.open("/python/index.html")
-          break;
+          window.open('/python/index.html')
+          break
       }
     },
     _isMobile() {
@@ -136,7 +158,7 @@ export default {
 .container {
   background: url(/img/bg_blue.png) no-repeat;
   background-color: #f6f6f6;
-  background-size: 100% 350px;
+  background-size: 100% auto;
 }
 .ant-layout-header,
 .ant-layout-content,
@@ -179,11 +201,11 @@ export default {
     border: 1px solid #eee;
     border-radius: 20px;
     width: 250px;
-    height: 300px;
+    min-height: 300px;
     text-align: center;
     line-height: 50px;
     float: right;
-    padding-top: 30px;
+    padding: 30px 20px;
   }
 }
 .ant-layout-sider {

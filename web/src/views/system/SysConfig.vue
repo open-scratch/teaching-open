@@ -154,6 +154,17 @@
                 ></j-select-depart>
               </a-form-item>
             </a-col>
+          <a-col :span="10">
+            <a-form-item label="默认头像" :labelCol="labelCol" :wrapperCol="wrapperCol">
+              <j-upload
+                  v-decorator="['avatar']"
+                  :fileType="'image'"
+                  :number="1"
+                  :multiple="false"
+                  :trigger-change="true"
+                ></j-upload>
+            </a-form-item>
+          </a-col>
           </a-row>
         </a-tab-pane>
         <a-tab-pane key="jscss" tab="自定义代码" forceRender>

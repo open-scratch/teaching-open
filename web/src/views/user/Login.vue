@@ -5,7 +5,7 @@
         :activeKey="customActiveKey"
         :tabBarStyle="{ textAlign: 'center', borderBottom: 'unset' }"
         @change="handleTabClick">
-        <a-tab-pane key="tab1" tab="账号密码登陆">
+        <a-tab-pane key="tab1" tab="账号密码登录">
           <a-form-item>
             <a-input
               size="large"

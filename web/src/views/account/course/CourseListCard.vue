@@ -1,28 +1,24 @@
 <template>
   <div class="app-list">
-    <a-list :grid="{ gutter: 24, xxl:4, xl:4, lg: 3, md: 2, sm: 1, xs: 1 }" :dataSource="dataSource">
-      <a-list-item slot="renderItem" slot-scope="item, index">
-        <a-card :hoverable="true">
-          <!-- <template class="ant-card-extra" slot="extra">
-            <span class="create-time">{{item.createTime}}</span>
-          </template> -->
-          <a-card-meta>
-            <div style="margin-bottom: 3px" slot="title">
-              <a-icon type="info-circle" @click="toDetail(item)"/>
-              <a-divider type="vertical"></a-divider>
-              <span @click="toCourse(item.showType, item.id)">{{ item.courseName }}</span>
-            </div>
-            <div @click="toCourse(item.showType, item.id)" class="meta-cardInfo" slot="description">
-                <img
-                  :src="getFileAccessHttpUrl(item.courseCover)"
-                  height="25px"
-                  style="width: 100%; height: 100%"
-                />
-            </div>
-          </a-card-meta>
-        </a-card>
-      </a-list-item>
-    </a-list>
+    <a-card v-for="item in dataSource" :key="item.id" :hoverable="true">
+      <!-- <template class="ant-card-extra" slot="extra">
+        <span class="create-time">{{item.createTime}}</span>
+      </template> -->
+      <a-card-meta>
+        <div style="margin-bottom: 3px" slot="title">
+          <a-icon type="info-circle" @click="toDetail(item)"/>
+          <a-divider type="vertical"></a-divider>
+          <span @click="toCourse(item.showType, item.id)">{{ item.courseName }}</span>
+        </div>
+        <div @click="toCourse(item.showType, item.id)" class="meta-cardInfo" slot="description">
+            <img
+              :src="getFileAccessHttpUrl(item.courseCover)"
+              height="25px"
+              style="width: 100%; height: 100%"
+            />
+        </div>
+      </a-card-meta>
+    </a-card>
     <j-modal 
       :visible="showCourseDetail" 
       :title="currentCourse.courseName"
@@ -83,6 +79,9 @@ export default {
   .ant-card {
     min-height: 200px;
     max-height: 400px;
+    width: 400px;
+    display: inline-block;
+    margin: 20px;
   }
   .meta-cardInfo {
     zoom: 1;

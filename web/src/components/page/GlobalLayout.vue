@@ -1,5 +1,5 @@
 <template>
-  <a-layout class="layout" :class="[device]">
+  <a-layout class="layout" :class="[device, userIdentity]">
 
     <template v-if="layoutMode === 'sidemenu'">
       <a-drawer
@@ -99,6 +99,7 @@
       SideMenu,
       GlobalHeader,
       GlobalFooter,
+      userIdentity: 'student', // student admin
       // update-start---- author:os_chengtgen -- date:20190830 --  for:issues/463 -编译主题颜色已生效，但还一直转圈，显示主题 正在编译 ------
       // // SettingDrawer
       // 注释这个因为在个人设置模块已经加载了SettingDrawer页面
@@ -127,6 +128,12 @@
       }
     },
     created() {
+      if(this.$store.getters.userInfo && this.$store.getters.userInfo.userIdentity==2){
+        this.userIdentity = 'admin'
+      }else{
+        this.userIdentity = 'student'
+      }
+      console.log("userInfo", this.$store.getters.userInfo);
       //--update-begin----author:scott---date:20190320------for:根据后台菜单配置，判断是否路由菜单字段，动态选择是否生成路由（为了支持参数URL菜单）------
       //this.menus = this.mainRouters.find((item) => item.path === '/').children;
       this.menus = this.permissionMenuList

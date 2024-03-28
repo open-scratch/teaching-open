@@ -45,7 +45,9 @@ export default {
     }
     if (this.$store.getters.sysConfig.logo2 && this.$store.getters.sysConfig.qiniuDomain) {
       this.logo2 = this.$store.getters.sysConfig.qiniuDomain + '/' + this.$store.getters.sysConfig.logo2
-      this.avatarUrl = this.logo2
+    }
+    if (this.$store.getters.sysConfig.avatar && this.$store.getters.sysConfig.qiniuDomain) {
+       this.avatarUrl = this.$store.getters.sysConfig.qiniuDomain + '/' + this.$store.getters.sysConfig.avatar
     }
     if(this.getFileAccessHttpUrl(this.avatar())){
       this.avatarUrl = this.getFileAccessHttpUrl(this.avatar())

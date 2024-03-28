@@ -1,11 +1,11 @@
 <template>
-  <div id="IndexPage" :style="{ background: sysConfig.homeBgColor }">
-    <div :style="{ 'background-image': 'url(' + getFileAccessHttpUrl(sysConfig.file_homeBg) + ')', 'background-repeat': sysConfig.homeBgRepeat }">
+  <!-- <div id="IndexPage" :style="{ background: sysConfig.homeBgColor }"> -->
+    <!-- <div :style="{ 'background-image': 'url(' + getFileAccessHttpUrl(sysConfig.file_homeBg) + ')', 'background-repeat': sysConfig.homeBgRepeat }"> -->
       <div class="boxBackground">
         <div class="boxContent" v-html="sysConfig._homeHtml"></div>
       </div>
-    </div>
-  </div>
+    <!-- </div> -->
+  <!-- </div> -->
 </template>
 <script>
 import { getFileAccessHttpUrl } from '@/api/manage'
@@ -51,6 +51,7 @@ export default {
 #IndexPage {
   width: 100%;
   height: auto;
+  margin-top: 28px;
   .banner {
     width: 100%;
     height: 100%;

@@ -1,5 +1,11 @@
 <template>
-  <div class="container">
+  <div class="container"
+    :style="{
+      backgroundColor: sysConfig.homeBgColor,
+      backgroundImage: sysConfig.file_homeBg ? 'url(' + getFileAccessHttpUrl(sysConfig.file_homeBg) + ')' : '',
+      backgroundRepeat: sysConfig.homeBgRepeat ? sysConfig.homeBgRepeat : '',
+    }"
+  >
     <a-layout>
       <a-layout-header>
         <Header/>
@@ -165,12 +171,14 @@ export default {
       loadingMore: false,
       commentsPage: 0,
       comments: [],
-      shareHtml: ''
+      shareHtml: '',
+      sysConfig: {},
     }
   },
   created() {
     this.workId = this.$route.query.id
     this.token = Vue.ls.get(ACCESS_TOKEN)
+    this.sysConfig = this.$store.getters.sysConfig
     this.getWorkInfo(this.workId)
     this.getWorkShareHtml()
   },
@@ -422,6 +430,10 @@ export default {
       }
     }
   }
+}
+
+.work-share-html{
+  max-width: 780px;
 }
 
 .ant-layout-sider {
