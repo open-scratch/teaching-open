@@ -40,8 +40,8 @@
             <a-button v-if="work.workDocumentUrl" @click="openWorkFile(work.workDocumentUrl_url)">作业资料</a-button>
             <!-- <a-divider v-if="work.workDocumentUrl != null" type="vertical" /> -->
             <a-button type="primary" :disabled="work.mineWorkStatus > 1" @click="toAdditionalWork(work, false)"> {{work.mineWorkStatus==null?'去做作业':'修改作业'}} </a-button>
-            <a-divider v-if="work.mineWorkStatus == 0" type="vertical" />
-            <a-button type="primary" v-if="work.mineWorkStatus < 2" @click="toAdditionalWork(work, true)"> 重做 </a-button>
+            <a-divider v-if="work.mineWorkStatus != null && work.mineWorkStatus < 2" type="vertical" />
+            <a-button type="primary" v-if="work.mineWorkStatus != null && work.mineWorkStatus < 2" @click="toAdditionalWork(work, true)"> 重做 </a-button>
           </div>
         </a-list-item>
       </a-list>
