@@ -95,7 +95,7 @@ export default {
         case '2':
           return '/scratch3/index.html?workId='+item.id
         case '3':
-          return '/scratchjr/editor.html?mode=edit&filepath=' + item.workFileKey_url
+          return '/scratchjr/editor.html?mode=edit&workFile=' + item.workFileKey_url
         case '4':
           return '/python/index.html?workId=' + item.id
         case '10':

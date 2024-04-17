@@ -117,7 +117,7 @@ export default {
         case 2:
           return '/scratch3/player.html?workUrl=' + url
         case 3:
-          return '/scratchjr/editor.html?mode=edit&filepath=' + url
+          return '/scratchjr/editor.html?mode=edit&workFile=' + url
         case 4:
           return '/python/player.html?lang=turtle&url='+ url
       }
@@ -131,7 +131,7 @@ export default {
           window.open('/scratch3/index.html?scene=course&unitId='+unit.id)
           break
         case 3:
-          window.open('/scratchjr/editor.html?scene=course&mode=edit&filepath=' + this.getFileAccessHttpUrl(unit.courseWork))
+          window.open('/scratchjr/editor.html?scene=course&mode=edit&workFile=' + this.getFileAccessHttpUrl(unit.courseWork))
           break
         case 4:
           window.open('/python/index.html?scene=course&lang=turtle&unitId='+unit.id + "&url=" + this.getFileAccessHttpUrl(unit.courseWork))
