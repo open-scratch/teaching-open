@@ -136,6 +136,9 @@ public class SysUser implements Serializable {
     @Excel(name = "职务", width = 15)
     private String post;
 
+    @Excel(name = "学校", width = 15)
+    private String school;
+
     /**
      * 座机号
      */

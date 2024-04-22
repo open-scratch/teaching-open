@@ -55,6 +55,10 @@
           <j-select-position placeholder="请选择职务" :multiple="false" v-decorator="['post', {}]"/>
         </a-form-item>
 
+        <a-form-item label="学校" :labelCol="labelCol" :wrapperCol="wrapperCol">
+          <a-input placeholder="请输入学校" v-decorator="[ 'school']" />
+        </a-form-item>
+
         <a-form-item label="角色分配" :labelCol="labelCol" :wrapperCol="wrapperCol" v-show="!roleDisabled" >
           <a-select
             mode="multiple"
@@ -332,7 +336,7 @@
         that.visible = true;
         that.model = Object.assign({}, record);
         that.$nextTick(() => {
-          that.form.setFieldsValue(pick(this.model,'username','sex','realname','email','phone','activitiSync','workNo','telephone','post'))
+          that.form.setFieldsValue(pick(this.model,'username','sex','realname','email','phone','activitiSync','workNo','telephone','post','school'))
         });
         //身份为上级显示负责部门，否则不显示
         this.changeIdentity(this.model.userIdentity)

@@ -94,3 +94,8 @@ INSERT INTO `sys_config`(`id`, `config_key`, `config_value`, `config_enabled`, `
 INSERT INTO `sys_config`(`id`, `config_key`, `config_value`, `config_enabled`, `comment`) VALUES ('1748234993630457857', 'homeBgRepeat', 'no-repeat', 1, NULL);
 INSERT INTO `sys_config`(`id`, `config_key`, `config_value`, `config_enabled`, `comment`) VALUES ('1748234994012139522', 'file_homeBg', '', 1, NULL);
 INSERT INTO `sys_config`(`id`, `config_key`, `config_value`, `config_enabled`, `comment`) VALUES ('1748234994079248386', '_homeHtml', '<h2 style=\"text-align: center;\">&nbsp;</h2>\n<h2 style=\"text-align: center;\">&nbsp;</h2>\n<h2 style=\"text-align: center;\"><span style=\"color: #b96ad9;\"><strong>这里是自定义首页</strong></span></h2>', 1, NULL);
+
+-- 2024-04-22
+alter table sys_user
+    add school varchar(256) default '' not null comment '学校' after post;
+

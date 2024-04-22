@@ -288,6 +288,12 @@ export default {
           dataIndex: 'phone',
         },
         {
+          title: '学校',
+          align: 'center',
+          width: 100,
+          dataIndex: 'school',
+        },
+        {
           title: '身份',
           width: 80,
           dataIndex: 'userIdentity',
