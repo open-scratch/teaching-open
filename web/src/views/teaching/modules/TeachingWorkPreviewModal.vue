@@ -42,7 +42,7 @@ export default {
           this.height = 500
           return
         case '3':
-          this.frameHref = '/scratchjr/editor.html?mode=edit&workFile=' + record.workFileKey_url
+          this.frameHref = '/scratchjr/editor.html?mode=look&workFile=' + record.workFileKey_url
           this.width = 1500
           this.height = 700
           return

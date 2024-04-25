@@ -417,7 +417,7 @@ export default {
         case '2':
           return window.open('/scratch3/index.html?workId=' + record.id)
         case '3':
-          return window.open('/scratchjr/editor.html?mode=edit&workFile=' + record.workFileKey_url)
+          return window.open('/scratchjr/editor.html?mode=look&workFile=' + record.workFileKey_url)
         case '4':
           return window.open('/python/index.html?workId=' + record.id)
          case '10':
