@@ -598,6 +598,7 @@ public class SysUserController extends BaseController {
                     }
                     sysUserExcel.setDelFlag(0);
                     sysUserExcel.setUserIdentity(sysUserExcel.getUserIdentity() != null && sysUserExcel.getUserIdentity() == 2 ? 2:1);
+                    sysUserExcel.setStatus(1);
                     // 密码加密加盐
                     String salt = oConvertUtils.randomGen(8);
                     sysUserExcel.setSalt(salt);
@@ -735,6 +736,7 @@ public class SysUserController extends BaseController {
                     }
                     sysUserExcel.setUserIdentity(1);
                     sysUserExcel.setDelFlag(0);
+                    sysUserExcel.setStatus(1);
                     //判断是否有密码字段，没有则使用用户名生成密码
                     String password;
                     if(StringUtils.isNotBlank(sysUserExcel.getPassword())){
