@@ -2962,12 +2962,9 @@ CREATE TABLE `sys_user`  (
 -- ----------------------------
 -- Records of sys_user
 -- ----------------------------
-INSERT INTO `sys_user` VALUES ('1563829482519494657', 'chengyu', 'chengyu', 'a262891fd3dcd26a', 'jCK7BW3l', NULL, NULL, NULL, NULL, NULL, NULL, 1, 0, NULL, NULL, 1, NULL, NULL, NULL, 'admin', '2022-08-28 18:02:57', 'admin', '2022-08-28 18:18:05', 2, '');
-INSERT INTO `sys_user` VALUES ('1608733910174998530', 'aaa', NULL, '3d12f0284f995364', 'AozaKqlN', NULL, NULL, NULL, NULL, '18566666666', NULL, 1, 0, NULL, NULL, 0, NULL, NULL, NULL, NULL, '2022-12-30 15:57:07', NULL, NULL, NULL, NULL);
-INSERT INTO `sys_user` VALUES ('2cb6e8e9b9ac4ccca17a1c3020a118d4', 'student', '学生', 'e4e236c0add71a04', 'F8tqiPzu', '[]', NULL, 1, NULL, NULL, '班级2,班级1', 1, 0, NULL, NULL, 1, NULL, '', NULL, 'jeecg', '2020-04-21 17:41:46', 'teacher', '2023-01-14 17:32:16', 1, '');
-INSERT INTO `sys_user` VALUES ('a4cfbd170571404baee5f2dee56d2a37', '123', '123123', 'bd18bcdba4d7c7c3', 'E7wo4o7e', NULL, NULL, NULL, NULL, NULL, NULL, 1, 1, NULL, NULL, 1, NULL, NULL, NULL, 'teacher', '2023-01-14 17:20:05', NULL, NULL, 1, '');
-INSERT INTO `sys_user` VALUES ('d05cb1b6d5f64789a9d6f0e8ee1185db', 'teacher', '老师', '3b1b68508ed6b0f5', 'kafIgeoy', '[]', NULL, NULL, NULL, NULL, 'A01A06A01', 1, 0, NULL, NULL, 1, '101', '', NULL, 'admin', '2020-04-21 21:39:06', 'jeecg', '2020-04-22 11:34:52', 2, 'd2b37ffcc3fd46ddb5bc1c3da7fc41c0');
-INSERT INTO `sys_user` VALUES ('e9ca23d68d884d4ebb19d07889727dae', 'admin', '管理员', 'cb362cfeefbf3d8d', 'RCGTeGiH', '4c9b63c898324bc0a785385dc65068f2.png', '2018-12-05 00:00:00', 1, 'goodat@vip.qq.com', '18566666661', 'A01', 1, 0, NULL, NULL, 1, '1', '', NULL, NULL, '2038-06-21 17:54:10', 'admin', '2023-01-15 14:01:02', 2, 'c6d7cb4deeac411cb3384b1b31278596');
+INSERT INTO `sys_user` VALUES ('2cb6e8e9b9ac4ccca17a1c3020a118d4', 'student', '学生', 'e4e236c0add71a04', 'F8tqiPzu', '[]', NULL, 1, NULL, NULL, '班级2,班级1', 1, 0, NULL, NULL, 1, NULL, '', '', NULL, 'jeecg', '2020-04-21 17:41:46', 'teacher', '2023-01-14 17:32:16', 1, '');
+INSERT INTO `sys_user` VALUES ('d05cb1b6d5f64789a9d6f0e8ee1185db', 'teacher', '老师', '3b1b68508ed6b0f5', 'kafIgeoy', '[]', NULL, NULL, NULL, NULL, 'A01A06A01', 1, 0, NULL, NULL, 1, '101', '', '', NULL, 'admin', '2020-04-21 21:39:06', 'jeecg', '2020-04-22 11:34:52', 2, 'd2b37ffcc3fd46ddb5bc1c3da7fc41c0');
+INSERT INTO `sys_user` VALUES ('e9ca23d68d884d4ebb19d07889727dae', 'admin', '管理员', 'cb362cfeefbf3d8d', 'RCGTeGiH', '4c9b63c898324bc0a785385dc65068f2.png', '2018-12-05 00:00:00', 1, 'goodat@vip.qq.com', '18566666661', 'A01', 1, 0, NULL, NULL, 1, '1', '', '', NULL, NULL, '2038-06-21 17:54:10', 'admin', '2023-01-15 14:01:02', 2, 'c6d7cb4deeac411cb3384b1b31278596');
 
 -- ----------------------------
 -- Table structure for sys_user_agent
