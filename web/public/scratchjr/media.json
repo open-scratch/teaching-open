@@ -11,7 +11,8 @@
     	"samples/QuickIntro.txt"
 	],
     "backgrounds": [
-    	{"md5":"Farm.svg","width":480,"height":360,"ext":"svg","name":"Farm"},
+    	{"md5": "separator", "separator":true},
+        {"md5":"Farm.svg","width":480,"height":360,"ext":"svg","name":"Farm"},
     	{"md5":"Park.svg","width":480,"height":360,"ext":"svg","name":"Park"},
     	{"md5":"Suburbs.svg","width":480,"height":360,"ext":"svg","name":"Suburbs"},
     	{"md5":"City.svg","width":480,"height":360,"ext":"svg","name":"City"},
