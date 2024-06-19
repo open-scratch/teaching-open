@@ -81,7 +81,17 @@ export const constantRouterMap = [
         path: 'courseList',
         name: 'courseList',
         component:() => import(/* webpackChunkName: "home" */ '@/views/home/CourseList')
-      }
+      },
+      {
+        path: 'newsList',
+        name: 'newsList',
+        component:() => import(/* webpackChunkName: "home" */ '@/views/home/NewsList')
+      },
+      {
+        path: '/news-detail',
+        name: 'newsDetail',
+        component: () => import(/* webpackChunkName: "home" */ '@/views/home/NewsDetail')
+      },
     ]
   },
   {
