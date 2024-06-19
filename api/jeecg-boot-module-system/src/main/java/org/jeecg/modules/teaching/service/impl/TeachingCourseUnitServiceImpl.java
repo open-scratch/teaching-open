@@ -31,4 +31,9 @@ public class TeachingCourseUnitServiceImpl extends ServiceImpl<TeachingCourseUni
         return this.baseMapper.getCourseWorkUnit(unitId, userId);
     }
 
+    @Override
+    public String getUserDepartIdByUnitId(String userId, String unitId) {
+        return this.baseMapper.getUserDepartIdByUnitId(userId, unitId);
+    }
+
 }

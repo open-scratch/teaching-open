@@ -17,3 +17,28 @@ INSERT INTO `sys_dict_item`(`id`, `dict_id`, `item_text`, `item_value`, `descrip
 INSERT INTO `sys_permission`(`id`, `parent_id`, `name`, `url`, `component`, `component_name`, `redirect`, `menu_type`, `perms`, `perms_type`, `sort_no`, `always_show`, `icon`, `is_route`, `is_leaf`, `keep_alive`, `hidden`, `description`, `create_by`, `create_time`, `update_by`, `update_time`, `del_flag`, `rule_flag`, `status`, `internal_or_external`) VALUES ('1803329147661983746', '', '资讯管理', '/news/list', 'teaching/TeachingNewsList', NULL, NULL, 0, NULL, '1', 13.00, 0, 'profile', 1, 1, 0, 0, NULL, 'admin', '2024-06-19 15:29:07', 'admin', '2024-06-19 15:32:24', 0, 0, '1', 0);
 INSERT INTO `sys_role_permission`(`id`, `role_id`, `permission_id`, `data_rule_ids`) VALUES ('1803329311386640386', 'f6817f48af4fb3af11b9e8bf182f618b', '1803329147661983746', NULL);
 INSERT INTO `teaching_menu`(`id`, `parent_id`, `name`, `url`, `menu_type`, `sort_no`, `icon`, `is_leaf`, `description`, `create_by`, `create_time`, `update_by`, `update_time`, `del_flag`, `internal_or_external`, `is_route`, `hidden`, `need_login`) VALUES ('1803359896461238274', '', '资讯', '/newsList', 0, 3.00, 'notification', 1, NULL, 'admin', '2024-06-19 17:31:19', 'admin', '2024-06-19 17:31:43', 0, 0, 1, 0, 0);
+
+alter table teaching_work
+    add depart_id varchar(40) default '' not null comment '班级ID' after user_id;
+
+
+create table teaching_depart_day_log
+(
+    id                            varchar(40) default '' not null
+        primary key,
+    depart_id                     varchar(40)            not null comment '班级ID',
+    depart_name                   varchar(100)           null comment '班级名',
+    unit_open_count               int                    null comment '开课次数',
+    course_work_assign_count      int                    null comment '课程作业布置次数',
+    additional_work_assign_count  int                    null comment '附加作业布置次数',
+    course_work_correct_count     int                    null comment '课程作业批改次数',
+    additional_work_correct_count int                    null comment '附加作业批改次数',
+    course_work_submit_count      int                    null comment '课程作业提交次数',
+    additional_work_submit_count  int                    null comment '附加作业提交次数',
+    create_time                   date                   null comment '日期'
+)
+    comment '每天班级日志';
+
+create index depart_id_index
+    on teaching_depart_day_log (depart_id);
+

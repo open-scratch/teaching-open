@@ -12,8 +12,10 @@ import org.jeecg.common.system.base.controller.JeecgController;
 import org.jeecg.common.system.query.QueryGenerator;
 import org.jeecg.modules.system.service.ISysDepartService;
 import org.jeecg.modules.teaching.entity.TeachingAdditionalWork;
+import org.jeecg.modules.teaching.enums.DepartDayLogType;
 import org.jeecg.modules.teaching.model.MineAdditionalWorkModel;
 import org.jeecg.modules.teaching.service.ITeachingAdditionalWorkService;
+import org.jeecg.modules.teaching.service.ITeachingDepartDayLogService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
@@ -34,6 +36,8 @@ public class TeachingAdditionalWorkController extends JeecgController<TeachingAd
    private ITeachingAdditionalWorkService teachingAdditionalWorkService;
    @Autowired
    private ISysDepartService sysDepartService;
+   @Autowired
+   private ITeachingDepartDayLogService teachingDepartDayLogService;
 
    @ApiOperation("获取附加作业详情")
    @GetMapping("getWorkInfo")
@@ -123,6 +127,7 @@ public class TeachingAdditionalWorkController extends JeecgController<TeachingAd
    @ApiOperation(value="附加作业-添加", notes="附加作业-添加")
    @PostMapping(value = "/add")
    public Result<?> add(@RequestBody TeachingAdditionalWork teachingAdditionalWork) {
+       teachingDepartDayLogService.addLog(teachingAdditionalWork.getWorkDept(), DepartDayLogType.COURSE_WORK_ASSIGN_COUNT);
        return teachingAdditionalWorkService.addNewAdditionalWork(teachingAdditionalWork);
    }
 
@@ -136,6 +141,7 @@ public class TeachingAdditionalWorkController extends JeecgController<TeachingAd
    @ApiOperation(value="附加作业-编辑", notes="附加作业-编辑")
    @PutMapping(value = "/edit")
    public Result<?> edit(@RequestBody TeachingAdditionalWork teachingAdditionalWork) {
+       teachingDepartDayLogService.addLog(teachingAdditionalWork.getWorkDept(), DepartDayLogType.COURSE_WORK_ASSIGN_COUNT);
        teachingAdditionalWorkService.updateById(teachingAdditionalWork);
        return Result.ok("编辑成功!");
    }

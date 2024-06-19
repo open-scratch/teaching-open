@@ -24,4 +24,6 @@ public interface TeachingCourseUnitMapper extends BaseMapper<TeachingCourseUnit>
     List<CourseUnitModel> getCourseUnitAndMediaList(Page<CourseUnitModel> page, @Param("ew") QueryWrapper<CourseUnitModel> queryWrapper);
 
     CourseUnitWorkModel getCourseWorkUnit(@Param("unitId") String unitId, @Param("userId") String userId);
+
+    String getUserDepartIdByUnitId(@Param("userId") String userId, @Param("unitId") String unitId);
 }

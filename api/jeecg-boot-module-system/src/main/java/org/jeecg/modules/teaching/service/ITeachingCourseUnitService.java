@@ -19,4 +19,6 @@ public interface ITeachingCourseUnitService extends IService<TeachingCourseUnit>
     IPage<CourseUnitModel> getCourseUnitList(Page<CourseUnitModel> page, QueryWrapper<CourseUnitModel> queryWrapper);
 
     CourseUnitWorkModel getCourseWorkUnit(String unitId, String id);
+
+    String getUserDepartIdByUnitId(String userId, String unitId);
 }
