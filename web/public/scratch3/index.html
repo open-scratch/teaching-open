@@ -17,11 +17,11 @@
   <script>
     var canShare = true
     var uploadParam = {}
-    var workName = ''
     var workId = urlParams('workId')
     var unitId = urlParams('unitId')
     var workFileUrl = urlParams('workFile') //SB3路径
     var workName = urlParams('workName') //作业名
+    if(workName) workName = decodeURIComponent(workName)
     var departId = urlParams('departId') //班级ID
     var additionalId = urlParams('additionalId') //附加作业ID
     var scene = urlParams("scene") || 'create' //来源
