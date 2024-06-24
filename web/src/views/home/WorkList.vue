@@ -116,7 +116,13 @@ export default {
       })
     },
     toDetail(id) {
-      this.$router.push('/work-detail?id=' + id)
+      let route = this.$router.resolve({
+        path: "/work-detail",
+        query: {
+          id: id,
+        },
+      });
+      window.open(route.href, '_blank');
     },
     _isMobile() {
       return (

@@ -265,7 +265,13 @@ export default {
       })
     },
     toDetail(id) {
-      this.$router.push('/work-detail?id=' + id)
+      let route = this.$router.resolve({
+        path: "/work-detail",
+        query: {
+          id: id,
+        },
+      });
+      window.open(route.href, '_blank');
     },
     toCourseDetail(id){
       this.$router.push('/teaching/mineCourse/courseUnitCard?id=' + id)
