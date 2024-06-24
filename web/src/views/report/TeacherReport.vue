@@ -66,7 +66,7 @@
         <a-col :span="4">
           <div class="data-tag" style="">
             <h3>
-              作业上交数量
+              作业上交次数
 
               <a-tooltip placement="top">
                 <template slot="title">
@@ -81,7 +81,7 @@
         <a-col :span="4">
           <div class="data-tag" style="">
             <h3>
-              作业批改数量
+              作业批改次数
 
               <a-tooltip placement="top">
                 <template slot="title">

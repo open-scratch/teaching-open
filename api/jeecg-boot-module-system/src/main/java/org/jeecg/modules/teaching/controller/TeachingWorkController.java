@@ -193,8 +193,6 @@ public class TeachingWorkController extends BaseController {
 					 put("user_id", getCurrentUser().getId());
 					 put("course_id", teachingWork.getCourseId());
 				 }});
-				 String departId = teachingCourseUnitService.getUserDepartIdByUnitId(getCurrentUser().getId(), teachingWork.getCourseId());
-				 teachingWork.setDepartId(departId);
 			 }else{
 				 oldWorks = teachingWorkService.getBaseMapper().selectByMap(new HashMap<String, Object>(){{
 					 put("work_name", teachingWork.getWorkName());
@@ -205,6 +203,11 @@ public class TeachingWorkController extends BaseController {
 			 teachingWork.setId(null);
 			 teachingWork.setUserId(getCurrentUser().getId());
 			 if (oldWorks.size() > 0){
+				 if (StringUtils.isNotBlank(teachingWork.getCourseId())){
+					 String departId = teachingCourseUnitService.getUserDepartIdByUnitId(getCurrentUser().getId(), teachingWork.getCourseId());
+					 teachingWork.setDepartId(departId);
+				 }
+
 				 teachingWork.setId(oldWorks.get(0).getId());
 				 teachingWork.setCreateTime(new Date());
 				 //teachingWork.setUpdateTime(new Date());
