@@ -127,7 +127,9 @@ public class TeachingAdditionalWorkController extends JeecgController<TeachingAd
    @ApiOperation(value="附加作业-添加", notes="附加作业-添加")
    @PostMapping(value = "/add")
    public Result<?> add(@RequestBody TeachingAdditionalWork teachingAdditionalWork) {
-       teachingDepartDayLogService.addLog(teachingAdditionalWork.getWorkDept(), DepartDayLogType.COURSE_WORK_ASSIGN_COUNT);
+       for (String departId: teachingAdditionalWork.getWorkDept().split(",")){
+           teachingDepartDayLogService.addLog(departId, DepartDayLogType.COURSE_WORK_ASSIGN_COUNT);
+       }
        return teachingAdditionalWorkService.addNewAdditionalWork(teachingAdditionalWork);
    }
 
@@ -141,7 +143,9 @@ public class TeachingAdditionalWorkController extends JeecgController<TeachingAd
    @ApiOperation(value="附加作业-编辑", notes="附加作业-编辑")
    @PutMapping(value = "/edit")
    public Result<?> edit(@RequestBody TeachingAdditionalWork teachingAdditionalWork) {
-       teachingDepartDayLogService.addLog(teachingAdditionalWork.getWorkDept(), DepartDayLogType.COURSE_WORK_ASSIGN_COUNT);
+       for (String departId: teachingAdditionalWork.getWorkDept().split(",")){
+           teachingDepartDayLogService.addLog(departId, DepartDayLogType.COURSE_WORK_ASSIGN_COUNT);
+       }
        teachingAdditionalWorkService.updateById(teachingAdditionalWork);
        return Result.ok("编辑成功!");
    }
