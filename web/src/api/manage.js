@@ -193,9 +193,9 @@ export function getFilePrevew(path){
   }
   switch(store.getters.sysConfig.filePreview){
     case 'ow365':
-      return `http://ow365.cn/?i=${store.getters.sysConfig.owId}&furl=${path}`
+      return `http://ow365.cn/?i=${store.getters.sysConfig.owId}&furl=` + encodeURIComponent(path)
     case 'officeapps':
-      return 'https://view.officeapps.live.com/op/embed.aspx?src=' + path
+      return 'https://view.officeapps.live.com/op/embed.aspx?src=' + encodeURIComponent(path)
     case 'kkfileview':
       return  location.protocol + "//" + location.host + `:8012/preview/onlinePreview?url=` + encodeURIComponent(btoa(url))
     default:
