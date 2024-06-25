@@ -45,7 +45,7 @@
                   <a v-if="u.endsWith('sb3')" target="_blank" :href="'/scratch3/index.html?scene=create&workFile='+u"
                     ><a-icon type="code" /> {{(i+1)}}. 查看代码 </a
                   >
-                  <a v-else-if="u.endsWith('ppt')||u.endsWith('pptx')" target="_blank" :href="'https://view.officeapps.live.com/op/embed.aspx?src='+u"
+                  <a v-else-if="u.endsWith('ppt')||u.endsWith('pptx')" target="_blank" :href="getFilePrevew(u)"
                     ><a-icon type="file-ppt" /> {{(i+1)}}. 查看PPT </a
                   >
                   <a v-else target="_blank" :href="u"
@@ -58,7 +58,7 @@
                  <a v-if="u.endsWith('sb3')" target="_blank" :href="'/scratch3/index.html?scene=create&workFile='+u"
                     ><a-icon type="code" /> {{(i+1)}}. 查看代码 </a
                   >
-                  <a v-else-if="u.endsWith('ppt')||u.endsWith('pptx')" target="_blank" :href="'https://view.officeapps.live.com/op/embed.aspx?src='+u"
+                  <a v-else-if="u.endsWith('ppt')||u.endsWith('pptx')" target="_blank" :href="getFilePrevew(u)"
                     ><a-icon type="file-ppt" /> {{(i+1)}}. 查看PPT </a
                   >
                   <a v-else target="_blank" :href="u"
@@ -75,7 +75,7 @@
 </template>
 <script>
 
-import { getFileAccessHttpUrl } from '@/api/manage'
+import { getFileAccessHttpUrl, getFilePrevew } from '@/api/manage'
 export default {
   name: 'UnitViewModal',
   data() {
@@ -104,6 +104,7 @@ export default {
     })
   },
   methods: {
+    getFilePrevew,
     getFileAccessHttpUrl,
     handleCancel(e) {
       this.unit = {}

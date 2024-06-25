@@ -181,6 +181,12 @@ jeecg :
     webapp: D://opt//webapp
     # 文件访问地址
     staticDomain: /api/sys/common/static
+  # 文件预览服务 local ow365 officeapps kkfileview
+  filePreview: local
+  ow365:
+    id: ??
+    key: ??
+    iv: ??
   #短信秘钥
   sms:
      accessKeyId: ??
