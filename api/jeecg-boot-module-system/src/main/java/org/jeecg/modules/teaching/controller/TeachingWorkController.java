@@ -22,6 +22,7 @@ import org.jeecg.common.util.RedisUtil;
 import org.jeecg.common.util.oConvertUtils;
 import org.jeecg.config.QiniuConfig;
 import org.jeecg.modules.common.controller.BaseController;
+import org.jeecg.modules.common.util.Ow365Util;
 import org.jeecg.modules.common.util.QiniuUtil;
 import org.jeecg.modules.system.entity.SysFile;
 import org.jeecg.modules.system.service.ISysDataLogService;
@@ -86,6 +87,8 @@ public class TeachingWorkController extends BaseController {
 	private RedisUtil redisUtil;
 	@Autowired
 	private QiniuUtil qiniuUtil;
+	@Autowired
+	private Ow365Util ow365Util;
 	 @Autowired
 	 private ISysFileService sysFileService;
 
@@ -155,6 +158,9 @@ public class TeachingWorkController extends BaseController {
 				 if (file != null && StringUtils.isNotBlank(file.getFilePath())){
 					 work.setMineWorkCover(QiniuConfig.domain + "/" + file.getFilePath());
 				 }
+			 }
+			 if(StringUtils.isNotBlank(work.getWorkDocumentUrl())){
+				 work.setWorkDocumentUrl(ow365Util.getFileUrlStr(work.getWorkDocumentUrl()));
 			 }
 		 }
 		 result.setResult(list);

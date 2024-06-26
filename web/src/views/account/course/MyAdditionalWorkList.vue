@@ -37,7 +37,7 @@
               </template>
               <a-rate v-if="work.score" :disabled="true" :value="work.score" />
             </a-tooltip>
-            <a-button v-if="work.workDocumentUrl" @click="openWorkFile(work.workDocumentUrl_url)">作业资料</a-button>
+            <a-button v-if="work.workDocumentUrl" @click="openWorkFile(work.workDocumentUrl)">作业资料</a-button>
             <!-- <a-divider v-if="work.workDocumentUrl != null" type="vertical" /> -->
             <a-button type="primary" :disabled="work.mineWorkStatus > 1" @click="toAdditionalWork(work, false)"> {{work.mineWorkStatus==null?'去做作业':'修改作业'}} </a-button>
             <a-divider v-if="work.mineWorkStatus != null && work.mineWorkStatus < 2" type="vertical" />
@@ -80,6 +80,7 @@ export default {
     this.getList()
   },
   methods: {
+    getFilePrevew,
     getList() {
       this.loading = true
       this.datasource = []
@@ -99,7 +100,7 @@ export default {
       this.getList()
     },
     openWorkFile(workUrl) {
-      if(workUrl.endsWith('ppt')||workUrl.endsWith('pptx')){
+      if(workUrl.startsWith('aes')||workUrl.endsWith('ppt')||workUrl.endsWith('pptx')||workUrl.endsWith('doc')||workUrl.endsWith('docx')||workUrl.endsWith('xls')||workUrl.endsWith('xlsx')){
         window.open(getFilePrevew(workUrl))
       }else{
         window.open(workUrl)

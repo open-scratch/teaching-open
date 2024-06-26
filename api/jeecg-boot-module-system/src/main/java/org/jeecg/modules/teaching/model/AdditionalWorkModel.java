@@ -15,7 +15,7 @@ public class AdditionalWorkModel {
     private String workCover;
     @FileUrl
     private String workUrl;
-    @FileUrl
+//    @FileUrl
     private String workDocumentUrl;
     private String workDept;
     private Date createTime;
