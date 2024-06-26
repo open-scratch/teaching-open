@@ -55,6 +55,8 @@ import { getAction } from '@/api/manage'
 import { mixinDevice } from '@/utils/mixin.js'
 import JDictSelectTag from '@/components/dict/JDictSelectTag.vue'
 import TeachingWorkSubmitModal from '@/views/teaching/modules/TeachingWorkSubmitModal'
+import { getFileAccessHttpUrl, getFilePrevew } from '@/api/manage'
+
 export default {
   mixins: [mixinDevice],
   components: {
@@ -98,7 +100,7 @@ export default {
     },
     openWorkFile(workUrl) {
       if(workUrl.endsWith('ppt')||workUrl.endsWith('pptx')){
-        window.open('https://view.officeapps.live.com/op/embed.aspx?src='+workUrl)
+        window.open(getFilePrevew(workUrl))
       }else{
         window.open(workUrl)
       }

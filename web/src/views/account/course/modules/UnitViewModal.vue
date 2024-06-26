@@ -40,28 +40,28 @@
               <a-collapse-panel v-if="unit.courseWork_url" key="0" :header="'课后作业'" :style="customStyle">
                 <a-button @click="handleViewCode(unit)" type="primary" icon="edit">去做作业</a-button>
               </a-collapse-panel>
-              <a-collapse-panel v-if="unit.coursePpt_url" :header="'课程资料'" :style="customStyle">
-                <div v-for="(u,i) in unit.coursePpt_url.split(',')" :key="i">
+              <a-collapse-panel v-if="unit.coursePpt" :header="'课程资料'" :style="customStyle">
+                <div v-for="(u,i) in unit.coursePpt.split(',')" :key="i">
                   <a v-if="u.endsWith('sb3')" target="_blank" :href="'/scratch3/index.html?scene=create&workFile='+u"
                     ><a-icon type="code" /> {{(i+1)}}. 查看代码 </a
                   >
                   <a v-else-if="u.endsWith('ppt')||u.endsWith('pptx')" target="_blank" :href="getFilePrevew(u)"
                     ><a-icon type="file-ppt" /> {{(i+1)}}. 查看PPT </a
                   >
-                  <a v-else target="_blank" :href="u"
+                  <a v-else target="_blank" :href="getFilePrevew(u)"
                     ><a-icon type="file" /> {{(i+1)}}. 查看资料 </a
                   >
                 </div>
               </a-collapse-panel>
-              <a-collapse-panel v-if="unit.coursePlan_url" :header="'课程教案'" :style="customStyle">
-                <div v-for="(u,i) in unit.coursePlan_url.split(',')" :key="i">
+              <a-collapse-panel v-if="unit.coursePlan" :header="'课程教案'" :style="customStyle">
+                <div v-for="(u,i) in unit.coursePlan.split(',')" :key="i">
                  <a v-if="u.endsWith('sb3')" target="_blank" :href="'/scratch3/index.html?scene=create&workFile='+u"
                     ><a-icon type="code" /> {{(i+1)}}. 查看代码 </a
                   >
                   <a v-else-if="u.endsWith('ppt')||u.endsWith('pptx')" target="_blank" :href="getFilePrevew(u)"
                     ><a-icon type="file-ppt" /> {{(i+1)}}. 查看PPT </a
                   >
-                  <a v-else target="_blank" :href="u"
+                  <a v-else target="_blank" :href="getFilePrevew(u)"
                     ><a-icon type="file" /> {{(i+1)}}. 查看资料 </a
                   >
                 </div>

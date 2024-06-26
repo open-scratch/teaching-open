@@ -3,20 +3,17 @@ package org.jeecg.modules.teaching.controller;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
-import java.util.Map;
-import java.util.stream.Collectors;
-import java.io.IOException;
-import java.io.UnsupportedEncodingException;
-import java.net.URLDecoder;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import org.apache.commons.lang.StringUtils;
 import org.jeecg.common.api.vo.DictResult;
 import org.jeecg.common.api.vo.Result;
 import org.jeecg.common.aspect.annotation.PermissionData;
 import org.jeecg.common.system.query.QueryGenerator;
 import org.jeecg.common.system.vo.LoginUser;
-import org.jeecg.common.util.oConvertUtils;
+import org.jeecg.modules.common.util.Ow365Util;
+import org.jeecg.modules.common.util.QiniuUtil;
 import org.jeecg.modules.system.service.ISysFileService;
 import org.jeecg.modules.teaching.entity.TeachingCourseUnit;
 import org.jeecg.modules.teaching.model.CourseUnitModel;
@@ -29,18 +26,11 @@ import com.baomidou.mybatisplus.core.metadata.IPage;
 import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import lombok.extern.slf4j.Slf4j;
 
-import org.jeecgframework.poi.excel.ExcelImportUtil;
-import org.jeecgframework.poi.excel.def.NormalExcelConstants;
-import org.jeecgframework.poi.excel.entity.ExportParams;
-import org.jeecgframework.poi.excel.entity.ImportParams;
-import org.jeecgframework.poi.excel.view.JeecgEntityExcelView;
 import org.jeecg.common.system.base.controller.JeecgController;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.web.bind.annotation.*;
-import org.springframework.web.multipart.MultipartFile;
-import org.springframework.web.multipart.MultipartHttpServletRequest;
 import org.springframework.web.servlet.ModelAndView;
-import com.alibaba.fastjson.JSON;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
 import org.jeecg.common.aspect.annotation.AutoLog;
@@ -62,6 +52,9 @@ public class TeachingCourseUnitController extends JeecgController<TeachingCourse
 	private ITeachingCourseDeptService teachingCourseDeptService;
 	 @Autowired
 	 private ISysFileService sysFileService;
+	 @Autowired
+	 private Ow365Util ow365Util;
+
 
 
 	 @ApiOperation(value="我的课程单元", notes="我的课程单元")
@@ -69,7 +62,7 @@ public class TeachingCourseUnitController extends JeecgController<TeachingCourse
 	 public Result<?> mineUnit(@RequestParam String courseId,
 								@RequestParam(name="pageNo", defaultValue="1") Integer pageNo,
 								@RequestParam(name="pageSize", defaultValue="10") Integer pageSize,
-								HttpServletRequest req) {
+								HttpServletRequest req) throws Exception {
 		 //验证权限
 		 if (!teachingCourseDeptService.checkCoursePermission(courseId, getCurrentUser().getId())){
 			 return Result.error("无课程权限");
@@ -80,8 +73,15 @@ public class TeachingCourseUnitController extends JeecgController<TeachingCourse
 		 queryWrapper.orderByAsc("order_num");
 		 Page<CourseUnitModel> page = new Page<CourseUnitModel>(pageNo, pageSize);
 		 IPage<CourseUnitModel> pageList = teachingCourseUnitService.getCourseUnitList(page, queryWrapper);
-		 if (getCurrentUser().getUserIdentity() == null || getCurrentUser().getUserIdentity().equals(1)){
-			 for (CourseUnitModel model: pageList.getRecords()){
+
+		 for (CourseUnitModel model: pageList.getRecords()){
+			 if(StringUtils.isNotBlank(model.getCoursePpt())){
+				 model.setCoursePpt(ow365Util.getFileUrlStr(model.getCoursePpt()));
+			 }
+			 if(StringUtils.isNotBlank(model.getCoursePlan())){
+				 model.setCoursePlan(ow365Util.getFileUrlStr(model.getCoursePlan()));
+			 }
+		 	if (getCurrentUser().getUserIdentity() == null || getCurrentUser().getUserIdentity().equals(1)){
 				 model.setCourseVideo(model.getShowCourseVideo()?model.getCourseVideo(): null);
 				 model.setCourseCase(model.getShowCourseCase()?model.getCourseCase(): null);
 				 model.setCoursePlan(model.getShowCoursePlan()?model.getCoursePlan(): null);
@@ -90,6 +90,8 @@ public class TeachingCourseUnitController extends JeecgController<TeachingCourse
 		 }
 		 return Result.ok(pageList);
 	 }
+
+
 	
 	/**
 	 * 分页列表查询

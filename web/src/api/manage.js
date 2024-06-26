@@ -188,12 +188,18 @@ export function getFileAccessHttpUrl(path,subStr) {
  */
 export function getFilePrevew(path){
   if(!path) return null
-  if(!path.startsWith('http:') && !path.startsWith('https:')){
+  let ssl = ''
+  if(path.startsWith('aes:')){
+    path = path.slice(4)
+  }else if(path.startsWith('aess:')){
+    path = path.slice(5)
+    ssl = '&ssl=1'
+  }else if(!path.startsWith('http:') && !path.startsWith('https:')){
     path = getFileAccessHttpUrl(path)
   }
   switch(store.getters.sysConfig.filePreview){
     case 'ow365':
-      return `http://ow365.cn/?i=${store.getters.sysConfig.owId}&furl=` + encodeURIComponent(path)
+      return `http://ow365.cn/?i=${store.getters.sysConfig.owId}${ssl}&n=5&furl=` + path
     case 'officeapps':
       return 'https://view.officeapps.live.com/op/embed.aspx?src=' + encodeURIComponent(path)
     case 'kkfileview':
