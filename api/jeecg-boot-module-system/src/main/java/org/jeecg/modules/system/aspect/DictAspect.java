@@ -16,6 +16,7 @@ import org.jeecg.common.aspect.annotation.Dict;
 import org.jeecg.common.constant.CommonConstant;
 import org.jeecg.common.util.oConvertUtils;
 import org.jeecg.config.QiniuConfig;
+import org.jeecg.modules.common.util.QiniuUtil;
 import org.jeecg.modules.system.entity.SysFile;
 import org.jeecg.modules.system.service.ISysDictService;
 import org.jeecg.modules.system.service.ISysFileService;
@@ -44,6 +45,8 @@ import lombok.extern.slf4j.Slf4j;
 public class DictAspect {
     @Autowired
     private ISysDictService dictService;
+    @Autowired
+    private QiniuUtil qiniuUtil;
     // 定义切点Pointcut
     @Pointcut("execution(public * org.jeecg.modules..*.*Controller.*(..))")
     public void excudeService() {
@@ -144,11 +147,11 @@ public class DictAspect {
                 if (key.contains(",")){
                     List<String> sl = new ArrayList<>();
                     for (String v: key.split(",")){
-                        sl.add(getFileUrl(v));
+                        sl.add(qiniuUtil.getFileUrl(v));
                     }
                     item.put(field.getName() + "_url", org.apache.commons.lang.StringUtils.join(sl, ","));
                 }else{
-                    item.put(field.getName() + "_url", getFileUrl(key));
+                    item.put(field.getName() + "_url", qiniuUtil.getFileUrl(key));
                 }
             }
             //date类型默认转换string格式化日期
@@ -160,29 +163,6 @@ public class DictAspect {
         return item;
     }
 
-    @Value(value="${jeecg.uploadType}")
-    private String uploadType;
-    @Value(value="${jeecg.path.staticDomain}")
-    private String staticDomain;
-    /**
-     * 获取文件访问地址
-     * @param fileKey
-     * @return
-     */
-    private String getFileUrl(String fileKey){
-        //TODO 应该从文件表中获取文件存储位置。
-        if (StringUtils.isEmpty(fileKey) || "null".equals(fileKey)){
-            return "";
-        }
-        //粗略判断一下fileKey是实际文件还是sysFile的id
-        if (CommonConstant.UPLOAD_TYPE_QINIU.equals(uploadType)){
-            return QiniuConfig.domain + "/" + fileKey;
-        }
-        if (CommonConstant.UPLOAD_TYPE_LOCAL.equals(uploadType)){
-            return staticDomain + "/" + fileKey;
-        }
-        return "";
-    }
 
     /**
      *  翻译字典文本
