@@ -182,6 +182,33 @@ export function getFileAccessHttpUrl(path,subStr) {
   }
 }
 
+/**
+ * 获取文件预览
+ * @param path 
+ */
+export function getFilePrevew(path){
+  if(!path) return null
+  let ssl = ''
+  if(path.startsWith('aes:')){
+    path = path.slice(4)
+  }else if(path.startsWith('aess:')){
+    path = path.slice(5)
+    ssl = '&ssl=1'
+  }else if(!path.startsWith('http:') && !path.startsWith('https:')){
+    path = getFileAccessHttpUrl(path)
+  }
+  switch(store.getters.sysConfig.filePreview){
+    case 'ow365':
+      return `http://ow365.cn/?i=${store.getters.sysConfig.owId}${ssl}&n=5&furl=` + path
+    case 'officeapps':
+      return 'https://view.officeapps.live.com/op/embed.aspx?src=' + encodeURIComponent(path)
+    case 'kkfileview':
+      return  location.protocol + "//" + location.host + `:8012/preview/onlinePreview?url=` + encodeURIComponent(btoa(url))
+    default:
+      return path
+  }
+}
+
 //获取当前配置
 export function getSysConfig(){
   return axios({

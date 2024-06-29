@@ -9,8 +9,11 @@ import com.qiniu.storage.Configuration;
 import com.qiniu.storage.UploadManager;
 import com.qiniu.storage.model.DefaultPutRet;
 import com.qiniu.util.Auth;
+import org.jeecg.common.constant.CommonConstant;
 import org.jeecg.config.QiniuConfig;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Component;
+import org.springframework.util.StringUtils;
 
 import java.io.File;
 
@@ -82,5 +85,29 @@ public class QiniuUtil {
             }
             return false;
         }
+    }
+
+    @Value(value="${jeecg.uploadType}")
+    private String uploadType;
+    @Value(value="${jeecg.path.staticDomain}")
+    private String staticDomain;
+    /**
+     * 获取文件访问地址
+     * @param fileKey
+     * @return
+     */
+    public String getFileUrl(String fileKey){
+        //TODO 应该从文件表中获取文件存储位置。
+        if (StringUtils.isEmpty(fileKey) || "null".equals(fileKey)){
+            return "";
+        }
+        //粗略判断一下fileKey是实际文件还是sysFile的id
+        if (CommonConstant.UPLOAD_TYPE_QINIU.equals(uploadType)){
+            return QiniuConfig.domain + "/" + fileKey;
+        }
+        if (CommonConstant.UPLOAD_TYPE_LOCAL.equals(uploadType)){
+            return staticDomain + "/" + fileKey;
+        }
+        return "";
     }
 }

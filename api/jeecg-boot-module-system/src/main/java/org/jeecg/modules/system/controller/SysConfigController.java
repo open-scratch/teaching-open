@@ -23,6 +23,11 @@ public class SysConfigController {
     private String staticDomain;
     @Value(value="${jeecg.uploadType}")
     private String uploadType;
+    @Value(value="${jeecg.filePreview}")
+    private String filePreview;
+
+    @Value(value="${jeecg.ow365.id}")
+    private String owId;
 
     @GetMapping("getConfig")
     public Result<String> getConfig(@RequestParam String key){
@@ -75,6 +80,10 @@ public class SysConfigController {
         tenantConfig.put("qiniuDomain", QiniuConfig.domain);
         tenantConfig.put("qiniuArea", QiniuConfig.area);
         tenantConfig.put("staticDomain", staticDomain);
+        tenantConfig.put("filePreview", filePreview);
+        if ("ow365".equals(filePreview)){
+            tenantConfig.put("owId", owId);
+        }
         result.setResult(tenantConfig);
         return result;
     }

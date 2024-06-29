@@ -37,7 +37,7 @@
               </template>
               <a-rate v-if="work.score" :disabled="true" :value="work.score" />
             </a-tooltip>
-            <a-button v-if="work.workDocumentUrl" @click="openWorkFile(work.workDocumentUrl_url)">作业资料</a-button>
+            <a-button v-if="work.workDocumentUrl" @click="openWorkFile(work.workDocumentUrl)">作业资料</a-button>
             <!-- <a-divider v-if="work.workDocumentUrl != null" type="vertical" /> -->
             <a-button type="primary" :disabled="work.mineWorkStatus > 1" @click="toAdditionalWork(work, false)"> {{work.mineWorkStatus==null?'去做作业':'修改作业'}} </a-button>
             <a-divider v-if="work.mineWorkStatus != null && work.mineWorkStatus < 2" type="vertical" />
@@ -55,6 +55,8 @@ import { getAction } from '@/api/manage'
 import { mixinDevice } from '@/utils/mixin.js'
 import JDictSelectTag from '@/components/dict/JDictSelectTag.vue'
 import TeachingWorkSubmitModal from '@/views/teaching/modules/TeachingWorkSubmitModal'
+import { getFileAccessHttpUrl, getFilePrevew } from '@/api/manage'
+
 export default {
   mixins: [mixinDevice],
   components: {
@@ -78,6 +80,7 @@ export default {
     this.getList()
   },
   methods: {
+    getFilePrevew,
     getList() {
       this.loading = true
       this.datasource = []
@@ -97,8 +100,8 @@ export default {
       this.getList()
     },
     openWorkFile(workUrl) {
-      if(workUrl.endsWith('ppt')||workUrl.endsWith('pptx')){
-        window.open('https://view.officeapps.live.com/op/embed.aspx?src='+workUrl)
+      if(workUrl.startsWith('aes')||workUrl.endsWith('ppt')||workUrl.endsWith('pptx')||workUrl.endsWith('doc')||workUrl.endsWith('docx')||workUrl.endsWith('xls')||workUrl.endsWith('xlsx')){
+        window.open(getFilePrevew(workUrl))
       }else{
         window.open(workUrl)
       }
