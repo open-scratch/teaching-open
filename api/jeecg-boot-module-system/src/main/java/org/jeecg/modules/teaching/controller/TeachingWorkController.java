@@ -202,12 +202,11 @@ public class TeachingWorkController extends BaseController {
 			 }
 			 teachingWork.setId(null);
 			 teachingWork.setUserId(getCurrentUser().getId());
-			 if (oldWorks.size() > 0){
-				 if (StringUtils.isNotBlank(teachingWork.getCourseId())){
-					 String departId = teachingCourseUnitService.getUserDepartIdByUnitId(getCurrentUser().getId(), teachingWork.getCourseId());
-					 teachingWork.setDepartId(departId);
-				 }
-
+			 if (StringUtils.isNotBlank(teachingWork.getCourseId())){
+				 String departId = teachingCourseUnitService.getUserDepartIdByUnitId(getCurrentUser().getId(), teachingWork.getCourseId());
+				 teachingWork.setDepartId(departId);
+			 }
+			 if (!oldWorks.isEmpty()){
 				 teachingWork.setId(oldWorks.get(0).getId());
 				 teachingWork.setCreateTime(new Date());
 				 //teachingWork.setUpdateTime(new Date());
@@ -223,10 +222,18 @@ public class TeachingWorkController extends BaseController {
 
 			 //班级每日教学记录
 			 if (isNotEmpty(teachingWork.getAdditionalId()) && isNotEmpty(teachingWork.getDepartId())){
-				 teachingDepartDayLogService.addLog(teachingWork.getDepartId(), DepartDayLogType.ADDITIONAL_WORK_SUBMIT_COUNT);
+				 String key = String.format("departLog:addiWorkSubmit:%s", teachingWork.getDepartId());
+				 if (!redisUtil.sHasKey(key, teachingWork.getId())) {
+					 redisUtil.sSet(key, teachingWork.getId());
+					 teachingDepartDayLogService.addLog(teachingWork.getDepartId(), DepartDayLogType.ADDITIONAL_WORK_SUBMIT_COUNT);
+				 }
 			 }
 			 if (isNotEmpty(teachingWork.getCourseId()) && isNotEmpty(teachingWork.getDepartId())){
-				 teachingDepartDayLogService.addLog(teachingWork.getDepartId(), DepartDayLogType.COURSE_WORK_SUBMIT_COUNT);
+				 String key = String.format("departLog:courseWorkSubmit:%s", teachingWork.getDepartId());
+				 if (!redisUtil.sHasKey(key, teachingWork.getId())) {
+					 redisUtil.sSet(key, teachingWork.getId());
+					 teachingDepartDayLogService.addLog(teachingWork.getDepartId(), DepartDayLogType.COURSE_WORK_SUBMIT_COUNT);
+				 }
 			 }
 		 } catch (Exception e) {
 			 log.error(e.getMessage(),e);
@@ -499,10 +506,18 @@ public class TeachingWorkController extends BaseController {
 		teachingWorkService.updateMain(teachingWork, teachingWorkPage.getTeachingWorkCorrectList(),teachingWorkPage.getTeachingWorkCommentList());
 		if (StringUtils.isNotBlank(teachingWork.getDepartId())){
 			if (StringUtils.isNotEmpty(teachingWork.getAdditionalId())){
-				teachingDepartDayLogService.addLog(teachingWork.getDepartId(), DepartDayLogType.ADDITIONAL_WORK_CORRECT_COUNT);
+				String key = String.format("departLog:addiWorkCorrect:%s", teachingWork.getDepartId());
+				if (!redisUtil.sHasKey(key, teachingWork.getId())) {
+					redisUtil.sSet(key, teachingWork.getId());
+					teachingDepartDayLogService.addLog(teachingWork.getDepartId(), DepartDayLogType.ADDITIONAL_WORK_CORRECT_COUNT);
+				}
 			}
 			if (StringUtils.isNotEmpty(teachingWork.getCourseId())){
-				teachingDepartDayLogService.addLog(teachingWork.getDepartId(), DepartDayLogType.COURSE_WORK_CORRECT_COUNT);
+				String key = String.format("departLog:courseWorkCorrect:%s", teachingWork.getDepartId());
+				if (!redisUtil.sHasKey(key, teachingWork.getId())) {
+					redisUtil.sSet(key, teachingWork.getId());
+					teachingDepartDayLogService.addLog(teachingWork.getDepartId(), DepartDayLogType.COURSE_WORK_CORRECT_COUNT);
+				}
 			}
 		}
 		return Result.ok("编辑成功!");

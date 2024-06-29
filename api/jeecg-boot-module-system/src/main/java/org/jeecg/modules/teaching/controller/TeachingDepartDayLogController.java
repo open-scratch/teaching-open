@@ -7,13 +7,17 @@ import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
 import lombok.extern.slf4j.Slf4j;
 import org.apache.commons.lang.StringUtils;
+import org.apache.ibatis.annotations.Param;
 import org.apache.shiro.SecurityUtils;
 import org.jeecg.common.api.vo.Result;
 import org.jeecg.common.aspect.annotation.AutoLog;
 import org.jeecg.common.system.base.controller.JeecgController;
 import org.jeecg.common.system.query.QueryGenerator;
 import org.jeecg.common.system.vo.LoginUser;
+import org.jeecg.common.util.RedisUtil;
 import org.jeecg.modules.teaching.entity.TeachingDepartDayLog;
+import org.jeecg.modules.teaching.enums.DepartDayLogType;
+import org.jeecg.modules.teaching.service.ITeachingCourseUnitService;
 import org.jeecg.modules.teaching.service.ITeachingDepartDayLogService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
@@ -37,6 +41,23 @@ import java.util.List;
 public class TeachingDepartDayLogController extends JeecgController<TeachingDepartDayLog, ITeachingDepartDayLogService> {
    @Autowired
    private ITeachingDepartDayLogService teachingDepartDayLogService;
+   @Autowired
+   private ITeachingCourseUnitService teachingCourseUnitService;
+   @Autowired
+   private RedisUtil redisUtil;
+
+   @GetMapping("unitViewLog")
+   public Result<?> unitViewLog(@RequestParam String unitId){
+       String departId = teachingCourseUnitService.getUserDepartIdByUnitId(getCurrentUser().getId(), unitId);
+       String key = String.format("departLog:unitView:%s", departId);
+       if (getCurrentUser().getUserIdentity().equals(2)){
+            if (!redisUtil.sHasKey(key, unitId)){
+                redisUtil.sSet(key, unitId);
+                teachingDepartDayLogService.addLog(departId, DepartDayLogType.UNIT_OPEN_COUNT);
+            }
+       }
+       return Result.ok();
+   }
 
     /**
      * 获取每日教学记录

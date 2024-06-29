@@ -10,6 +10,7 @@ import org.jeecg.common.api.vo.Result;
 import org.jeecg.common.aspect.annotation.AutoLog;
 import org.jeecg.common.system.base.controller.JeecgController;
 import org.jeecg.common.system.query.QueryGenerator;
+import org.jeecg.common.util.RedisUtil;
 import org.jeecg.modules.system.service.ISysDepartService;
 import org.jeecg.modules.teaching.entity.TeachingAdditionalWork;
 import org.jeecg.modules.teaching.enums.DepartDayLogType;
@@ -38,6 +39,8 @@ public class TeachingAdditionalWorkController extends JeecgController<TeachingAd
    private ISysDepartService sysDepartService;
    @Autowired
    private ITeachingDepartDayLogService teachingDepartDayLogService;
+   @Autowired
+   private RedisUtil redisUtil;
 
    @ApiOperation("获取附加作业详情")
    @GetMapping("getWorkInfo")
@@ -128,7 +131,11 @@ public class TeachingAdditionalWorkController extends JeecgController<TeachingAd
    @PostMapping(value = "/add")
    public Result<?> add(@RequestBody TeachingAdditionalWork teachingAdditionalWork) {
        for (String departId: teachingAdditionalWork.getWorkDept().split(",")){
-           teachingDepartDayLogService.addLog(departId, DepartDayLogType.COURSE_WORK_ASSIGN_COUNT);
+           String key = String.format("departLog:addiWorkAssign:%s", departId);
+           if (!redisUtil.sHasKey(key, teachingAdditionalWork.getId())) {
+               redisUtil.sSet(key, teachingAdditionalWork.getId());
+               teachingDepartDayLogService.addLog(departId, DepartDayLogType.COURSE_WORK_ASSIGN_COUNT);
+           }
        }
        return teachingAdditionalWorkService.addNewAdditionalWork(teachingAdditionalWork);
    }
@@ -144,7 +151,11 @@ public class TeachingAdditionalWorkController extends JeecgController<TeachingAd
    @PutMapping(value = "/edit")
    public Result<?> edit(@RequestBody TeachingAdditionalWork teachingAdditionalWork) {
        for (String departId: teachingAdditionalWork.getWorkDept().split(",")){
-           teachingDepartDayLogService.addLog(departId, DepartDayLogType.COURSE_WORK_ASSIGN_COUNT);
+           String key = String.format("departLog:addiWorkAssign:%s", departId);
+           if (!redisUtil.sHasKey(key, teachingAdditionalWork.getId())) {
+               redisUtil.sSet(key, teachingAdditionalWork.getId());
+               teachingDepartDayLogService.addLog(departId, DepartDayLogType.COURSE_WORK_ASSIGN_COUNT);
+           }
        }
        teachingAdditionalWorkService.updateById(teachingAdditionalWork);
        return Result.ok("编辑成功!");

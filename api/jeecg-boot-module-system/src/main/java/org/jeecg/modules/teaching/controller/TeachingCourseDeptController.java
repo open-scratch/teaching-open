@@ -117,7 +117,6 @@ public class TeachingCourseDeptController extends JeecgController<TeachingCourse
 	@PostMapping(value = "/add")
 	public Result<?> add(@RequestBody TeachingCourseDept teachingCourseDept) {
 		teachingCourseDeptService.save(teachingCourseDept);
-		teachingDepartDayLogService.addLog(teachingCourseDept.getDeptId(), DepartDayLogType.UNIT_OPEN_COUNT);
 		return Result.ok("添加成功！");
 	}
 	
@@ -132,7 +131,6 @@ public class TeachingCourseDeptController extends JeecgController<TeachingCourse
 	@PutMapping(value = "/edit")
 	public Result<?> edit(@RequestBody TeachingCourseDept teachingCourseDept) {
 		teachingCourseDeptService.updateById(teachingCourseDept);
-		teachingDepartDayLogService.addLog(teachingCourseDept.getDeptId(), DepartDayLogType.UNIT_OPEN_COUNT);
 		return Result.ok("编辑成功!");
 	}
 	
