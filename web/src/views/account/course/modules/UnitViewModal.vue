@@ -75,7 +75,7 @@
 </template>
 <script>
 
-import { getFileAccessHttpUrl, getFilePrevew } from '@/api/manage'
+import { getFileAccessHttpUrl,getAction, getFilePrevew } from '@/api/manage'
 export default {
   name: 'UnitViewModal',
   data() {
@@ -103,9 +103,16 @@ export default {
       })
     })
   },
+  created(){
+  },
   methods: {
     getFilePrevew,
     getFileAccessHttpUrl,
+    view(unit){
+      this.visible = true;
+      this.unit = unit
+      getAction('/teaching/teachingDepartDayLog/unitViewLog?unitId=' + this.unit.id)
+    },
     handleCancel(e) {
       this.unit = {}
       this.visible = false

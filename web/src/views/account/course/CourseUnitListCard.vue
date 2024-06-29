@@ -69,9 +69,7 @@ export default {
         })
     },
     viewUnit(unit){
-      console.log(unit);
-      this.$refs.unitViewModal.visible = true;
-      this.$refs.unitViewModal.unit = unit
+      this.$refs.unitViewModal.view(unit)
     },
   }
 }

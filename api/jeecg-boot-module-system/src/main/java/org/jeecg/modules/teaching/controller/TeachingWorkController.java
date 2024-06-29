@@ -29,15 +29,15 @@ import org.jeecg.modules.system.service.ISysDataLogService;
 import org.jeecg.modules.system.service.ISysDepartService;
 import org.jeecg.modules.system.service.ISysFileService;
 import org.jeecg.modules.system.service.ISysUserService;
+import org.jeecg.modules.teaching.entity.TeachingAdditionalWork;
 import org.jeecg.modules.teaching.entity.TeachingWork;
 import org.jeecg.modules.teaching.entity.TeachingWorkComment;
 import org.jeecg.modules.teaching.entity.TeachingWorkCorrect;
+import org.jeecg.modules.teaching.enums.DepartDayLogType;
 import org.jeecg.modules.teaching.model.AdditionalWorkModel;
 import org.jeecg.modules.teaching.model.StudentWorkModel;
 import org.jeecg.modules.teaching.model.WorkCommentModel;
-import org.jeecg.modules.teaching.service.ITeachingWorkCommentService;
-import org.jeecg.modules.teaching.service.ITeachingWorkCorrectService;
-import org.jeecg.modules.teaching.service.ITeachingWorkService;
+import org.jeecg.modules.teaching.service.*;
 import org.jeecg.modules.teaching.vo.StudentWorkSendVO;
 import org.jeecg.modules.teaching.vo.TeachingWorkPage;
 import org.jeecgframework.poi.excel.ExcelImportUtil;
@@ -91,6 +91,12 @@ public class TeachingWorkController extends BaseController {
 	private Ow365Util ow365Util;
 	 @Autowired
 	 private ISysFileService sysFileService;
+	 @Autowired
+	 private ITeachingDepartDayLogService teachingDepartDayLogService;
+	 @Autowired
+	 private ITeachingAdditionalWorkService teachingAdditionalWorkService;
+	 @Autowired
+	 private ITeachingCourseUnitService teachingCourseUnitService;
 
 	 /**
 	  * 我的作业分页列表查询
@@ -202,7 +208,11 @@ public class TeachingWorkController extends BaseController {
 			 }
 			 teachingWork.setId(null);
 			 teachingWork.setUserId(getCurrentUser().getId());
-			 if (oldWorks.size() > 0){
+			 if (StringUtils.isNotBlank(teachingWork.getCourseId())){
+				 String departId = teachingCourseUnitService.getUserDepartIdByUnitId(getCurrentUser().getId(), teachingWork.getCourseId());
+				 teachingWork.setDepartId(departId);
+			 }
+			 if (!oldWorks.isEmpty()){
 				 teachingWork.setId(oldWorks.get(0).getId());
 				 teachingWork.setCreateTime(new Date());
 				 //teachingWork.setUpdateTime(new Date());
@@ -215,6 +225,22 @@ public class TeachingWorkController extends BaseController {
 				 result.success("添加成功！");
 			 }
 			 teachingWorkService.saveOrUpdate(teachingWork);
+
+			 //班级每日教学记录
+			 if (isNotEmpty(teachingWork.getAdditionalId()) && isNotEmpty(teachingWork.getDepartId())){
+				 String key = String.format("departLog:addiWorkSubmit:%s", teachingWork.getDepartId());
+				 if (!redisUtil.sHasKey(key, teachingWork.getId())) {
+					 redisUtil.sSet(key, teachingWork.getId());
+					 teachingDepartDayLogService.addLog(teachingWork.getDepartId(), DepartDayLogType.ADDITIONAL_WORK_SUBMIT_COUNT);
+				 }
+			 }
+			 if (isNotEmpty(teachingWork.getCourseId()) && isNotEmpty(teachingWork.getDepartId())){
+				 String key = String.format("departLog:courseWorkSubmit:%s", teachingWork.getDepartId());
+				 if (!redisUtil.sHasKey(key, teachingWork.getId())) {
+					 redisUtil.sSet(key, teachingWork.getId());
+					 teachingDepartDayLogService.addLog(teachingWork.getDepartId(), DepartDayLogType.COURSE_WORK_SUBMIT_COUNT);
+				 }
+			 }
 		 } catch (Exception e) {
 			 log.error(e.getMessage(),e);
 			 result.error500("系统内部错误");
@@ -484,6 +510,22 @@ public class TeachingWorkController extends BaseController {
 			return Result.error("未找到对应数据");
 		}
 		teachingWorkService.updateMain(teachingWork, teachingWorkPage.getTeachingWorkCorrectList(),teachingWorkPage.getTeachingWorkCommentList());
+		if (StringUtils.isNotBlank(teachingWork.getDepartId())){
+			if (StringUtils.isNotEmpty(teachingWork.getAdditionalId())){
+				String key = String.format("departLog:addiWorkCorrect:%s", teachingWork.getDepartId());
+				if (!redisUtil.sHasKey(key, teachingWork.getId())) {
+					redisUtil.sSet(key, teachingWork.getId());
+					teachingDepartDayLogService.addLog(teachingWork.getDepartId(), DepartDayLogType.ADDITIONAL_WORK_CORRECT_COUNT);
+				}
+			}
+			if (StringUtils.isNotEmpty(teachingWork.getCourseId())){
+				String key = String.format("departLog:courseWorkCorrect:%s", teachingWork.getDepartId());
+				if (!redisUtil.sHasKey(key, teachingWork.getId())) {
+					redisUtil.sSet(key, teachingWork.getId());
+					teachingDepartDayLogService.addLog(teachingWork.getDepartId(), DepartDayLogType.COURSE_WORK_CORRECT_COUNT);
+				}
+			}
+		}
 		return Result.ok("编辑成功!");
 	}
 	

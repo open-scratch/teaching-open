@@ -62,4 +62,9 @@
         where unit.id = #{unitId}
         limit 1
     </select>
+    <select id="getUserDepartIdByUnitId" resultType="java.lang.String">
+        select dept_id from teaching_course_dept
+        where course_id = (select course_id from teaching_course_unit where id = #{unitId})
+         and dept_id in (select dep_id from sys_user_depart where user_id = #{userId}) limit 1
+    </select>
 </mapper>

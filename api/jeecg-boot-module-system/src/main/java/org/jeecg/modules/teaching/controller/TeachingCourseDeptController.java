@@ -13,6 +13,7 @@ import org.jeecg.common.api.vo.Result;
 import org.jeecg.common.system.query.QueryGenerator;
 import org.jeecg.common.util.oConvertUtils;
 import org.jeecg.modules.teaching.entity.TeachingCourseDept;
+import org.jeecg.modules.teaching.enums.DepartDayLogType;
 import org.jeecg.modules.teaching.model.CourseDeptModel;
 import org.jeecg.modules.teaching.service.ITeachingCourseDeptService;
 
@@ -21,6 +22,7 @@ import com.baomidou.mybatisplus.core.metadata.IPage;
 import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import lombok.extern.slf4j.Slf4j;
 
+import org.jeecg.modules.teaching.service.ITeachingDepartDayLogService;
 import org.jeecg.modules.teaching.vo.DepartCourseVO;
 import org.jeecgframework.poi.excel.ExcelImportUtil;
 import org.jeecgframework.poi.excel.def.NormalExcelConstants;
@@ -51,6 +53,8 @@ import org.jeecg.common.aspect.annotation.AutoLog;
 public class TeachingCourseDeptController extends JeecgController<TeachingCourseDept, ITeachingCourseDeptService> {
 	@Autowired
 	private ITeachingCourseDeptService teachingCourseDeptService;
+	@Autowired
+	private ITeachingDepartDayLogService teachingDepartDayLogService;
 	
 	/**
 	 * 分页列表查询

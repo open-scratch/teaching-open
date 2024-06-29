@@ -36,6 +36,11 @@ public class TeachingWork implements Serializable {
     @Dict(dictTable = "sys_user", dicText = "realname", dicCode = "id")
     @ApiModelProperty(value = "用户ID")
     private java.lang.String userId;
+    /**班级ID*/
+    @Excel(name = "班级", width = 15, dictTable = "sys_depart", dicText = "depart_name", dicCode = "id")
+    @Dict(dictTable = "sys_depart", dicText = "depart_name", dicCode = "id")
+    @ApiModelProperty(value = "班级")
+    private java.lang.String departId;
 	/**课程ID*/
 	@Excel(name = "课程", width = 15, dictTable = "teaching_course_unit", dicText = "unit_name", dicCode = "id")
     @Dict(dictTable = "teaching_course_unit", dicText = "unit_name", dicCode = "id")
