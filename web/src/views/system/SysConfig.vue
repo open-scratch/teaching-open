@@ -120,6 +120,22 @@
           <a-row>
             <a-col :span="6">
               <a-form-item
+                label="开放作品评论"
+                :labelCol="{ xs: { span: 12 }, sm: { span: 10 } }"
+                :wrapperCol="{ xs: { span: 12 }, sm: { span: 14 } }"
+              >
+                <j-dict-select-tag
+                  type="radioButton"
+                  v-decorator="['allowComment', { initialValue: '0' }]"
+                  :trigger-change="true"
+                  @change="(v) => (model.allowComment = v.target.value)"
+                  dictCode="yn"
+                  placeholder="请选择是否开放评论"
+                />
+              </a-form-item>
+            </a-col>
+            <a-col :span="6">
+              <a-form-item
                 label="开放注册"
                 :labelCol="{ xs: { span: 12 }, sm: { span: 10 } }"
                 :wrapperCol="{ xs: { span: 12 }, sm: { span: 14 } }"
@@ -154,17 +170,17 @@
                 ></j-select-depart>
               </a-form-item>
             </a-col>
-          <a-col :span="10">
-            <a-form-item label="默认头像" :labelCol="labelCol" :wrapperCol="wrapperCol">
-              <j-upload
-                  v-decorator="['avatar']"
-                  :fileType="'image'"
-                  :number="1"
-                  :multiple="false"
-                  :trigger-change="true"
-                ></j-upload>
-            </a-form-item>
-          </a-col>
+            <a-col :span="10">
+              <a-form-item label="默认头像" :labelCol="labelCol" :wrapperCol="wrapperCol">
+                <j-upload
+                    v-decorator="['avatar']"
+                    :fileType="'image'"
+                    :number="1"
+                    :multiple="false"
+                    :trigger-change="true"
+                  ></j-upload>
+              </a-form-item>
+            </a-col>
           </a-row>
         </a-tab-pane>
         <a-tab-pane key="jscss" tab="自定义代码" forceRender>

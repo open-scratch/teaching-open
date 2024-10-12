@@ -64,7 +64,7 @@
             </div>
 
             <!-- 评论区 -->
-            <div class="project-comment">
+            <div class="project-comment" v-if="sysConfig.allowComment == 1">
               <div class="publish">
                 <a-row type="flex" justify="space-between">
                   <a-col :span="3" class="comment-user"  v-if="!_isMobile()">
