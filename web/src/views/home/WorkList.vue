@@ -36,10 +36,10 @@
                 <p>{{ item.workName }}</p>
                 <a-row class="work-author">
                   <a-col :span="6">
-                    <a-avatar shape="square" class="avatar" :size="40" :src="item.avatar_url" />
+                    <a-avatar shape="square" class="avatar" :size="40" :src="item.avatar_url" @click="toFriend(item.userId)"/>
                   </a-col>
                   <a-col :span="18">
-                    <span>{{ item.realname || item.username }}</span>
+                    <span @click="toFriend(item.userId)">{{ item.realname || item.username }}</span>
                   </a-col>
                 </a-row>
               </div>
@@ -124,6 +124,15 @@ export default {
       });
       window.open(route.href, '_blank');
     },
+    toFriend(id){
+      let route = this.$router.resolve({
+        path: "/friend-detail",
+        query: {
+          id: id,
+        },
+      });
+      window.open(route.href, '_blank');
+    },
     _isMobile() {
       return (
         navigator.userAgent.match(
@@ -163,6 +172,7 @@ export default {
     .work-author {
       span {
         line-height: 40px;
+        cursor: pointer;
       }
     }
     .ant-tag {

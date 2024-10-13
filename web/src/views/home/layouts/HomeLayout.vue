@@ -49,10 +49,10 @@ import Vue from 'vue'
 import { getAction, getFileAccessHttpUrl } from '@/api/manage'
 import { ACCESS_TOKEN } from '@/store/mutation-types'
 import { mapActions, mapGetters } from 'vuex'
-import Header from './modules/Header'
-import Banner from './modules/Banner'
-import Footer from './modules/Footer'
-import UserEnter from './modules/UserEnter'
+import Header from '../modules/Header'
+import Banner from '../modules/Banner'
+import Footer from '../modules/Footer'
+import UserEnter from '../modules/UserEnter'
 
 export default {
   name: 'HomeLayout',

@@ -1,140 +1,119 @@
 <template>
-  <div class="container"
-    :style="{
-      backgroundColor: sysConfig.homeBgColor,
-      backgroundImage: sysConfig.file_homeBg ? 'url(' + getFileAccessHttpUrl(sysConfig.file_homeBg) + ')' : '',
-      backgroundRepeat: sysConfig.homeBgRepeat ? sysConfig.homeBgRepeat : '',
-    }"
-  >
-    <a-layout>
-      <a-layout-header>
-        <Header/>
-      </a-layout-header>
-      <a-layout>
-        <a-layout-content>
-          <div class="project-detail">
-            <!-- 播放器 -->
-            <div class="scratch-player">
-              <iframe
-                :src="frameHref"
-                id="player"
-                frameborder="0"
-                width="100%"
-                height="100%"
-                :scrolling="workInfo.workType==4||workInfo.workType==10?'auto':'no'"
-              ></iframe>
+  <div>
+    <div class="project-detail">
+      <!-- 播放器 -->
+      <div class="scratch-player">
+        <iframe
+          :src="frameHref"
+          id="player"
+          frameborder="0"
+          width="100%"
+          height="100%"
+          :scrolling="workInfo.workType == 4 || workInfo.workType == 10 ? 'auto' : 'no'"
+        ></iframe>
+      </div>
+      <keyboard v-if="_isMobile() && workInfo.workType == 2" @event="keyEvent" />
+      <!-- 作品信息 -->
+      <div class="project-info">
+        <a-row type="flex" justify="space-around">
+          <a-col :span="4">
+            <a-avatar shape="square" class="avatar" :size="60" :src="workInfo.avatar_url" @click="toFriend(workInfo.userId)"/>
+            <p @click="toFriend(workInfo.userId)">{{ workInfo.realname || workInfo.username }}</p>
+          </a-col>
+          <a-col :span="14" v-if="!_isMobile()">
+            <div class="project-meta">
+              <h2 class="title">{{ workInfo.workName }}</h2>
+              <p class="time">{{ workInfo.createTime }}</p>
             </div>
-            <keyboard v-if="_isMobile() && workInfo.workType==2" @event="keyEvent"/>
-            <!-- 作品信息 -->
-            <div class="project-info">
-              <a-row type="flex" justify="space-around">
-                <a-col :span="4">
-                  <a-avatar shape="square" class="avatar" :size="60" :src="workInfo.avatar_url" />
-                  <p>{{ workInfo.realname || workInfo.username }}</p>
-                </a-col>
-                <a-col :span="14" v-if="!_isMobile()">
-                  <div class="project-meta">
-                    <h2 class="title">{{ workInfo.workName }}</h2>
-                    <p class="time">{{ workInfo.createTime }}</p>
-                  </div>
-                </a-col>
-                <a-col :span="_isMobile()?12:6">
-                  <div class="project-op">
-                    <a-icon type="eye" theme="twoTone" />
-                    <span class="gap">{{ workInfo.viewNum }}</span>
+          </a-col>
+          <a-col :span="_isMobile() ? 12 : 6">
+            <div class="project-op">
+              <a-icon type="eye" theme="twoTone" />
+              <span class="gap">{{ workInfo.viewNum }}</span>
 
-                    <a-icon type="like" theme="twoTone" @click="starWork" />
-                    <span class="gap">{{ workInfo.starNum }}</span>
+              <a-icon type="like" theme="twoTone" @click="starWork" />
+              <span class="gap">{{ workInfo.starNum }}</span>
 
-                    <a-popover v-if="!_isMobile()" title="微信扫一扫手机体验和分享">
-                      <template slot="content">
-                        <qrcode :value="getShareUrl()" :size="200" level="H"></qrcode>
-                      </template>
-                      <a-icon type="mobile" theme="twoTone" />
-                    </a-popover>
-                  </div>
-                </a-col>
-                <a-col :span="24" v-if="_isMobile()">
-                  <div class="project-meta">
-                    <h2 class="title">{{ workInfo.workName }}</h2>
-                    <p class="time">{{ workInfo.createTime }}</p>
-                  </div>
-                </a-col>
-              </a-row>
+              <a-popover v-if="!_isMobile()" title="微信扫一扫手机体验和分享">
+                <template slot="content">
+                  <qrcode :value="getShareUrl()" :size="200" level="H"></qrcode>
+                </template>
+                <a-icon type="mobile" theme="twoTone" />
+              </a-popover>
             </div>
+          </a-col>
+          <a-col :span="24" v-if="_isMobile()">
+            <div class="project-meta">
+              <h2 class="title">{{ workInfo.workName }}</h2>
+              <p class="time">{{ workInfo.createTime }}</p>
+            </div>
+          </a-col>
+        </a-row>
+      </div>
 
-            <!-- 评论区 -->
-            <div class="project-comment" v-if="sysConfig.allowComment == 1">
-              <div class="publish">
-                <a-row type="flex" justify="space-between">
-                  <a-col :span="3" class="comment-user"  v-if="!_isMobile()">
-                    <a-avatar shape="square" :size="60" icon="user" :src="getFileAccessHttpUrl(avatar())" />
-                    <p>
-                      {{ token ? nickname() : '未登录' }}
-                    </p>
-                  </a-col>
-                  <a-col :span="16">
-                    <a-textarea
-                      v-model="commentContent"
-                      :rows="5"
-                      :maxLength="500"
-                      placeholder="说说这个作品怎么样吧"
-                    ></a-textarea>
-                  </a-col>
-                  <a-col :span="_isMobile()?6:4">
-                    <div class="comment-btn">
-                      <a-button :disabled="!token" type="dashed" @click="comment">发表评论</a-button>
-                    </div>
-                  </a-col>
-                </a-row>
+      <!-- 评论区 -->
+      <div class="project-comment" v-if="sysConfig.allowComment == 1">
+        <div class="publish">
+          <a-row type="flex" justify="space-between">
+            <a-col :span="3" class="comment-user" v-if="!_isMobile()">
+              <a-avatar shape="square" :size="60" icon="user" :src="getFileAccessHttpUrl(avatar())" />
+              <p>
+                {{ token ? nickname() : '未登录' }}
+              </p>
+            </a-col>
+            <a-col :span="16">
+              <a-textarea
+                v-model="commentContent"
+                :rows="5"
+                :maxLength="500"
+                placeholder="说说这个作品怎么样吧"
+              ></a-textarea>
+            </a-col>
+            <a-col :span="_isMobile() ? 6 : 4">
+              <div class="comment-btn">
+                <a-button :disabled="!token" type="dashed" @click="comment">发表评论</a-button>
               </div>
-              <a-divider />
-              <a-list
-                class="comment-list"
-                item-layout="horizontal"
-                :locale="{ emptyText: '暂无评论' }"
-                :data-source="comments"
-              >
-                <a-list-item slot="renderItem" slot-scope="item">
-                  <a-comment :author="item.realname || item.username">
-                    <a-avatar shape="square" :size="40" slot="avatar" icon="user" :src="item.avatar_url" />
-                    <p class="comment-content" slot="content">
-                      {{ item.comment }}
-                    </p>
-                    <a-tooltip slot="datetime" :title="moment(item.createTime).format('YYYY-MM-DD HH:mm:ss')">
-                      <span>{{ moment(item.createTime).fromNow() }}</span>
-                    </a-tooltip>
-                  </a-comment>
-                </a-list-item>
-                <div
-                  v-if="showLoadingMore"
-                  slot="loadMore"
-                  :style="{
-                    textAlign: 'center',
-                    marginTop: '12px',
-                    height: '32px',
-                    lineHeight: '32px',
-                  }"
-                >
-                  <a-spin v-if="loadingMore" />
-                  <a-button type="link" v-else @click="workComments"> 加载更多 </a-button>
-                </div>
-              </a-list>
-            </div>
+            </a-col>
+          </a-row>
+        </div>
+        <a-divider />
+        <a-list
+          class="comment-list"
+          item-layout="horizontal"
+          :locale="{ emptyText: '暂无评论' }"
+          :data-source="comments"
+        >
+          <a-list-item slot="renderItem" slot-scope="item">
+            <a-comment :author="item.realname || item.username">
+              <a-avatar shape="square" :size="40" slot="avatar" icon="user" :src="item.avatar_url" />
+              <p class="comment-content" slot="content">
+                {{ item.comment }}
+              </p>
+              <a-tooltip slot="datetime" :title="moment(item.createTime).format('YYYY-MM-DD HH:mm:ss')">
+                <span>{{ moment(item.createTime).fromNow() }}</span>
+              </a-tooltip>
+            </a-comment>
+          </a-list-item>
+          <div
+            v-if="showLoadingMore"
+            slot="loadMore"
+            :style="{
+              textAlign: 'center',
+              marginTop: '12px',
+              height: '32px',
+              lineHeight: '32px',
+            }"
+          >
+            <a-spin v-if="loadingMore" />
+            <a-button type="link" v-else @click="workComments"> 加载更多 </a-button>
           </div>
-          <div v-if="shareHtml" class="work-share-html">
-            <a-divider></a-divider>
-            <div v-html="shareHtml"></div>
-          </div>
-        </a-layout-content>
-        <a-layout-sider v-if="!_isMobile()">
-          <UserEnter/>
-        </a-layout-sider>
-      </a-layout>
-      <a-layout-footer>
-        <Footer/>
-      </a-layout-footer>
-    </a-layout>
+        </a-list>
+      </div>
+    </div>
+    <div v-if="shareHtml" class="work-share-html">
+      <a-divider></a-divider>
+      <div v-html="shareHtml"></div>
+    </div>
   </div>
 </template>
 
@@ -152,13 +131,13 @@ import UserEnter from './modules/UserEnter'
 import moment from 'moment'
 import { postAction } from '../../api/manage'
 export default {
-  name:"WorkDetail",
+  name: 'WorkDetail',
   components: {
     qrcode: QrCode,
     Keyboard,
     Header,
     Footer,
-    UserEnter
+    UserEnter,
   },
   data() {
     return {
@@ -200,20 +179,20 @@ export default {
       })
     })
     //计算播放器高度
-    let playerDom = document.getElementById("player");
-    playerDom.style.height = playerDom.clientWidth * 0.9 + "px";
+    let playerDom = document.getElementById('player')
+    playerDom.style.height = playerDom.clientWidth * 0.9 + 'px'
   },
   methods: {
     ...mapGetters(['nickname', 'avatar', 'userInfo']),
     moment,
     getFileAccessHttpUrl,
-    keyEvent(key, keyCode, isDown){
-      let player = document.getElementById("player");
-      player.contentWindow.vm.postIOData("keyboard", {
+    keyEvent(key, keyCode, isDown) {
+      let player = document.getElementById('player')
+      player.contentWindow.vm.postIOData('keyboard', {
         keyCode: keyCode,
         key: key,
         isDown: isDown,
-      });
+      })
     },
     getWorkInfo(workId) {
       getAction('/teaching/teachingWork/studentWorkInfo?workId=' + workId).then((res) => {
@@ -264,8 +243,8 @@ export default {
       getAction('/teaching/teachingWork/getWorkComments', { workId: this.workId, page: this.commentsPage }).then(
         (res) => {
           this.loadingMore = false
-          if (res.result.length == 0 && this.commentsPage>1) {
-              this.$message.info('已加载完啦！')
+          if (res.result.length == 0 && this.commentsPage > 1) {
+            this.$message.info('已加载完啦！')
           } else {
             this.comments = this.comments.concat(res.result)
           }
@@ -278,10 +257,10 @@ export default {
           (res) => {
             if (res.success) {
               this.comments.unshift({
-                  comment: this.commentContent,
-                  realname: this.nickname(),
-                  avatar_url: this.getFileAccessHttpUrl(this.avatar()),
-                  createTime: new Date()
+                comment: this.commentContent,
+                realname: this.nickname(),
+                avatar_url: this.getFileAccessHttpUrl(this.avatar()),
+                createTime: new Date(),
               })
               this.commentContent = ''
               this.$message.success(res.message)
@@ -290,9 +269,9 @@ export default {
         )
       }
     },
-    getWorkShareHtml(){
-      getAction("/sys/config/getConfig?key=_workShareHtml").then(res=>{
-        if(res.success){
+    getWorkShareHtml() {
+      getAction('/sys/config/getConfig?key=_workShareHtml').then((res) => {
+        if (res.success) {
           this.shareHtml = res.result
         }
       })
@@ -300,46 +279,27 @@ export default {
     getShareUrl() {
       return window.location.protocol + '//' + window.location.host + '/work-detail?id=' + this.workId
     },
-    enter() {
-      this.$router.push('/account/center')
+    toFriend(id){
+      let route = this.$router.resolve({
+        path: "/friend-detail",
+        query: {
+          id: id,
+        },
+      });
+      window.open(route.href, '_blank');
     },
     _isMobile() {
-      return navigator.userAgent.match(/(phone|pad|pod|iPhone|iPod|ios|Android|Mobile|BlackBerry|IEMobile|MQQBrowser|JUC|Fennec|wOSBrowser|BrowserNG|WebOS|Symbian|Windows Phone)/i) != null
+      return (
+        navigator.userAgent.match(
+          /(phone|pad|pod|iPhone|iPod|ios|Android|Mobile|BlackBerry|IEMobile|MQQBrowser|JUC|Fennec|wOSBrowser|BrowserNG|WebOS|Symbian|Windows Phone)/i
+        ) != null
+      )
     },
-    
   },
 }
 </script>
 
 <style lang="less" scoped>
-.container {
-  background: url(/img/bg_blue.png) no-repeat;
-  background-color: #f6f6f6;
-  background-size: 100% 250px;
-}
-.ant-layout-header,
-.ant-layout-content,
-.ant-layout-sider,
-.ant-layout-sider-children,
-.ant-layout-footer {
-  background: transparent;
-}
-.ant-layout {
-  background: transparent;
-  min-height: calc(100vh - 200px);
-}
-.ant-layout-header {
-  height: 250px;
-  width: 100%;
-  padding: 0;
-}
-
-.ant-layout-has-sider {
-  max-width: 1100px;
-  width: 100%;
-  margin: -100px auto 0;
-}
-
 .project-detail {
   max-width: 780px;
   background: #fff;
@@ -432,13 +392,7 @@ export default {
   }
 }
 
-.work-share-html{
+.work-share-html {
   max-width: 780px;
 }
-
-.ant-layout-sider {
-  max-width: 300px !important;
-  width: 300px !important;
-}
-
 </style>

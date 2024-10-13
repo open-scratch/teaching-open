@@ -1,5 +1,6 @@
 import { UserLayout, TabLayout, RouteView, BlankLayout, PageView } from '@/components/layouts'
-import HomeLayout from '@/views/home/HomeLayout'
+import HomeLayout from '@/views/home/layouts/HomeLayout'
+import WorkLayout from '@/views/home/layouts/WorkLayout'
 import store from '@/store/'
 
 /**
@@ -95,9 +96,21 @@ export const constantRouterMap = [
     ]
   },
   {
-    path: '/work-detail',
-    name: 'workDetail',
-    component: () => import(/* webpackChunkName: "home" */ '@/views/home/WorkDetail')
+    path: '/',
+    component: WorkLayout,
+    meta: {title: '社区'},
+    children: [
+      {
+        path: '/friend-detail',
+        name: 'friendDetail',
+        component: () => import(/* webpackChunkName: "home" */ '@/views/home/FriendDetail')
+      },
+      {
+        path: '/work-detail',
+        name: 'workDetail',
+        component: () => import(/* webpackChunkName: "home" */ '@/views/home/WorkDetail')
+      },
+    ]
   },
   {
     path: '/404',

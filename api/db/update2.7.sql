@@ -99,3 +99,5 @@ INSERT INTO `sys_config`(`id`, `config_key`, `config_value`, `config_enabled`, `
 alter table sys_user
     add school varchar(256) default '' not null comment '学校' after post;
 
+alter table teaching_work
+    add depart_id varchar(40) default '' not null comment '班级';

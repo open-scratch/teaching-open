@@ -25,6 +25,7 @@ import org.jeecg.modules.common.controller.BaseController;
 import org.jeecg.modules.common.util.Ow365Util;
 import org.jeecg.modules.common.util.QiniuUtil;
 import org.jeecg.modules.system.entity.SysFile;
+import org.jeecg.modules.system.entity.SysUser;
 import org.jeecg.modules.system.service.ISysDataLogService;
 import org.jeecg.modules.system.service.ISysDepartService;
 import org.jeecg.modules.system.service.ISysFileService;
@@ -97,6 +98,20 @@ public class TeachingWorkController extends BaseController {
 	 private ITeachingAdditionalWorkService teachingAdditionalWorkService;
 	 @Autowired
 	 private ITeachingCourseUnitService teachingCourseUnitService;
+
+	 @GetMapping("userInfo")
+	 public Result<?> getUserInfo(@RequestParam String userId){
+		 SysUser user = sysUserService.getById(userId);
+		 if(user == null){
+			 return Result.error("参数错误");
+		 }
+		 Map<String, Object> userInfo = new HashMap<>();
+		 userInfo.put("realname", user.getRealname());
+		 userInfo.put("sex", user.getSex());
+		 userInfo.put("avatar", user.getAvatar());
+		 userInfo.put("school", user.getSchool());
+		 return Result.ok(userInfo);
+	 }
 
 	 /**
 	  * 我的作业分页列表查询
@@ -350,16 +365,18 @@ public class TeachingWorkController extends BaseController {
 		 return result;
 	 }
 
-	 //劲作排行 TODO 缓存1
-	 @ApiOperation(value = "劲作排行榜")
+	 //劲作排行 TODO 缓存
+	 @ApiOperation(value = "作品排行榜")
 	 @GetMapping(value = "/leaderboard")
 	 public Result<?> listLeaderboard(@RequestParam(name = "pageNo", defaultValue = "1") Integer pageNo,
 									  @RequestParam(name = "pageSize", defaultValue = "10") Integer pageSize,
 									  @RequestParam(required = false, defaultValue = "view") String orderBy, //排序
 									  @RequestParam(required = false) Integer workStatus, //状态
+									  @RequestParam(required = false) String userId, //用户ID
 									  HttpServletRequest request) {
 		 QueryWrapper<StudentWorkModel> queryWrapper = new QueryWrapper<StudentWorkModel>();
 		 queryWrapper.ge("teaching_work.work_status", 3);
+		 queryWrapper.eq(StringUtils.isNotBlank(userId), "teaching_work.user_id", userId);
 		 queryWrapper.eq(workStatus!=null, "teaching_work.work_status", workStatus);
 		 switch (orderBy){
 			 case "view":
