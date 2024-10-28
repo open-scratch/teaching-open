@@ -368,7 +368,7 @@ public class SysUserController extends BaseController {
         result.setResult(true);
         try {
             //通过传入信息查询新的用户信息
-            List<SysUser> user = sysUserService.queryLogicDeleted(new LambdaQueryWrapper<SysUser>()
+            List<SysUser> user = sysUserService.list(new LambdaQueryWrapper<SysUser>()
                     .eq(StringUtils.isNotBlank(sysUser.getPhone()), SysUser::getPhone, sysUser.getPhone())
                     .eq(StringUtils.isNotBlank(sysUser.getEmail()), SysUser::getEmail, sysUser.getEmail())
                     .eq(StringUtils.isNotBlank(sysUser.getUsername()), SysUser::getUsername, sysUser.getUsername()));
