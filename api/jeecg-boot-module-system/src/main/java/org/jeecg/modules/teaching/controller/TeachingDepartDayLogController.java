@@ -76,6 +76,7 @@ public class TeachingDepartDayLogController extends JeecgController<TeachingDepa
        //获取我负责的班级
        LoginUser user = (LoginUser) SecurityUtils.getSubject().getPrincipal();
        String departIds = user.getDepartIds();
+       boolean isAdmin = hasRole("admin") || hasRole("dev");
 
        TeachingDepartDayLog report = teachingDepartDayLogService.getOne(new QueryWrapper<TeachingDepartDayLog>()
                .select("depart_id, depart_name, sum(unit_open_count) unit_open_count," +
@@ -86,7 +87,7 @@ public class TeachingDepartDayLogController extends JeecgController<TeachingDepa
                        "sum(course_work_submit_count) course_work_submit_count,"+
                        "sum(additional_work_submit_count) additional_work_submit_count"
                )
-                       .in("depart_id", departIds.split(","))
+                       .in(!isAdmin, "depart_id", departIds.split(","))
                        .ge(StringUtils.isNotEmpty(startTime), "create_time", startTime)
                        .le(StringUtils.isNotEmpty(endTime), "create_time", endTime)
        );

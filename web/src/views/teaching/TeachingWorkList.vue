@@ -5,8 +5,8 @@
       <a-form layout="inline" @keyup.enter.native="searchQuery">
         <a-row :gutter="24">
           <a-col :xl="4" :lg="5" :md="7" :sm="24">
-            <a-form-item label="作业名">
-              <a-input placeholder="请输入作业名" v-model="queryParam.workName"></a-input>
+            <a-form-item label="作品名">
+              <a-input placeholder="请输入作品名" v-model="queryParam.workName"></a-input>
             </a-form-item>
           </a-col>
           <a-col :xl="4" :lg="5" :md="7" :sm="24">
@@ -50,6 +50,11 @@
             <a-col :xl="6" :lg="7" :md="8" :sm="24">
               <a-form-item label="课程ID">
                 <a-input placeholder="请输入课程ID" v-model="queryParam.courseId"></a-input>
+              </a-form-item>
+            </a-col>
+            <a-col :xl="6" :lg="7" :md="8" :sm="24">
+              <a-form-item label="班级ID">
+                <a-input placeholder="请输入班级ID" v-model="queryParam.departId"></a-input>
               </a-form-item>
             </a-col>
             <a-col :xl="6" :lg="7" :md="8" :sm="24">
@@ -242,7 +247,7 @@ export default {
         },
 
         {
-          title: '作业名',
+          title: '名称',
           align: 'center',
           dataIndex: 'workName',
         },
@@ -253,7 +258,7 @@ export default {
           scopedSlots: {customRender: 'imgSlot'}
         },
         {
-          title: '创作来源',
+          title: '来源',
           align: 'center',
           width: 100,
           dataIndex: 'workScene',
@@ -275,25 +280,25 @@ export default {
           scopedSlots: {customRender: 'workTag'}
         },
         {
-          title: '作业类型',
+          title: '类型',
           align: 'center',
           dataIndex: 'workType_dictText',
           sorter: true,
         },
         {
-          title: '作业状态',
+          title: '状态',
           align: 'center',
           dataIndex: 'workStatus_dictText',
           sorter: true,
         },
         {
-          title: '查看次数',
+          title: '查看',
           align: 'center',
           dataIndex: 'viewNum',
           sorter: true,
         },
         {
-          title: '点赞次数',
+          title: '点赞',
           align: 'center',
           dataIndex: 'starNum',
           sorter: true,
@@ -305,12 +310,17 @@ export default {
           sorter: true,
         },
         {
-          title: '课程单元',
+          title: '所属班级',
+          align: 'center',
+          dataIndex: 'departId_dictText',
+        },
+        {
+          title: '所属课程',
           align: 'center',
           dataIndex: 'courseId_dictText',
         },
         {
-          title: '班级作业',
+          title: '所属作业',
           align: 'center',
           dataIndex: 'additionalId_dictText',
         },

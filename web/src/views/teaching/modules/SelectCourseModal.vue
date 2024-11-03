@@ -16,7 +16,7 @@
           <a-row :gutter="24">
 
             <a-col :span="10">
-              <a-form-item label="账号">
+              <a-form-item label="课程名">
                 <a-input placeholder="请输入课程名" v-model="queryParam.courseName"></a-input>
               </a-form-item>
             </a-col>
