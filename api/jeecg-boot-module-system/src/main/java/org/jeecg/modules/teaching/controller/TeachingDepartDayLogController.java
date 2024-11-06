@@ -112,7 +112,7 @@ public class TeachingDepartDayLogController extends JeecgController<TeachingDepa
         LoginUser user = (LoginUser) SecurityUtils.getSubject().getPrincipal();
         String departIds = user.getDepartIds();
         Page<TeachingDepartDayLog> page = new Page<TeachingDepartDayLog>(pageNo, pageSize);
-
+        boolean isAdmin = hasRole("admin") || hasRole("dev");
         List<TeachingDepartDayLog> list = teachingDepartDayLogService.list(new QueryWrapper<TeachingDepartDayLog>()
                         .select("depart_id, depart_name, sum(unit_open_count) unit_open_count," +
                                 "sum(course_work_assign_count) course_work_assign_count," +
@@ -122,7 +122,7 @@ public class TeachingDepartDayLogController extends JeecgController<TeachingDepa
                                 "sum(course_work_submit_count) course_work_submit_count,"+
                                 "sum(additional_work_submit_count) additional_work_submit_count"
                         )
-                        .in("depart_id", departIds.split(","))
+                        .in(!isAdmin, "depart_id", departIds.split(","))
                         .ge(StringUtils.isNotEmpty(startTime), "create_time", startTime)
                         .le(StringUtils.isNotEmpty(endTime), "create_time", endTime)
                        .groupBy("depart_id")
