@@ -79,8 +79,8 @@ public class NgAlainController {
         }
         return dictlist;
     }
-    @RequestMapping(value = "/getDictItemsByTable/{table}/{key}/{value}", method = RequestMethod.GET)
-    public Object getDictItemsByTable(@PathVariable String table,@PathVariable String key,@PathVariable String value) {
-        return this.ngAlainService.getDictByTable(table,key,value);
-    }
+//    @RequestMapping(value = "/getDictItemsByTable/{table}/{key}/{value}", method = RequestMethod.GET)
+//    public Object getDictItemsByTable(@PathVariable String table,@PathVariable String key,@PathVariable String value) {
+//        return this.ngAlainService.getDictByTable(table,key,value);
+//    }
 }

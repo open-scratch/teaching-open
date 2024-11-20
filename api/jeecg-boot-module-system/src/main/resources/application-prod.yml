@@ -14,7 +14,13 @@ management:
     web:
       exposure:
         include: metrics,httptrace
-
+springfox:
+  documentation:
+    # 总开关（同时设置auto-startup=false，否则/v3/api-docs等接口仍能继续访问）
+    enabled: false
+    auto-startup: false
+    swagger-ui:
+      enabled: false
 spring:
   servlet:
     multipart:
