@@ -26,7 +26,6 @@
                 <p>背景图</p>
                 <j-upload
                   v-decorator="['file_homeBg']"
-                  :uploadTarget="'qiniu'"
                   :fileType="'image'"
                   :number="1"
                   :trigger-change="true"
