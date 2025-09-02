@@ -1,11 +1,12 @@
-# Teaching 在线教学平台 v2.7
+# Teaching 在线教学平台 v2.8
+
 ===============
 
 ## 项目介绍
 
 Teaching针对机构、学校提供STEAM在线教育解决方案， 提供一个低成本试错的机会。
 
-平台集成CRM系统、教务系统、作业系统、题库系统、赛事系统、社区系统。并封装了常用的工具，如各种工具类、微信生态对接、支付对接等等。
+平台集成CRM系统、教务系统、作业系统、题库系统、赛事系统、社区系统、文章系统。并封装了常用的工具，如各种工具类、微信生态对接、支付对接等等。
 
 [前往官网](http://teaching.vip)
 
@@ -36,6 +37,7 @@ Teaching针对机构、学校提供STEAM在线教育解决方案， 提供一个
 ├─课程管理
 │  ├─课程管理
 │  ├─课程单元管理
+├─资讯管理
 ├─系统管理
 │  ├─用户管理
 |  ├─角色管理
@@ -49,6 +51,7 @@ Teaching针对机构、学校提供STEAM在线教育解决方案， 提供一个
 ├─系统监控
 │  ├─ ……
 ```
+
 ## 教学工具对接
 
 - [Scratch2.0](https://github.com/open-scratch/scratch2) (已淘汰)
@@ -60,7 +63,6 @@ Teaching针对机构、学校提供STEAM在线教育解决方案， 提供一个
 - [Python Turtle](https://github.com/open-scratch/teaching-python)
 
 - [Blockly](https://github.com/google/blockly)
-
   
 ## 技术架构
 
@@ -77,8 +79,11 @@ Teaching针对机构、学校提供STEAM在线教育解决方案， 提供一个
 ### [点击查看宝塔面板部署教程](https://www.213.name/%e5%ae%9d%e5%a1%94%e9%9d%a2%e6%9d%bf%e5%bf%ab%e9%80%9f%e9%83%a8%e7%bd%b2teaching%e5%bc%80%e6%ba%90%e6%95%99%e5%ad%a6%e5%b9%b3%e5%8f%b0/)
 
 ### 环境准备
+
 以CentOS服务器为例，其他系统操作流程基本一样。
+
 #### 安装mysql5.6
+
 1. 略
 
 2. 设置数据库表名忽略大小写（重要）
@@ -88,6 +93,7 @@ Teaching针对机构、学校提供STEAM在线教育解决方案， 提供一个
 3. 导入api/db文件夹的sql文件。如果是升级，需要依次按版本号执行升级sql。
 
 #### 安装 redis 6.0
+
 略
 
 #### 安装Java
@@ -96,6 +102,7 @@ CentOS系统可执行命令一键安装
 `yum install -y java-1.8.0-openjdk`
 
 #### 安装Nginx
+
 略
 
 #### 注册配置七牛云
@@ -114,6 +121,7 @@ CentOS系统可执行命令一键安装
 修改application-prod.yml
 
 需要修改的地方：
+
 ```yml
 domain: 您的站点域名
 # 本地：local 七牛云：qiniu
@@ -138,6 +146,7 @@ qiniu:
   staticDomain: 您的七牛域名
   area: 您的七牛存储区域（z0：华东 z1：华北 z2：华南 na0：北美 as0：东南亚 cn-east-2：华东-浙江2）
 ```
+
 配置文件可以编译后修改，推荐将.yml配置文件放到jar包同级目录，java将优先使用同级目录的配置，这样方便后续升级。
 
 #### 编译项目（若使用已编译好的jar文件，本步骤可以跳过）
@@ -183,18 +192,19 @@ qiniu:
   `npm run build` 或 `yarn run build`
 
 ### 前端部署
-  
 
 将编译后的dist文件夹上传至服务器网站根目录
 
 - 配置Nginx
 
 参考配置:
+
 ```
 server
 {
     listen 80 default_server;
     server_name open.teaching.vip; # 改为你网站的域名
+    root /www/wwwroot/teaching-open; # 改为你网站目录的路径
     location / {
       index index.html index.htm;
       root /www/wwwroot/teaching-open; # 改为你网站目录的路径
@@ -223,7 +233,6 @@ server
 }
 ```
 
-
 ### 测试账号
 
 - admin —— 超级管理员
@@ -234,7 +243,9 @@ server
 ## 常见问题
 
 ### 页面一直加载中
-只有两种可能：
+
+有两种可能：
+
 1. api未启动，尝试访问http://ip地址:8080看是否有内容输出
 2. nginx反向代理配置错误，特征是接口报502或504错误
 
@@ -244,6 +255,7 @@ server
 将本地素材库上传至七牛云，素材库位置在scratch3/static/internalapi，需要原来的保持目录结构，选择internalapi目录上传。
 
 然后修改scratch3/index.html中的素材库配置地址切换为七牛云
+
 ```js
 assets:{
   assetHost: getSysConfig('qiniuDomain')
@@ -251,14 +263,17 @@ assets:{
 ```
 
 ### Scratch提交作品卡住
+
 1. 七牛云配置错误，此时系统内其他上传也会失败
 2. 页面停留时间过长导致登录失效，可以将Scratch文件保存到本地，刷新页面后再次提交
 3. 网络问题
 
 ### 切换为本地存储
-建议是使用云存储的，极大减少服务器的宽带压力。但是有些朋友不想用七牛云存储，或者局域网部署，则可以使用本地存储模式。
+
+强烈建议使用云存储，极大减少服务器的宽带压力。但是有些朋友不想用七牛云存储，或者局域网部署，则可以使用本地存储模式。
 
 修改application-prod.yml
+
 ```yml
 jeecg:
   uploadType: local

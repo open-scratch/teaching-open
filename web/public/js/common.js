@@ -1,3 +1,4 @@
+window.version = 'TO2.8'
 window.urlParams = function (paramName) {
   var reg = new RegExp('[?&]' + paramName + '=([^&]*)[&]?', 'i')
   var paramVal = window.location.search.match(reg)
@@ -300,17 +301,4 @@ window.isFullscreen = function(){
          document.webkitFullscreenElement || false;
 }
 
-console.log("Teaching Open v2.7");
-
-window.dataLayer = window.dataLayer || [];
-function gtag(){dataLayer.push(arguments);}
-gtag('js', new Date());
-gtag('config', 'UA-155190299-2');
-
-var _hmt = _hmt || [];
-(function() {
-  var hm = document.createElement("script");
-  hm.src = "https://hm.baidu.com/hm.js?5701500c2c4326d51b2652ee8426452e";
-  var s = document.getElementsByTagName("script")[0]; 
-  s.parentNode.insertBefore(hm, s);
-})();
+console.log("Teaching Open v2.8");
