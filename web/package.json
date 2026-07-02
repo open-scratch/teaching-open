@@ -32,7 +32,7 @@
     "tinymce": "^5.3.2",
     "vcolorpicker": "^1.1.0",
     "viser-vue": "^2.4.4",
-    "vue": "^2.6.10",
+    "vue": "^2.7.16",
     "vue-area-linkage": "^5.1.0",
     "vue-awesome-swiper": "^4.1.1",
     "vue-cropper": "^0.4.8",
@@ -60,7 +60,7 @@
     "html-webpack-plugin": "^4.2.0",
     "less": "^3.9.0",
     "less-loader": "^4.1.0",
-    "vue-template-compiler": "^2.6.10"
+    "vue-template-compiler": "^2.7.16"
   },
   "eslintConfig": {
     "root": true,
