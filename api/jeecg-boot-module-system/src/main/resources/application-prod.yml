@@ -13,7 +13,7 @@ management:
   endpoints:
     web:
       exposure:
-        include: metrics,httptrace
+        include: health
 springfox:
   documentation:
     # 总开关（同时设置auto-startup=false，否则/v3/api-docs等接口仍能继续访问）
@@ -102,8 +102,8 @@ spring:
     druid:
       stat-view-servlet:
         enabled: true
-        loginUsername: admin
-        loginPassword: 123456
+        loginUsername: ${DRUID_USERNAME:admin}
+        loginPassword: ${DRUID_PASSWORD:Druid@2024!Secure}
         allow:
       web-stat-filter:
         enabled: true

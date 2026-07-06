@@ -13,7 +13,7 @@ management:
   endpoints:
     web:
       exposure:
-        include: metrics,httptrace
+        include: health
 
 spring:
   servlet:

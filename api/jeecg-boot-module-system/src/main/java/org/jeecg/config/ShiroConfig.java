@@ -105,16 +105,18 @@ public class ShiroConfig {
 		filterChainDefinitionMap.put("/**/*.woff2", "anon");
 		// update-begin--Author:sunjianlei Date:20190813 for：排除字体格式的后缀
 
-		filterChainDefinitionMap.put("/druid/**", "anon");
+		//安全修复: Druid监控面板需要认证访问，不再设为anon
+		//filterChainDefinitionMap.put("/druid/**", "anon");
 		filterChainDefinitionMap.put("/swagger-ui.html", "anon");
 		filterChainDefinitionMap.put("/swagger**/**", "anon");
 		filterChainDefinitionMap.put("/webjars/**", "anon");
 		filterChainDefinitionMap.put("/v2/**", "anon");
-		
-		//性能监控
-		filterChainDefinitionMap.put("/actuator/metrics/**", "anon");
-		filterChainDefinitionMap.put("/actuator/httptrace/**", "anon");
-		filterChainDefinitionMap.put("/actuator/redis/**", "anon");
+
+		//安全修复: Actuator端点不再匿名访问，需要JWT认证
+		//filterChainDefinitionMap.put("/actuator/metrics/**", "anon");
+		//filterChainDefinitionMap.put("/actuator/httptrace/**", "anon");
+		//filterChainDefinitionMap.put("/actuator/redis/**", "anon");
+		filterChainDefinitionMap.put("/actuator/health/**", "anon");
 
         //大屏设计器排除
 		filterChainDefinitionMap.put("/big/screen/**", "anon");

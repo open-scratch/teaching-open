@@ -1267,6 +1267,7 @@ public class SysUserController extends BaseController {
 
 	/**
 	 * 根据用户名或手机号查询用户信息
+	 * 安全修复: 对返回的手机号进行脱敏处理，防止敏感信息泄露 (CVE-2021-37305)
 	 * @param
 	 * @return
 	 */
@@ -1280,7 +1281,7 @@ public class SysUserController extends BaseController {
 			SysUser user = sysUserService.getUserByPhone(phone);
 			if(user!=null) {
 				map.put("username",user.getUsername());
-				map.put("phone",user.getPhone());
+				map.put("phone", desensitizePhone(user.getPhone()));
 				result.setSuccess(true);
 				result.setResult(map);
 				return result;
@@ -1290,7 +1291,7 @@ public class SysUserController extends BaseController {
 			SysUser user = sysUserService.getUserByName(username);
 			if(user!=null) {
 				map.put("username",user.getUsername());
-				map.put("phone",user.getPhone());
+				map.put("phone", desensitizePhone(user.getPhone()));
 				result.setSuccess(true);
 				result.setResult(map);
 				return result;
@@ -1299,6 +1300,18 @@ public class SysUserController extends BaseController {
 		result.setSuccess(false);
 		result.setMessage("验证失败");
 		return result;
+	}
+
+	/**
+	 * 手机号脱敏处理：保留前3位和后4位，中间用****替代
+	 * @param phone 原始手机号
+	 * @return 脱敏后的手机号
+	 */
+	private String desensitizePhone(String phone) {
+		if (phone != null && phone.length() >= 7) {
+			return phone.substring(0, 3) + "****" + phone.substring(phone.length() - 4);
+		}
+		return phone;
 	}
 	
 	/**
